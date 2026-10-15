@@ -1,6 +1,6 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Wrap-up
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=3";
+import * as srs from "./srs.js?v=4";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
@@ -82,6 +82,28 @@ const BLANK = `<span class="mx-1 inline-block min-w-24 border-b-[3px] border-das
 let voices = [];
 function loadVoices() { voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
 
+const IS_IOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+
+// iPhone: เล่นไฟล์เสียงเงียบหนึ่งครั้งตอนแตะจอครั้งแรก เพื่อปลดล็อกเสียงของเว็บ
+// (ช่วยให้เสียงออกแม้เปิดโหมดเงียบไว้ในบางรุ่น)
+const SILENT_WAV = "data:audio/wav;base64,UklGRmQGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YUAGAACAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICA";
+let audioUnlocked = false;
+function unlockAudio() {
+  if (audioUnlocked) return;
+  audioUnlocked = true;
+  try {
+    const a = new Audio(SILENT_WAV);
+    a.setAttribute("playsinline", "");
+    a.play().catch(() => {});
+  } catch { /* ข้าม */ }
+  window.speechSynthesis?.resume?.();
+}
+document.addEventListener("pointerdown", unlockAudio, { capture: true });
+document.addEventListener("keydown", unlockAudio, { capture: true });
+
+let currentUtterance = null; // เก็บอ้างอิงไว้ ไม่ให้ Safari เก็บกวาดทิ้งกลางคัน
+let speechWorked = false;
+
 function speak(text, onDone, rate = 0.9) {
   let finished = false;
   const done = () => {
@@ -90,17 +112,23 @@ function speak(text, onDone, rate = 0.9) {
     app.querySelectorAll("[data-ping]").forEach(el => el.remove());
     onDone && onDone();
   };
-  if (!window.speechSynthesis) return done();
-  speechSynthesis.cancel();
+  const synth = window.speechSynthesis;
+  if (!synth) return done();
+  if (synth.speaking || synth.pending) synth.cancel(); // เรียก cancel ตอนว่างอยู่ทำให้เสียงหายในบางเบราว์เซอร์
+  synth.resume?.();
+  if (!voices.length) loadVoices();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = store.settings.accent;
   u.rate = rate;
+  u.volume = 1;
   const v = voices.find(v => v.lang.replace("_", "-") === u.lang) || voices.find(v => v.lang.startsWith("en"));
   if (v) u.voice = v;
+  u.onstart = () => { speechWorked = true; };
   u.onend = done;
   u.onerror = done;
   setTimeout(done, 2500 + (text.length * 80) / rate); // กันกรณีเบราว์เซอร์ไม่ส่ง onend
-  speechSynthesis.speak(u);
+  currentUtterance = u;
+  synth.speak(u);
 }
 
 // ---------- icons ----------
@@ -300,11 +328,7 @@ function complete(id, phase) {
 
 // ---------- session flow ----------
 function startSession() {
-  if (window.speechSynthesis) { // ปลดล็อกเสียงบน iOS ด้วยการกดของผู้ใช้
-    const u = new SpeechSynthesisUtterance(" ");
-    u.volume = 0;
-    speechSynthesis.speak(u);
-  }
+  unlockAudio(); // การกดปุ่มเริ่มเรียนนับเป็นการแตะของผู้ใช้ ใช้ปลดล็อกเสียง
   const d = daily();
   const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date);
   const tasks = [
@@ -580,7 +604,11 @@ function renderHome() {
           <div class="mt-4 text-sm text-zinc-500">คำใหม่ต่อวัน</div>
           <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 6, 7].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
           <div class="mt-4 text-sm text-zinc-500">สำเนียงเสียงอ่าน</div>
-          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "อเมริกัน (US)")}${seg("data-accent", "en-GB", store.settings.accent, "อังกฤษ (UK)")}</div>`, "!p-6")}
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "อเมริกัน (US)")}${seg("data-accent", "en-GB", store.settings.accent, "อังกฤษ (UK)")}</div>
+          <button data-act="test-sound" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-purple-50 px-4 py-2.5 text-sm font-semibold text-purple-700 ring-1 ring-purple-100 hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", "h-4 w-4")} ทดสอบเสียง</button>
+          <p id="sound-status" class="mt-2 text-xs text-zinc-500">${window.speechSynthesis
+            ? (IS_IOS ? "iPhone: ถ้าไม่มีเสียง ให้ปิดโหมดเงียบ (สวิตช์ข้างเครื่อง) และเพิ่มเสียงให้ดัง แล้วกดทดสอบอีกครั้ง" : "")
+            : "เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน กรุณาเปิดเว็บใน Safari หรือ Chrome"}</p>`, "!p-6")}
       </section>
 
       <details class="group rounded-[28px] bg-white p-6 ring-1 ring-zinc-200/70 dark:bg-zinc-900 dark:ring-zinc-800">
@@ -600,6 +628,18 @@ function renderHome() {
     if (confirm("ล้างความคืบหน้าทั้งหมด? ย้อนกลับไม่ได้")) { store.cards = {}; store.daily = null; save(); renderHome(); }
   });
   app.querySelectorAll("[data-new]").forEach(b => (b.onclick = () => { store.settings.newPerDay = Number(b.dataset.new); save(); renderHome(); }));
+  on("test-sound", () => {
+    unlockAudio();
+    const status = app.querySelector("#sound-status");
+    speechWorked = false;
+    speak("Hello! Let's learn English.");
+    setTimeout(() => {
+      if (!status) return;
+      status.textContent = speechWorked
+        ? (IS_IOS ? "เล่นเสียงแล้ว ถ้ายังไม่ได้ยิน ให้ปิดโหมดเงียบที่สวิตช์ข้างเครื่อง และเพิ่มเสียงให้ดัง" : "เล่นเสียงแล้ว ถ้ายังไม่ได้ยิน ให้ตรวจระดับเสียงของเครื่อง")
+        : "เบราว์เซอร์ไม่ยอมเล่นเสียง ลองรีเฟรชหน้าเว็บแล้วกดทดสอบอีกครั้ง (iPhone: ตั้งค่า > การช่วยการเข้าถึง > เนื้อหาที่พูด > เสียง ให้มีเสียงภาษาอังกฤษ)";
+    }, 1500);
+  });
   app.querySelectorAll("[data-accent]").forEach(b => (b.onclick = () => { store.settings.accent = b.dataset.accent; save(); renderHome(); speak("Hello"); }));
 }
 
