@@ -1,5 +1,6 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Wrap-up
-import * as srs from "./srs.js?v=2";
+// หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
+import * as srs from "./srs.js?v=3";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
@@ -10,10 +11,17 @@ let store = { cards: {}, daily: null, settings: { newPerDay: 5, accent: "en-US" 
 let session = null;
 
 const PHASES = {
-  warm: { th: "อุ่นเครื่อง", en: "Warm-up" },
-  review: { th: "ทบทวน", en: "Core Review" },
-  new: { th: "คำใหม่", en: "New Intake" },
-  wrap: { th: "เก็บตก", en: "Wrap-up" },
+  warm: { th: "อุ่นเครื่อง", en: "Warm-up", dot: "bg-amber-400" },
+  review: { th: "ทบทวน", en: "Core Review", dot: "bg-purple-500" },
+  new: { th: "คำใหม่", en: "New Intake", dot: "bg-teal-500" },
+  wrap: { th: "เก็บตก", en: "Wrap-up", dot: "bg-rose-500" },
+};
+
+// ขั้นตอนของคำหนึ่งคำ แสดงเป็นแถบด้านบนการ์ด
+const STEPS = {
+  intro: ["ฟัง", "เลือก", "รู้จักคำ", "เติมคำ"],
+  recall: ["นึก", "เฉลย", "เติมคำ"],
+  warm: ["นึก", "เฉลย"],
 };
 
 // ---------- storage ----------
@@ -67,44 +75,99 @@ function pickOptions(w, field) {
 const isLeech = w => !!store.cards[w.id]?.leech;
 const sentenceOf = w => (isLeech(w) ? { en: w.simple, th: w.simpleTh } : { en: w.cloze, th: w.clozeTh });
 const filled = (s, w) => s.replace("___", w.answer);
-const hl = (text, target) => esc(text).replace(wordRe(esc(target)), m => `<span class="font-semibold text-purple-600 dark:text-purple-400">${m}</span>`);
-const BLANK = `<span class="inline-block min-w-20 border-b-2 border-purple-500 align-baseline">&nbsp;</span>`;
+const hl = (text, target) => esc(text).replace(wordRe(esc(target)), m => `<mark class="rounded bg-purple-100 px-1 font-semibold text-purple-800 dark:bg-purple-500/20 dark:text-purple-200">${m}</mark>`);
+const BLANK = `<span class="mx-1 inline-block min-w-24 border-b-[3px] border-dashed border-purple-400 align-baseline">&nbsp;</span>`;
 
 // ---------- speech ----------
 let voices = [];
 function loadVoices() { voices = window.speechSynthesis ? speechSynthesis.getVoices() : []; }
 
-function speak(text, onDone) {
+function speak(text, onDone, rate = 0.9) {
   let finished = false;
-  const done = () => { if (!finished) { finished = true; onDone && onDone(); } };
+  const done = () => {
+    if (finished) return;
+    finished = true;
+    app.querySelectorAll("[data-ping]").forEach(el => el.remove());
+    onDone && onDone();
+  };
   if (!window.speechSynthesis) return done();
   speechSynthesis.cancel();
   const u = new SpeechSynthesisUtterance(text);
   u.lang = store.settings.accent;
-  u.rate = 0.9;
+  u.rate = rate;
   const v = voices.find(v => v.lang.replace("_", "-") === u.lang) || voices.find(v => v.lang.startsWith("en"));
   if (v) u.voice = v;
   u.onend = done;
   u.onerror = done;
-  setTimeout(done, 2500 + text.length * 80); // กันกรณีเบราว์เซอร์ไม่ส่ง onend
+  setTimeout(done, 2500 + (text.length * 80) / rate); // กันกรณีเบราว์เซอร์ไม่ส่ง onend
   speechSynthesis.speak(u);
 }
 
+// ---------- icons ----------
+const svg = d => `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="h-full w-full">${d}</svg>`;
+const ICON = {
+  speaker: svg('<path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a10 10 0 0 1 0 14"/>'),
+  close: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
+  check: svg('<path d="M20 6 9 17l-5-5"/>'),
+  x: svg('<path d="M18 6 6 18M6 6l12 12"/>'),
+  bulb: svg('<path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>'),
+  slow: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
+  arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+};
+const icon = (name, cls = "h-5 w-5") => `<span class="inline-block ${cls}">${ICON[name]}</span>`;
+
 // ---------- UI pieces ----------
 const BTN = {
-  primary: "bg-purple-600 text-white hover:bg-purple-700",
-  again: "bg-rose-600 text-white hover:bg-rose-700",
-  hard: "bg-amber-400 text-zinc-950 hover:bg-amber-300",
-  easy: "bg-teal-500 text-zinc-950 hover:bg-teal-400",
-  ghost: "bg-white text-zinc-900 ring-1 ring-zinc-200 hover:ring-purple-400 dark:bg-zinc-900 dark:text-zinc-100 dark:ring-zinc-800",
+  primary: "bg-purple-600 text-white shadow-sm shadow-purple-600/25 hover:bg-purple-700",
+  again: "bg-rose-500 text-white hover:bg-rose-600",
+  hard: "bg-amber-400 text-zinc-900 hover:bg-amber-300",
+  easy: "bg-teal-500 text-white hover:bg-teal-600",
+  ghost: "bg-white text-zinc-700 ring-1 ring-zinc-200 hover:ring-purple-300 dark:bg-zinc-900 dark:text-zinc-200 dark:ring-zinc-800",
 };
 
 function button(attrs, label, variant = "primary", key = "") {
-  const hint = key ? `<kbd class="ml-2 hidden text-xs opacity-60 md:inline">${key.split(" ")[0]}</kbd>` : "";
-  return `<button ${attrs} ${key ? `data-key="${key}"` : ""} class="min-h-12 rounded-2xl px-4 py-3 text-base font-medium transition active:scale-[.98] disabled:opacity-40 ${BTN[variant]}">${label}${hint}</button>`;
+  const hint = key ? `<kbd class="ml-2 hidden rounded border border-current px-1.5 text-[11px] font-normal opacity-60 md:inline">${key.split(" ")[0]}</kbd>` : "";
+  return `<button ${attrs} ${key ? `data-key="${key}"` : ""} class="inline-flex min-h-[52px] w-full items-center justify-center rounded-2xl px-5 py-3.5 text-base font-semibold transition active:scale-[.98] disabled:opacity-40 ${BTN[variant]}">${label}${hint}</button>`;
 }
 
-const panel = "rounded-3xl bg-white p-6 shadow-sm ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800";
+const card = (inner, extra = "") =>
+  `<section class="animate-pop rounded-[28px] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 md:p-8 dark:bg-zinc-900 dark:shadow-none dark:ring-zinc-800 ${extra}">${inner}</section>`;
+
+function sayBtn(text, size = "sm") {
+  if (size === "lg") {
+    return `<button data-say="${esc(text)}" aria-label="ฟังอีกครั้ง" class="relative mx-auto grid h-28 w-28 place-items-center rounded-full bg-gradient-to-br from-purple-500 to-indigo-600 text-white shadow-xl shadow-purple-600/30 transition hover:scale-105 active:scale-95">
+      <span data-ping class="absolute inset-0 animate-ping rounded-full bg-purple-400/40"></span>${icon("speaker", "relative h-11 w-11")}</button>`;
+  }
+  const dim = size === "md" ? "h-12 w-12" : "h-9 w-9";
+  const ico = size === "md" ? "h-6 w-6" : "h-4 w-4";
+  return `<button data-say="${esc(text)}" aria-label="ฟังเสียง" class="grid ${dim} shrink-0 place-items-center rounded-full bg-purple-50 text-purple-600 ring-1 ring-purple-100 transition hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", ico)}</button>`;
+}
+
+const slowBtn = text =>
+  `<button data-say-slow="${esc(text)}" class="inline-flex items-center gap-1.5 rounded-full bg-zinc-100 px-3 py-1.5 text-sm text-zinc-600 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-300">${icon("slow", "h-4 w-4")} ฟังช้าๆ</button>`;
+
+function steps(list, active) {
+  return `<ol id="steps" class="flex items-center justify-center gap-1.5 text-xs">${list.map((s, i) => `
+    <li class="flex items-center gap-1.5">
+      ${i ? `<span class="h-px w-3 bg-zinc-300 sm:w-5 dark:bg-zinc-700"></span>` : ""}
+      <span class="flex items-center gap-1 rounded-full px-2.5 py-1 font-medium ${i < active
+        ? "text-teal-600 dark:text-teal-400"
+        : i === active ? "bg-zinc-900 text-white dark:bg-white dark:text-zinc-900" : "text-zinc-400"}">
+        ${i < active ? icon("check", "h-3.5 w-3.5") : `<span class="tabular-nums">${i + 1}</span>`}${s}</span>
+    </li>`).join("")}</ol>`;
+}
+
+function chip(ok, text) {
+  return `<div class="animate-pop mx-auto flex w-fit items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold ${ok
+    ? "bg-teal-50 text-teal-700 ring-1 ring-teal-200 dark:bg-teal-500/10 dark:text-teal-300 dark:ring-teal-500/30"
+    : "bg-rose-50 text-rose-700 ring-1 ring-rose-200 dark:bg-rose-500/10 dark:text-rose-300 dark:ring-rose-500/30"}">
+    ${icon(ok ? "check" : "x", "h-4 w-4")} ${text}</div>`;
+}
+
+const leechBadge = w => isLeech(w)
+  ? `<div class="mb-4 text-center"><div class="text-6xl">${w.emoji}</div>
+      <span class="mt-2 inline-block rounded-full bg-amber-100 px-3 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">คำที่ลืมบ่อย · มีภาพช่วยจำ</span></div>`
+  : "";
 
 function remaining() {
   const ids = new Set([...session.tasks.map(t => t.id), ...daily().wrap]);
@@ -112,76 +175,103 @@ function remaining() {
   return ids.size;
 }
 
-function shell(inner) {
+// โครงหน้าระหว่างเรียน: แถบหัว + เนื้อหา + แถบปุ่มด้านล่าง (บนมือถือปุ่มอยู่ใกล้นิ้วโป้ง บนจอใหญ่อยู่ใต้การ์ด)
+function shell({ stepsHtml = "", body = "", actions = "" }) {
   const ph = PHASES[session.current.phase];
   const left = remaining();
   const pct = Math.round((100 * session.completed) / Math.max(1, session.completed + left));
   app.innerHTML = `
-    <header class="sticky top-0 z-10 -mx-4 bg-zinc-100/90 px-4 pb-3 pt-[max(12px,env(safe-area-inset-top))] backdrop-blur dark:bg-zinc-950/90">
+    <header class="sticky top-0 z-20 -mx-4 bg-zinc-50/85 px-4 pb-3 pt-[max(12px,env(safe-area-inset-top))] backdrop-blur-md dark:bg-zinc-950/85">
       <div class="flex items-center gap-3">
-        <button data-act="close" aria-label="ปิด" class="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-zinc-200 text-lg dark:bg-zinc-800">✕</button>
+        <button data-act="close" aria-label="ปิด" class="grid h-10 w-10 shrink-0 place-items-center rounded-full text-zinc-500 hover:bg-zinc-200/70 dark:hover:bg-zinc-800">${icon("close")}</button>
         <div class="flex-1">
-          <div class="flex justify-between text-sm">
-            <span class="font-medium">${ph.th} <span class="text-zinc-500">· ${ph.en}</span></span>
-            <span class="text-zinc-500">เหลือ ${left} คำ</span>
+          <div class="flex items-center justify-between text-sm">
+            <span class="inline-flex items-center gap-2 font-semibold"><span class="h-2.5 w-2.5 rounded-full ${ph.dot}"></span>${ph.th}<span class="font-normal text-zinc-400">${ph.en}</span></span>
+            <span class="tabular-nums text-zinc-500">เหลือ ${left} คำ</span>
           </div>
-          <div class="mt-1 h-2 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
-            <div class="h-full bg-purple-600 transition-all" style="width:${pct}%"></div>
+          <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
+            <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-teal-400 transition-all duration-500" style="width:${pct}%"></div>
           </div>
         </div>
       </div>
     </header>
-    <main class="flex flex-1 flex-col gap-4 py-4">${inner}</main>`;
+    <main class="flex flex-1 flex-col pt-3 md:justify-center md:pb-10">
+      <div class="grid gap-4">${stepsHtml}${body}</div>
+      ${actions ? `<div class="sticky bottom-0 -mx-4 mt-auto bg-gradient-to-t from-zinc-50 from-70% to-transparent px-4 pb-[max(16px,env(safe-area-inset-bottom))] pt-6 md:static md:mx-0 md:mt-5 md:bg-none md:p-0 dark:from-zinc-950">${actions}</div>` : ""}
+    </main>`;
   on("close", () => { window.speechSynthesis?.cancel(); session = null; renderHome(); });
   app.querySelectorAll("[data-say]").forEach(b => (b.onclick = () => speak(b.dataset.say)));
+  app.querySelectorAll("[data-say-slow]").forEach(b => (b.onclick = () => speak(b.dataset.saySlow, null, 0.55)));
 }
 
-// หน้าคำถาม: ความหมายไทย + collocation (ซ่อนตัวสะกดภาษาอังกฤษ)
-function promptHTML(w, { masked = false } = {}) {
-  const leech = isLeech(w);
-  return `
-    <div class="${panel} text-center">
-      ${leech ? `<div class="text-6xl">${w.emoji}</div>
-        <span class="mt-2 inline-block rounded-full bg-amber-100 px-3 py-0.5 text-xs text-amber-800 dark:bg-amber-900/40 dark:text-amber-300">คำที่ลืมบ่อย · มีภาพช่วยจำ</span>` : ""}
-      <div class="mt-2 text-2xl font-semibold text-purple-600 md:text-3xl dark:text-purple-400">${esc(w.meaning)}</div>
-      ${masked ? `<div class="mt-5 text-xl md:text-2xl">${esc(w.collocation).replace(wordRe(esc(w.word)), BLANK)}</div>` : ""}
-      <div class="mt-2 text-zinc-500">${esc(w.collocationTh)}</div>
-    </div>`;
-}
-
-// การ์ดเฉลยเต็ม (แสดงหลังจากพยายามนึกแล้วเท่านั้น)
+// การ์ดเฉลยเต็ม: ตัวสะกด คำอ่าน ความหมายไทย collocation และประโยคตัวอย่าง
 // ใช้ประโยคง่าย เพื่อไม่ให้ซ้ำกับประโยคใน Micro-Quiz ที่จะตามมา
-function cardHTML(w) {
-  const s = { en: w.simple, th: w.simpleTh };
-  return `
-    <div class="${panel}">
-      <div class="flex items-start justify-between gap-3">
-        <div>
-          <div class="text-3xl font-semibold md:text-4xl">${esc(w.word)}</div>
-          <button data-say="${esc(w.word)}" class="mt-1 inline-flex items-center gap-2 text-zinc-500 hover:text-purple-600">🔊 <span>${esc(w.ipa)}</span></button>
-        </div>
-        <span class="text-sm text-teal-600 dark:text-teal-400">${esc(w.pos)}</span>
-      </div>
-      <div class="mt-3 text-lg text-purple-600 dark:text-purple-400">${esc(w.meaning)}</div>
-      <div class="mt-4 rounded-2xl bg-zinc-100 p-4 dark:bg-zinc-800">
-        <div class="text-xs uppercase tracking-wide text-zinc-500">Collocation</div>
-        <button data-say="${esc(w.collocation)}" class="text-left text-lg">${hl(w.collocation, w.word)}</button>
-        <div class="text-sm text-zinc-500">${esc(w.collocationTh)}</div>
-      </div>
-      <div class="mt-3 rounded-2xl bg-zinc-100 p-4 dark:bg-zinc-800">
-        <button data-say="${esc(filled(s.en, w))}" class="text-left italic">${hl(filled(s.en, w), w.answer)}</button>
-        <div class="text-sm text-zinc-500">${esc(s.th)}</div>
-      </div>
-    </div>`;
+function example(label, en, target, th, accent) {
+  return `<div class="flex items-start gap-3 rounded-2xl border-l-4 ${accent} bg-zinc-50 p-4 dark:bg-zinc-800/50">
+    <div class="min-w-0 flex-1">
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">${label}</div>
+      <div class="mt-1 text-lg leading-snug">${hl(en, target)}</div>
+      <div class="mt-0.5 text-sm text-zinc-500">${esc(th)}</div>
+    </div>
+    ${sayBtn(en)}
+  </div>`;
 }
 
-const listening = `<div class="mt-auto flex items-center justify-center gap-3 py-4 text-zinc-500">
-  <span class="grid h-12 w-12 animate-pulse place-items-center rounded-full bg-purple-600 text-xl text-white">🔊</span> ฟังเสียงก่อน…</div>`;
+function wordCard(w) {
+  return card(`
+    ${leechBadge(w)}
+    <div class="flex items-start gap-4">
+      <div class="min-w-0 flex-1">
+        <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+          <h2 class="text-4xl font-bold tracking-tight md:text-5xl">${esc(w.word)}</h2>
+          <span class="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-teal-200 dark:bg-teal-500/10 dark:text-teal-300 dark:ring-teal-500/30">${esc(w.pos)}</span>
+        </div>
+        <div class="mt-1.5 text-lg text-zinc-500">${esc(w.ipa)}</div>
+      </div>
+      ${sayBtn(w.word, "md")}
+    </div>
+    <div class="mt-5 border-t border-zinc-100 pt-5 dark:border-zinc-800">
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">ความหมาย</div>
+      <div class="mt-1 text-2xl font-semibold text-purple-700 dark:text-purple-300">${esc(w.meaning)}</div>
+    </div>
+    <div class="mt-5 grid gap-3">
+      ${example("Collocation", w.collocation, w.word, w.collocationTh, "border-purple-400")}
+      ${example("ตัวอย่าง", filled(w.simple, w), w.answer, w.simpleTh, "border-teal-400")}
+    </div>`);
+}
 
-// Ear-first: เล่นเสียงก่อน แล้วค่อยเปิดตัวสะกด
-function revealThen(w, before, after) {
-  shell(before + listening);
-  speak(w.word, after);
+// โจทย์แบบฟัง: เล่นเสียงอย่างเดียว ไม่มีตัวสะกดและคำแปล
+function promptListen(w, text) {
+  return card(`
+    ${leechBadge(w)}
+    <div class="py-4 text-center">
+      ${sayBtn(w.word, "lg")}
+      <p class="mt-6 text-xl font-semibold">${text}</p>
+      <div class="mt-3 flex justify-center">${slowBtn(w.word)}</div>
+    </div>`);
+}
+
+// โจทย์แบบไทย: ความหมายไทย + collocation ที่ซ่อนคำไว้ (ยังไม่เห็นตัวสะกด)
+function promptThai(w) {
+  return card(`
+    ${leechBadge(w)}
+    <div class="py-2 text-center">
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">นึกคำภาษาอังกฤษ แล้วพูดออกเสียง</div>
+      <div class="mt-3 text-3xl font-bold text-purple-700 md:text-4xl dark:text-purple-300">${esc(w.meaning)}</div>
+      <div class="mx-auto mt-6 w-fit rounded-2xl bg-zinc-50 px-5 py-3 dark:bg-zinc-800/60">
+        <div class="text-xl md:text-2xl">${esc(w.collocation).replace(wordRe(esc(w.word)), BLANK)}</div>
+        <div class="mt-1 text-sm text-zinc-500">${esc(w.collocationTh)}</div>
+      </div>
+    </div>`);
+}
+
+const listening = `<div class="flex items-center justify-center gap-3 py-3 text-zinc-500">
+  <span class="grid h-11 w-11 animate-pulse place-items-center rounded-full bg-purple-600 text-white">${icon("speaker", "h-5 w-5")}</span> ฟังเสียงก่อน…</div>`;
+
+// สลับรูปแบบโจทย์ทบทวน: ฟังแล้วนึกความหมาย ↔ เห็นไทยแล้วนึกคำอังกฤษ
+function nextMode() {
+  session.flip = !session.flip;
+  return session.flip ? "listen" : "thai";
 }
 
 // ---------- state changes ----------
@@ -222,7 +312,7 @@ function startSession() {
     ...plan.review.map(id => ({ phase: "review", id, kind: "recall" })),
     ...plan.fresh.map(id => ({ phase: "new", id, kind: "intro" })),
   ];
-  session = { tasks, current: null, currentDone: false, completed: 0, learned: 0, fails: 0, cleared: 0 };
+  session = { tasks, current: null, currentDone: false, completed: 0, learned: 0, fails: 0, cleared: 0, flip: false };
   next();
 }
 
@@ -237,35 +327,53 @@ function next() {
   view(byId[t.id], t.phase);
 }
 
+// เปิดเฉลย: ถ้าโจทย์เป็นแบบไทย ให้เล่นเสียงก่อนแล้วค่อยเห็นตัวสะกด
+function reveal(w, mode, stepsHtml, prompt, show) {
+  if (mode === "listen") { show(); speak(w.word); return; }
+  shell({ stepsHtml, body: prompt, actions: listening });
+  speak(w.word, show);
+}
+
 // Warm-up: ทวนเร็วๆ ว่ายังจำคำของเมื่อวานได้ไหม
 function showWarm(w, phase) {
-  const prompt = `<p class="text-sm text-zinc-500">นึกคำภาษาอังกฤษจากความหมายนี้ในใจ</p>${promptHTML(w)}`;
-  shell(`${prompt}<div class="mt-auto grid">${button('data-act="reveal"', "เฉลย", "primary", "Space Enter")}</div>`);
-  on("reveal", () => revealThen(w, prompt, () => {
-    shell(`${cardHTML(w)}
-      <div class="mt-auto grid grid-cols-2 gap-3">
+  const mode = nextMode();
+  const prompt = mode === "listen" ? promptListen(w, "ฟังแล้วนึกความหมายเป็นภาษาไทย") : promptThai(w);
+  shell({ stepsHtml: steps(STEPS.warm, 0), body: prompt, actions: button('data-act="reveal"', "เฉลย", "primary", "Space Enter") });
+  if (mode === "listen") speak(w.word);
+  on("reveal", () => reveal(w, mode, steps(STEPS.warm, 0), prompt, () => {
+    shell({
+      stepsHtml: steps(STEPS.warm, 1),
+      body: wordCard(w),
+      actions: `<div class="grid grid-cols-2 gap-3">
         ${button('data-act="forgot"', "จำไม่ได้", "again", "1")}
         ${button('data-act="knew"', "จำได้", "easy", "2")}
-      </div>`);
+      </div>`,
+    });
     on("forgot", () => { fail(w.id); next(); });
     on("knew", () => { complete(w.id, phase); next(); });
   }));
 }
 
-// Level 2 · Recall: ความหมาย + collocation → นึกและพูดในใจ → เฉลย → ให้คะแนนตัวเอง
+// Level 2 · Recall: นึกคำ → เฉลย → ให้คะแนนตัวเอง → Micro-Quiz
 function showRecall(w, phase) {
-  const prompt = `<p class="text-sm text-zinc-500">นึกคำที่หายไป แล้วลองพูดออกเสียง ก่อนกดเฉลย</p>${promptHTML(w, { masked: true })}`;
-  shell(`${prompt}<div class="mt-auto grid">${button('data-act="reveal"', "เฉลย (Reveal Answer)", "primary", "Space Enter")}</div>`);
-  on("reveal", () => revealThen(w, prompt, () => {
+  const mode = nextMode();
+  const prompt = mode === "listen" ? promptListen(w, "ฟังแล้วนึกความหมายเป็นภาษาไทย") : promptThai(w);
+  shell({ stepsHtml: steps(STEPS.recall, 0), body: prompt, actions: button('data-act="reveal"', "เฉลย", "primary", "Space Enter") });
+  if (mode === "listen") speak(w.word);
+  on("reveal", () => reveal(w, mode, steps(STEPS.recall, 0), prompt, () => {
     const c = store.cards[w.id];
     const days = phase === "wrap" ? null : { hard: 1, easy: srs.nextEasyInterval(c?.interval ?? 0) };
-    const sub = t => `<span class="block text-xs font-normal opacity-80">${t}</span>`;
-    shell(`${cardHTML(w)}
-      <div class="mt-auto grid grid-cols-3 gap-3">
-        ${button('data-act="again"', `Again${sub("ทวนอีกรอบ")}`, "again", "1")}
-        ${button('data-act="hard"', `Hard${sub(days ? `${days.hard} วัน` : "ยาก")}`, "hard", "2")}
-        ${button('data-act="easy"', `Easy${sub(days ? `${days.easy} วัน` : "ง่าย")}`, "easy", "3")}
-      </div>`);
+    const sub = t => `<span class="block text-xs font-medium opacity-80">${t}</span>`;
+    shell({
+      stepsHtml: steps(STEPS.recall, 1),
+      body: wordCard(w),
+      actions: `<p class="mb-2 text-center text-sm text-zinc-500">นึกออกง่ายแค่ไหน?</p>
+        <div class="grid grid-cols-3 gap-2.5">
+          ${button('data-act="again"', `<span>Again${sub("ทวนอีกรอบ")}</span>`, "again", "1")}
+          ${button('data-act="hard"', `<span>Hard${sub(days ? `อีก ${days.hard} วัน` : "ยาก")}</span>`, "hard", "2")}
+          ${button('data-act="easy"', `<span>Easy${sub(days ? `อีก ${days.easy} วัน` : "ง่าย")}</span>`, "easy", "3")}
+        </div>`,
+    });
     on("again", () => { fail(w.id); next(); });
     const pass = rating => () => {
       if (phase !== "wrap") { store.cards[w.id] = srs.rate(c, rating, daily().date); save(); }
@@ -277,61 +385,75 @@ function showRecall(w, phase) {
   }));
 }
 
-// Level 1 · Recognition (คำใหม่): ฟังเสียง + ความหมาย → เลือกคำที่ถูกจาก 4 ตัวเลือก
+// Level 1 · Recognition (คำใหม่): ฟังเสียง → เลือกคำที่ได้ยิน → ค่อยเห็นความหมาย
 function showIntro(w, phase) {
   const d = daily();
   if (!d.newIds.includes(w.id)) { d.newIds.push(w.id); save(); }
-  shell(`
-    <p class="text-sm text-zinc-500">คำใหม่ · ฟังเสียง แล้วเลือกคำที่ตรงกับความหมาย</p>
-    <div class="${panel} text-center">
-      <button data-say="${esc(w.word)}" aria-label="ฟังอีกครั้ง" class="mx-auto grid h-20 w-20 place-items-center rounded-full bg-purple-600 text-3xl text-white shadow-lg active:scale-95">🔊</button>
-      <div class="mt-4 text-2xl font-semibold text-purple-600 md:text-3xl dark:text-purple-400">${esc(w.meaning)}</div>
-      <div class="mt-2 text-zinc-500">${esc(w.collocationTh)}</div>
-    </div>
-    <div id="opts" class="mt-auto grid gap-3"><p class="py-4 text-center text-zinc-500">ฟังให้จบก่อน แล้วตัวเลือกจะขึ้นมา…</p></div>`);
+  shell({
+    stepsHtml: steps(STEPS.intro, 0),
+    body: promptListen(w, "ฟังให้ดี แล้วเลือกคำที่ได้ยิน"),
+    actions: `<div id="opts" class="grid gap-3 sm:grid-cols-2"><p class="col-span-full py-4 text-center text-sm text-zinc-500">ฟังให้จบก่อน แล้วตัวเลือกจะขึ้นมา…</p></div>`,
+  });
 
   speak(w.word, () => {
     const box = app.querySelector("#opts");
     if (!box) return; // ผู้ใช้ปิดหน้าไปแล้ว
+    app.querySelector("#steps").outerHTML = steps(STEPS.intro, 1);
     const opts = pickOptions(w, "word");
-    box.className = "mt-auto grid grid-cols-1 gap-3 sm:grid-cols-2";
-    box.innerHTML = opts.map((o, i) => button(`data-opt="${esc(o)}"`, esc(o), "ghost", String(i + 1))).join("");
+    box.innerHTML = opts.map((o, i) => `
+      <button data-opt="${esc(o)}" data-key="${i + 1}" class="animate-pop flex min-h-14 items-center gap-3 rounded-2xl bg-white px-4 py-3 text-left text-lg font-semibold ring-1 ring-zinc-200 transition hover:-translate-y-0.5 hover:shadow-md hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
+        <span class="grid h-7 w-7 shrink-0 place-items-center rounded-lg bg-zinc-100 text-xs font-medium text-zinc-500 dark:bg-zinc-800">${i + 1}</span>
+        <span class="flex-1">${esc(o)}</span>
+      </button>`).join("");
     box.querySelectorAll("[data-opt]").forEach(b => (b.onclick = () => {
       const ok = b.dataset.opt === w.word;
+      box.querySelectorAll("[data-opt]").forEach(x => {
+        x.disabled = true;
+        if (x.dataset.opt === w.word) x.className += " !ring-2 !ring-teal-500 bg-teal-50 dark:bg-teal-500/10";
+        else if (x === b) x.className += " !ring-2 !ring-rose-500 bg-rose-50 dark:bg-rose-500/10";
+        else x.className += " opacity-50";
+      });
       if (ok) session.tasks.unshift({ phase, id: w.id, kind: "cloze" });
       else fail(w.id);
-      shell(`
-        ${banner(ok, ok ? "ถูกต้อง! จำคำนี้ไว้ แล้วไปเติมคำในประโยค" : `ยังไม่ถูก คำที่ถูกคือ “${esc(w.word)}” จะกลับมาให้ทวนอีกครั้งตอนท้าย`)}
-        ${cardHTML(w)}
-        <div class="mt-auto grid">${button('data-act="next"', ok ? "ไปทำ Micro-Quiz" : "ต่อไป", "primary", "Enter Space")}</div>`);
-      speak(w.word);
-      on("next", next);
+      setTimeout(() => {
+        shell({
+          stepsHtml: steps(STEPS.intro, 2),
+          body: chip(ok, ok ? "ถูกต้อง! มารู้จักคำนี้กัน" : `ยังไม่ถูก คำที่ได้ยินคือ “${esc(w.word)}” จะกลับมาทวนตอนท้าย`) + wordCard(w),
+          actions: button('data-act="next"', ok ? `ไปเติมคำในประโยค ${icon("arrow", "ml-2 h-5 w-5")}` : "ต่อไป", "primary", "Enter Space"),
+        });
+        speak(w.word);
+        on("next", next);
+      }, 650);
     }));
   });
 }
 
-function banner(ok, text) {
-  return `<div class="rounded-2xl px-4 py-3 font-medium ${ok
-    ? "bg-teal-100 text-teal-900 dark:bg-teal-900/40 dark:text-teal-200"
-    : "bg-rose-100 text-rose-900 dark:bg-rose-900/40 dark:text-rose-200"}">${ok ? "✓" : "✗"} ${text}</div>`;
-}
-
-// Level 3 · Production (Micro-Quiz): เติมคำในประโยค
+// Level 3 · Production (Micro-Quiz): เติมคำในประโยค คำแปลไทยซ่อนไว้เป็นคำใบ้
 function showCloze(w, phase) {
   const s = sentenceOf(w);
-  shell(`
-    <p class="text-sm text-zinc-500">Micro-Quiz · เติมคำให้ประโยคสมบูรณ์</p>
-    <div class="${panel}">
-      ${isLeech(w) ? `<div class="mb-3 text-center text-5xl">${w.emoji}</div>` : ""}
-      <p class="text-xl leading-relaxed md:text-2xl">${esc(s.en).replace("___", BLANK)}</p>
-      <p class="mt-2 text-zinc-500">${esc(s.th)}</p>
-    </div>
-    <form id="quiz" class="mt-auto grid gap-3">
+  const list = phase === "new" ? STEPS.intro : STEPS.recall;
+  shell({
+    stepsHtml: steps(list, list.length - 1),
+    body: card(`
+      ${leechBadge(w)}
+      <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Micro-Quiz · เติมคำให้ประโยคสมบูรณ์</div>
+      <p class="mt-3 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${esc(s.en).replace("___", BLANK)}</p>
+      <button data-act="hint" class="mt-5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 hover:bg-amber-100 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล (คำใบ้)</button>
+      <p id="hint" class="mt-3 hidden text-zinc-500">${esc(s.th)}</p>`),
+    actions: `<form id="quiz" class="grid gap-3">
       <input id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"
-        placeholder="พิมพ์คำที่หายไป" class="rounded-2xl bg-white px-4 py-3 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-zinc-900 dark:ring-zinc-700">
-      ${button('type="submit"', "ตรวจคำตอบ")}
-      ${button('type="button" data-act="choices"', "ไม่แน่ใจ ขอดูตัวเลือก", "ghost")}
-    </form>`);
+        placeholder="พิมพ์คำที่หายไป" class="w-full rounded-2xl bg-white px-5 py-3.5 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-zinc-900 dark:ring-zinc-700">
+      <div class="grid grid-cols-[1fr_auto] gap-3">
+        ${button('type="submit"', "ตรวจคำตอบ")}
+        <button type="button" data-act="choices" class="rounded-2xl px-4 text-sm font-medium text-zinc-500 ring-1 ring-zinc-200 hover:text-purple-600 hover:ring-purple-300 dark:ring-zinc-800">ขอตัวเลือก</button>
+      </div>
+    </form>`,
+  });
+
+  on("hint", e => {
+    app.querySelector("#hint").classList.remove("hidden");
+    e.currentTarget.remove();
+  });
 
   const check = value => {
     const ok = norm(value) === norm(w.answer);
@@ -342,13 +464,17 @@ function showCloze(w, phase) {
       fail(w.id);
     }
     const full = filled(s.en, w);
-    shell(`
-      ${banner(ok, ok ? "ถูกต้อง! ผ่านคำนี้สำหรับวันนี้แล้ว" : `คำตอบคือ “${esc(w.answer)}” จะกลับมาทวนอีกครั้งในช่วงเก็บตก`)}
-      <div class="${panel}">
-        <button data-say="${esc(full)}" class="text-left text-xl leading-relaxed md:text-2xl">${hl(full, w.answer)} <span class="text-base">🔊</span></button>
-        <p class="mt-2 text-zinc-500">${esc(s.th)}</p>
-      </div>
-      <div class="mt-auto grid">${button('data-act="next"', "ต่อไป", "primary", "Enter Space")}</div>`);
+    shell({
+      stepsHtml: steps(list, list.length),
+      body: chip(ok, ok ? "ถูกต้อง! ผ่านคำนี้สำหรับวันนี้แล้ว" : `คำตอบคือ “${esc(w.answer)}” จะกลับมาทวนในช่วงเก็บตก`) +
+        card(`
+          <div class="flex items-start gap-4">
+            <p class="flex-1 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${hl(full, w.answer)}</p>
+            ${sayBtn(full, "md")}
+          </div>
+          <p class="mt-3 border-t border-zinc-100 pt-3 text-zinc-500 dark:border-zinc-800">${esc(s.th)}</p>`),
+      actions: button('data-act="next"', `ต่อไป ${icon("arrow", "ml-2 h-5 w-5")}`, "primary", "Enter Space"),
+    });
     speak(full);
     on("next", next);
   };
@@ -361,7 +487,7 @@ function showCloze(w, phase) {
   };
   on("choices", () => {
     const form = app.querySelector("#quiz");
-    form.innerHTML = `<div class="grid grid-cols-1 gap-3 sm:grid-cols-2">${pickOptions(w, "answer")
+    form.innerHTML = `<div class="grid gap-3 sm:grid-cols-2">${pickOptions(w, "answer")
       .map((o, i) => button(`type="button" data-opt="${esc(o)}"`, esc(o), "ghost", String(i + 1))).join("")}</div>`;
     form.querySelectorAll("[data-opt]").forEach(b => (b.onclick = () => check(b.dataset.opt)));
   });
@@ -373,21 +499,24 @@ function finish() {
   save();
   const s = session;
   session = null;
+  const stat = (n, label, color) => `<div class="rounded-2xl bg-zinc-50 p-4 text-center dark:bg-zinc-800/60">
+    <div class="text-3xl font-bold tabular-nums ${color}">${n}</div><div class="mt-1 text-sm text-zinc-500">${label}</div></div>`;
   app.innerHTML = `
-    <main class="flex flex-1 flex-col items-center justify-center gap-6 py-10 text-center">
-      <div class="text-6xl">🎉</div>
-      <h1 class="text-2xl font-semibold">จบการเรียนวันนี้แล้ว</h1>
-      <div class="grid w-full grid-cols-3 gap-3">
-        ${tile(s.completed, "คำที่ผ่าน")}${tile(s.learned, "คำใหม่")}${tile(s.cleared, "เก็บตกสำเร็จ")}
-      </div>
-      <p class="text-zinc-500">คำที่ผิดวันนี้ถูกทวนจนถูกครบ 100% แล้ว พรุ่งนี้จะมีรอบทบทวนรออยู่</p>
-      ${button('data-act="home"', "กลับหน้าแรก")}
+    <main class="flex flex-1 flex-col justify-center py-10">
+      ${card(`
+        <div class="text-center">
+          <div class="text-6xl">🎉</div>
+          <h1 class="mt-4 text-2xl font-bold">จบการเรียนวันนี้แล้ว</h1>
+          <p class="mt-2 text-zinc-500">คำที่ผิดวันนี้ทวนจนถูกครบแล้ว พรุ่งนี้มีรอบทบทวนรออยู่</p>
+        </div>
+        <div class="mt-6 grid grid-cols-3 gap-3">
+          ${stat(s.completed, "คำที่ผ่าน", "text-purple-600 dark:text-purple-300")}
+          ${stat(s.learned, "คำใหม่", "text-teal-600 dark:text-teal-300")}
+          ${stat(s.cleared, "เก็บตกสำเร็จ", "text-rose-500")}
+        </div>
+        <div class="mt-6">${button('data-act="home"', "กลับหน้าแรก")}</div>`)}
     </main>`;
   on("home", renderHome);
-}
-
-function tile(n, label) {
-  return `<div class="${panel} !p-4 text-center"><div class="text-3xl font-semibold">${n}</div><div class="text-sm text-zinc-500">${label}</div></div>`;
 }
 
 // ---------- home ----------
@@ -398,41 +527,71 @@ function renderHome() {
   const cards = Object.values(store.cards);
   const learned = cards.length;
   const leeches = cards.filter(c => c.leech).length;
+  const tomorrow = cards.filter(c => c.due === srs.addDays(d.date, 1)).length;
+  const pct = words.length ? (100 * learned) / words.length : 0;
+  const dateTh = new Date().toLocaleDateString("th-TH", { weekday: "long", day: "numeric", month: "long" });
   const seg = (attr, val, cur, label) =>
-    `<button ${attr}="${val}" class="flex-1 rounded-xl px-3 py-2 text-sm ${val === cur ? "bg-purple-600 text-white" : "bg-zinc-100 dark:bg-zinc-800"}">${label}</button>`;
+    `<button ${attr}="${val}" class="flex-1 rounded-xl px-3 py-2 text-sm font-medium transition ${String(val) === String(cur)
+      ? "bg-white text-purple-700 shadow-sm dark:bg-zinc-700 dark:text-white"
+      : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"}">${label}</button>`;
+  const phaseRow = (key, n) => `
+    <li class="flex items-center justify-between rounded-2xl bg-white/10 px-4 py-2.5">
+      <span class="flex items-center gap-2.5"><span class="h-2.5 w-2.5 rounded-full ${PHASES[key].dot} ring-2 ring-white/40"></span>${PHASES[key].th}<span class="text-sm text-white/60">${PHASES[key].en}</span></span>
+      <span class="text-lg font-bold tabular-nums">${n}</span>
+    </li>`;
 
   app.innerHTML = `
-    <header class="pt-[max(24px,env(safe-area-inset-top))]">
-      <h1 class="text-3xl font-semibold">Active Recall English</h1>
-      <p class="mt-1 text-zinc-500">นึกก่อน ค่อยดูเฉลย · ทบทวนตามรอบความจำ</p>
+    <header class="flex items-center gap-3 pt-[max(24px,env(safe-area-inset-top))]">
+      <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-lg font-bold text-white shadow-lg shadow-purple-600/30">A</div>
+      <div>
+        <h1 class="text-xl font-bold leading-tight">Active Recall English</h1>
+        <p class="text-sm text-zinc-500">ฟังก่อน · นึกก่อน · แล้วค่อยดูเฉลย</p>
+      </div>
     </header>
-    <main class="flex flex-1 flex-col gap-4 py-6">
-      <section class="grid grid-cols-2 gap-3 md:grid-cols-4">
-        ${tile(plan.warm.length, "อุ่นเครื่อง")}${tile(plan.review.length, "ถึงรอบทบทวน")}
-        ${tile(plan.fresh.length, "คำใหม่วันนี้")}${tile(plan.wrap.length, "ค้างเก็บตก")}
+    <main class="grid gap-4 py-6">
+      <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-6 text-white shadow-xl shadow-purple-600/25 md:p-8">
+        <p class="text-sm text-white/70">${esc(dateTh)}</p>
+        <h2 class="mt-1 text-2xl font-bold">${total ? `วันนี้มี ${total} คำรอคุณอยู่` : "วันนี้เรียนครบแล้ว 🎉"}</h2>
+        <ul class="mt-5 grid gap-2">
+          ${phaseRow("warm", plan.warm.length)}${phaseRow("review", plan.review.length)}
+          ${phaseRow("new", plan.fresh.length)}${phaseRow("wrap", plan.wrap.length)}
+        </ul>
+        <button data-act="start" ${total ? "" : "disabled"} class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98] disabled:opacity-60">
+          ${total ? `เริ่มเรียนวันนี้ ${icon("arrow", "h-5 w-5")}` : `พรุ่งนี้มีรอบทบทวน ${tomorrow} คำ`}
+        </button>
       </section>
-      ${button(`data-act="start" ${total ? "" : "disabled"}`, total ? "เริ่มเรียนวันนี้" : "วันนี้ครบแล้ว กลับมาใหม่พรุ่งนี้")}
-      <section class="${panel} grid gap-4">
-        <div class="flex justify-between"><span>เรียนไปแล้ว</span><span class="font-semibold">${learned} / ${words.length} คำ</span></div>
-        <div class="flex justify-between"><span>คำที่ลืมบ่อย (Leech)</span><span class="font-semibold">${leeches}</span></div>
-        <div>
-          <div class="mb-2 text-sm text-zinc-500">คำใหม่ต่อวัน</div>
-          <div class="flex gap-2">${[5, 6, 7].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
-        </div>
-        <div>
-          <div class="mb-2 text-sm text-zinc-500">สำเนียงเสียงอ่าน</div>
-          <div class="flex gap-2">${seg("data-accent", "en-US", store.settings.accent, "🇺🇸 US")}${seg("data-accent", "en-GB", store.settings.accent, "🇬🇧 UK")}</div>
-        </div>
+
+      <section class="grid gap-4 md:grid-cols-2">
+        ${card(`
+          <div class="flex items-baseline justify-between">
+            <h3 class="font-semibold">คลังคำศัพท์</h3>
+            <span class="text-sm text-zinc-500">${pct < 1 && learned ? "<1" : Math.round(pct)}%</span>
+          </div>
+          <div class="mt-3 text-3xl font-bold tabular-nums">${learned}<span class="text-lg font-medium text-zinc-400"> / ${words.length.toLocaleString()} คำ</span></div>
+          <div class="mt-3 h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+            <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="width:${Math.max(pct, learned ? 1 : 0)}%"></div>
+          </div>
+          <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
+            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">ทบทวนพรุ่งนี้</div><div class="text-xl font-bold tabular-nums">${tomorrow}</div></div>
+            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">คำที่ลืมบ่อย</div><div class="text-xl font-bold tabular-nums text-amber-600 dark:text-amber-400">${leeches}</div></div>
+          </div>`, "!p-6")}
+        ${card(`
+          <h3 class="font-semibold">ตั้งค่า</h3>
+          <div class="mt-4 text-sm text-zinc-500">คำใหม่ต่อวัน</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 6, 7].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
+          <div class="mt-4 text-sm text-zinc-500">สำเนียงเสียงอ่าน</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "อเมริกัน (US)")}${seg("data-accent", "en-GB", store.settings.accent, "อังกฤษ (UK)")}</div>`, "!p-6")}
       </section>
-      <details class="${panel}">
-        <summary class="cursor-pointer font-medium">เรียนอย่างไร</summary>
-        <ol class="mt-3 list-decimal space-y-2 pl-5 text-zinc-600 dark:text-zinc-400">
-          <li><b>อุ่นเครื่อง</b> ทวนคำของเมื่อวานสั้นๆ</li>
-          <li><b>ทบทวน</b> เห็นความหมาย + collocation ที่ซ่อนคำไว้ นึกและพูดในใจ แล้วกดเฉลย ให้คะแนน Again / Hard / Easy จากนั้นเติมคำในประโยค</li>
-          <li><b>คำใหม่</b> ฟังเสียงก่อน แล้วเลือกคำที่ถูกจาก 4 ตัวเลือก จากนั้นเติมคำในประโยค</li>
-          <li><b>เก็บตก</b> คำที่ผิดหรือกด Again วันนี้ จะวนกลับมาจนถูกครบทุกคำ</li>
+
+      <details class="group rounded-[28px] bg-white p-6 ring-1 ring-zinc-200/70 dark:bg-zinc-900 dark:ring-zinc-800">
+        <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">เรียนอย่างไร <span class="text-zinc-400 transition group-open:rotate-180">⌄</span></summary>
+        <ol class="mt-4 grid gap-3 text-zinc-600 dark:text-zinc-400">
+          <li><b class="text-zinc-900 dark:text-zinc-100">อุ่นเครื่อง</b> ทวนคำของเมื่อวานสั้นๆ</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">ทบทวน</b> สลับกันสองแบบ คือ ฟังเสียงแล้วนึกความหมาย กับ เห็นคำไทยแล้วนึกคำอังกฤษ จากนั้นให้คะแนน Again / Hard / Easy และเติมคำในประโยค</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">คำใหม่</b> ฟังเสียง เลือกคำที่ได้ยิน แล้วจึงเห็นความหมายและตัวอย่าง ปิดท้ายด้วยการเติมคำในประโยค</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">เก็บตก</b> คำที่ผิดหรือกด Again วันนี้ จะวนกลับมาจนถูกครบทุกคำ</li>
         </ol>
-        <button data-act="reset" class="mt-4 text-sm text-rose-600 underline">ล้างความคืบหน้าทั้งหมด</button>
+        <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">ล้างความคืบหน้าทั้งหมด</button>
       </details>
     </main>`;
 

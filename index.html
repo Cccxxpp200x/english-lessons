@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f4f4f5" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#09090b" media="(prefers-color-scheme: dark)">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <title>Active Recall English</title>
@@ -13,13 +13,21 @@
   <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script>
-    tailwind.config = { theme: { extend: { fontFamily: { sans: ["Prompt", "system-ui", "sans-serif"] } } } };
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Prompt", "system-ui", "sans-serif"] },
+          keyframes: { pop: { "0%": { opacity: "0", transform: "translateY(8px) scale(.98)" }, "100%": { opacity: "1", transform: "none" } } },
+          animation: { pop: "pop .28s ease-out both" },
+        },
+      },
+    };
   </script>
 </head>
-<body class="min-h-dvh bg-zinc-100 font-sans text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
-  <div id="app" class="mx-auto flex min-h-dvh w-full max-w-xl flex-col px-4 pb-[max(16px,env(safe-area-inset-bottom))]">
+<body class="min-h-dvh bg-zinc-50 font-sans text-zinc-900 antialiased dark:bg-zinc-950 dark:text-zinc-100">
+  <div id="app" class="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4">
     <p class="py-10 text-center text-zinc-500">กำลังโหลด…</p>
   </div>
-  <script type="module" src="assets/app.js?v=2"></script>
+  <script type="module" src="assets/app.js?v=3"></script>
 </body>
 </html>
