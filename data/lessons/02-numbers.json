@@ -1,0 +1,18 @@
+{
+  "id": "02-numbers",
+  "title": "ตัวเลข",
+  "titleEn": "Numbers",
+  "level": "A1",
+  "words": [
+    { "word": "One", "meaning": "หนึ่ง (1)", "pos": "number", "example": "I have one brother.", "exampleTh": "ฉันมีพี่ชายหนึ่งคน" },
+    { "word": "Two", "meaning": "สอง (2)", "pos": "number", "example": "Two cups of coffee, please.", "exampleTh": "ขอกาแฟสองแก้วครับ" },
+    { "word": "Three", "meaning": "สาม (3)", "pos": "number", "example": "She has three cats.", "exampleTh": "เธอมีแมวสามตัว" },
+    { "word": "Four", "meaning": "สี่ (4)", "pos": "number", "example": "The class starts at four o'clock.", "exampleTh": "ชั้นเรียนเริ่มสี่โมง" },
+    { "word": "Five", "meaning": "ห้า (5)", "pos": "number", "example": "I work five days a week.", "exampleTh": "ฉันทำงานสัปดาห์ละห้าวัน" },
+    { "word": "Ten", "meaning": "สิบ (10)", "pos": "number", "example": "It costs ten baht.", "exampleTh": "ราคาสิบบาท" },
+    { "word": "Twenty", "meaning": "ยี่สิบ (20)", "pos": "number", "example": "He is twenty years old.", "exampleTh": "เขาอายุยี่สิบปี" },
+    { "word": "Hundred", "meaning": "ร้อย (100)", "pos": "number", "example": "There are a hundred students.", "exampleTh": "มีนักเรียนหนึ่งร้อยคน" },
+    { "word": "Thousand", "meaning": "พัน (1,000)", "pos": "number", "example": "This phone costs five thousand baht.", "exampleTh": "โทรศัพท์เครื่องนี้ราคาห้าพันบาท" },
+    { "word": "First", "meaning": "ที่หนึ่ง / แรก", "pos": "ordinal", "example": "This is my first time in Bangkok.", "exampleTh": "นี่เป็นครั้งแรกที่ฉันมากรุงเทพฯ" }
+  ]
+}

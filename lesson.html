@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="th">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>บทเรียน</title>
+  <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <a href="index.html" class="back">&larr; บทเรียนทั้งหมด</a>
+    <h1 id="lesson-title">กำลังโหลด...</h1>
+    <nav class="tabs" role="tablist">
+      <button class="tab active" data-mode="cards" role="tab">แฟลชการ์ด</button>
+      <button class="tab" data-mode="quiz" role="tab">แบบทดสอบ</button>
+    </nav>
+  </header>
+  <main id="lesson-body"></main>
+  <script src="assets/app.js"></script>
+  <script>renderLesson();</script>
+</body>
+</html>

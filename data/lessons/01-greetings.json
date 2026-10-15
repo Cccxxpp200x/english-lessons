@@ -1,0 +1,18 @@
+{
+  "id": "01-greetings",
+  "title": "คำทักทาย",
+  "titleEn": "Greetings",
+  "level": "A1",
+  "words": [
+    { "word": "Hello", "meaning": "สวัสดี", "pos": "interjection", "example": "Hello, how are you?", "exampleTh": "สวัสดี สบายดีไหม" },
+    { "word": "Good morning", "meaning": "สวัสดีตอนเช้า", "pos": "phrase", "example": "Good morning, teacher!", "exampleTh": "สวัสดีตอนเช้าครับคุณครู" },
+    { "word": "Good afternoon", "meaning": "สวัสดีตอนบ่าย", "pos": "phrase", "example": "Good afternoon, everyone.", "exampleTh": "สวัสดีตอนบ่ายทุกคน" },
+    { "word": "Good evening", "meaning": "สวัสดีตอนเย็น", "pos": "phrase", "example": "Good evening, sir.", "exampleTh": "สวัสดีตอนเย็นครับท่าน" },
+    { "word": "Goodbye", "meaning": "ลาก่อน", "pos": "interjection", "example": "Goodbye, see you tomorrow.", "exampleTh": "ลาก่อน แล้วเจอกันพรุ่งนี้" },
+    { "word": "Thank you", "meaning": "ขอบคุณ", "pos": "phrase", "example": "Thank you for your help.", "exampleTh": "ขอบคุณที่ช่วยเหลือ" },
+    { "word": "Sorry", "meaning": "ขอโทษ", "pos": "interjection", "example": "Sorry, I am late.", "exampleTh": "ขอโทษที่มาสาย" },
+    { "word": "Please", "meaning": "กรุณา / ได้โปรด", "pos": "adverb", "example": "Please sit down.", "exampleTh": "เชิญนั่งครับ" },
+    { "word": "Nice to meet you", "meaning": "ยินดีที่ได้รู้จัก", "pos": "phrase", "example": "Hi, I'm Somchai. Nice to meet you.", "exampleTh": "สวัสดี ผมชื่อสมชาย ยินดีที่ได้รู้จัก" },
+    { "word": "See you later", "meaning": "แล้วพบกันใหม่", "pos": "phrase", "example": "I have to go. See you later!", "exampleTh": "ฉันต้องไปแล้ว แล้วพบกันใหม่นะ" }
+  ]
+}

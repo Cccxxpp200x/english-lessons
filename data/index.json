@@ -1,0 +1,7 @@
+{
+  "lessons": [
+    { "id": "01-greetings", "title": "คำทักทาย", "titleEn": "Greetings", "level": "A1", "file": "lessons/01-greetings.json" },
+    { "id": "02-numbers", "title": "ตัวเลข", "titleEn": "Numbers", "level": "A1", "file": "lessons/02-numbers.json" },
+    { "id": "03-daily-life", "title": "ชีวิตประจำวัน", "titleEn": "Daily Life", "level": "A1", "file": "lessons/03-daily-life.json" }
+  ]
+}

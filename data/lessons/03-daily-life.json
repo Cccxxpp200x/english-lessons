@@ -1,0 +1,18 @@
+{
+  "id": "03-daily-life",
+  "title": "ชีวิตประจำวัน",
+  "titleEn": "Daily Life",
+  "level": "A1",
+  "words": [
+    { "word": "Wake up", "meaning": "ตื่นนอน", "pos": "verb", "example": "I wake up at six every day.", "exampleTh": "ฉันตื่นนอนตอนหกโมงทุกวัน" },
+    { "word": "Breakfast", "meaning": "อาหารเช้า", "pos": "noun", "example": "I eat rice for breakfast.", "exampleTh": "ฉันกินข้าวเป็นอาหารเช้า" },
+    { "word": "Go to school", "meaning": "ไปโรงเรียน", "pos": "phrase", "example": "My sister goes to school by bus.", "exampleTh": "น้องสาวไปโรงเรียนด้วยรถเมล์" },
+    { "word": "Work", "meaning": "ทำงาน / งาน", "pos": "verb/noun", "example": "My father works in a hospital.", "exampleTh": "พ่อของฉันทำงานที่โรงพยาบาล" },
+    { "word": "Lunch", "meaning": "อาหารกลางวัน", "pos": "noun", "example": "Let's have lunch together.", "exampleTh": "ไปกินข้าวกลางวันด้วยกันเถอะ" },
+    { "word": "Study", "meaning": "เรียน / ศึกษา", "pos": "verb", "example": "I study English every evening.", "exampleTh": "ฉันเรียนภาษาอังกฤษทุกเย็น" },
+    { "word": "Cook", "meaning": "ทำอาหาร", "pos": "verb", "example": "My mother cooks dinner.", "exampleTh": "แม่ของฉันทำอาหารเย็น" },
+    { "word": "Dinner", "meaning": "อาหารเย็น", "pos": "noun", "example": "We have dinner at seven.", "exampleTh": "เรากินข้าวเย็นตอนหนึ่งทุ่ม" },
+    { "word": "Take a shower", "meaning": "อาบน้ำ", "pos": "phrase", "example": "I take a shower before bed.", "exampleTh": "ฉันอาบน้ำก่อนนอน" },
+    { "word": "Go to bed", "meaning": "เข้านอน", "pos": "phrase", "example": "I go to bed at ten o'clock.", "exampleTh": "ฉันเข้านอนตอนสี่ทุ่ม" }
+  ]
+}
