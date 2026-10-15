@@ -37,8 +37,9 @@
 index.html        หน้าเว็บ (ใช้ Tailwind CSS ผ่าน CDN ไม่ต้อง build)
 assets/srs.js     ตรรกะรอบทบทวนและการจัดคิวประจำวัน
 assets/app.js     หน้าจอและลำดับการเรียน
-data/words.json   คลังคำศัพท์
+data/words/       คลังคำศัพท์ แยกเป็นชุด ชุดละ 100 คำ เรียงตามความถี่การใช้
 data/SCHEMA.md    รูปแบบข้อมูลและวิธีเพิ่มคำ
+tools/check_words.py  ตัวตรวจไฟล์คำศัพท์ก่อน commit
 ```
 
 ## เปิดบนเครื่อง

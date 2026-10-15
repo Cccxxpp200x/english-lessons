@@ -458,9 +458,19 @@ async function boot() {
   loadVoices();
   window.speechSynthesis?.addEventListener?.("voiceschanged", loadVoices);
   try {
-    const res = await fetch("data/words.json");
-    if (!res.ok) throw new Error(`โหลดคำศัพท์ไม่สำเร็จ (${res.status})`);
-    words = (await res.json()).words.map(w => ({ ...w, answer: w.answer || w.word }));
+    const getJSON = async path => {
+      const res = await fetch(path);
+      if (!res.ok) throw new Error(`โหลด ${path} ไม่สำเร็จ (${res.status})`);
+      return res.json();
+    };
+    // คำศัพท์แยกเป็นชุดๆ ตามลำดับใน index.json (คำที่อยู่ชุดแรกจะได้เรียนก่อน)
+    const { files } = await getJSON("data/words/index.json");
+    const lists = await Promise.all(files.map(f => getJSON(`data/words/${f}`)));
+    const seen = new Set();
+    words = lists
+      .flatMap(l => l.words)
+      .filter(w => !seen.has(w.id) && seen.add(w.id))
+      .map(w => ({ ...w, answer: w.answer || w.word }));
     byId = Object.fromEntries(words.map(w => [w.id, w]));
     renderHome();
   } catch (err) {
