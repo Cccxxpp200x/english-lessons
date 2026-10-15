@@ -1,5 +1,5 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Wrap-up
-import * as srs from "./srs.js";
+import * as srs from "./srs.js?v=2";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
