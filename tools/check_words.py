@@ -37,6 +37,8 @@ for name in files:
             errors.append(f"{where}: collocation ไม่มีคำ '{w.get('word')}'")
         for f in ("cloze", "simple"):
             s = w.get(f, "")
+            if re.search(r"___\w", s):
+                errors.append(f"{where}: {f} มีตัวอักษรติดกับ ___ (เช่น ___s)")
             if s.count("___") != 1:
                 errors.append(f"{where}: {f} ต้องมี ___ หนึ่งจุดพอดี")
             if s in seen_sentences:
