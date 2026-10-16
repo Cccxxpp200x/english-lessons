@@ -1,19 +1,20 @@
-// หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Wrap-up
+// หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=4";
+import * as srs from "./srs.js?v=5";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
 
 let words = [];
 let byId = {};
-let store = { cards: {}, daily: null, settings: { newPerDay: 5, accent: "en-US" } };
+let store = { cards: {}, daily: null, settings: { newPerDay: 5, sentencesPerDay: 5, accent: "en-US" } };
 let session = null;
 
 const PHASES = {
   warm: { th: "อุ่นเครื่อง", en: "Warm-up", dot: "bg-amber-400" },
   review: { th: "ทบทวน", en: "Core Review", dot: "bg-purple-500" },
   new: { th: "คำใหม่", en: "New Intake", dot: "bg-teal-500" },
+  sentence: { th: "ประโยค", en: "Sentences", dot: "bg-sky-400" },
   wrap: { th: "เก็บตก", en: "Wrap-up", dot: "bg-rose-500" },
 };
 
@@ -22,6 +23,7 @@ const STEPS = {
   intro: ["ฟัง", "เลือก", "รู้จักคำ", "เติมคำ"],
   recall: ["นึก", "เฉลย", "เติมคำ"],
   warm: ["นึก", "เฉลย"],
+  sentence: ["เรียงประโยค", "พูดตาม"],
 };
 
 // ---------- storage ----------
@@ -197,10 +199,18 @@ const leechBadge = w => isLeech(w)
       <span class="mt-2 inline-block rounded-full bg-amber-100 px-3 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">คำที่ลืมบ่อย · มีภาพช่วยจำ</span></div>`
   : "";
 
+const sentencesLeft = () => Math.max(0, (store.settings.sentencesPerDay ?? 5) - (daily().sentences || 0));
+
+// จำนวนงานที่เหลือ: คำ (นับไม่ซ้ำ) + ประโยค
 function remaining() {
-  const ids = new Set([...session.tasks.map(t => t.id), ...daily().wrap]);
-  if (session.current && !session.currentDone) ids.add(session.current.id);
-  return ids.size;
+  const isSentence = t => t && (t.kind === "sentence" || t.kind === "sentence-start");
+  const ids = new Set([...session.tasks.filter(t => !isSentence(t)).map(t => t.id), ...daily().wrap]);
+  const cur = session.current;
+  if (cur && !session.currentDone && !isSentence(cur)) ids.add(cur.id);
+  let n = ids.size + session.tasks.filter(t => t.kind === "sentence").length;
+  if (cur?.kind === "sentence" && !session.currentDone) n++;
+  if (session.tasks.some(t => t.kind === "sentence-start")) n += sentencesLeft();
+  return n;
 }
 
 // โครงหน้าระหว่างเรียน: แถบหัว + เนื้อหา + แถบปุ่มด้านล่าง (บนมือถือปุ่มอยู่ใกล้นิ้วโป้ง บนจอใหญ่อยู่ใต้การ์ด)
@@ -215,7 +225,7 @@ function shell({ stepsHtml = "", body = "", actions = "" }) {
         <div class="flex-1">
           <div class="flex items-center justify-between text-sm">
             <span class="inline-flex items-center gap-2 font-semibold"><span class="h-2.5 w-2.5 rounded-full ${ph.dot}"></span>${ph.th}<span class="font-normal text-zinc-400">${ph.en}</span></span>
-            <span class="tabular-nums text-zinc-500">เหลือ ${left} คำ</span>
+            <span class="tabular-nums text-zinc-500">เหลือ ${left}</span>
           </div>
           <div class="mt-2 h-1.5 overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-800">
             <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-teal-400 transition-all duration-500" style="width:${pct}%"></div>
@@ -336,7 +346,9 @@ function startSession() {
     ...plan.review.map(id => ({ phase: "review", id, kind: "recall" })),
     ...plan.fresh.map(id => ({ phase: "new", id, kind: "intro" })),
   ];
-  session = { tasks, current: null, currentDone: false, completed: 0, learned: 0, fails: 0, cleared: 0, flip: false };
+  // ช่วงประโยคสร้างตอนถึงคิว เพื่อให้ใช้คำใหม่ที่เพิ่งเรียนวันนี้ได้ด้วย
+  if (sentencesLeft() > 0) tasks.push({ phase: "sentence", id: "sentence-start", kind: "sentence-start" });
+  session = { tasks, current: null, currentDone: false, completed: 0, learned: 0, fails: 0, cleared: 0, sentences: 0, flip: false, sflip: false };
   next();
 }
 
@@ -344,9 +356,14 @@ function next() {
   const d = daily();
   const t = session.tasks.shift() || (d.wrap.length ? { phase: "wrap", id: d.wrap[0], kind: "recall" } : null);
   if (!t) return finish();
+  if (t.kind === "sentence-start") {
+    session.tasks.unshift(...buildSentenceTasks(sentencesLeft()));
+    return next();
+  }
   if (t.phase !== "warm" && !d.warmDone) { d.warmDone = true; save(); }
   if (!session.current || session.current.id !== t.id) session.currentDone = false;
   session.current = t;
+  if (t.kind === "sentence") return showSentence(t);
   const view = { warm: showWarm, recall: showRecall, intro: showIntro, cloze: showCloze }[t.kind];
   view(byId[t.id], t.phase);
 }
@@ -517,6 +534,125 @@ function showCloze(w, phase) {
   });
 }
 
+// ---------- ฝึกโครงสร้างประโยค ----------
+// เลือกประโยคจากคำที่เรียนแล้ว เน้นคำที่ผ่านวันนี้ก่อน แล้วสุ่มจากคำที่เคยเรียน
+function buildSentenceTasks(n) {
+  const d = daily();
+  const known = Object.keys(store.cards).filter(id => byId[id]);
+  const ids = [...new Set([...shuffle(d.done.filter(id => byId[id])), ...shuffle(known)])];
+  const out = [];
+  for (const id of ids) {
+    if (out.length >= n) break;
+    const w = byId[id];
+    for (const [en, th] of [[filled(w.cloze, w), w.clozeTh], [filled(w.simple, w), w.simpleTh]]) {
+      if (srs.usableSentence(en)) { out.push({ phase: "sentence", kind: "sentence", id: `s:${id}`, wid: id, en, th }); break; }
+    }
+  }
+  return out;
+}
+
+// สลับบัตรคำ โดยไม่ให้ออกมาเรียงถูกอยู่แล้ว
+function shuffleTiles(tiles) {
+  let order = tiles.map((_, i) => i);
+  for (let k = 0; k < 10; k++) {
+    order = shuffle(order);
+    if (order.some((v, i) => tiles[v] !== tiles[i])) break;
+  }
+  return order;
+}
+
+const tileCls = "rounded-xl px-3.5 py-2 text-lg font-medium shadow-sm ring-1 transition active:scale-95";
+
+// แบบ A: เห็นคำแปลไทย → เรียงคำเป็นประโยคอังกฤษ / แบบ B: ฟังเสียง → เรียงคำตามที่ได้ยิน
+function showSentence(t) {
+  session.sflip = !session.sflip;
+  const mode = session.sflip ? "build" : "listen";
+  const w = byId[t.wid];
+  const { toks, tiles, end } = srs.tokenizeSentence(t.en);
+  const order = shuffleTiles(tiles); // ลำดับบัตรคำในกองด้านล่าง (เก็บเป็นตำแหน่งใน tiles)
+  let picked = []; // ตำแหน่งใน order ที่ผู้เรียนแตะแล้ว ตามลำดับ
+
+  const prompt = mode === "build"
+    ? `<div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">เรียงคำให้เป็นประโยคภาษาอังกฤษ</div>
+       <p class="mt-3 text-2xl font-semibold leading-snug text-sky-700 md:text-3xl dark:text-sky-300">${esc(t.th)}</p>`
+    : `<div class="text-center">
+         ${sayBtn(t.en, "lg")}
+         <p class="mt-5 text-lg font-semibold">ฟังแล้วเรียงคำตามที่ได้ยิน</p>
+         <div class="mt-3 flex flex-wrap justify-center gap-2">${slowBtn(t.en)}
+           <button data-act="hint" class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล</button>
+         </div>
+         <p id="hint" class="mt-3 hidden text-zinc-500">${esc(t.th)}</p>
+       </div>`;
+
+  shell({
+    stepsHtml: steps(STEPS.sentence, 0),
+    body: card(`${prompt}
+      <div id="answer" class="mt-6 flex min-h-[64px] flex-wrap content-start items-center gap-2 rounded-2xl border-2 border-dashed border-zinc-200 p-3 transition dark:border-zinc-700"></div>
+      <p id="sent-msg" class="mt-3 hidden"></p>`),
+    actions: `<div id="pool" class="mb-4 flex flex-wrap justify-center gap-2"></div>
+      <div class="grid grid-cols-[auto_1fr] gap-3">
+        <button type="button" data-act="clear" class="rounded-2xl px-5 text-sm font-medium text-zinc-500 ring-1 ring-zinc-200 hover:text-sky-600 hover:ring-sky-300 dark:ring-zinc-800">ล้าง</button>
+        ${button('data-act="check-sentence" disabled', "ตรวจประโยค", "primary", "Enter")}
+      </div>`,
+  });
+  if (mode === "listen") speak(t.en);
+  on("hint", e => { app.querySelector("#hint").classList.remove("hidden"); e.currentTarget.remove(); });
+
+  const answer = app.querySelector("#answer");
+  const pool = app.querySelector("#pool");
+  const checkBtn = app.querySelector('[data-act="check-sentence"]');
+
+  function update() {
+    answer.innerHTML = picked.length
+      ? picked.map((p, i) => `<button data-picked="${i}" class="${tileCls} bg-sky-50 text-sky-900 ring-sky-200 dark:bg-sky-500/10 dark:text-sky-100 dark:ring-sky-500/30">${esc(tiles[order[p]])}</button>`).join("") +
+        (picked.length === tiles.length && end ? `<span class="text-lg font-medium">${esc(end)}</span>` : "")
+      : `<span class="px-1 text-sm text-zinc-400">แตะคำด้านล่างตามลำดับ</span>`;
+    pool.innerHTML = order.map((ti, p) => `<button data-pool="${p}" class="${tileCls} bg-white ring-zinc-200 hover:ring-sky-400 dark:bg-zinc-900 dark:ring-zinc-700 ${picked.includes(p) ? "pointer-events-none opacity-0" : ""}">${esc(tiles[ti])}</button>`).join("");
+    checkBtn.disabled = picked.length !== tiles.length;
+    pool.querySelectorAll("[data-pool]").forEach(b => (b.onclick = () => { picked.push(Number(b.dataset.pool)); update(); }));
+    answer.querySelectorAll("[data-picked]").forEach(b => (b.onclick = () => { picked.splice(Number(b.dataset.picked), 1); update(); }));
+  }
+  update();
+  on("clear", () => { picked = []; update(); });
+
+  on("check-sentence", () => {
+    if (picked.length !== tiles.length) return;
+    const chosen = picked.map(p => tiles[order[p]]);
+    if (!srs.isCorrectOrder(chosen, toks)) {
+      const msg = app.querySelector("#sent-msg");
+      answer.classList.replace("border-zinc-200", "border-rose-400");
+      msg.className = "mt-3 rounded-2xl bg-rose-50 px-4 py-3 text-rose-800 dark:bg-rose-500/10 dark:text-rose-200";
+      msg.innerHTML = `ยังไม่ถูก ประโยคที่ถูกคือ<br><b>${esc(t.en)}</b><br><span class="text-sm">ลองเรียงใหม่อีกครั้ง</span>`;
+      picked = [];
+      update();
+      speak(t.en);
+      return;
+    }
+    // เรียงถูกแล้ว → ฟังและพูดตาม (shadowing) เพื่อฝึกพูดทั้งประโยค
+    shell({
+      stepsHtml: steps(STEPS.sentence, 1),
+      body: chip(true, "ถูกต้อง! ฟังแล้วพูดตามออกเสียง") + card(`
+        <div class="flex items-start gap-4">
+          <p class="flex-1 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${hl(t.en, w.answer)}</p>
+          ${sayBtn(t.en, "md")}
+        </div>
+        <p class="mt-3 border-t border-zinc-100 pt-3 text-zinc-500 dark:border-zinc-800">${esc(t.th)}</p>
+        <div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-zinc-500">${slowBtn(t.en)}<span>พูดตามให้ทันเสียง 1–2 รอบ</span></div>`),
+      actions: button('data-act="next"', `พูดตามแล้ว ไปต่อ ${icon("arrow", "ml-2 h-5 w-5")}`, "primary", "Enter Space"),
+    });
+    speak(t.en);
+    on("next", () => {
+      const d = daily();
+      d.sentences = (d.sentences || 0) + 1;
+      session.sentences++;
+      session.completed++;
+      session.currentDone = true;
+      save();
+      next();
+    });
+  });
+}
+
 function finish() {
   const d = daily();
   d.warmDone = true;
@@ -533,9 +669,10 @@ function finish() {
           <h1 class="mt-4 text-2xl font-bold">จบการเรียนวันนี้แล้ว</h1>
           <p class="mt-2 text-zinc-500">คำที่ผิดวันนี้ทวนจนถูกครบแล้ว พรุ่งนี้มีรอบทบทวนรออยู่</p>
         </div>
-        <div class="mt-6 grid grid-cols-3 gap-3">
-          ${stat(s.completed, "คำที่ผ่าน", "text-purple-600 dark:text-purple-300")}
+        <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+          ${stat(s.completed - s.sentences, "คำที่ผ่าน", "text-purple-600 dark:text-purple-300")}
           ${stat(s.learned, "คำใหม่", "text-teal-600 dark:text-teal-300")}
+          ${stat(s.sentences, "ประโยค", "text-sky-600 dark:text-sky-300")}
           ${stat(s.cleared, "เก็บตกสำเร็จ", "text-rose-500")}
         </div>
         <div class="mt-6">${button('data-act="home"', "กลับหน้าแรก")}</div>`)}
@@ -547,8 +684,10 @@ function finish() {
 function renderHome() {
   const d = daily();
   const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date);
-  const total = plan.warm.length + plan.review.length + plan.fresh.length + plan.wrap.length;
+  const wordsToday = plan.warm.length + plan.review.length + plan.fresh.length + plan.wrap.length;
   const cards = Object.values(store.cards);
+  const sentToday = Math.min(sentencesLeft(), cards.length + plan.fresh.length);
+  const total = wordsToday + sentToday;
   const learned = cards.length;
   const leeches = cards.filter(c => c.leech).length;
   const tomorrow = cards.filter(c => c.due === srs.addDays(d.date, 1)).length;
@@ -575,10 +714,10 @@ function renderHome() {
     <main class="grid gap-4 py-6">
       <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-6 text-white shadow-xl shadow-purple-600/25 md:p-8">
         <p class="text-sm text-white/70">${esc(dateTh)}</p>
-        <h2 class="mt-1 text-2xl font-bold">${total ? `วันนี้มี ${total} คำรอคุณอยู่` : "วันนี้เรียนครบแล้ว 🎉"}</h2>
+        <h2 class="mt-1 text-2xl font-bold">${total ? `วันนี้มี ${wordsToday} คำ · ${sentToday} ประโยค` : "วันนี้เรียนครบแล้ว 🎉"}</h2>
         <ul class="mt-5 grid gap-2">
           ${phaseRow("warm", plan.warm.length)}${phaseRow("review", plan.review.length)}
-          ${phaseRow("new", plan.fresh.length)}${phaseRow("wrap", plan.wrap.length)}
+          ${phaseRow("new", plan.fresh.length)}${phaseRow("sentence", sentToday)}${phaseRow("wrap", plan.wrap.length)}
         </ul>
         <button data-act="start" ${total ? "" : "disabled"} class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98] disabled:opacity-60">
           ${total ? `เริ่มเรียนวันนี้ ${icon("arrow", "h-5 w-5")}` : `พรุ่งนี้มีรอบทบทวน ${tomorrow} คำ`}
@@ -602,7 +741,10 @@ function renderHome() {
         ${card(`
           <h3 class="font-semibold">ตั้งค่า</h3>
           <div class="mt-4 text-sm text-zinc-500">คำใหม่ต่อวัน</div>
-          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 6, 7].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
+          <p class="mt-1.5 text-xs text-zinc-500">ยิ่งคำใหม่มาก คำที่ต้องทบทวนในวันถัดๆ ไปก็จะเพิ่มขึ้นตาม</p>
+          <div class="mt-4 text-sm text-zinc-500">ฝึกประโยคต่อวัน</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-sent", n, store.settings.sentencesPerDay ?? 5, `${n} ประโยค`)).join("")}</div>
           <div class="mt-4 text-sm text-zinc-500">สำเนียงเสียงอ่าน</div>
           <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "อเมริกัน (US)")}${seg("data-accent", "en-GB", store.settings.accent, "อังกฤษ (UK)")}</div>
           <button data-act="test-sound" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-purple-50 px-4 py-2.5 text-sm font-semibold text-purple-700 ring-1 ring-purple-100 hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", "h-4 w-4")} ทดสอบเสียง</button>
@@ -617,6 +759,7 @@ function renderHome() {
           <li><b class="text-zinc-900 dark:text-zinc-100">อุ่นเครื่อง</b> ทวนคำของเมื่อวานสั้นๆ</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">ทบทวน</b> สลับกันสองแบบ คือ ฟังเสียงแล้วนึกความหมาย กับ เห็นคำไทยแล้วนึกคำอังกฤษ จากนั้นให้คะแนน Again / Hard / Easy และเติมคำในประโยค</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">คำใหม่</b> ฟังเสียง เลือกคำที่ได้ยิน แล้วจึงเห็นความหมายและตัวอย่าง ปิดท้ายด้วยการเติมคำในประโยค</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">ประโยค</b> ฝึกโครงสร้างประโยคจากคำที่เรียนแล้ว สลับสองแบบ คือ เห็นคำแปลไทยแล้วเรียงคำเป็นประโยค กับ ฟังเสียงแล้วเรียงคำตามที่ได้ยิน เรียงถูกแล้วฟังและพูดตาม</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">เก็บตก</b> คำที่ผิดหรือกด Again วันนี้ จะวนกลับมาจนถูกครบทุกคำ</li>
         </ol>
         <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">ล้างความคืบหน้าทั้งหมด</button>
@@ -628,6 +771,7 @@ function renderHome() {
     if (confirm("ล้างความคืบหน้าทั้งหมด? ย้อนกลับไม่ได้")) { store.cards = {}; store.daily = null; save(); renderHome(); }
   });
   app.querySelectorAll("[data-new]").forEach(b => (b.onclick = () => { store.settings.newPerDay = Number(b.dataset.new); save(); renderHome(); }));
+  app.querySelectorAll("[data-sent]").forEach(b => (b.onclick = () => { store.settings.sentencesPerDay = Number(b.dataset.sent); save(); renderHome(); }));
   on("test-sound", () => {
     unlockAudio();
     const status = app.querySelector("#sound-status");

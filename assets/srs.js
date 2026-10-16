@@ -52,7 +52,27 @@ export function graduate(card, today) {
 }
 
 export function emptyDaily(today) {
-  return { date: today, newIds: [], warmDone: false, wrap: [], done: [] };
+  return { date: today, newIds: [], warmDone: false, wrap: [], done: [], sentences: 0 };
+}
+
+// ---------- ฝึกเรียงประโยค ----------
+
+// แยกประโยคเป็นคำสำหรับทำบัตรคำ: ตัดเครื่องหมายท้ายประโยคออกไปแสดงแยก
+// และทำตัวแรกเป็นตัวพิมพ์เล็ก (ยกเว้น I) เพื่อไม่ให้ตัวพิมพ์ใหญ่เป็นคำใบ้ว่าคำไหนขึ้นต้น
+export function tokenizeSentence(en) {
+  const m = en.trim().match(/^(.*?)([.!?]*)$/);
+  const toks = m[1].split(/\s+/).filter(Boolean);
+  const tiles = toks.map((t, i) => (i === 0 && !/^I(\b|')/.test(t) ? t[0].toLowerCase() + t.slice(1) : t));
+  return { toks, tiles, end: m[2] };
+}
+
+export function isCorrectOrder(chosen, toks) {
+  return chosen.join(" ").toLowerCase() === toks.join(" ").toLowerCase();
+}
+
+// ประโยคที่เหมาะกับการเรียง: ไม่มีเครื่องหมายคำพูด และมีอย่างน้อย 4 คำ
+export function usableSentence(en) {
+  return !/["“”]/.test(en) && tokenizeSentence(en).toks.length >= 4;
 }
 
 // จัดคิวของวันนี้ แยกเป็น 4 ช่วง
