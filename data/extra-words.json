@@ -1,0 +1,761 @@
+{
+ "description": "คำพื้นฐาน (คำสรรพนาม คำช่วย ตัวเลข วัน เดือน ชื่อเฉพาะ) สำหรับป๊อปอัปแตะดูความหมาย ไม่ได้อยู่ในบทเรียน",
+ "words": [
+  {
+   "word": "the",
+   "ipa": "/ðə/",
+   "pos": "article",
+   "meaning": "(คำนำหน้านามเฉพาะ) …นั้น / …นี้"
+  },
+  {
+   "word": "a",
+   "ipa": "/ə/",
+   "pos": "article",
+   "meaning": "หนึ่ง (คำนำหน้านามนับได้ที่ขึ้นต้นด้วยเสียงพยัญชนะ)"
+  },
+  {
+   "word": "an",
+   "ipa": "/ən/",
+   "pos": "article",
+   "meaning": "หนึ่ง (คำนำหน้านามที่ขึ้นต้นด้วยเสียงสระ)"
+  },
+  {
+   "word": "I",
+   "ipa": "/aɪ/",
+   "pos": "pronoun",
+   "meaning": "ฉัน / ผม"
+  },
+  {
+   "word": "you",
+   "ipa": "/juː/",
+   "pos": "pronoun",
+   "meaning": "คุณ / พวกคุณ"
+  },
+  {
+   "word": "he",
+   "ipa": "/hiː/",
+   "pos": "pronoun",
+   "meaning": "เขา (ผู้ชาย)"
+  },
+  {
+   "word": "she",
+   "ipa": "/ʃiː/",
+   "pos": "pronoun",
+   "meaning": "เธอ (ผู้หญิง)"
+  },
+  {
+   "word": "it",
+   "ipa": "/ɪt/",
+   "pos": "pronoun",
+   "meaning": "มัน"
+  },
+  {
+   "word": "we",
+   "ipa": "/wiː/",
+   "pos": "pronoun",
+   "meaning": "พวกเรา"
+  },
+  {
+   "word": "they",
+   "ipa": "/ðeɪ/",
+   "pos": "pronoun",
+   "meaning": "พวกเขา"
+  },
+  {
+   "word": "me",
+   "ipa": "/miː/",
+   "pos": "pronoun",
+   "meaning": "ฉัน / ผม (เป็นกรรม)"
+  },
+  {
+   "word": "him",
+   "ipa": "/hɪm/",
+   "pos": "pronoun",
+   "meaning": "เขา (เป็นกรรม)"
+  },
+  {
+   "word": "her",
+   "ipa": "/hɜː/",
+   "pos": "pronoun",
+   "meaning": "เธอ / ของเธอ"
+  },
+  {
+   "word": "us",
+   "ipa": "/ʌs/",
+   "pos": "pronoun",
+   "meaning": "พวกเรา (เป็นกรรม)"
+  },
+  {
+   "word": "them",
+   "ipa": "/ðem/",
+   "pos": "pronoun",
+   "meaning": "พวกเขา (เป็นกรรม)"
+  },
+  {
+   "word": "my",
+   "ipa": "/maɪ/",
+   "pos": "determiner",
+   "meaning": "ของฉัน"
+  },
+  {
+   "word": "your",
+   "ipa": "/jɔː/",
+   "pos": "determiner",
+   "meaning": "ของคุณ"
+  },
+  {
+   "word": "his",
+   "ipa": "/hɪz/",
+   "pos": "determiner",
+   "meaning": "ของเขา"
+  },
+  {
+   "word": "its",
+   "ipa": "/ɪts/",
+   "pos": "determiner",
+   "meaning": "ของมัน"
+  },
+  {
+   "word": "our",
+   "ipa": "/aʊə/",
+   "pos": "determiner",
+   "meaning": "ของพวกเรา"
+  },
+  {
+   "word": "their",
+   "ipa": "/ðeə/",
+   "pos": "determiner",
+   "meaning": "ของพวกเขา"
+  },
+  {
+   "word": "mine",
+   "ipa": "/maɪn/",
+   "pos": "pronoun",
+   "meaning": "ของฉัน"
+  },
+  {
+   "word": "yours",
+   "ipa": "/jɔːz/",
+   "pos": "pronoun",
+   "meaning": "ของคุณ"
+  },
+  {
+   "word": "myself",
+   "ipa": "/maɪˈself/",
+   "pos": "pronoun",
+   "meaning": "ตัวฉันเอง"
+  },
+  {
+   "word": "yourself",
+   "ipa": "/jɔːˈself/",
+   "pos": "pronoun",
+   "meaning": "ตัวคุณเอง"
+  },
+  {
+   "word": "himself",
+   "ipa": "/hɪmˈself/",
+   "pos": "pronoun",
+   "meaning": "ตัวเขาเอง"
+  },
+  {
+   "word": "herself",
+   "ipa": "/hɜːˈself/",
+   "pos": "pronoun",
+   "meaning": "ตัวเธอเอง"
+  },
+  {
+   "word": "itself",
+   "ipa": "/ɪtˈself/",
+   "pos": "pronoun",
+   "meaning": "ตัวมันเอง"
+  },
+  {
+   "word": "ourselves",
+   "ipa": "/aʊəˈselvz/",
+   "pos": "pronoun",
+   "meaning": "พวกเราเอง"
+  },
+  {
+   "word": "themselves",
+   "ipa": "/ðəmˈselvz/",
+   "pos": "pronoun",
+   "meaning": "พวกเขาเอง"
+  },
+  {
+   "word": "this",
+   "ipa": "/ðɪs/",
+   "pos": "determiner",
+   "meaning": "นี้ / สิ่งนี้"
+  },
+  {
+   "word": "that",
+   "ipa": "/ðæt/",
+   "pos": "determiner",
+   "meaning": "นั้น / สิ่งนั้น / ว่า"
+  },
+  {
+   "word": "these",
+   "ipa": "/ðiːz/",
+   "pos": "determiner",
+   "meaning": "เหล่านี้"
+  },
+  {
+   "word": "those",
+   "ipa": "/ðəʊz/",
+   "pos": "determiner",
+   "meaning": "เหล่านั้น"
+  },
+  {
+   "word": "be",
+   "ipa": "/biː/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ / คือ"
+  },
+  {
+   "word": "is",
+   "ipa": "/ɪz/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ / คือ (ใช้กับ he, she, it)"
+  },
+  {
+   "word": "am",
+   "ipa": "/æm/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ / คือ (ใช้กับ I)"
+  },
+  {
+   "word": "are",
+   "ipa": "/ɑː/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ / คือ (ใช้กับ you, we, they)"
+  },
+  {
+   "word": "was",
+   "ipa": "/wɒz/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ (อดีตของ is, am)"
+  },
+  {
+   "word": "were",
+   "ipa": "/wɜː/",
+   "pos": "verb",
+   "meaning": "เป็น / อยู่ (อดีตของ are)"
+  },
+  {
+   "word": "been",
+   "ipa": "/biːn/",
+   "pos": "verb",
+   "meaning": "เคยเป็น / เคยอยู่ (รูปที่ 3 ของ be)"
+  },
+  {
+   "word": "being",
+   "ipa": "/ˈbiːɪŋ/",
+   "pos": "verb",
+   "meaning": "การเป็น / กำลังเป็น"
+  },
+  {
+   "word": "has",
+   "ipa": "/hæz/",
+   "pos": "verb",
+   "meaning": "มี (ใช้กับ he, she, it)"
+  },
+  {
+   "word": "had",
+   "ipa": "/hæd/",
+   "pos": "verb",
+   "meaning": "มี (อดีตของ have)"
+  },
+  {
+   "word": "does",
+   "ipa": "/dʌz/",
+   "pos": "verb",
+   "meaning": "ทำ (ใช้กับ he, she, it) / ใช้ในคำถามและปฏิเสธ"
+  },
+  {
+   "word": "did",
+   "ipa": "/dɪd/",
+   "pos": "verb",
+   "meaning": "ทำ (อดีตของ do) / ใช้ในคำถามและปฏิเสธอดีต"
+  },
+  {
+   "word": "will",
+   "ipa": "/wɪl/",
+   "pos": "modal",
+   "meaning": "จะ"
+  },
+  {
+   "word": "would",
+   "ipa": "/wʊd/",
+   "pos": "modal",
+   "meaning": "จะ (อดีตของ will) / ใช้ขออย่างสุภาพ"
+  },
+  {
+   "word": "can",
+   "ipa": "/kæn/",
+   "pos": "modal",
+   "meaning": "สามารถ / ได้"
+  },
+  {
+   "word": "could",
+   "ipa": "/kʊd/",
+   "pos": "modal",
+   "meaning": "สามารถ (อดีตของ can) / ช่วย…ได้ไหม (สุภาพ)"
+  },
+  {
+   "word": "should",
+   "ipa": "/ʃʊd/",
+   "pos": "modal",
+   "meaning": "ควร"
+  },
+  {
+   "word": "must",
+   "ipa": "/mʌst/",
+   "pos": "modal",
+   "meaning": "ต้อง"
+  },
+  {
+   "word": "may",
+   "ipa": "/meɪ/",
+   "pos": "modal",
+   "meaning": "อาจจะ / ขออนุญาต"
+  },
+  {
+   "word": "might",
+   "ipa": "/maɪt/",
+   "pos": "modal",
+   "meaning": "อาจจะ"
+  },
+  {
+   "word": "shall",
+   "ipa": "/ʃæl/",
+   "pos": "modal",
+   "meaning": "จะ / …กันไหม"
+  },
+  {
+   "word": "not",
+   "ipa": "/nɒt/",
+   "pos": "adverb",
+   "meaning": "ไม่"
+  },
+  {
+   "word": "don't",
+   "ipa": "/dəʊnt/",
+   "pos": "verb",
+   "meaning": "ไม่ (do not)"
+  },
+  {
+   "word": "doesn't",
+   "ipa": "/ˈdʌznt/",
+   "pos": "verb",
+   "meaning": "ไม่ (does not)"
+  },
+  {
+   "word": "didn't",
+   "ipa": "/ˈdɪdnt/",
+   "pos": "verb",
+   "meaning": "ไม่ได้ (did not)"
+  },
+  {
+   "word": "can't",
+   "ipa": "/kɑːnt/",
+   "pos": "modal",
+   "meaning": "ไม่สามารถ / ไม่ได้ (cannot)"
+  },
+  {
+   "word": "won't",
+   "ipa": "/wəʊnt/",
+   "pos": "modal",
+   "meaning": "จะไม่ (will not)"
+  },
+  {
+   "word": "isn't",
+   "ipa": "/ˈɪznt/",
+   "pos": "verb",
+   "meaning": "ไม่ใช่ / ไม่ได้เป็น (is not)"
+  },
+  {
+   "word": "aren't",
+   "ipa": "/ɑːnt/",
+   "pos": "verb",
+   "meaning": "ไม่ใช่ / ไม่ได้เป็น (are not)"
+  },
+  {
+   "word": "let's",
+   "ipa": "/lets/",
+   "pos": "verb",
+   "meaning": "มา…กันเถอะ (let us)"
+  },
+  {
+   "word": "and",
+   "ipa": "/ænd/",
+   "pos": "conjunction",
+   "meaning": "และ"
+  },
+  {
+   "word": "or",
+   "ipa": "/ɔː/",
+   "pos": "conjunction",
+   "meaning": "หรือ"
+  },
+  {
+   "word": "as",
+   "ipa": "/æz/",
+   "pos": "preposition",
+   "meaning": "เป็น / ในฐานะ / ขณะที่"
+  },
+  {
+   "word": "yes",
+   "ipa": "/jes/",
+   "pos": "exclamation",
+   "meaning": "ใช่"
+  },
+  {
+   "word": "no",
+   "ipa": "/nəʊ/",
+   "pos": "determiner",
+   "meaning": "ไม่ / ไม่มี"
+  },
+  {
+   "word": "hello",
+   "ipa": "/həˈləʊ/",
+   "pos": "exclamation",
+   "meaning": "สวัสดี"
+  },
+  {
+   "word": "thanks",
+   "ipa": "/θæŋks/",
+   "pos": "exclamation",
+   "meaning": "ขอบคุณ"
+  },
+  {
+   "word": "oh",
+   "ipa": "/əʊ/",
+   "pos": "exclamation",
+   "meaning": "โอ้"
+  },
+  {
+   "word": "OK",
+   "ipa": "/ˌəʊˈkeɪ/",
+   "pos": "adjective",
+   "meaning": "โอเค / ตกลง"
+  },
+  {
+   "word": "sir",
+   "ipa": "/sɜː/",
+   "pos": "noun",
+   "meaning": "ท่าน / คุณ (ผู้ชาย สุภาพ)"
+  },
+  {
+   "word": "mom",
+   "ipa": "/mɒm/",
+   "pos": "noun",
+   "meaning": "แม่"
+  },
+  {
+   "word": "dad",
+   "ipa": "/dæd/",
+   "pos": "noun",
+   "meaning": "พ่อ"
+  },
+  {
+   "word": "TV",
+   "ipa": "/ˌtiːˈviː/",
+   "pos": "noun",
+   "meaning": "โทรทัศน์"
+  },
+  {
+   "word": "one",
+   "ipa": "/wʌn/",
+   "pos": "number",
+   "meaning": "หนึ่ง"
+  },
+  {
+   "word": "two",
+   "ipa": "/tuː/",
+   "pos": "number",
+   "meaning": "สอง"
+  },
+  {
+   "word": "three",
+   "ipa": "/θriː/",
+   "pos": "number",
+   "meaning": "สาม"
+  },
+  {
+   "word": "four",
+   "ipa": "/fɔː/",
+   "pos": "number",
+   "meaning": "สี่"
+  },
+  {
+   "word": "five",
+   "ipa": "/faɪv/",
+   "pos": "number",
+   "meaning": "ห้า"
+  },
+  {
+   "word": "six",
+   "ipa": "/sɪks/",
+   "pos": "number",
+   "meaning": "หก"
+  },
+  {
+   "word": "seven",
+   "ipa": "/ˈsevn/",
+   "pos": "number",
+   "meaning": "เจ็ด"
+  },
+  {
+   "word": "eight",
+   "ipa": "/eɪt/",
+   "pos": "number",
+   "meaning": "แปด"
+  },
+  {
+   "word": "nine",
+   "ipa": "/naɪn/",
+   "pos": "number",
+   "meaning": "เก้า"
+  },
+  {
+   "word": "ten",
+   "ipa": "/ten/",
+   "pos": "number",
+   "meaning": "สิบ"
+  },
+  {
+   "word": "eleven",
+   "ipa": "/ɪˈlevn/",
+   "pos": "number",
+   "meaning": "สิบเอ็ด"
+  },
+  {
+   "word": "twelve",
+   "ipa": "/twelv/",
+   "pos": "number",
+   "meaning": "สิบสอง"
+  },
+  {
+   "word": "twenty",
+   "ipa": "/ˈtwenti/",
+   "pos": "number",
+   "meaning": "ยี่สิบ"
+  },
+  {
+   "word": "thirty",
+   "ipa": "/ˈθɜːti/",
+   "pos": "number",
+   "meaning": "สามสิบ"
+  },
+  {
+   "word": "forty",
+   "ipa": "/ˈfɔːti/",
+   "pos": "number",
+   "meaning": "สี่สิบ"
+  },
+  {
+   "word": "fifty",
+   "ipa": "/ˈfɪfti/",
+   "pos": "number",
+   "meaning": "ห้าสิบ"
+  },
+  {
+   "word": "tenth",
+   "ipa": "/tenθ/",
+   "pos": "number",
+   "meaning": "ที่สิบ"
+  },
+  {
+   "word": "Monday",
+   "ipa": "/ˈmʌndeɪ/",
+   "pos": "noun",
+   "meaning": "วันจันทร์"
+  },
+  {
+   "word": "Tuesday",
+   "ipa": "/ˈtjuːzdeɪ/",
+   "pos": "noun",
+   "meaning": "วันอังคาร"
+  },
+  {
+   "word": "Wednesday",
+   "ipa": "/ˈwenzdeɪ/",
+   "pos": "noun",
+   "meaning": "วันพุธ"
+  },
+  {
+   "word": "Thursday",
+   "ipa": "/ˈθɜːzdeɪ/",
+   "pos": "noun",
+   "meaning": "วันพฤหัสบดี"
+  },
+  {
+   "word": "Friday",
+   "ipa": "/ˈfraɪdeɪ/",
+   "pos": "noun",
+   "meaning": "วันศุกร์"
+  },
+  {
+   "word": "Saturday",
+   "ipa": "/ˈsætədeɪ/",
+   "pos": "noun",
+   "meaning": "วันเสาร์"
+  },
+  {
+   "word": "Sunday",
+   "ipa": "/ˈsʌndeɪ/",
+   "pos": "noun",
+   "meaning": "วันอาทิตย์"
+  },
+  {
+   "word": "January",
+   "ipa": "/ˈdʒænjuəri/",
+   "pos": "noun",
+   "meaning": "มกราคม"
+  },
+  {
+   "word": "February",
+   "ipa": "/ˈfebruəri/",
+   "pos": "noun",
+   "meaning": "กุมภาพันธ์"
+  },
+  {
+   "word": "March",
+   "ipa": "/mɑːtʃ/",
+   "pos": "noun",
+   "meaning": "มีนาคม"
+  },
+  {
+   "word": "April",
+   "ipa": "/ˈeɪprəl/",
+   "pos": "noun",
+   "meaning": "เมษายน"
+  },
+  {
+   "word": "June",
+   "ipa": "/dʒuːn/",
+   "pos": "noun",
+   "meaning": "มิถุนายน"
+  },
+  {
+   "word": "July",
+   "ipa": "/dʒuˈlaɪ/",
+   "pos": "noun",
+   "meaning": "กรกฎาคม"
+  },
+  {
+   "word": "August",
+   "ipa": "/ˈɔːɡəst/",
+   "pos": "noun",
+   "meaning": "สิงหาคม"
+  },
+  {
+   "word": "September",
+   "ipa": "/sepˈtembə/",
+   "pos": "noun",
+   "meaning": "กันยายน"
+  },
+  {
+   "word": "October",
+   "ipa": "/ɒkˈtəʊbə/",
+   "pos": "noun",
+   "meaning": "ตุลาคม"
+  },
+  {
+   "word": "November",
+   "ipa": "/nəʊˈvembə/",
+   "pos": "noun",
+   "meaning": "พฤศจิกายน"
+  },
+  {
+   "word": "December",
+   "ipa": "/dɪˈsembə/",
+   "pos": "noun",
+   "meaning": "ธันวาคม"
+  },
+  {
+   "word": "English",
+   "ipa": "/ˈɪŋɡlɪʃ/",
+   "pos": "noun",
+   "meaning": "ภาษาอังกฤษ / ชาวอังกฤษ"
+  },
+  {
+   "word": "Thai",
+   "ipa": "/taɪ/",
+   "pos": "noun",
+   "meaning": "ภาษาไทย / คนไทย"
+  },
+  {
+   "word": "Japanese",
+   "ipa": "/ˌdʒæpəˈniːz/",
+   "pos": "noun",
+   "meaning": "ภาษาญี่ปุ่น / คนญี่ปุ่น"
+  },
+  {
+   "word": "Thailand",
+   "ipa": "/ˈtaɪlænd/",
+   "pos": "noun",
+   "meaning": "ประเทศไทย"
+  },
+  {
+   "word": "Bangkok",
+   "ipa": "/bæŋˈkɒk/",
+   "pos": "noun",
+   "meaning": "กรุงเทพฯ"
+  },
+  {
+   "word": "Japan",
+   "ipa": "/dʒəˈpæn/",
+   "pos": "noun",
+   "meaning": "ประเทศญี่ปุ่น"
+  },
+  {
+   "word": "China",
+   "ipa": "/ˈtʃaɪnə/",
+   "pos": "noun",
+   "meaning": "ประเทศจีน"
+  },
+  {
+   "word": "Laos",
+   "ipa": "/laʊs/",
+   "pos": "noun",
+   "meaning": "ประเทศลาว"
+  },
+  {
+   "word": "Asia",
+   "ipa": "/ˈeɪʒə/",
+   "pos": "noun",
+   "meaning": "ทวีปเอเชีย"
+  },
+  {
+   "word": "Tokyo",
+   "ipa": "/ˈtəʊkiəʊ/",
+   "pos": "noun",
+   "meaning": "กรุงโตเกียว"
+  },
+  {
+   "word": "Phuket",
+   "ipa": "/puːˈket/",
+   "pos": "noun",
+   "meaning": "ภูเก็ต"
+  },
+  {
+   "word": "baht",
+   "ipa": "/bɑːt/",
+   "pos": "noun",
+   "meaning": "บาท (สกุลเงินไทย)"
+  },
+  {
+   "word": "km",
+   "ipa": "/ˈkɪləmiːtə/",
+   "pos": "noun",
+   "meaning": "กิโลเมตร"
+  },
+  {
+   "word": "o'clock",
+   "ipa": "/əˈklɒk/",
+   "pos": "adverb",
+   "meaning": "นาฬิกา (บอกเวลาเต็มชั่วโมง)"
+  }
+ ]
+}

@@ -1,6 +1,6 @@
-// หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up
+// หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=5";
+import * as srs from "./srs.js?v=6";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
@@ -16,6 +16,7 @@ const PHASES = {
   new: { th: "คำใหม่", en: "New Intake", dot: "bg-teal-500" },
   sentence: { th: "ประโยค", en: "Sentences", dot: "bg-sky-400" },
   wrap: { th: "เก็บตก", en: "Wrap-up", dot: "bg-rose-500" },
+  practice: { th: "ฝึกซ้ำ", en: "Practice", dot: "bg-indigo-400" },
 };
 
 // ขั้นตอนของคำหนึ่งคำ แสดงเป็นแถบด้านบนการ์ด
@@ -77,8 +78,115 @@ function pickOptions(w, field) {
 const isLeech = w => !!store.cards[w.id]?.leech;
 const sentenceOf = w => (isLeech(w) ? { en: w.simple, th: w.simpleTh } : { en: w.cloze, th: w.clozeTh });
 const filled = (s, w) => s.replace("___", w.answer);
-const hl = (text, target) => esc(text).replace(wordRe(esc(target)), m => `<mark class="rounded bg-purple-100 px-1 font-semibold text-purple-800 dark:bg-purple-500/20 dark:text-purple-200">${m}</mark>`);
+
+// ทำให้ทุกคำในประโยคแตะได้ เพื่อเปิดป๊อปอัปฟังเสียงและดูความหมาย
+const TAP = "cursor-pointer rounded underline decoration-zinc-300 decoration-dotted underline-offset-[6px] transition hover:bg-sky-100 active:bg-sky-200 dark:decoration-zinc-600 dark:hover:bg-sky-500/20";
+function tapWords(text) {
+  let out = "", last = 0;
+  for (const m of text.matchAll(/[A-Za-z]+(?:['’][A-Za-z]+)*/g)) {
+    out += esc(text.slice(last, m.index)) + `<span data-w="${esc(m[0])}" class="${TAP}">${esc(m[0])}</span>`;
+    last = m.index + m[0].length;
+  }
+  return out + esc(text.slice(last));
+}
+
+// เน้นคำเป้าหมาย (ไม่ให้แตะดูความหมาย เพราะเป็นคำที่กำลังฝึก) ส่วนคำอื่นแตะได้
+function hl(text, target) {
+  const m = text.match(wordRe(target));
+  if (!m) return tapWords(text);
+  return tapWords(text.slice(0, m.index)) +
+    `<mark class="rounded bg-purple-100 px-1 font-semibold text-purple-800 dark:bg-purple-500/20 dark:text-purple-200">${esc(m[0])}</mark>` +
+    tapWords(text.slice(m.index + m[0].length));
+}
 const BLANK = `<span class="mx-1 inline-block min-w-24 border-b-[3px] border-dashed border-purple-400 align-baseline">&nbsp;</span>`;
+const tapBlank = s => s.split("___").map(tapWords).join(BLANK);
+
+// ---------- ป๊อปอัปคำศัพท์ ----------
+let byWord = {};
+const IRREGULAR = {
+  done: "do", went: "go", gone: "go", "i'm": "I", "i'll": "I", "i'd": "I", "i've": "I", better: "good", best: "good", worse: "bad", worst: "bad",
+  children: "child", men: "man", women: "woman", feet: "foot", teeth: "tooth", mice: "mouse",
+  saw: "see", seen: "see", made: "make", took: "take", taken: "take", got: "get", came: "come",
+  said: "say", knew: "know", known: "know", thought: "think", told: "tell", gave: "give", given: "give",
+  found: "find", left: "leave", felt: "feel", brought: "bring", bought: "buy", began: "begin", begun: "begin",
+  kept: "keep", held: "hold", wrote: "write", written: "write", stood: "stand", heard: "hear", meant: "mean",
+  met: "meet", ran: "run", paid: "pay", sat: "sit", spoke: "speak", spoken: "speak", led: "lead",
+  grew: "grow", grown: "grow", lost: "lose", fell: "fall", fallen: "fall", sent: "send", built: "build",
+  understood: "understand", drew: "draw", drawn: "draw", broke: "break", broken: "break", spent: "spend",
+  rose: "rise", drove: "drive", driven: "drive", ate: "eat", eaten: "eat", slept: "sleep", taught: "teach",
+  caught: "catch", fought: "fight", sold: "sell", won: "win", wore: "wear", worn: "wear", chose: "choose",
+  chosen: "choose", forgot: "forget", forgotten: "forget", flew: "fly", flown: "fly", swam: "swim",
+  sang: "sing", sung: "sing", threw: "throw", thrown: "throw", hid: "hide", woke: "wake", stole: "steal",
+  hung: "hang", fed: "feed", shot: "shoot", lit: "light", dug: "dig", bit: "bite", shook: "shake",
+};
+
+// หาคำในคลังจากรูปที่ผันแล้ว เช่น asked → ask, cities → city, went → go
+function lookup(raw) {
+  const w = raw.toLowerCase().replace(/’/g, "'");
+  const tries = [];
+  const add = s => { if (s && s.length > 1 || s === "i" || s === "a") tries.push(s, IRREGULAR[s]); };
+  add(w);
+  if (w.endsWith("n't")) add(w.slice(0, -3));
+  if (w.includes("'")) add(w.split("'")[0]);
+  if (w.endsWith("ies")) add(w.slice(0, -3) + "y");
+  if (w.endsWith("es")) add(w.slice(0, -2));
+  if (w.endsWith("s")) add(w.slice(0, -1));
+  if (w.endsWith("ied")) add(w.slice(0, -3) + "y");
+  if (w.endsWith("ed")) { add(w.slice(0, -2)); add(w.slice(0, -1)); }
+  if (w.endsWith("ing")) { add(w.slice(0, -3)); add(w.slice(0, -3) + "e"); }
+  const stem = w.replace(/(ed|ing|er|est)$/, "");
+  if (stem !== w && /(.)\1$/.test(stem)) add(stem.slice(0, -1)); // stopped → stop, bigger → big
+  if (w.endsWith("ier") || w.endsWith("iest")) add(w.replace(/i(er|est)$/, "y"));
+  if (w.endsWith("er")) { add(w.slice(0, -2)); add(w.slice(0, -1)); }
+  if (w.endsWith("est")) { add(w.slice(0, -3)); add(w.slice(0, -2)); }
+  if (w.endsWith("ly")) add(w.slice(0, -2));
+  for (const t of tries) if (t && byWord[t.toLowerCase()]) return byWord[t.toLowerCase()];
+  return null;
+}
+
+function closeWordPopup() { document.getElementById("word-pop")?.remove(); }
+
+function showWordPopup(raw) {
+  closeWordPopup();
+  const e = lookup(raw);
+  const derived = e && e.word.toLowerCase() !== raw.toLowerCase().replace(/’/g, "'");
+  const el = document.createElement("div");
+  el.id = "word-pop";
+  el.className = "fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/30 p-3 backdrop-blur-[2px] md:items-center";
+  el.innerHTML = `
+    <div role="dialog" aria-label="${esc(raw)}" class="animate-pop w-full max-w-md rounded-[28px] bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+      <div class="flex items-start gap-4">
+        <div class="min-w-0 flex-1">
+          <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1">
+            <span class="text-3xl font-bold tracking-tight">${esc(raw)}</span>
+            ${e ? `<span class="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-teal-200 dark:bg-teal-500/10 dark:text-teal-300 dark:ring-teal-500/30">${esc(e.pos)}</span>` : ""}
+          </div>
+          ${e && !derived ? `<div class="mt-1 text-zinc-500">${esc(e.ipa)}</div>` : ""}
+          ${derived
+            ? `<div class="mt-1 text-sm text-zinc-500">รูปเดิมของคำ: <button data-pop-say="${esc(e.word)}" class="font-semibold text-sky-700 underline decoration-dotted underline-offset-4 dark:text-sky-300">${esc(e.word)}</button> ${esc(e.ipa)}</div>` : ""}
+        </div>
+        <button data-pop-say="${esc(raw)}" aria-label="ฟังเสียง" class="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-purple-50 text-purple-600 ring-1 ring-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", "h-6 w-6")}</button>
+      </div>
+      <div class="mt-4 text-xl font-semibold text-purple-700 dark:text-purple-300">${e ? esc(e.meaning) : "คำนี้ยังไม่มีในคลัง 3,000 คำ"}</div>
+      ${e?.collocation ? `<div class="mt-3 rounded-2xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/60">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Collocation</div>
+        <div class="mt-0.5 text-lg">${esc(e.collocation)}</div>
+        <div class="text-sm text-zinc-500">${esc(e.collocationTh)}</div></div>` : ""}
+      <button data-pop-close class="mt-4 w-full rounded-2xl bg-zinc-100 py-3 font-semibold text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200">ปิด</button>
+    </div>`;
+  document.body.append(el);
+  el.onclick = ev => {
+    const say = ev.target.closest("[data-pop-say]");
+    if (say) return speak(say.dataset.popSay);
+    if (ev.target === el || ev.target.closest("[data-pop-close]")) closeWordPopup();
+  };
+  speak(raw);
+}
+
+document.addEventListener("click", e => {
+  const t = e.target.closest("[data-w]");
+  if (t && app.contains(t)) showWordPopup(t.dataset.w);
+});
 
 // ---------- speech ----------
 let voices = [];
@@ -143,6 +251,8 @@ const ICON = {
   bulb: svg('<path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.2 1 2V17h6v-.3c0-.8.4-1.5 1-2A7 7 0 0 0 12 2z"/>'),
   slow: svg('<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>'),
   arrow: svg('<path d="M5 12h14M13 6l6 6-6 6"/>'),
+  flip: svg('<path d="M3 12a9 9 0 0 1 15.5-6.2L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15.5 6.2L3 16"/><path d="M3 21v-5h5"/>'),
+  repeat: svg('<path d="m17 2 4 4-4 4"/><path d="M3 11v-1a4 4 0 0 1 4-4h14"/><path d="m7 22-4-4 4-4"/><path d="M21 13v1a4 4 0 0 1-4 4H3"/>'),
 };
 const icon = (name, cls = "h-5 w-5") => `<span class="inline-block ${cls}">${ICON[name]}</span>`;
 
@@ -160,8 +270,8 @@ function button(attrs, label, variant = "primary", key = "") {
   return `<button ${attrs} ${key ? `data-key="${key}"` : ""} class="inline-flex min-h-[52px] w-full items-center justify-center rounded-2xl px-5 py-3.5 text-base font-semibold transition active:scale-[.98] disabled:opacity-40 ${BTN[variant]}">${label}${hint}</button>`;
 }
 
-const card = (inner, extra = "") =>
-  `<section class="animate-pop rounded-[28px] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 md:p-8 dark:bg-zinc-900 dark:shadow-none dark:ring-zinc-800 ${extra}">${inner}</section>`;
+const CARD = "rounded-[28px] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 md:p-8 dark:bg-zinc-900 dark:shadow-none dark:ring-zinc-800";
+const card = (inner, extra = "") => `<section class="animate-pop ${CARD} ${extra}">${inner}</section>`;
 
 function sayBtn(text, size = "sm") {
   if (size === "lg") {
@@ -199,12 +309,17 @@ const leechBadge = w => isLeech(w)
       <span class="mt-2 inline-block rounded-full bg-amber-100 px-3 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">คำที่ลืมบ่อย · มีภาพช่วยจำ</span></div>`
   : "";
 
-const sentencesLeft = () => Math.max(0, (store.settings.sentencesPerDay ?? 5) - (daily().sentences || 0));
+const sentencesLeft = () => session?.practice
+  ? session.sentTarget
+  : Math.max(0, (store.settings.sentencesPerDay ?? 5) - (daily().sentences || 0));
+
+// คำที่เรียนไปแล้ววันนี้ (ใช้ในรอบฝึกซ้ำ)
+const todayIds = () => { const d = daily(); return [...new Set([...d.newIds, ...d.done])].filter(id => byId[id]); };
 
 // จำนวนงานที่เหลือ: คำ (นับไม่ซ้ำ) + ประโยค
 function remaining() {
   const isSentence = t => t && (t.kind === "sentence" || t.kind === "sentence-start");
-  const ids = new Set([...session.tasks.filter(t => !isSentence(t)).map(t => t.id), ...daily().wrap]);
+  const ids = new Set([...session.tasks.filter(t => !isSentence(t)).map(t => t.id), ...(session.practice ? [] : daily().wrap)]);
   const cur = session.current;
   if (cur && !session.currentDone && !isSentence(cur)) ids.add(cur.id);
   let n = ids.size + session.tasks.filter(t => t.kind === "sentence").length;
@@ -278,6 +393,56 @@ function wordCard(w) {
     </div>`);
 }
 
+// แฟลชการ์ดคำใหม่: ด้านหน้าเป็นภาษาอังกฤษล้วน (คำ คำอ่าน วลี ประโยค) พลิกด้านหลังจึงเห็นความหมายไทย
+function flashCard(w) {
+  const face = "grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden";
+  const enLine = (label, en, target, accent) => `
+    <div class="flex items-start gap-3 rounded-2xl border-l-4 ${accent} bg-zinc-50 p-4 dark:bg-zinc-800/50">
+      <div class="min-w-0 flex-1">
+        <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">${label}</div>
+        <div class="mt-1 text-lg leading-snug">${hl(en, target)}</div>
+      </div>
+      ${sayBtn(en)}
+    </div>`;
+  const flipHint = text => `<div class="mt-5 flex items-center justify-center gap-2 text-sm text-zinc-400">${icon("flip", "h-4 w-4")} ${text}</div>`;
+  const ex = filled(w.simple, w);
+  return `<div class="animate-pop" style="perspective:1400px">
+    <div id="flip" class="grid cursor-pointer select-none transition-transform duration-500" style="transform-style:preserve-3d;-webkit-transform-style:preserve-3d">
+      <section class="${CARD}" style="${face}">
+        ${leechBadge(w)}
+        <div class="flex items-start gap-4">
+          <div class="min-w-0 flex-1">
+            <div class="flex flex-wrap items-center gap-x-3 gap-y-1">
+              <h2 class="text-4xl font-bold tracking-tight md:text-5xl">${esc(w.word)}</h2>
+              <span class="rounded-full bg-teal-50 px-2.5 py-0.5 text-xs font-medium text-teal-700 ring-1 ring-teal-200 dark:bg-teal-500/10 dark:text-teal-300 dark:ring-teal-500/30">${esc(w.pos)}</span>
+            </div>
+            <div class="mt-1.5 text-lg text-zinc-500">${esc(w.ipa)}</div>
+          </div>
+          ${sayBtn(w.word, "md")}
+        </div>
+        <div class="mt-5 grid gap-3">
+          ${enLine("Collocation", w.collocation, w.word, "border-purple-400")}
+          ${enLine("ตัวอย่าง", ex, w.answer, "border-teal-400")}
+        </div>
+        <p class="mt-4 text-center text-sm text-zinc-500">ลองเดาความหมายจากประโยคก่อน · แตะคำอื่นเพื่อดูความหมาย</p>
+        ${flipHint("แตะการ์ดเพื่อพลิกดูความหมาย")}
+      </section>
+      <section class="${CARD}" style="${face};transform:rotateY(180deg);pointer-events:none">
+        <div class="flex items-center justify-between gap-3">
+          <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">ความหมายของ <span class="normal-case text-zinc-600 dark:text-zinc-300">${esc(w.word)}</span></div>
+          ${sayBtn(w.word)}
+        </div>
+        <div class="mt-2 text-3xl font-bold text-purple-700 md:text-4xl dark:text-purple-300">${esc(w.meaning)}</div>
+        <div class="mt-5 grid gap-3">
+          ${example("Collocation", w.collocation, w.word, w.collocationTh, "border-purple-400")}
+          ${example("ตัวอย่าง", ex, w.answer, w.simpleTh, "border-teal-400")}
+        </div>
+        ${flipHint("แตะเพื่อพลิกกลับ")}
+      </section>
+    </div>
+  </div>`;
+}
+
 // โจทย์แบบฟัง: เล่นเสียงอย่างเดียว ไม่มีตัวสะกดและคำแปล
 function promptListen(w, text) {
   return card(`
@@ -314,6 +479,12 @@ function nextMode() {
 
 // ---------- state changes ----------
 function fail(id) {
+  if (session.practice) { // รอบฝึกซ้ำ: ไม่แตะรอบทบทวน แค่วนคำนี้กลับมาท้ายคิว
+    session.tasks.push({ phase: "practice", id, kind: "recall" });
+    session.fails++;
+    session.currentDone = true;
+    return;
+  }
   const d = daily();
   store.cards[id] = srs.rate(store.cards[id], "again", d.date);
   d.wrap = d.wrap.filter(x => x !== id).concat(id);
@@ -323,6 +494,7 @@ function fail(id) {
 }
 
 function complete(id, phase) {
+  if (session.practice) { session.completed++; session.currentDone = true; return; }
   const d = daily();
   if (!d.done.includes(id)) d.done.push(id);
   if (phase === "wrap") {
@@ -352,15 +524,26 @@ function startSession() {
   next();
 }
 
+// ฝึกซ้ำคำของวันนี้อีกรอบ: ไม่เปลี่ยนรอบทบทวนและไม่นับเป็นสถิติประจำวัน
+function startPractice() {
+  unlockAudio();
+  const tasks = shuffle(todayIds()).map(id => ({ phase: "practice", id, kind: "recall" }));
+  tasks.push({ phase: "sentence", id: "sentence-start", kind: "sentence-start" });
+  session = { tasks, current: null, currentDone: false, completed: 0, learned: 0, fails: 0, cleared: 0, sentences: 0, flip: false, sflip: false,
+    practice: true, sentTarget: store.settings.sentencesPerDay ?? 5 };
+  next();
+}
+
 function next() {
   const d = daily();
-  const t = session.tasks.shift() || (d.wrap.length ? { phase: "wrap", id: d.wrap[0], kind: "recall" } : null);
+  const t = session.tasks.shift() || (!session.practice && d.wrap.length ? { phase: "wrap", id: d.wrap[0], kind: "recall" } : null);
   if (!t) return finish();
   if (t.kind === "sentence-start") {
     session.tasks.unshift(...buildSentenceTasks(sentencesLeft()));
+    if (session.practice) session.sentTarget = 0;
     return next();
   }
-  if (t.phase !== "warm" && !d.warmDone) { d.warmDone = true; save(); }
+  if (!session.practice && t.phase !== "warm" && !d.warmDone) { d.warmDone = true; save(); }
   if (!session.current || session.current.id !== t.id) session.currentDone = false;
   session.current = t;
   if (t.kind === "sentence") return showSentence(t);
@@ -402,6 +585,19 @@ function showRecall(w, phase) {
   shell({ stepsHtml: steps(STEPS.recall, 0), body: prompt, actions: button('data-act="reveal"', "เฉลย", "primary", "Space Enter") });
   if (mode === "listen") speak(w.word);
   on("reveal", () => reveal(w, mode, steps(STEPS.recall, 0), prompt, () => {
+    if (phase === "practice") {
+      shell({
+        stepsHtml: steps(STEPS.recall, 1),
+        body: wordCard(w),
+        actions: `<div class="grid grid-cols-2 gap-3">
+          ${button('data-act="forgot"', "จำไม่ได้", "again", "1")}
+          ${button('data-act="knew"', "จำได้", "easy", "2")}
+        </div>`,
+      });
+      on("forgot", () => { fail(w.id); next(); });
+      on("knew", () => { session.tasks.unshift({ phase, id: w.id, kind: "cloze" }); next(); });
+      return;
+    }
     const c = store.cards[w.id];
     const days = phase === "wrap" ? null : { hard: 1, easy: srs.nextEasyInterval(c?.interval ?? 0) };
     const sub = t => `<span class="block text-xs font-medium opacity-80">${t}</span>`;
@@ -457,13 +653,29 @@ function showIntro(w, phase) {
       if (ok) session.tasks.unshift({ phase, id: w.id, kind: "cloze" });
       else fail(w.id);
       setTimeout(() => {
+        const nextBtn = button('data-act="next"', ok ? `ไปเติมคำในประโยค ${icon("arrow", "ml-2 h-5 w-5")}` : "ต่อไป", "primary", "Enter Space");
         shell({
           stepsHtml: steps(STEPS.intro, 2),
-          body: chip(ok, ok ? "ถูกต้อง! มารู้จักคำนี้กัน" : `ยังไม่ถูก คำที่ได้ยินคือ “${esc(w.word)}” จะกลับมาทวนตอนท้าย`) + wordCard(w),
-          actions: button('data-act="next"', ok ? `ไปเติมคำในประโยค ${icon("arrow", "ml-2 h-5 w-5")}` : "ต่อไป", "primary", "Enter Space"),
+          body: chip(ok, ok ? "ถูกต้อง! มารู้จักคำนี้กัน" : `ยังไม่ถูก คำที่ได้ยินคือ “${esc(w.word)}” จะกลับมาทวนตอนท้าย`) + flashCard(w),
+          actions: `<div id="flip-actions">${button('data-act="flip"', `${icon("flip", "mr-2 h-5 w-5")} พลิกดูความหมาย`, "primary", "Enter Space")}</div>`,
         });
         speak(w.word);
-        on("next", next);
+        // ต้องพลิกดูความหมายก่อน จึงจะไปขั้นต่อไปได้ (พลิกกลับไปมาได้)
+        const flipEl = app.querySelector("#flip");
+        let back = false, seen = false;
+        const flip = () => {
+          back = !back;
+          flipEl.style.transform = back ? "rotateY(180deg)" : "";
+          flipEl.children[0].style.pointerEvents = back ? "none" : "";
+          flipEl.children[1].style.pointerEvents = back ? "" : "none";
+          if (back && !seen) {
+            seen = true;
+            app.querySelector("#flip-actions").innerHTML = nextBtn;
+            on("next", next);
+          }
+        };
+        flipEl.onclick = e => { if (!e.target.closest("[data-say],[data-w]")) flip(); };
+        on("flip", flip);
       }, 650);
     }));
   });
@@ -478,7 +690,7 @@ function showCloze(w, phase) {
     body: card(`
       ${leechBadge(w)}
       <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Micro-Quiz · เติมคำให้ประโยคสมบูรณ์</div>
-      <p class="mt-3 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${esc(s.en).replace("___", BLANK)}</p>
+      <p class="mt-3 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${tapBlank(s.en)}</p>
       <button data-act="hint" class="mt-5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 hover:bg-amber-100 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล (คำใบ้)</button>
       <p id="hint" class="mt-3 hidden text-zinc-500">${esc(s.th)}</p>`),
     actions: `<form id="quiz" class="grid gap-3">
@@ -507,7 +719,7 @@ function showCloze(w, phase) {
     const full = filled(s.en, w);
     shell({
       stepsHtml: steps(list, list.length),
-      body: chip(ok, ok ? "ถูกต้อง! ผ่านคำนี้สำหรับวันนี้แล้ว" : `คำตอบคือ “${esc(w.answer)}” จะกลับมาทวนในช่วงเก็บตก`) +
+      body: chip(ok, ok ? "ถูกต้อง! ผ่านคำนี้สำหรับวันนี้แล้ว" : `คำตอบคือ “${esc(w.answer)}” ${phase === "practice" ? "จะวนกลับมาอีกครั้งท้ายรอบ" : "จะกลับมาทวนในช่วงเก็บตก"}`) +
         card(`
           <div class="flex items-start gap-4">
             <p class="flex-1 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${hl(full, w.answer)}</p>
@@ -643,7 +855,7 @@ function showSentence(t) {
     speak(t.en);
     on("next", () => {
       const d = daily();
-      d.sentences = (d.sentences || 0) + 1;
+      if (!session.practice) d.sentences = (d.sentences || 0) + 1;
       session.sentences++;
       session.completed++;
       session.currentDone = true;
@@ -655,9 +867,8 @@ function showSentence(t) {
 
 function finish() {
   const d = daily();
-  d.warmDone = true;
-  save();
   const s = session;
+  if (!s.practice) { d.warmDone = true; save(); }
   session = null;
   const stat = (n, label, color) => `<div class="rounded-2xl bg-zinc-50 p-4 text-center dark:bg-zinc-800/60">
     <div class="text-3xl font-bold tabular-nums ${color}">${n}</div><div class="mt-1 text-sm text-zinc-500">${label}</div></div>`;
@@ -666,14 +877,14 @@ function finish() {
       ${card(`
         <div class="text-center">
           <div class="text-6xl">🎉</div>
-          <h1 class="mt-4 text-2xl font-bold">จบการเรียนวันนี้แล้ว</h1>
-          <p class="mt-2 text-zinc-500">คำที่ผิดวันนี้ทวนจนถูกครบแล้ว พรุ่งนี้มีรอบทบทวนรออยู่</p>
+          <h1 class="mt-4 text-2xl font-bold">${s.practice ? "ฝึกซ้ำครบแล้ว" : "จบการเรียนวันนี้แล้ว"}</h1>
+          <p class="mt-2 text-zinc-500">${s.practice ? "รอบฝึกซ้ำไม่เปลี่ยนรอบทบทวน ฝึกเพิ่มได้เรื่อยๆ" : "คำที่ผิดวันนี้ทวนจนถูกครบแล้ว พรุ่งนี้มีรอบทบทวนรออยู่"}</p>
         </div>
-        <div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
+        <div class="mt-6 grid grid-cols-2 gap-3 ${s.practice ? "sm:grid-cols-3" : "sm:grid-cols-4"}">
           ${stat(s.completed - s.sentences, "คำที่ผ่าน", "text-purple-600 dark:text-purple-300")}
-          ${stat(s.learned, "คำใหม่", "text-teal-600 dark:text-teal-300")}
+          ${s.practice ? stat(s.fails, "ตอบผิด", "text-rose-500") : stat(s.learned, "คำใหม่", "text-teal-600 dark:text-teal-300")}
           ${stat(s.sentences, "ประโยค", "text-sky-600 dark:text-sky-300")}
-          ${stat(s.cleared, "เก็บตกสำเร็จ", "text-rose-500")}
+          ${s.practice ? "" : stat(s.cleared, "เก็บตกสำเร็จ", "text-rose-500")}
         </div>
         <div class="mt-6">${button('data-act="home"', "กลับหน้าแรก")}</div>`)}
     </main>`;
@@ -692,83 +903,93 @@ function renderHome() {
   const leeches = cards.filter(c => c.leech).length;
   const tomorrow = cards.filter(c => c.due === srs.addDays(d.date, 1)).length;
   const pct = words.length ? (100 * learned) / words.length : 0;
-  const dateTh = new Date().toLocaleDateString("th-TH", { weekday: "long", day: "numeric", month: "long" });
+  const dateEn = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
+  const practiceN = todayIds().length;
+  const plural = (n, one, many = one + "s") => `${n} ${n === 1 ? one : many}`;
   const seg = (attr, val, cur, label) =>
     `<button ${attr}="${val}" class="flex-1 rounded-xl px-3 py-2 text-sm font-medium transition ${String(val) === String(cur)
       ? "bg-white text-purple-700 shadow-sm dark:bg-zinc-700 dark:text-white"
       : "text-zinc-500 hover:text-zinc-800 dark:hover:text-zinc-200"}">${label}</button>`;
   const phaseRow = (key, n) => `
     <li class="flex items-center justify-between rounded-2xl bg-white/10 px-4 py-2.5">
-      <span class="flex items-center gap-2.5"><span class="h-2.5 w-2.5 rounded-full ${PHASES[key].dot} ring-2 ring-white/40"></span>${PHASES[key].th}<span class="text-sm text-white/60">${PHASES[key].en}</span></span>
+      <span class="flex items-center gap-2.5"><span class="h-2.5 w-2.5 rounded-full ${PHASES[key].dot} ring-2 ring-white/40"></span>${PHASES[key].en}</span>
       <span class="text-lg font-bold tabular-nums">${n}</span>
     </li>`;
+  const practiceBtn = practiceN ? `
+    <button data-act="practice" class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white/15 px-5 py-3.5 font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/25 active:scale-[.98]">
+      ${icon("repeat", "h-5 w-5")} Practice today's ${plural(practiceN, "word")} again
+    </button>
+    <p class="mt-2 text-center text-xs text-white/60">Extra practice doesn't change your review schedule.</p>` : "";
 
   app.innerHTML = `
     <header class="flex items-center gap-3 pt-[max(24px,env(safe-area-inset-top))]">
       <div class="grid h-11 w-11 place-items-center rounded-2xl bg-gradient-to-br from-purple-500 to-indigo-600 text-lg font-bold text-white shadow-lg shadow-purple-600/30">A</div>
       <div>
         <h1 class="text-xl font-bold leading-tight">Active Recall English</h1>
-        <p class="text-sm text-zinc-500">ฟังก่อน · นึกก่อน · แล้วค่อยดูเฉลย</p>
+        <p class="text-sm text-zinc-500">Listen first · Recall first · Then check</p>
       </div>
     </header>
     <main class="grid gap-4 py-6">
       <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-6 text-white shadow-xl shadow-purple-600/25 md:p-8">
-        <p class="text-sm text-white/70">${esc(dateTh)}</p>
-        <h2 class="mt-1 text-2xl font-bold">${total ? `วันนี้มี ${wordsToday} คำ · ${sentToday} ประโยค` : "วันนี้เรียนครบแล้ว 🎉"}</h2>
+        <p class="text-sm text-white/70">${esc(dateEn)}</p>
+        <h2 class="mt-1 text-2xl font-bold">${total ? `Today: ${plural(wordsToday, "word")} · ${plural(sentToday, "sentence")}` : "All done for today 🎉"}</h2>
         <ul class="mt-5 grid gap-2">
           ${phaseRow("warm", plan.warm.length)}${phaseRow("review", plan.review.length)}
           ${phaseRow("new", plan.fresh.length)}${phaseRow("sentence", sentToday)}${phaseRow("wrap", plan.wrap.length)}
         </ul>
         <button data-act="start" ${total ? "" : "disabled"} class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98] disabled:opacity-60">
-          ${total ? `เริ่มเรียนวันนี้ ${icon("arrow", "h-5 w-5")}` : `พรุ่งนี้มีรอบทบทวน ${tomorrow} คำ`}
+          ${total ? `${practiceN ? "Continue" : "Start"} today's lesson ${icon("arrow", "h-5 w-5")}` : `Tomorrow: ${plural(tomorrow, "word")} to review`}
         </button>
+        ${practiceBtn}
       </section>
 
       <section class="grid gap-4 md:grid-cols-2">
         ${card(`
           <div class="flex items-baseline justify-between">
-            <h3 class="font-semibold">คลังคำศัพท์</h3>
+            <h3 class="font-semibold">Vocabulary</h3>
             <span class="text-sm text-zinc-500">${pct < 1 && learned ? "<1" : Math.round(pct)}%</span>
           </div>
-          <div class="mt-3 text-3xl font-bold tabular-nums">${learned}<span class="text-lg font-medium text-zinc-400"> / ${words.length.toLocaleString()} คำ</span></div>
+          <div class="mt-3 text-3xl font-bold tabular-nums">${learned}<span class="text-lg font-medium text-zinc-400"> / ${words.length.toLocaleString("en-US")} words</span></div>
           <div class="mt-3 h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
             <div class="h-full rounded-full bg-gradient-to-r from-purple-500 to-teal-400" style="width:${Math.max(pct, learned ? 1 : 0)}%"></div>
           </div>
           <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
-            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">ทบทวนพรุ่งนี้</div><div class="text-xl font-bold tabular-nums">${tomorrow}</div></div>
-            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">คำที่ลืมบ่อย</div><div class="text-xl font-bold tabular-nums text-amber-600 dark:text-amber-400">${leeches}</div></div>
+            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">Due tomorrow</div><div class="text-xl font-bold tabular-nums">${tomorrow}</div></div>
+            <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">Tricky words</div><div class="text-xl font-bold tabular-nums text-amber-600 dark:text-amber-400">${leeches}</div></div>
           </div>`, "!p-6")}
         ${card(`
-          <h3 class="font-semibold">ตั้งค่า</h3>
-          <div class="mt-4 text-sm text-zinc-500">คำใหม่ต่อวัน</div>
-          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-new", n, store.settings.newPerDay, `${n} คำ`)).join("")}</div>
-          <p class="mt-1.5 text-xs text-zinc-500">ยิ่งคำใหม่มาก คำที่ต้องทบทวนในวันถัดๆ ไปก็จะเพิ่มขึ้นตาม</p>
-          <div class="mt-4 text-sm text-zinc-500">ฝึกประโยคต่อวัน</div>
-          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-sent", n, store.settings.sentencesPerDay ?? 5, `${n} ประโยค`)).join("")}</div>
-          <div class="mt-4 text-sm text-zinc-500">สำเนียงเสียงอ่าน</div>
-          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "อเมริกัน (US)")}${seg("data-accent", "en-GB", store.settings.accent, "อังกฤษ (UK)")}</div>
-          <button data-act="test-sound" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-purple-50 px-4 py-2.5 text-sm font-semibold text-purple-700 ring-1 ring-purple-100 hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", "h-4 w-4")} ทดสอบเสียง</button>
+          <h3 class="font-semibold">Settings</h3>
+          <div class="mt-4 text-sm text-zinc-500">New words per day</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-new", n, store.settings.newPerDay, `${n} words`)).join("")}</div>
+          <p class="mt-1.5 text-xs text-zinc-500">More new words today means more reviews in the days ahead.</p>
+          <div class="mt-4 text-sm text-zinc-500">Sentences per day</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-sent", n, store.settings.sentencesPerDay ?? 5, `${n} sentences`)).join("")}</div>
+          <div class="mt-4 text-sm text-zinc-500">Voice accent</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${seg("data-accent", "en-US", store.settings.accent, "American (US)")}${seg("data-accent", "en-GB", store.settings.accent, "British (UK)")}</div>
+          <button data-act="test-sound" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-purple-50 px-4 py-2.5 text-sm font-semibold text-purple-700 ring-1 ring-purple-100 hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">${icon("speaker", "h-4 w-4")} Test sound</button>
           <p id="sound-status" class="mt-2 text-xs text-zinc-500">${window.speechSynthesis
-            ? (IS_IOS ? "iPhone: ถ้าไม่มีเสียง ให้ปิดโหมดเงียบ (สวิตช์ข้างเครื่อง) และเพิ่มเสียงให้ดัง แล้วกดทดสอบอีกครั้ง" : "")
-            : "เบราว์เซอร์นี้ไม่รองรับเสียงอ่าน กรุณาเปิดเว็บใน Safari หรือ Chrome"}</p>`, "!p-6")}
+            ? (IS_IOS ? "iPhone: if you hear nothing, turn off Silent Mode (side switch), turn the volume up, then test again." : "")
+            : "This browser can't read text aloud. Please open the site in Safari or Chrome."}</p>`, "!p-6")}
       </section>
 
       <details class="group rounded-[28px] bg-white p-6 ring-1 ring-zinc-200/70 dark:bg-zinc-900 dark:ring-zinc-800">
-        <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">เรียนอย่างไร <span class="text-zinc-400 transition group-open:rotate-180">⌄</span></summary>
+        <summary class="flex cursor-pointer list-none items-center justify-between font-semibold">How it works <span class="text-zinc-400 transition group-open:rotate-180">⌄</span></summary>
         <ol class="mt-4 grid gap-3 text-zinc-600 dark:text-zinc-400">
-          <li><b class="text-zinc-900 dark:text-zinc-100">อุ่นเครื่อง</b> ทวนคำของเมื่อวานสั้นๆ</li>
-          <li><b class="text-zinc-900 dark:text-zinc-100">ทบทวน</b> สลับกันสองแบบ คือ ฟังเสียงแล้วนึกความหมาย กับ เห็นคำไทยแล้วนึกคำอังกฤษ จากนั้นให้คะแนน Again / Hard / Easy และเติมคำในประโยค</li>
-          <li><b class="text-zinc-900 dark:text-zinc-100">คำใหม่</b> ฟังเสียง เลือกคำที่ได้ยิน แล้วจึงเห็นความหมายและตัวอย่าง ปิดท้ายด้วยการเติมคำในประโยค</li>
-          <li><b class="text-zinc-900 dark:text-zinc-100">ประโยค</b> ฝึกโครงสร้างประโยคจากคำที่เรียนแล้ว สลับสองแบบ คือ เห็นคำแปลไทยแล้วเรียงคำเป็นประโยค กับ ฟังเสียงแล้วเรียงคำตามที่ได้ยิน เรียงถูกแล้วฟังและพูดตาม</li>
-          <li><b class="text-zinc-900 dark:text-zinc-100">เก็บตก</b> คำที่ผิดหรือกด Again วันนี้ จะวนกลับมาจนถูกครบทุกคำ</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Warm-up</b> A quick check of yesterday's words.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Core Review</b> Two styles take turns: hear the word and recall its meaning, or see the Thai and recall the English. Rate yourself Again / Hard / Easy, then fill in a sentence.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">New Intake</b> Listen, pick the word you heard, then study a flashcard: English on the front, Thai meaning on the back. Finish by filling in a sentence.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Sentences</b> Build sentences from words you know: read the Thai and order the tiles, or listen and order what you hear. Then repeat the sentence out loud.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Wrap-up</b> Words you missed today come back until you get them all right.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Tip</b> Tap any underlined word in a sentence to hear it and see its meaning.</li>
         </ol>
-        <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">ล้างความคืบหน้าทั้งหมด</button>
+        <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">Reset all progress</button>
       </details>
     </main>`;
 
   on("start", startSession);
+  on("practice", startPractice);
   on("reset", () => {
-    if (confirm("ล้างความคืบหน้าทั้งหมด? ย้อนกลับไม่ได้")) { store.cards = {}; store.daily = null; save(); renderHome(); }
+    if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; save(); renderHome(); }
   });
   app.querySelectorAll("[data-new]").forEach(b => (b.onclick = () => { store.settings.newPerDay = Number(b.dataset.new); save(); renderHome(); }));
   app.querySelectorAll("[data-sent]").forEach(b => (b.onclick = () => { store.settings.sentencesPerDay = Number(b.dataset.sent); save(); renderHome(); }));
@@ -780,8 +1001,8 @@ function renderHome() {
     setTimeout(() => {
       if (!status) return;
       status.textContent = speechWorked
-        ? (IS_IOS ? "เล่นเสียงแล้ว ถ้ายังไม่ได้ยิน ให้ปิดโหมดเงียบที่สวิตช์ข้างเครื่อง และเพิ่มเสียงให้ดัง" : "เล่นเสียงแล้ว ถ้ายังไม่ได้ยิน ให้ตรวจระดับเสียงของเครื่อง")
-        : "เบราว์เซอร์ไม่ยอมเล่นเสียง ลองรีเฟรชหน้าเว็บแล้วกดทดสอบอีกครั้ง (iPhone: ตั้งค่า > การช่วยการเข้าถึง > เนื้อหาที่พูด > เสียง ให้มีเสียงภาษาอังกฤษ)";
+        ? (IS_IOS ? "Sound played. If you still can't hear it, turn off Silent Mode with the side switch and turn the volume up." : "Sound played. If you can't hear it, check your device volume.")
+        : "The browser didn't play the sound. Refresh the page and test again. (iPhone: Settings > Accessibility > Spoken Content > Voices — make sure an English voice is installed.)";
     }, 1500);
   });
   app.querySelectorAll("[data-accent]").forEach(b => (b.onclick = () => { store.settings.accent = b.dataset.accent; save(); renderHome(); speak("Hello"); }));
@@ -789,6 +1010,7 @@ function renderHome() {
 
 // คีย์ลัดบนคอมพิวเตอร์: Space/Enter = เฉลย/ต่อไป, 1-4 = ปุ่มคำตอบ
 document.addEventListener("keydown", e => {
+  if (document.getElementById("word-pop")) { if (["Escape", "Enter", " "].includes(e.key)) { e.preventDefault(); closeWordPopup(); } return; }
   if (!session || e.target.closest("input, textarea") || e.metaKey || e.ctrlKey || e.altKey) return;
   const key = e.key === " " ? "Space" : e.key;
   const el = app.querySelector(`[data-key~="${CSS.escape(key)}"]`);
@@ -815,6 +1037,11 @@ async function boot() {
       .filter(w => !seen.has(w.id) && seen.add(w.id))
       .map(w => ({ ...w, answer: w.answer || w.word }));
     byId = Object.fromEntries(words.map(w => [w.id, w]));
+    for (const w of words) byWord[w.word.toLowerCase()] ??= w;
+    // คำพื้นฐานที่ไม่ได้อยู่ในบทเรียน ใช้กับป๊อปอัปแตะดูความหมายเท่านั้น (โหลดไม่ได้ก็ใช้งานต่อได้)
+    getJSON("data/extra-words.json")
+      .then(x => x.words.forEach(w => (byWord[w.word.toLowerCase()] ??= w)))
+      .catch(() => {});
     renderHome();
   } catch (err) {
     app.innerHTML = `<p class="py-10 text-center text-rose-600">${esc(err.message)}</p>`;
