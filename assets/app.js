@@ -2,13 +2,16 @@
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
 import { openPictures } from "./picture.js?v=10";
+import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
-const KEY = "english-lessons:v2";
+let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
+let profile = null;
 const app = document.getElementById("app");
 
 let words = [];
 let byId = {};
-let store = { cards: {}, daily: null, settings: { newPerDay: 5, sentencesPerDay: 5, accent: "en-US" } };
+const defaultStore = () => ({ cards: {}, daily: null, settings: { newPerDay: 5, sentencesPerDay: 5, accent: "en-US" } });
+let store = defaultStore();
 let session = null;
 
 const PHASES = {
@@ -31,12 +34,13 @@ const STEPS = {
 // ---------- storage ----------
 function load() {
   try {
-    const s = JSON.parse(localStorage.getItem(KEY));
+    const s = KEY && JSON.parse(localStorage.getItem(KEY));
     if (s) store = { ...store, ...s, settings: { ...store.settings, ...s.settings } };
   } catch { /* ไม่มีข้อมูลหรือเบราว์เซอร์ไม่อนุญาต */ }
 }
 
 function save() {
+  if (!KEY) return;
   try { localStorage.setItem(KEY, JSON.stringify(store)); } catch { /* ข้าม */ }
 }
 
@@ -946,6 +950,10 @@ function renderHome() {
         <h1 class="text-xl font-bold leading-tight">Active Recall English</h1>
         <p class="text-sm text-zinc-500">Listen first · Recall first · Then check</p>
       </div>
+      <button data-act="profile" class="ml-auto flex max-w-[40%] items-center gap-2 rounded-full bg-white py-1.5 pl-1.5 pr-3 ring-1 ring-zinc-200 hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
+        <span class="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-purple-100 text-lg dark:bg-purple-500/20">${esc(profile?.emoji || "🙂")}</span>
+        <span class="truncate text-sm font-semibold">${esc(profile?.name || "")}</span>
+      </button>
     </header>
     <main class="grid gap-4 py-6">
       <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-6 text-white shadow-xl shadow-purple-600/25 md:p-8">
@@ -1017,6 +1025,7 @@ function renderHome() {
   on("start", startSession);
   on("practice", startPractice);
   on("pictures", () => openPictures(pictureCtx));
+  on("profile", () => showProfileSheet(profileCtx, profile));
   on("reset", () => {
     if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; store.custom = {}; save(); renderHome(); }
   });
@@ -1047,8 +1056,22 @@ document.addEventListener("keydown", e => {
 });
 
 // ---------- boot ----------
-async function boot() {
+// เข้าโปรไฟล์: โหลดความคืบหน้าของโปรไฟล์นั้น (การสลับโปรไฟล์จะรีโหลดหน้า จึงไม่มีข้อมูลค้างจากโปรไฟล์ก่อน)
+function enterProfile(p) {
+  profile = p;
+  KEY = dataKey(p.id);
+  store = defaultStore();
   load();
+  Object.values(store.custom || {}).forEach(addWord); // คำที่เพิ่มจากโหมดอธิบายภาพ
+  renderHome();
+}
+
+const profileCtx = {
+  app, esc, icon, button, save, renderHome, enter: enterProfile,
+  get store() { return store; },
+};
+
+async function boot() {
   loadVoices();
   window.speechSynthesis?.addEventListener?.("voiceschanged", loadVoices);
   try {
@@ -1067,13 +1090,13 @@ async function boot() {
       .map(w => ({ ...w, answer: w.answer || w.word }));
     byId = Object.fromEntries(words.map(w => [w.id, w]));
     for (const w of words) byWord[w.word.toLowerCase()] ??= w;
-    // คำที่เพิ่มจากโหมดอธิบายภาพ (ไม่อยู่ในคลัง 3,000 คำ)
-    Object.values(store.custom || {}).forEach(addWord);
     // คำพื้นฐานที่ไม่ได้อยู่ในบทเรียน ใช้กับป๊อปอัปแตะดูความหมายเท่านั้น (โหลดไม่ได้ก็ใช้งานต่อได้)
     getJSON("data/extra-words.json")
       .then(x => x.words.forEach(w => (byWord[w.word.toLowerCase()] ??= w)))
       .catch(() => {});
-    renderHome();
+    const p = activeProfile(); // ปลดล็อกไว้แล้วในแท็บนี้
+    if (p) enterProfile(p);
+    else showProfiles(profileCtx);
   } catch (err) {
     app.innerHTML = `<p class="py-10 text-center text-rose-600">${esc(err.message)}</p>`;
   }

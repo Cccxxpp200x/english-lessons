@@ -17,8 +17,8 @@
       theme: {
         extend: {
           fontFamily: { sans: ["Prompt", "system-ui", "sans-serif"] },
-          keyframes: { pop: { "0%": { opacity: "0", transform: "translateY(8px) scale(.98)" }, "100%": { opacity: "1", transform: "none" } } },
-          animation: { pop: "pop .28s ease-out both" },
+          keyframes: { shake: { "0%,100%": { transform: "translateX(0)" }, "20%,60%": { transform: "translateX(-8px)" }, "40%,80%": { transform: "translateX(8px)" } }, pop: { "0%": { opacity: "0", transform: "translateY(8px) scale(.98)" }, "100%": { opacity: "1", transform: "none" } } },
+          animation: { pop: "pop .28s ease-out both", shake: "shake .35s ease-in-out" },
         },
       },
     };
@@ -28,6 +28,6 @@
   <div id="app" class="mx-auto flex min-h-dvh w-full max-w-2xl flex-col px-4">
     <p class="py-10 text-center text-zinc-500">กำลังโหลด…</p>
   </div>
-  <script type="module" src="assets/app.js?v=10"></script>
+  <script type="module" src="assets/app.js?v=11"></script>
 </body>
 </html>
