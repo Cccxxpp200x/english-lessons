@@ -1,7 +1,7 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
-import { openPictures } from "./picture.js?v=9";
+import { openPictures } from "./picture.js?v=10";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");

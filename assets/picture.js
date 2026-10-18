@@ -120,9 +120,12 @@ export async function openPictures(ctx, keepPic = false) {
 
 function render() {
   const p = pic;
-  const ratio = (p.h / p.w) * 100;
+  // ภาพตรึงไว้ด้านบนเสมอ (ติดกับแถบหัว) จึงจำกัดความสูงไม่เกิน PIC_MAX ของจอ เพื่อให้เหลือที่เลื่อนอ่านด้านล่าง
+  // กล่องภาพใช้สัดส่วนเดียวกับรูปจริง ตำแหน่งจุด % จึงตรงเสมอ
+  const boxStyle = `aspect-ratio:${p.w}/${p.h};width:min(100%, calc(${PIC_MAX} * ${p.w / p.h}))`;
   C.app.innerHTML = `
-    <header class="sticky top-0 z-20 -mx-4 flex items-center gap-3 bg-zinc-50/85 px-4 pb-3 pt-[max(12px,env(safe-area-inset-top))] backdrop-blur-md dark:bg-zinc-950/85">
+    <div id="pin" class="sticky top-0 z-20 -mx-4 bg-zinc-50/95 px-4 pb-2 shadow-[0_8px_16px_-12px_rgba(0,0,0,.25)] backdrop-blur-md dark:bg-zinc-950/95">
+    <header class="flex items-center gap-3 pb-2 pt-[max(10px,env(safe-area-inset-top))]">
       <button data-act="close" aria-label="ปิด" class="grid h-10 w-10 shrink-0 place-items-center rounded-full text-zinc-500 hover:bg-zinc-200/70 dark:hover:bg-zinc-800">${icon("close")}</button>
       <div class="min-w-0 flex-1">
         <div class="text-sm font-semibold">Picture Talk <span class="font-normal text-zinc-400">· ฝึกอธิบายภาพ</span></div>
@@ -130,10 +133,8 @@ function render() {
       </div>
       <button data-act="new-pic" class="inline-flex items-center gap-1.5 rounded-full bg-white px-3 py-2 text-sm font-medium text-purple-700 ring-1 ring-purple-200 hover:bg-purple-50 dark:bg-zinc-900 dark:text-purple-300 dark:ring-purple-500/30">${icon("repeat", "h-4 w-4")} ภาพใหม่</button>
     </header>
-
-    <main class="grid gap-4 pb-10 pt-2 md:grid-cols-[3fr_2fr] md:items-start">
       <section class="animate-pop">
-        <div id="pic" class="relative overflow-hidden rounded-[24px] bg-zinc-200 shadow-lg ring-1 ring-zinc-200 dark:bg-zinc-800 dark:ring-zinc-800" style="padding-top:${ratio}%">
+        <div id="pic" class="relative mx-auto overflow-hidden rounded-[20px] bg-zinc-200 ring-1 ring-zinc-200 dark:bg-zinc-800 dark:ring-zinc-800" style="${boxStyle}">
           <img src="${esc(p.src)}" alt="${esc(p.title)}" class="absolute inset-0 h-full w-full object-cover" loading="eager" referrerpolicy="no-referrer">
           ${p.hotspots.map((h, i) => `
             <button data-hot="${i}" aria-label="${esc(h.word)}" style="left:${h.x}%;top:${h.y}%"
@@ -142,12 +143,15 @@ function render() {
               <span class="relative">${i + 1}</span>
             </button>`).join("")}
         </div>
-        <p class="mt-1.5 text-right text-[11px] text-zinc-400">Photo: <a class="underline" href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.author)}</a> / Unsplash</p>
+        <p class="mt-1 text-right text-[10px] text-zinc-400">Photo: <a class="underline" href="${esc(p.page)}" target="_blank" rel="noopener">${esc(p.author)}</a> / Unsplash</p>
       </section>
+    </div>
 
-      <section class="${CARD()} !p-5">
+    <main class="grid gap-4 pb-10 pt-4 md:grid-cols-2 md:items-start">
+
+      <section class="${CARD()} !p-5 md:col-span-2">
         ${label("คำศัพท์และก้อนคำในภาพ · แตะเพื่อดู")}
-        <ul class="mt-3 grid gap-1.5">
+        <ul class="mt-3 grid gap-1.5 md:grid-cols-2">
           ${p.hotspots.map((h, i) => `
             <li><button data-hot="${i}" class="flex w-full items-center gap-3 rounded-xl px-2 py-1.5 text-left hover:bg-zinc-50 dark:hover:bg-zinc-800/60">
               <span class="grid h-6 w-6 shrink-0 place-items-center rounded-full bg-purple-100 text-xs font-bold text-purple-700 dark:bg-purple-500/20 dark:text-purple-200">${i + 1}</span>
@@ -182,9 +186,18 @@ function render() {
   C.app.querySelector('[data-act="close"]').onclick = () => { window.speechSynthesis?.cancel(); stopMic(); C.renderHome(); };
   C.app.querySelector('[data-act="new-pic"]').onclick = () => { stopMic(); pic = pickRandom(pic.id); level = 1; render(); window.scrollTo({ top: 0 }); };
   C.app.querySelectorAll("[data-hot]").forEach(b => (b.onclick = () => showHotspot(Number(b.dataset.hot))));
-  C.app.querySelectorAll("[data-level]").forEach(b => (b.onclick = () => { stopMic(); level = Number(b.dataset.level); render(); C.app.querySelector("#practice").scrollIntoView({ block: "start", behavior: "smooth" }); }));
+  C.app.querySelectorAll("[data-level]").forEach(b => (b.onclick = () => { stopMic(); level = Number(b.dataset.level); render(); scrollToEl(C.app.querySelector("#practice")); }));
   C.app.querySelector("details").addEventListener("toggle", () => { try { localStorage.setItem("english-lessons:frame-seen", "1"); } catch { /* ข้าม */ } });
   ({ 1: level1, 2: level2, 3: level3 })[level]();
+}
+
+const PIC_MAX = "38dvh";
+
+// เลื่อนไปที่ส่วนฝึก โดยไม่ให้ถูกภาพที่ตรึงไว้บัง
+function scrollToEl(el) {
+  const pin = C.app.querySelector("#pin");
+  const y = el.getBoundingClientRect().top + window.scrollY - (pin ? pin.offsetHeight : 0) - 12;
+  window.scrollTo({ top: Math.max(0, y), behavior: "smooth" });
 }
 
 const CARD = () => "rounded-[24px] bg-white p-6 shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 dark:bg-zinc-900 dark:shadow-none dark:ring-zinc-800";
@@ -210,7 +223,7 @@ function showHotspot(i) {
   el.id = "word-pop";
   el.className = "fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/30 p-3 backdrop-blur-[2px] md:items-center";
   el.innerHTML = `
-    <div role="dialog" class="animate-pop max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-[28px] bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
+    <div role="dialog" class="animate-pop max-h-[56dvh] md:max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-[28px] bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
       <div class="flex items-start gap-4">
         <div class="text-4xl">${h.emoji}</div>
         <div class="min-w-0 flex-1">
@@ -277,7 +290,6 @@ function level1() {
     if (idx >= qs.length) return order();
     const q = qs[idx];
     highlight(q.hot ?? -1);
-    if (q.hot != null) C.app.querySelector("#pic").scrollIntoView({ block: "nearest", behavior: "smooth" });
     box.innerHTML = header(idx + 1) + `<div class="${CARD()}">
       <div class="flex items-start gap-3"><p class="flex-1 text-xl font-semibold">${esc(q.q)}</p>${C.sayBtn(q.q)}</div>
       <p class="mt-1 text-sm text-zinc-500">${esc(q.th)}</p>
@@ -350,7 +362,7 @@ function level1() {
           ${C.button('data-act="go2"', `ไป Level 2 ${icon("arrow", "ml-2 h-5 w-5")}`)}
         </div></div>`;
       box.querySelector('[data-act="again"]').onclick = level1;
-      box.querySelector('[data-act="go2"]').onclick = () => { level = 2; render(); C.app.querySelector("#practice").scrollIntoView({ block: "start" }); };
+      box.querySelector('[data-act="go2"]').onclick = () => { level = 2; render(); scrollToEl(C.app.querySelector("#practice")); };
     };
   }
   ask();
@@ -421,7 +433,7 @@ function level2() {
       <div class="mt-5 grid gap-3 sm:grid-cols-2">${C.button('data-act="again"', "ทำ Level 2 อีกรอบ", "ghost")}${C.button('data-act="go3"', `ไป Level 3 ${icon("arrow", "ml-2 h-5 w-5")}`)}</div></div>`;
     bindModel(box);
     box.querySelector('[data-act="again"]').onclick = level2;
-    box.querySelector('[data-act="go3"]').onclick = () => { level = 3; render(); C.app.querySelector("#practice").scrollIntoView({ block: "start" }); };
+    box.querySelector('[data-act="go3"]').onclick = () => { level = 3; render(); scrollToEl(C.app.querySelector("#practice")); };
   }
   ask();
 }
@@ -670,7 +682,7 @@ function feedback(box, text) {
   </div>`;
   bindModel(fb);
   fb.querySelectorAll("[data-hot2]").forEach(b => (b.onclick = () => showHotspot(Number(b.dataset.hot2))));
-  fb.scrollIntoView({ block: "start", behavior: "smooth" });
+  scrollToEl(fb);
   if (getKey()) aiFeedback(fb.querySelector("#ai"), text);
 }
 
