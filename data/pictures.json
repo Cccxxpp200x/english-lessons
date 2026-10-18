@@ -1,0 +1,1625 @@
+{
+ "license": "Photos from Unsplash (Unsplash License, free to use). Credits in each entry.",
+ "pictures": [
+  {
+   "id": "cafe",
+   "title": "Working in a cafe",
+   "titleTh": "ทำงานในคาเฟ่",
+   "w": 1000,
+   "h": 667,
+   "author": "Brooke Cagle",
+   "user": "brookecagle",
+   "page": "https://unsplash.com/photos/cb4Dv50LN1Y",
+   "setting": "in a coffee shop",
+   "settingTh": "ในร้านกาแฟ",
+   "src": "https://images.unsplash.com/photo-1601933513556-7926c45d1c49?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 53,
+     "y": 40,
+     "word": "woman",
+     "ipa": "/ˈwʊmən/",
+     "pos": "noun",
+     "meaning": "ผู้หญิง",
+     "phrase": "a smiling woman",
+     "phraseTh": "ผู้หญิงที่กำลังยิ้ม",
+     "action": "drinking iced coffee",
+     "actionTh": "ดื่มกาแฟเย็น",
+     "sentence": "A smiling woman is drinking iced coffee.",
+     "sentenceTh": "ผู้หญิงที่กำลังยิ้มกำลังดื่มกาแฟเย็น",
+     "emoji": "👩",
+     "question": "What is the woman doing?",
+     "answer": "She is drinking iced coffee through a straw."
+    },
+    {
+     "x": 50,
+     "y": 45,
+     "word": "glasses",
+     "ipa": "/ˈɡlɑːsɪz/",
+     "pos": "noun",
+     "meaning": "แว่นตา",
+     "phrase": "round glasses",
+     "phraseTh": "แว่นตาทรงกลม",
+     "action": "wearing glasses",
+     "actionTh": "สวมแว่นตา",
+     "sentence": "She is wearing round glasses.",
+     "sentenceTh": "เธอสวมแว่นตาทรงกลม",
+     "emoji": "👓"
+    },
+    {
+     "x": 47,
+     "y": 61,
+     "word": "straw",
+     "ipa": "/strɔː/",
+     "pos": "noun",
+     "meaning": "หลอด",
+     "phrase": "a plastic straw",
+     "phraseTh": "หลอดพลาสติก",
+     "action": "drinking through a straw",
+     "actionTh": "ดูดผ่านหลอด",
+     "sentence": "She is drinking through a straw.",
+     "sentenceTh": "เธอกำลังดูดน้ำผ่านหลอด",
+     "emoji": "🥤"
+    },
+    {
+     "x": 32,
+     "y": 78,
+     "word": "laptop",
+     "ipa": "/ˈlæptɒp/",
+     "pos": "noun",
+     "meaning": "แล็ปท็อป / คอมพิวเตอร์โน้ตบุ๊ก",
+     "phrase": "an open laptop",
+     "phraseTh": "แล็ปท็อปที่เปิดอยู่",
+     "action": "working on a laptop",
+     "actionTh": "ทำงานบนแล็ปท็อป",
+     "sentence": "There is an open laptop on the table.",
+     "sentenceTh": "มีแล็ปท็อปที่เปิดอยู่บนโต๊ะ",
+     "emoji": "💻"
+    },
+    {
+     "x": 15,
+     "y": 84,
+     "word": "camera",
+     "ipa": "/ˈkæmərə/",
+     "pos": "noun",
+     "meaning": "กล้องถ่ายรูป",
+     "phrase": "a black camera",
+     "phraseTh": "กล้องถ่ายรูปสีดำ",
+     "action": "taking photos with a camera",
+     "actionTh": "ถ่ายรูปด้วยกล้อง",
+     "sentence": "A black camera is next to the laptop.",
+     "sentenceTh": "กล้องสีดำวางอยู่ข้างแล็ปท็อป",
+     "emoji": "📷"
+    },
+    {
+     "x": 30,
+     "y": 96,
+     "word": "table",
+     "ipa": "/ˈteɪbl/",
+     "pos": "noun",
+     "meaning": "โต๊ะ",
+     "phrase": "a long wooden table",
+     "phraseTh": "โต๊ะไม้ยาว",
+     "action": "sitting at a table",
+     "actionTh": "นั่งที่โต๊ะ",
+     "sentence": "She is sitting at a long wooden table.",
+     "sentenceTh": "เธอนั่งอยู่ที่โต๊ะไม้ยาว",
+     "emoji": "🪵"
+    },
+    {
+     "x": 17,
+     "y": 31,
+     "word": "plant",
+     "ipa": "/plɑːnt/",
+     "pos": "noun",
+     "meaning": "ต้นไม้ / พืช",
+     "phrase": "a hanging plant",
+     "phraseTh": "ต้นไม้แขวน",
+     "action": "hanging from the ceiling",
+     "actionTh": "แขวนจากเพดาน",
+     "sentence": "A small plant is hanging in the background.",
+     "sentenceTh": "ต้นไม้เล็กๆ แขวนอยู่ด้านหลัง",
+     "emoji": "🪴"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "This picture shows a young woman in a coffee shop.",
+     "th": "ภาพนี้แสดงหญิงสาวคนหนึ่งในร้านกาแฟ",
+     "blank": "coffee"
+    },
+    {
+     "part": "details",
+     "en": "In the foreground, there is an open laptop and a black camera.",
+     "th": "ด้านหน้ามีแล็ปท็อปที่เปิดอยู่และกล้องสีดำ",
+     "blank": "camera"
+    },
+    {
+     "part": "details",
+     "en": "The woman is drinking iced coffee through a straw.",
+     "th": "ผู้หญิงกำลังดื่มกาแฟเย็นผ่านหลอด",
+     "blank": "drinking"
+    },
+    {
+     "part": "details",
+     "en": "She is wearing round glasses and an orange sweater.",
+     "th": "เธอสวมแว่นตาทรงกลมและเสื้อสเวตเตอร์สีส้ม",
+     "blank": "wearing"
+    },
+    {
+     "part": "details",
+     "en": "In the background, there are empty tables and a hanging plant.",
+     "th": "ด้านหลังมีโต๊ะว่างและต้นไม้แขวน",
+     "blank": "background"
+    },
+    {
+     "part": "inference",
+     "en": "She looks happy and relaxed, so maybe she is working on a fun project.",
+     "th": "เธอดูมีความสุขและผ่อนคลาย บางทีเธออาจกำลังทำงานที่สนุก",
+     "blank": "relaxed"
+    }
+   ]
+  },
+  {
+   "id": "meeting",
+   "title": "A business meeting",
+   "titleTh": "การประชุมงาน",
+   "w": 1000,
+   "h": 668,
+   "author": "Christina @ wocintechchat.com",
+   "user": "wocintechchat",
+   "page": "https://unsplash.com/photos/rg1y72eKw6o",
+   "setting": "at a business meeting",
+   "settingTh": "ในการประชุมงาน",
+   "src": "https://images.unsplash.com/photo-1573164574511-73c773193279?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 33,
+     "y": 66,
+     "word": "woman",
+     "ipa": "/ˈwʊmən/",
+     "pos": "noun",
+     "meaning": "ผู้หญิง",
+     "phrase": "a woman on the left",
+     "phraseTh": "ผู้หญิงทางซ้าย",
+     "action": "explaining an idea",
+     "actionTh": "อธิบายความคิด",
+     "sentence": "A woman on the left is explaining an idea.",
+     "sentenceTh": "ผู้หญิงทางซ้ายกำลังอธิบายความคิด",
+     "emoji": "🙋‍♀️",
+     "question": "What is the woman on the left doing?",
+     "answer": "She is explaining an idea to her team."
+    },
+    {
+     "x": 82,
+     "y": 70,
+     "word": "listener",
+     "ipa": "/ˈlɪsənə/",
+     "pos": "noun",
+     "meaning": "ผู้ฟัง",
+     "phrase": "a quiet listener",
+     "phraseTh": "ผู้ฟังที่เงียบ",
+     "action": "listening carefully",
+     "actionTh": "ฟังอย่างตั้งใจ",
+     "sentence": "A listener in the foreground is listening carefully.",
+     "sentenceTh": "ผู้ฟังที่อยู่ด้านหน้ากำลังฟังอย่างตั้งใจ",
+     "emoji": "👂",
+     "question": "What is the woman in the foreground doing?",
+     "answer": "She is listening to the speaker."
+    },
+    {
+     "x": 59,
+     "y": 82,
+     "word": "laptop",
+     "ipa": "/ˈlæptɒp/",
+     "pos": "noun",
+     "meaning": "แล็ปท็อป",
+     "phrase": "an open laptop",
+     "phraseTh": "แล็ปท็อปที่เปิดอยู่",
+     "action": "looking at a laptop",
+     "actionTh": "ดูแล็ปท็อป",
+     "sentence": "There is an open laptop on the meeting table.",
+     "sentenceTh": "มีแล็ปท็อปที่เปิดอยู่บนโต๊ะประชุม",
+     "emoji": "💻"
+    },
+    {
+     "x": 57,
+     "y": 50,
+     "word": "screen",
+     "ipa": "/skriːn/",
+     "pos": "noun",
+     "meaning": "จอ",
+     "phrase": "a large screen",
+     "phraseTh": "จอขนาดใหญ่",
+     "action": "hanging on the wall",
+     "actionTh": "แขวนอยู่บนผนัง",
+     "sentence": "A large screen is hanging on the wall.",
+     "sentenceTh": "จอขนาดใหญ่แขวนอยู่บนผนัง",
+     "emoji": "🖥️"
+    },
+    {
+     "x": 59,
+     "y": 23,
+     "word": "lamp",
+     "ipa": "/læmp/",
+     "pos": "noun",
+     "meaning": "โคมไฟ",
+     "phrase": "a white lamp",
+     "phraseTh": "โคมไฟสีขาว",
+     "action": "hanging from the ceiling",
+     "actionTh": "ห้อยจากเพดาน",
+     "sentence": "A white lamp is hanging above the table.",
+     "sentenceTh": "โคมไฟสีขาวห้อยอยู่เหนือโต๊ะ",
+     "emoji": "💡"
+    },
+    {
+     "x": 90,
+     "y": 35,
+     "word": "window",
+     "ipa": "/ˈwɪndəʊ/",
+     "pos": "noun",
+     "meaning": "หน้าต่าง",
+     "phrase": "a large window",
+     "phraseTh": "หน้าต่างบานใหญ่",
+     "action": "letting in sunlight",
+     "actionTh": "ให้แสงแดดส่องเข้ามา",
+     "sentence": "A large window on the right is letting in sunlight.",
+     "sentenceTh": "หน้าต่างบานใหญ่ทางขวาให้แสงแดดส่องเข้ามา",
+     "emoji": "🪟"
+    },
+    {
+     "x": 9,
+     "y": 55,
+     "word": "door",
+     "ipa": "/dɔː/",
+     "pos": "noun",
+     "meaning": "ประตู",
+     "phrase": "a wooden door",
+     "phraseTh": "ประตูไม้",
+     "action": "closing the door",
+     "actionTh": "ปิดประตู",
+     "sentence": "There is a wooden door on the left.",
+     "sentenceTh": "มีประตูไม้อยู่ทางซ้าย",
+     "emoji": "🚪"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "This is a business meeting in a modern office.",
+     "th": "นี่คือการประชุมงานในสำนักงานที่ทันสมัย",
+     "blank": "office"
+    },
+    {
+     "part": "details",
+     "en": "Seven women are sitting around a long table.",
+     "th": "ผู้หญิงเจ็ดคนนั่งอยู่รอบโต๊ะยาว",
+     "blank": "around"
+    },
+    {
+     "part": "details",
+     "en": "On the left, a woman is explaining an idea with her hands.",
+     "th": "ทางซ้าย ผู้หญิงคนหนึ่งกำลังอธิบายความคิดโดยใช้มือประกอบ",
+     "blank": "explaining"
+    },
+    {
+     "part": "details",
+     "en": "There are laptops and phones on the table.",
+     "th": "มีแล็ปท็อปและโทรศัพท์อยู่บนโต๊ะ",
+     "blank": "laptops"
+    },
+    {
+     "part": "details",
+     "en": "In the background, a large screen is hanging on the wall.",
+     "th": "ด้านหลังมีจอขนาดใหญ่แขวนอยู่บนผนัง",
+     "blank": "screen"
+    },
+    {
+     "part": "inference",
+     "en": "Everyone seems interested, so it might be an important meeting.",
+     "th": "ทุกคนดูสนใจ จึงอาจเป็นการประชุมที่สำคัญ",
+     "blank": "important"
+    }
+   ]
+  },
+  {
+   "id": "streetfood",
+   "title": "Grilling satay",
+   "titleTh": "ร้านสะเต๊ะริมทาง",
+   "w": 1000,
+   "h": 667,
+   "author": "Kelvin Zyteng",
+   "user": "zyteng",
+   "page": "https://unsplash.com/photos/dbncYfDL1aE",
+   "setting": "at a street food stall",
+   "settingTh": "ที่ร้านอาหารริมทาง",
+   "src": "https://images.unsplash.com/photo-1742391355474-e765ee5f510e?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 37,
+     "y": 28,
+     "word": "man",
+     "ipa": "/mæn/",
+     "pos": "noun",
+     "meaning": "ผู้ชาย",
+     "phrase": "a young man",
+     "phraseTh": "ชายหนุ่ม",
+     "action": "fanning the grill",
+     "actionTh": "พัดเตาย่าง",
+     "sentence": "A young man is fanning the grill.",
+     "sentenceTh": "ชายหนุ่มกำลังพัดเตาย่าง",
+     "emoji": "👨",
+     "question": "What is the young man doing?",
+     "answer": "He is fanning the fire with a hand fan."
+    },
+    {
+     "x": 44,
+     "y": 45,
+     "word": "fan",
+     "ipa": "/fæn/",
+     "pos": "noun",
+     "meaning": "พัด",
+     "phrase": "a bamboo fan",
+     "phraseTh": "พัดไม้ไผ่",
+     "action": "holding a fan",
+     "actionTh": "ถือพัด",
+     "sentence": "He is holding a bamboo fan.",
+     "sentenceTh": "เขากำลังถือพัดไม้ไผ่",
+     "emoji": "🪭"
+    },
+    {
+     "x": 40,
+     "y": 78,
+     "word": "satay",
+     "ipa": "/ˈsæteɪ/",
+     "pos": "noun",
+     "meaning": "สะเต๊ะ",
+     "phrase": "chicken satay",
+     "phraseTh": "สะเต๊ะไก่",
+     "action": "grilling satay",
+     "actionTh": "ย่างสะเต๊ะ",
+     "sentence": "They are grilling chicken satay.",
+     "sentenceTh": "พวกเขากำลังย่างสะเต๊ะไก่",
+     "emoji": "🍢"
+    },
+    {
+     "x": 20,
+     "y": 93,
+     "word": "grill",
+     "ipa": "/ɡrɪl/",
+     "pos": "noun",
+     "meaning": "เตาย่าง",
+     "phrase": "a hot charcoal grill",
+     "phraseTh": "เตาถ่านร้อนๆ",
+     "action": "cooking on a grill",
+     "actionTh": "ทำอาหารบนเตาย่าง",
+     "sentence": "The satay is cooking on a hot charcoal grill.",
+     "sentenceTh": "สะเต๊ะกำลังสุกอยู่บนเตาถ่านร้อนๆ",
+     "emoji": "🔥"
+    },
+    {
+     "x": 78,
+     "y": 45,
+     "word": "headscarf",
+     "ipa": "/ˈhedskɑːf/",
+     "pos": "noun",
+     "meaning": "ผ้าคลุมศีรษะ",
+     "phrase": "a white headscarf",
+     "phraseTh": "ผ้าคลุมศีรษะสีขาว",
+     "action": "wearing a headscarf",
+     "actionTh": "สวมผ้าคลุมศีรษะ",
+     "sentence": "The woman on the right is wearing a white headscarf.",
+     "sentenceTh": "ผู้หญิงทางขวาสวมผ้าคลุมศีรษะสีขาว",
+     "emoji": "🧕",
+     "question": "What is the woman on the right doing?",
+     "answer": "She is turning the satay on the grill."
+    },
+    {
+     "x": 60,
+     "y": 74,
+     "word": "gloves",
+     "ipa": "/ɡlʌvz/",
+     "pos": "noun",
+     "meaning": "ถุงมือ",
+     "phrase": "plastic gloves",
+     "phraseTh": "ถุงมือพลาสติก",
+     "action": "wearing plastic gloves",
+     "actionTh": "สวมถุงมือพลาสติก",
+     "sentence": "Both cooks are wearing plastic gloves.",
+     "sentenceTh": "คนทำอาหารทั้งสองคนสวมถุงมือพลาสติก",
+     "emoji": "🧤"
+    },
+    {
+     "x": 20,
+     "y": 6,
+     "word": "tent",
+     "ipa": "/tent/",
+     "pos": "noun",
+     "meaning": "เต็นท์",
+     "phrase": "a blue tent",
+     "phraseTh": "เต็นท์สีฟ้า",
+     "action": "standing under a tent",
+     "actionTh": "ยืนอยู่ใต้เต็นท์",
+     "sentence": "They are standing under a blue tent.",
+     "sentenceTh": "พวกเขายืนอยู่ใต้เต็นท์สีฟ้า",
+     "emoji": "⛺"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "This picture shows a busy street food stall.",
+     "th": "ภาพนี้แสดงร้านอาหารริมทางที่วุ่นวาย",
+     "blank": "street"
+    },
+    {
+     "part": "details",
+     "en": "In the foreground, satay is cooking on a hot charcoal grill.",
+     "th": "ด้านหน้ามีสะเต๊ะกำลังย่างอยู่บนเตาถ่านร้อนๆ",
+     "blank": "grill"
+    },
+    {
+     "part": "details",
+     "en": "On the left, a young man is fanning the fire.",
+     "th": "ทางซ้าย ชายหนุ่มกำลังพัดไฟ",
+     "blank": "fanning"
+    },
+    {
+     "part": "details",
+     "en": "On the right, a woman in a headscarf is turning the satay.",
+     "th": "ทางขวา ผู้หญิงที่คลุมศีรษะกำลังพลิกสะเต๊ะ",
+     "blank": "turning"
+    },
+    {
+     "part": "details",
+     "en": "They are both wearing plastic gloves.",
+     "th": "ทั้งสองคนสวมถุงมือพลาสติก",
+     "blank": "gloves"
+    },
+    {
+     "part": "inference",
+     "en": "It seems like a hot day, and the food probably smells delicious.",
+     "th": "ดูเหมือนจะเป็นวันที่ร้อน และอาหารคงส่งกลิ่นหอมน่ากิน",
+     "blank": "delicious"
+    }
+   ]
+  },
+  {
+   "id": "kitchen",
+   "title": "Cooking together",
+   "titleTh": "ทำอาหารด้วยกัน",
+   "w": 1000,
+   "h": 667,
+   "author": "Hillshire Farm",
+   "user": "hillshirefarm",
+   "page": "https://unsplash.com/photos/J4De0QaP8mY",
+   "setting": "in a kitchen",
+   "settingTh": "ในห้องครัว",
+   "src": "https://images.unsplash.com/photo-1628191013647-5640e14ded54?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 82,
+     "y": 38,
+     "word": "mother",
+     "ipa": "/ˈmʌðə/",
+     "pos": "noun",
+     "meaning": "แม่",
+     "phrase": "a happy mother",
+     "phraseTh": "แม่ที่มีความสุข",
+     "action": "cutting vegetables",
+     "actionTh": "หั่นผัก",
+     "sentence": "A happy mother is cutting vegetables.",
+     "sentenceTh": "แม่ที่มีความสุขกำลังหั่นผัก",
+     "emoji": "👩",
+     "question": "What is the mother doing?",
+     "answer": "She is cutting vegetables on a board."
+    },
+    {
+     "x": 56,
+     "y": 38,
+     "word": "boy",
+     "ipa": "/bɔɪ/",
+     "pos": "noun",
+     "meaning": "เด็กผู้ชาย",
+     "phrase": "a little boy",
+     "phraseTh": "เด็กผู้ชายตัวเล็ก",
+     "action": "sitting on the counter",
+     "actionTh": "นั่งบนเคาน์เตอร์",
+     "sentence": "A little boy is sitting on the counter.",
+     "sentenceTh": "เด็กผู้ชายตัวเล็กกำลังนั่งอยู่บนเคาน์เตอร์",
+     "emoji": "👦",
+     "question": "What is the little boy doing?",
+     "answer": "He is laughing and sitting on the counter."
+    },
+    {
+     "x": 44,
+     "y": 63,
+     "word": "knife",
+     "ipa": "/naɪf/",
+     "pos": "noun",
+     "meaning": "มีด",
+     "phrase": "a sharp knife",
+     "phraseTh": "มีดคม",
+     "action": "cutting with a knife",
+     "actionTh": "หั่นด้วยมีด",
+     "sentence": "She is holding a sharp knife.",
+     "sentenceTh": "เธอกำลังถือมีดคม",
+     "emoji": "🔪"
+    },
+    {
+     "x": 45,
+     "y": 73,
+     "word": "board",
+     "ipa": "/bɔːd/",
+     "pos": "noun",
+     "meaning": "เขียง / แผ่นกระดาน",
+     "phrase": "a wooden cutting board",
+     "phraseTh": "เขียงไม้",
+     "action": "cutting on a board",
+     "actionTh": "หั่นบนเขียง",
+     "sentence": "There is a wooden cutting board on the counter.",
+     "sentenceTh": "มีเขียงไม้อยู่บนเคาน์เตอร์",
+     "emoji": "🪵"
+    },
+    {
+     "x": 45,
+     "y": 82,
+     "word": "sandwich",
+     "ipa": "/ˈsænwɪtʃ/",
+     "pos": "noun",
+     "meaning": "แซนด์วิช",
+     "phrase": "a ham sandwich",
+     "phraseTh": "แซนด์วิชแฮม",
+     "action": "making a sandwich",
+     "actionTh": "ทำแซนด์วิช",
+     "sentence": "They are making a ham sandwich.",
+     "sentenceTh": "พวกเขากำลังทำแซนด์วิชแฮม",
+     "emoji": "🥪"
+    },
+    {
+     "x": 25,
+     "y": 57,
+     "word": "basket",
+     "ipa": "/ˈbɑːskɪt/",
+     "pos": "noun",
+     "meaning": "ตะกร้า",
+     "phrase": "a basket of bananas",
+     "phraseTh": "ตะกร้ากล้วย",
+     "action": "putting fruit in a basket",
+     "actionTh": "ใส่ผลไม้ในตะกร้า",
+     "sentence": "A basket of bananas is next to the boy.",
+     "sentenceTh": "ตะกร้ากล้วยวางอยู่ข้างเด็กผู้ชาย",
+     "emoji": "🧺"
+    },
+    {
+     "x": 40,
+     "y": 11,
+     "word": "shelf",
+     "ipa": "/ʃelf/",
+     "pos": "noun",
+     "meaning": "ชั้นวางของ",
+     "phrase": "a wooden shelf",
+     "phraseTh": "ชั้นวางไม้",
+     "action": "putting plates on a shelf",
+     "actionTh": "วางจานบนชั้น",
+     "sentence": "Plates and baskets are on the wooden shelf.",
+     "sentenceTh": "จานและตะกร้าอยู่บนชั้นวางไม้",
+     "emoji": "🗄️"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "A mother and her son are cooking together in a bright kitchen.",
+     "th": "แม่กับลูกชายกำลังทำอาหารด้วยกันในห้องครัวที่สว่าง",
+     "blank": "kitchen"
+    },
+    {
+     "part": "details",
+     "en": "On the right, the mother is cutting vegetables with a knife.",
+     "th": "ทางขวา แม่กำลังหั่นผักด้วยมีด",
+     "blank": "cutting"
+    },
+    {
+     "part": "details",
+     "en": "The little boy is sitting on the counter next to her.",
+     "th": "เด็กผู้ชายตัวเล็กนั่งอยู่บนเคาน์เตอร์ข้างๆ เธอ",
+     "blank": "sitting"
+    },
+    {
+     "part": "details",
+     "en": "In the foreground, there is a ham sandwich on a plate.",
+     "th": "ด้านหน้ามีแซนด์วิชแฮมอยู่บนจาน",
+     "blank": "sandwich"
+    },
+    {
+     "part": "details",
+     "en": "At the top of the picture, there are plates on a wooden shelf.",
+     "th": "ด้านบนของภาพมีจานอยู่บนชั้นวางไม้",
+     "blank": "shelf"
+    },
+    {
+     "part": "inference",
+     "en": "They both look very happy, so maybe they are making lunch for the family.",
+     "th": "ทั้งสองดูมีความสุขมาก บางทีพวกเขาอาจกำลังทำอาหารกลางวันให้ครอบครัว",
+     "blank": "lunch"
+    }
+   ]
+  },
+  {
+   "id": "classroom",
+   "title": "In the classroom",
+   "titleTh": "ในห้องเรียน",
+   "w": 1000,
+   "h": 622,
+   "author": "Quilia",
+   "user": "heyquilia",
+   "page": "https://unsplash.com/photos/zFSo6bnZJTw",
+   "setting": "in a classroom",
+   "settingTh": "ในห้องเรียน",
+   "src": "https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 50,
+     "y": 24,
+     "word": "teacher",
+     "ipa": "/ˈtiːtʃə/",
+     "pos": "noun",
+     "meaning": "ครู",
+     "phrase": "a male teacher",
+     "phraseTh": "ครูผู้ชาย",
+     "action": "teaching the class",
+     "actionTh": "สอนนักเรียนในชั้น",
+     "sentence": "A male teacher is teaching the class.",
+     "sentenceTh": "ครูผู้ชายกำลังสอนนักเรียนในชั้น",
+     "emoji": "👨‍🏫",
+     "question": "What is the teacher doing?",
+     "answer": "He is standing at the front and teaching the class."
+    },
+    {
+     "x": 25,
+     "y": 24,
+     "word": "whiteboard",
+     "ipa": "/ˈwaɪtbɔːd/",
+     "pos": "noun",
+     "meaning": "ไวท์บอร์ด / กระดานไวท์บอร์ด",
+     "phrase": "a big whiteboard",
+     "phraseTh": "ไวท์บอร์ดขนาดใหญ่",
+     "action": "writing on the whiteboard",
+     "actionTh": "เขียนบนไวท์บอร์ด",
+     "sentence": "There is a big whiteboard behind the teacher.",
+     "sentenceTh": "มีไวท์บอร์ดขนาดใหญ่อยู่ข้างหลังครู",
+     "emoji": "⬜"
+    },
+    {
+     "x": 37,
+     "y": 52,
+     "word": "student",
+     "ipa": "/ˈstjuːdnt/",
+     "pos": "noun",
+     "meaning": "นักเรียน",
+     "phrase": "a student with curly hair",
+     "phraseTh": "นักเรียนผมหยิก",
+     "action": "listening to the teacher",
+     "actionTh": "ฟังครู",
+     "sentence": "A student in the foreground is listening to the teacher.",
+     "sentenceTh": "นักเรียนที่อยู่ด้านหน้ากำลังฟังครู",
+     "emoji": "🧑‍🎓",
+     "question": "What are the students doing?",
+     "answer": "They are listening to the teacher."
+    },
+    {
+     "x": 40,
+     "y": 85,
+     "word": "backpack",
+     "ipa": "/ˈbækpæk/",
+     "pos": "noun",
+     "meaning": "กระเป๋าเป้",
+     "phrase": "a green backpack",
+     "phraseTh": "กระเป๋าเป้สีเขียว",
+     "action": "carrying a backpack",
+     "actionTh": "สะพายกระเป๋าเป้",
+     "sentence": "A green backpack is hanging on the chair.",
+     "sentenceTh": "กระเป๋าเป้สีเขียวแขวนอยู่บนเก้าอี้",
+     "emoji": "🎒"
+    },
+    {
+     "x": 64,
+     "y": 55,
+     "word": "hoodie",
+     "ipa": "/ˈhʊdi/",
+     "pos": "noun",
+     "meaning": "เสื้อฮู้ด",
+     "phrase": "a pink hoodie",
+     "phraseTh": "เสื้อฮู้ดสีชมพู",
+     "action": "wearing a hoodie",
+     "actionTh": "สวมเสื้อฮู้ด",
+     "sentence": "A girl on the right is wearing a pink hoodie.",
+     "sentenceTh": "เด็กผู้หญิงทางขวาสวมเสื้อฮู้ดสีชมพู",
+     "emoji": "🧥"
+    },
+    {
+     "x": 49,
+     "y": 61,
+     "word": "desk",
+     "ipa": "/desk/",
+     "pos": "noun",
+     "meaning": "โต๊ะเรียน",
+     "phrase": "a long desk",
+     "phraseTh": "โต๊ะเรียนตัวยาว",
+     "action": "sitting at a desk",
+     "actionTh": "นั่งที่โต๊ะเรียน",
+     "sentence": "Two students are sharing a long desk.",
+     "sentenceTh": "นักเรียนสองคนนั่งโต๊ะเรียนตัวยาวด้วยกัน",
+     "emoji": "🪑"
+    },
+    {
+     "x": 20,
+     "y": 6,
+     "word": "poster",
+     "ipa": "/ˈpəʊstə/",
+     "pos": "noun",
+     "meaning": "โปสเตอร์",
+     "phrase": "a colorful poster",
+     "phraseTh": "โปสเตอร์สีสันสดใส",
+     "action": "putting a poster on the wall",
+     "actionTh": "ติดโปสเตอร์บนผนัง",
+     "sentence": "A colorful poster is on the wall.",
+     "sentenceTh": "มีโปสเตอร์สีสันสดใสติดอยู่บนผนัง",
+     "emoji": "🖼️"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "This is a classroom in a school.",
+     "th": "นี่คือห้องเรียนในโรงเรียน",
+     "blank": "school"
+    },
+    {
+     "part": "details",
+     "en": "At the front of the room, a teacher is standing in front of the whiteboard.",
+     "th": "ที่ด้านหน้าห้อง ครูกำลังยืนอยู่หน้าไวท์บอร์ด",
+     "blank": "whiteboard"
+    },
+    {
+     "part": "details",
+     "en": "The students are sitting at long desks and listening to him.",
+     "th": "นักเรียนนั่งอยู่ที่โต๊ะเรียนตัวยาวและฟังเขาอยู่",
+     "blank": "listening"
+    },
+    {
+     "part": "details",
+     "en": "In the foreground, a green backpack is hanging on a chair.",
+     "th": "ด้านหน้ามีกระเป๋าเป้สีเขียวแขวนอยู่บนเก้าอี้",
+     "blank": "backpack"
+    },
+    {
+     "part": "details",
+     "en": "A girl on the right is wearing a pink hoodie.",
+     "th": "เด็กผู้หญิงทางขวาสวมเสื้อฮู้ดสีชมพู",
+     "blank": "hoodie"
+    },
+    {
+     "part": "inference",
+     "en": "The students seem focused, so the lesson is probably interesting.",
+     "th": "นักเรียนดูตั้งใจ บทเรียนจึงน่าจะน่าสนใจ",
+     "blank": "focused"
+    }
+   ]
+  },
+  {
+   "id": "picnic",
+   "title": "A picnic in the park",
+   "titleTh": "ปิกนิกในสวน",
+   "w": 1000,
+   "h": 667,
+   "author": "Jarritos Mexican Soda",
+   "user": "jarritos",
+   "page": "https://unsplash.com/photos/PfQIG063sVQ",
+   "setting": "in a park",
+   "settingTh": "ในสวนสาธารณะ",
+   "src": "https://images.unsplash.com/photo-1622495966349-2857f74777a0?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 37,
+     "y": 36,
+     "word": "friends",
+     "ipa": "/frendz/",
+     "pos": "noun",
+     "meaning": "เพื่อน (หลายคน)",
+     "phrase": "two close friends",
+     "phraseTh": "เพื่อนสนิทสองคน",
+     "action": "laughing with a friend",
+     "actionTh": "หัวเราะกับเพื่อน",
+     "sentence": "Two close friends are laughing together.",
+     "sentenceTh": "เพื่อนสนิทสองคนกำลังหัวเราะด้วยกัน",
+     "emoji": "👭",
+     "question": "What is the woman on the left doing?",
+     "answer": "She is laughing and taking a slice of pizza."
+    },
+    {
+     "x": 57,
+     "y": 40,
+     "word": "top",
+     "ipa": "/tɒp/",
+     "pos": "noun",
+     "meaning": "เสื้อ (ตัวบนของผู้หญิง)",
+     "phrase": "a yellow top",
+     "phraseTh": "เสื้อสีเหลือง",
+     "action": "wearing a yellow top",
+     "actionTh": "สวมเสื้อสีเหลือง",
+     "sentence": "The woman on the right is wearing a yellow top.",
+     "sentenceTh": "ผู้หญิงทางขวาสวมเสื้อสีเหลือง",
+     "emoji": "👚",
+     "question": "What is the woman on the right doing?",
+     "answer": "She is sitting on the blanket with her knees up."
+    },
+    {
+     "x": 43,
+     "y": 74,
+     "word": "pizza",
+     "ipa": "/ˈpiːtsə/",
+     "pos": "noun",
+     "meaning": "พิซซ่า",
+     "phrase": "a box of pizza",
+     "phraseTh": "พิซซ่าหนึ่งกล่อง",
+     "action": "sharing a pizza",
+     "actionTh": "แบ่งพิซซ่ากัน",
+     "sentence": "They are sharing a box of pizza.",
+     "sentenceTh": "พวกเขากำลังแบ่งพิซซ่าหนึ่งกล่องกัน",
+     "emoji": "🍕"
+    },
+    {
+     "x": 54,
+     "y": 70,
+     "word": "bottle",
+     "ipa": "/ˈbɒtl/",
+     "pos": "noun",
+     "meaning": "ขวด",
+     "phrase": "a green glass bottle",
+     "phraseTh": "ขวดแก้วสีเขียว",
+     "action": "opening a bottle",
+     "actionTh": "เปิดขวด",
+     "sentence": "There is a green glass bottle next to the pizza.",
+     "sentenceTh": "มีขวดแก้วสีเขียวอยู่ข้างพิซซ่า",
+     "emoji": "🍾"
+    },
+    {
+     "x": 62,
+     "y": 88,
+     "word": "blanket",
+     "ipa": "/ˈblæŋkɪt/",
+     "pos": "noun",
+     "meaning": "ผ้าห่ม / ผ้าปู",
+     "phrase": "a striped blanket",
+     "phraseTh": "ผ้าปูลายทาง",
+     "action": "sitting on a blanket",
+     "actionTh": "นั่งบนผ้าปู",
+     "sentence": "They are sitting on a striped blanket.",
+     "sentenceTh": "พวกเขานั่งอยู่บนผ้าปูลายทาง",
+     "emoji": "🧺"
+    },
+    {
+     "x": 78,
+     "y": 71,
+     "word": "sandals",
+     "ipa": "/ˈsændlz/",
+     "pos": "noun",
+     "meaning": "รองเท้าแตะ",
+     "phrase": "brown sandals",
+     "phraseTh": "รองเท้าแตะสีน้ำตาล",
+     "action": "taking off sandals",
+     "actionTh": "ถอดรองเท้าแตะ",
+     "sentence": "A pair of brown sandals is on the blanket.",
+     "sentenceTh": "รองเท้าแตะสีน้ำตาลหนึ่งคู่วางอยู่บนผ้าปู",
+     "emoji": "🩴"
+    },
+    {
+     "x": 20,
+     "y": 20,
+     "word": "tree",
+     "ipa": "/triː/",
+     "pos": "noun",
+     "meaning": "ต้นไม้",
+     "phrase": "a tall green tree",
+     "phraseTh": "ต้นไม้สีเขียวสูง",
+     "action": "sitting under a tree",
+     "actionTh": "นั่งใต้ต้นไม้",
+     "sentence": "A tall green tree is in the background.",
+     "sentenceTh": "มีต้นไม้สีเขียวสูงต้นหนึ่งอยู่ด้านหลัง",
+     "emoji": "🌳"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "Two friends are having a picnic in a city park.",
+     "th": "เพื่อนสองคนกำลังปิกนิกในสวนสาธารณะในเมือง",
+     "blank": "picnic"
+    },
+    {
+     "part": "details",
+     "en": "They are sitting on a striped blanket on the grass.",
+     "th": "พวกเขานั่งอยู่บนผ้าปูลายทางบนสนามหญ้า",
+     "blank": "blanket"
+    },
+    {
+     "part": "details",
+     "en": "The woman on the left is taking a slice of pizza.",
+     "th": "ผู้หญิงทางซ้ายกำลังหยิบพิซซ่าหนึ่งชิ้น",
+     "blank": "slice"
+    },
+    {
+     "part": "details",
+     "en": "Next to the pizza, there are two glass bottles.",
+     "th": "ข้างพิซซ่ามีขวดแก้วสองขวด",
+     "blank": "bottles"
+    },
+    {
+     "part": "details",
+     "en": "In the background, people are sitting on benches under the trees.",
+     "th": "ด้านหลังมีคนนั่งอยู่บนม้านั่งใต้ต้นไม้",
+     "blank": "benches"
+    },
+    {
+     "part": "inference",
+     "en": "It looks like a sunny afternoon, and they are having a great time.",
+     "th": "ดูเหมือนเป็นช่วงบ่ายที่แดดดี และพวกเขากำลังสนุกกันมาก",
+     "blank": "sunny"
+    }
+   ]
+  },
+  {
+   "id": "beach",
+   "title": "A family at the beach",
+   "titleTh": "ครอบครัวที่ชายหาด",
+   "w": 1000,
+   "h": 667,
+   "author": "Niko Samik",
+   "user": "urbanriviera26",
+   "page": "https://unsplash.com/photos/BIsJb3wClf8",
+   "setting": "at the beach",
+   "settingTh": "ที่ชายหาด",
+   "src": "https://images.unsplash.com/photo-1772305436753-e308844ecda2?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 78,
+     "y": 23,
+     "word": "hat",
+     "ipa": "/hæt/",
+     "pos": "noun",
+     "meaning": "หมวก",
+     "phrase": "a straw hat",
+     "phraseTh": "หมวกฟาง",
+     "action": "wearing a hat",
+     "actionTh": "สวมหมวก",
+     "sentence": "The father is wearing a straw hat.",
+     "sentenceTh": "พ่อสวมหมวกฟาง",
+     "emoji": "👒",
+     "question": "What is the father doing?",
+     "answer": "He is smiling at the camera with his family."
+    },
+    {
+     "x": 26,
+     "y": 38,
+     "word": "hair",
+     "ipa": "/heə/",
+     "pos": "noun",
+     "meaning": "ผม",
+     "phrase": "long brown hair",
+     "phraseTh": "ผมยาวสีน้ำตาล",
+     "action": "blowing in the wind",
+     "actionTh": "ปลิวไปตามลม",
+     "sentence": "The mother's long hair is blowing in the wind.",
+     "sentenceTh": "ผมยาวของแม่กำลังปลิวไปตามลม",
+     "emoji": "💨",
+     "question": "What is the mother doing?",
+     "answer": "She is laughing and holding her daughter."
+    },
+    {
+     "x": 45,
+     "y": 33,
+     "word": "braids",
+     "ipa": "/breɪdz/",
+     "pos": "noun",
+     "meaning": "ผมเปีย",
+     "phrase": "colorful braids",
+     "phraseTh": "ผมเปียสีสันสดใส",
+     "action": "raising her arm",
+     "actionTh": "ยกแขนขึ้น",
+     "sentence": "A girl with colorful braids is raising her arm.",
+     "sentenceTh": "เด็กผู้หญิงผมเปียสีสันสดใสกำลังยกแขนขึ้น",
+     "emoji": "🙌",
+     "question": "What is the older girl doing?",
+     "answer": "She is raising her arm in the air."
+    },
+    {
+     "x": 72,
+     "y": 62,
+     "word": "daughter",
+     "ipa": "/ˈdɔːtə/",
+     "pos": "noun",
+     "meaning": "ลูกสาว",
+     "phrase": "a little daughter",
+     "phraseTh": "ลูกสาวตัวเล็ก",
+     "action": "reaching toward the camera",
+     "actionTh": "ยื่นมือมาทางกล้อง",
+     "sentence": "The little daughter is reaching toward the camera.",
+     "sentenceTh": "ลูกสาวตัวเล็กกำลังยื่นมือมาทางกล้อง",
+     "emoji": "👧",
+     "question": "What is the little girl doing?",
+     "answer": "She is reaching toward the camera with both hands."
+    },
+    {
+     "x": 93,
+     "y": 92,
+     "word": "sea",
+     "ipa": "/siː/",
+     "pos": "noun",
+     "meaning": "ทะเล",
+     "phrase": "the blue sea",
+     "phraseTh": "ทะเลสีฟ้า",
+     "action": "swimming in the sea",
+     "actionTh": "ว่ายน้ำในทะเล",
+     "sentence": "The blue sea is behind them.",
+     "sentenceTh": "ทะเลสีฟ้าอยู่ข้างหลังพวกเขา",
+     "emoji": "🌊"
+    },
+    {
+     "x": 20,
+     "y": 84,
+     "word": "mountains",
+     "ipa": "/ˈmaʊntɪnz/",
+     "pos": "noun",
+     "meaning": "ภูเขา",
+     "phrase": "green mountains",
+     "phraseTh": "ภูเขาสีเขียว",
+     "action": "climbing mountains",
+     "actionTh": "ปีนภูเขา",
+     "sentence": "There are green mountains in the distance.",
+     "sentenceTh": "มีภูเขาสีเขียวอยู่ไกลๆ",
+     "emoji": "⛰️"
+    },
+    {
+     "x": 12,
+     "y": 12,
+     "word": "sky",
+     "ipa": "/skaɪ/",
+     "pos": "noun",
+     "meaning": "ท้องฟ้า",
+     "phrase": "a clear blue sky",
+     "phraseTh": "ท้องฟ้าสีฟ้าใส",
+     "action": "looking at the sky",
+     "actionTh": "มองท้องฟ้า",
+     "sentence": "The sky is clear and blue.",
+     "sentenceTh": "ท้องฟ้าใสและเป็นสีฟ้า",
+     "emoji": "☀️"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "A happy family is taking a selfie at the beach.",
+     "th": "ครอบครัวที่มีความสุขกำลังถ่ายเซลฟี่ที่ชายหาด",
+     "blank": "selfie"
+    },
+    {
+     "part": "details",
+     "en": "There are four people: a mother, a father, and two daughters.",
+     "th": "มีสี่คน คือ แม่ พ่อ และลูกสาวสองคน",
+     "blank": "daughters"
+    },
+    {
+     "part": "details",
+     "en": "On the right, the father is wearing a straw hat.",
+     "th": "ทางขวา พ่อสวมหมวกฟาง",
+     "blank": "hat"
+    },
+    {
+     "part": "details",
+     "en": "In the front, the little girl is reaching toward the camera.",
+     "th": "ข้างหน้า เด็กผู้หญิงตัวเล็กกำลังยื่นมือมาทางกล้อง",
+     "blank": "reaching"
+    },
+    {
+     "part": "details",
+     "en": "Behind them, we can see the blue sea and green mountains.",
+     "th": "ข้างหลังพวกเขา เราเห็นทะเลสีฟ้าและภูเขาสีเขียว",
+     "blank": "mountains"
+    },
+    {
+     "part": "inference",
+     "en": "It seems like a windy summer day, and they are enjoying their vacation.",
+     "th": "ดูเหมือนเป็นวันฤดูร้อนที่ลมแรง และพวกเขากำลังสนุกกับวันหยุดพักผ่อน",
+     "blank": "vacation"
+    }
+   ]
+  },
+  {
+   "id": "supermarket",
+   "title": "Shopping for groceries",
+   "titleTh": "ซื้อของในซูเปอร์มาร์เก็ต",
+   "w": 1000,
+   "h": 667,
+   "author": "Boxed Water Is Better",
+   "user": "boxedwater",
+   "page": "https://unsplash.com/photos/7H1hDt694s8",
+   "setting": "in a supermarket",
+   "settingTh": "ในซูเปอร์มาร์เก็ต",
+   "src": "https://images.unsplash.com/photo-1553531889-56cc480ac5cb?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 50,
+     "y": 24,
+     "word": "customer",
+     "ipa": "/ˈkʌstəmə/",
+     "pos": "noun",
+     "meaning": "ลูกค้า",
+     "phrase": "a smiling customer",
+     "phraseTh": "ลูกค้าที่ยิ้มแย้ม",
+     "action": "shopping for groceries",
+     "actionTh": "ซื้อของใช้ในบ้าน",
+     "sentence": "A smiling customer is shopping for groceries.",
+     "sentenceTh": "ลูกค้าที่ยิ้มแย้มกำลังซื้อของใช้ในบ้าน",
+     "emoji": "🛍️",
+     "question": "What is the woman doing?",
+     "answer": "She is picking up a box from the shelf."
+    },
+    {
+     "x": 41,
+     "y": 50,
+     "word": "jacket",
+     "ipa": "/ˈdʒækɪt/",
+     "pos": "noun",
+     "meaning": "เสื้อแจ็กเก็ต",
+     "phrase": "a black leather jacket",
+     "phraseTh": "เสื้อแจ็กเก็ตหนังสีดำ",
+     "action": "wearing a jacket",
+     "actionTh": "สวมเสื้อแจ็กเก็ต",
+     "sentence": "She is wearing a black leather jacket.",
+     "sentenceTh": "เธอสวมเสื้อแจ็กเก็ตหนังสีดำ",
+     "emoji": "🧥"
+    },
+    {
+     "x": 82,
+     "y": 62,
+     "word": "box",
+     "ipa": "/bɒks/",
+     "pos": "noun",
+     "meaning": "กล่อง",
+     "phrase": "a white box",
+     "phraseTh": "กล่องสีขาว",
+     "action": "picking up a box",
+     "actionTh": "หยิบกล่องขึ้นมา",
+     "sentence": "She is picking up a white box.",
+     "sentenceTh": "เธอกำลังหยิบกล่องสีขาวขึ้นมา",
+     "emoji": "📦"
+    },
+    {
+     "x": 37,
+     "y": 92,
+     "word": "basket",
+     "ipa": "/ˈbɑːskɪt/",
+     "pos": "noun",
+     "meaning": "ตะกร้า",
+     "phrase": "a green shopping basket",
+     "phraseTh": "ตะกร้าซื้อของสีเขียว",
+     "action": "carrying a basket",
+     "actionTh": "ถือตะกร้า",
+     "sentence": "She is carrying a green shopping basket.",
+     "sentenceTh": "เธอกำลังถือตะกร้าซื้อของสีเขียว",
+     "emoji": "🧺"
+    },
+    {
+     "x": 50,
+     "y": 83,
+     "word": "vegetables",
+     "ipa": "/ˈvedʒtəblz/",
+     "pos": "noun",
+     "meaning": "ผัก",
+     "phrase": "fresh green vegetables",
+     "phraseTh": "ผักสีเขียวสดๆ",
+     "action": "buying vegetables",
+     "actionTh": "ซื้อผัก",
+     "sentence": "There are fresh green vegetables in the basket.",
+     "sentenceTh": "มีผักสีเขียวสดๆ อยู่ในตะกร้า",
+     "emoji": "🥬"
+    },
+    {
+     "x": 88,
+     "y": 30,
+     "word": "shelves",
+     "ipa": "/ʃelvz/",
+     "pos": "noun",
+     "meaning": "ชั้นวางของ (หลายชั้น)",
+     "phrase": "metal shelves",
+     "phraseTh": "ชั้นวางโลหะ",
+     "action": "putting products on the shelves",
+     "actionTh": "วางสินค้าบนชั้น",
+     "sentence": "On the right, the metal shelves are full of products.",
+     "sentenceTh": "ทางขวา ชั้นวางโลหะเต็มไปด้วยสินค้า",
+     "emoji": "🗄️"
+    },
+    {
+     "x": 18,
+     "y": 22,
+     "word": "windows",
+     "ipa": "/ˈwɪndəʊz/",
+     "pos": "noun",
+     "meaning": "หน้าต่าง (หลายบาน)",
+     "phrase": "big bright windows",
+     "phraseTh": "หน้าต่างบานใหญ่ที่สว่าง",
+     "action": "looking through the windows",
+     "actionTh": "มองผ่านหน้าต่าง",
+     "sentence": "There are big bright windows in the background.",
+     "sentenceTh": "มีหน้าต่างบานใหญ่ที่สว่างอยู่ด้านหลัง",
+     "emoji": "🪟"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "A young woman is shopping in a supermarket.",
+     "th": "หญิงสาวคนหนึ่งกำลังซื้อของในซูเปอร์มาร์เก็ต",
+     "blank": "supermarket"
+    },
+    {
+     "part": "details",
+     "en": "She is picking up a white box from the shelf.",
+     "th": "เธอกำลังหยิบกล่องสีขาวจากชั้นวาง",
+     "blank": "picking"
+    },
+    {
+     "part": "details",
+     "en": "In her other hand, she is carrying a green basket.",
+     "th": "มืออีกข้างของเธอถือตะกร้าสีเขียว",
+     "blank": "carrying"
+    },
+    {
+     "part": "details",
+     "en": "There are fresh vegetables in the basket.",
+     "th": "มีผักสดอยู่ในตะกร้า",
+     "blank": "vegetables"
+    },
+    {
+     "part": "details",
+     "en": "She is wearing a black leather jacket and blue jeans.",
+     "th": "เธอสวมเสื้อแจ็กเก็ตหนังสีดำและกางเกงยีนส์สีฟ้า",
+     "blank": "jacket"
+    },
+    {
+     "part": "inference",
+     "en": "She looks happy, so maybe she found what she was looking for.",
+     "th": "เธอดูมีความสุข บางทีเธออาจเจอของที่ตามหาแล้ว",
+     "blank": "found"
+    }
+   ]
+  },
+  {
+   "id": "dinner",
+   "title": "A family meal",
+   "titleTh": "มื้ออาหารของครอบครัว",
+   "w": 1000,
+   "h": 800,
+   "author": "National Cancer Institute",
+   "user": "nci",
+   "page": "https://unsplash.com/photos/BQPi8F_UON0",
+   "setting": "at home at the dinner table",
+   "settingTh": "ที่โต๊ะอาหารในบ้าน",
+   "src": "https://images.unsplash.com/photo-1576089073624-b5751a8f4de9?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 28,
+     "y": 30,
+     "word": "father",
+     "ipa": "/ˈfɑːðə/",
+     "pos": "noun",
+     "meaning": "พ่อ",
+     "phrase": "a smiling father",
+     "phraseTh": "พ่อที่ยิ้มแย้ม",
+     "action": "smiling at his daughter",
+     "actionTh": "ยิ้มให้ลูกสาว",
+     "sentence": "A smiling father is looking at his daughter.",
+     "sentenceTh": "พ่อที่ยิ้มแย้มกำลังมองลูกสาว",
+     "emoji": "👨",
+     "question": "What is the father doing?",
+     "answer": "He is smiling at his daughter."
+    },
+    {
+     "x": 45,
+     "y": 44,
+     "word": "girl",
+     "ipa": "/ɡɜːl/",
+     "pos": "noun",
+     "meaning": "เด็กผู้หญิง",
+     "phrase": "a cheerful girl",
+     "phraseTh": "เด็กผู้หญิงร่าเริง",
+     "action": "feeding her mother",
+     "actionTh": "ป้อนอาหารแม่",
+     "sentence": "A cheerful girl is feeding her mother.",
+     "sentenceTh": "เด็กผู้หญิงร่าเริงกำลังป้อนอาหารแม่",
+     "emoji": "👧",
+     "question": "What is the girl doing?",
+     "answer": "She is feeding her mother with chopsticks."
+    },
+    {
+     "x": 68,
+     "y": 42,
+     "word": "mother",
+     "ipa": "/ˈmʌðə/",
+     "pos": "noun",
+     "meaning": "แม่",
+     "phrase": "a mother in an orange top",
+     "phraseTh": "แม่ที่ใส่เสื้อสีส้ม",
+     "action": "eating dinner",
+     "actionTh": "กินอาหารเย็น",
+     "sentence": "The mother is eating dinner with her family.",
+     "sentenceTh": "แม่กำลังกินอาหารเย็นกับครอบครัว",
+     "emoji": "👩",
+     "question": "What is the mother doing?",
+     "answer": "She is eating the food from her daughter."
+    },
+    {
+     "x": 61,
+     "y": 66,
+     "word": "chopsticks",
+     "ipa": "/ˈtʃɒpstɪks/",
+     "pos": "noun",
+     "meaning": "ตะเกียบ",
+     "phrase": "a pair of chopsticks",
+     "phraseTh": "ตะเกียบหนึ่งคู่",
+     "action": "eating with chopsticks",
+     "actionTh": "กินด้วยตะเกียบ",
+     "sentence": "The girl is eating with chopsticks.",
+     "sentenceTh": "เด็กผู้หญิงกำลังกินด้วยตะเกียบ",
+     "emoji": "🥢"
+    },
+    {
+     "x": 11,
+     "y": 75,
+     "word": "rice",
+     "ipa": "/raɪs/",
+     "pos": "noun",
+     "meaning": "ข้าว",
+     "phrase": "a big bowl of rice",
+     "phraseTh": "ข้าวชามใหญ่",
+     "action": "eating rice",
+     "actionTh": "กินข้าว",
+     "sentence": "There is a big bowl of rice on the left.",
+     "sentenceTh": "มีข้าวชามใหญ่อยู่ทางซ้าย",
+     "emoji": "🍚"
+    },
+    {
+     "x": 40,
+     "y": 88,
+     "word": "table",
+     "ipa": "/ˈteɪbl/",
+     "pos": "noun",
+     "meaning": "โต๊ะ",
+     "phrase": "a round glass table",
+     "phraseTh": "โต๊ะกระจกทรงกลม",
+     "action": "sitting at the table",
+     "actionTh": "นั่งที่โต๊ะ",
+     "sentence": "They are sitting at a round glass table.",
+     "sentenceTh": "พวกเขานั่งอยู่ที่โต๊ะกระจกทรงกลม",
+     "emoji": "🍽️"
+    },
+    {
+     "x": 5,
+     "y": 62,
+     "word": "flowers",
+     "ipa": "/ˈflaʊəz/",
+     "pos": "noun",
+     "meaning": "ดอกไม้",
+     "phrase": "white flowers",
+     "phraseTh": "ดอกไม้สีขาว",
+     "action": "putting flowers in a vase",
+     "actionTh": "ใส่ดอกไม้ในแจกัน",
+     "sentence": "There are white flowers on the left.",
+     "sentenceTh": "มีดอกไม้สีขาวอยู่ทางซ้าย",
+     "emoji": "💐"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "A family is having a meal together at home.",
+     "th": "ครอบครัวหนึ่งกำลังกินอาหารด้วยกันที่บ้าน",
+     "blank": "meal"
+    },
+    {
+     "part": "details",
+     "en": "In the middle, a little girl is feeding her mother with chopsticks.",
+     "th": "ตรงกลาง เด็กผู้หญิงตัวเล็กกำลังป้อนอาหารแม่ด้วยตะเกียบ",
+     "blank": "feeding"
+    },
+    {
+     "part": "details",
+     "en": "On the left, the father is smiling at his daughter.",
+     "th": "ทางซ้าย พ่อกำลังยิ้มให้ลูกสาว",
+     "blank": "smiling"
+    },
+    {
+     "part": "details",
+     "en": "There is a big bowl of rice and a plate of food on the table.",
+     "th": "บนโต๊ะมีข้าวชามใหญ่และอาหารหนึ่งจาน",
+     "blank": "bowl"
+    },
+    {
+     "part": "details",
+     "en": "In the background, we can see a white kitchen.",
+     "th": "ด้านหลังเราเห็นห้องครัวสีขาว",
+     "blank": "kitchen"
+    },
+    {
+     "part": "inference",
+     "en": "They look very close, and it seems like a warm family moment.",
+     "th": "พวกเขาดูสนิทกันมาก และดูเหมือนเป็นช่วงเวลาที่อบอุ่นของครอบครัว",
+     "blank": "warm"
+    }
+   ]
+  },
+  {
+   "id": "airport",
+   "title": "Waiting at the airport",
+   "titleTh": "รอขึ้นเครื่องที่สนามบิน",
+   "w": 1000,
+   "h": 667,
+   "author": "JESHOOTS.COM",
+   "user": "jeshoots",
+   "page": "https://unsplash.com/photos/mSESwdMZr-A",
+   "setting": "at an airport",
+   "settingTh": "ที่สนามบิน",
+   "src": "https://images.unsplash.com/photo-1530521954074-e64f6810b32d?w=1200&q=75&auto=format&fit=crop",
+   "hotspots": [
+    {
+     "x": 35,
+     "y": 12,
+     "word": "airplane",
+     "ipa": "/ˈeəpleɪn/",
+     "pos": "noun",
+     "meaning": "เครื่องบิน",
+     "phrase": "a big airplane",
+     "phraseTh": "เครื่องบินลำใหญ่",
+     "action": "taking off",
+     "actionTh": "บินขึ้น",
+     "sentence": "An airplane is taking off outside.",
+     "sentenceTh": "เครื่องบินลำหนึ่งกำลังบินขึ้นอยู่ข้างนอก",
+     "emoji": "✈️"
+    },
+    {
+     "x": 76,
+     "y": 22,
+     "word": "traveler",
+     "ipa": "/ˈtrævələ/",
+     "pos": "noun",
+     "meaning": "นักเดินทาง",
+     "phrase": "a relaxed traveler",
+     "phraseTh": "นักเดินทางที่ผ่อนคลาย",
+     "action": "waiting for a flight",
+     "actionTh": "รอเที่ยวบิน",
+     "sentence": "A relaxed traveler is waiting for his flight.",
+     "sentenceTh": "นักเดินทางที่ผ่อนคลายกำลังรอเที่ยวบินของเขา",
+     "emoji": "🧳",
+     "question": "What is the man doing?",
+     "answer": "He is waiting for his flight and looking at the airplane."
+    },
+    {
+     "x": 23,
+     "y": 78,
+     "word": "suitcase",
+     "ipa": "/ˈsuːtkeɪs/",
+     "pos": "noun",
+     "meaning": "กระเป๋าเดินทาง",
+     "phrase": "a black suitcase",
+     "phraseTh": "กระเป๋าเดินทางสีดำ",
+     "action": "resting his feet on a suitcase",
+     "actionTh": "วางเท้าพักบนกระเป๋าเดินทาง",
+     "sentence": "He is resting his feet on a black suitcase.",
+     "sentenceTh": "เขากำลังวางเท้าพักบนกระเป๋าเดินทางสีดำ",
+     "emoji": "🧳"
+    },
+    {
+     "x": 12,
+     "y": 44,
+     "word": "sneakers",
+     "ipa": "/ˈsniːkəz/",
+     "pos": "noun",
+     "meaning": "รองเท้าผ้าใบ",
+     "phrase": "black sneakers",
+     "phraseTh": "รองเท้าผ้าใบสีดำ",
+     "action": "wearing sneakers",
+     "actionTh": "สวมรองเท้าผ้าใบ",
+     "sentence": "He is wearing black sneakers.",
+     "sentenceTh": "เขาสวมรองเท้าผ้าใบสีดำ",
+     "emoji": "👟"
+    },
+    {
+     "x": 51,
+     "y": 42,
+     "word": "phone",
+     "ipa": "/fəʊn/",
+     "pos": "noun",
+     "meaning": "โทรศัพท์",
+     "phrase": "a mobile phone",
+     "phraseTh": "โทรศัพท์มือถือ",
+     "action": "holding a phone",
+     "actionTh": "ถือโทรศัพท์",
+     "sentence": "He is holding a phone in his hand.",
+     "sentenceTh": "เขากำลังถือโทรศัพท์ไว้ในมือ",
+     "emoji": "📱"
+    },
+    {
+     "x": 80,
+     "y": 76,
+     "word": "seats",
+     "ipa": "/siːts/",
+     "pos": "noun",
+     "meaning": "ที่นั่ง",
+     "phrase": "a row of seats",
+     "phraseTh": "ที่นั่งแถวหนึ่ง",
+     "action": "sitting in a row of seats",
+     "actionTh": "นั่งอยู่ในแถวที่นั่ง",
+     "sentence": "On the right, there is a row of empty seats.",
+     "sentenceTh": "ทางขวามีที่นั่งว่างแถวหนึ่ง",
+     "emoji": "💺"
+    },
+    {
+     "x": 40,
+     "y": 30,
+     "word": "window",
+     "ipa": "/ˈwɪndəʊ/",
+     "pos": "noun",
+     "meaning": "หน้าต่าง",
+     "phrase": "a large glass window",
+     "phraseTh": "หน้าต่างกระจกบานใหญ่",
+     "action": "looking out of the window",
+     "actionTh": "มองออกไปนอกหน้าต่าง",
+     "sentence": "He is looking out of a large glass window.",
+     "sentenceTh": "เขากำลังมองออกไปนอกหน้าต่างกระจกบานใหญ่",
+     "emoji": "🪟"
+    }
+   ],
+   "model": [
+    {
+     "part": "overview",
+     "en": "A man is waiting for his flight at an airport.",
+     "th": "ผู้ชายคนหนึ่งกำลังรอเที่ยวบินที่สนามบิน",
+     "blank": "airport"
+    },
+    {
+     "part": "details",
+     "en": "He is sitting on a seat and resting his feet on a suitcase.",
+     "th": "เขานั่งอยู่บนที่นั่งและวางเท้าพักบนกระเป๋าเดินทาง",
+     "blank": "suitcase"
+    },
+    {
+     "part": "details",
+     "en": "He is holding a phone and looking out of the window.",
+     "th": "เขาถือโทรศัพท์และมองออกไปนอกหน้าต่าง",
+     "blank": "window"
+    },
+    {
+     "part": "details",
+     "en": "In the background, an airplane is taking off.",
+     "th": "ด้านหลังมีเครื่องบินลำหนึ่งกำลังบินขึ้น",
+     "blank": "taking"
+    },
+    {
+     "part": "details",
+     "en": "On the right, there is a row of empty seats.",
+     "th": "ทางขวามีที่นั่งว่างแถวหนึ่ง",
+     "blank": "empty"
+    },
+    {
+     "part": "inference",
+     "en": "He looks relaxed, so maybe he is going on a holiday.",
+     "th": "เขาดูผ่อนคลาย บางทีเขาอาจกำลังไปเที่ยวพักผ่อน",
+     "blank": "holiday"
+    }
+   ]
+  }
+ ]
+}

@@ -1,6 +1,7 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
+import { openPictures } from "./picture.js?v=9";
 
 const KEY = "english-lessons:v2";
 const app = document.getElementById("app");
@@ -891,6 +892,23 @@ function finish() {
   on("home", renderHome);
 }
 
+// ---------- Picture Talk ----------
+function addWord(e) {
+  if (byId[e.id]) return;
+  words.push(e);
+  byId[e.id] = e;
+  byWord[e.word.toLowerCase()] ??= e;
+}
+let verbSet = null, nounSet = null;
+const pictureCtx = {
+  app, esc, icon, card, button, speak, sayBtn, hl, tapWords, srs, shuffle, daily, save, renderHome, unlockAudio, showWordPopup, addWord,
+  get store() { return store; },
+  get byId() { return byId; },
+  get byWord() { return byWord; },
+  verbs: () => (verbSet ??= new Set(words.filter(w => w.pos === "verb").map(w => w.word.toLowerCase()))),
+  nouns: () => (nounSet ??= new Set(words.filter(w => w.pos === "noun").map(w => w.word.toLowerCase()))),
+};
+
 // ---------- home ----------
 function renderHome() {
   const d = daily();
@@ -943,6 +961,15 @@ function renderHome() {
         ${practiceBtn}
       </section>
 
+      <button data-act="pictures" class="animate-pop group flex items-center gap-4 rounded-[28px] bg-white p-5 text-left shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 transition hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-amber-300 to-rose-400 text-2xl shadow-lg shadow-rose-400/30">🖼️</span>
+        <span class="min-w-0 flex-1">
+          <span class="block text-lg font-bold">Picture Talk</span>
+          <span class="block text-sm text-zinc-500">Describe a random photo: words in the picture, sentence starters, 3 practice levels, and speaking with your mic.</span>
+        </span>
+        <span class="text-purple-600 transition group-hover:translate-x-1">${icon("arrow", "h-6 w-6")}</span>
+      </button>
+
       <section class="grid gap-4 md:grid-cols-2">
         ${card(`
           <div class="flex items-baseline justify-between">
@@ -980,6 +1007,7 @@ function renderHome() {
           <li><b class="text-zinc-900 dark:text-zinc-100">New Intake</b> Listen, pick the word you heard, then study a flashcard: English on the front, Thai meaning on the back. Finish by filling in a sentence.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Sentences</b> Build sentences from words you know: read the Thai and order the tiles, or listen and order what you hear. Then repeat the sentence out loud.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Wrap-up</b> Words you missed today come back until you get them all right.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Picture Talk</b> Describe a random photo in 3 steps: overview, details and positions, then what you guess about the scene. Tap the dots to learn words and add them to your review queue.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Tip</b> Tap any underlined word in a sentence to hear it and see its meaning.</li>
         </ol>
         <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">Reset all progress</button>
@@ -988,8 +1016,9 @@ function renderHome() {
 
   on("start", startSession);
   on("practice", startPractice);
+  on("pictures", () => openPictures(pictureCtx));
   on("reset", () => {
-    if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; save(); renderHome(); }
+    if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; store.custom = {}; save(); renderHome(); }
   });
   app.querySelectorAll("[data-new]").forEach(b => (b.onclick = () => { store.settings.newPerDay = Number(b.dataset.new); save(); renderHome(); }));
   app.querySelectorAll("[data-sent]").forEach(b => (b.onclick = () => { store.settings.sentencesPerDay = Number(b.dataset.sent); save(); renderHome(); }));
@@ -1038,6 +1067,8 @@ async function boot() {
       .map(w => ({ ...w, answer: w.answer || w.word }));
     byId = Object.fromEntries(words.map(w => [w.id, w]));
     for (const w of words) byWord[w.word.toLowerCase()] ??= w;
+    // คำที่เพิ่มจากโหมดอธิบายภาพ (ไม่อยู่ในคลัง 3,000 คำ)
+    Object.values(store.custom || {}).forEach(addWord);
     // คำพื้นฐานที่ไม่ได้อยู่ในบทเรียน ใช้กับป๊อปอัปแตะดูความหมายเท่านั้น (โหลดไม่ได้ก็ใช้งานต่อได้)
     getJSON("data/extra-words.json")
       .then(x => x.words.forEach(w => (byWord[w.word.toLowerCase()] ??= w)))
