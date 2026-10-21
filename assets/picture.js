@@ -188,10 +188,35 @@ function render() {
   C.app.querySelectorAll("[data-hot]").forEach(b => (b.onclick = () => showHotspot(Number(b.dataset.hot))));
   C.app.querySelectorAll("[data-level]").forEach(b => (b.onclick = () => { stopMic(); level = Number(b.dataset.level); render(); scrollToEl(C.app.querySelector("#practice")); }));
   C.app.querySelector("details").addEventListener("toggle", () => { try { localStorage.setItem("english-lessons:frame-seen", "1"); } catch { /* ข้าม */ } });
+  keepTypingVisible();
   ({ 1: level1, 2: level2, 3: level3 })[level]();
 }
 
 const PIC_MAX = "38dvh";
+
+// บนมือถือ ตอนพิมพ์ (คีย์บอร์ดเปิด) พื้นที่จอเหลือน้อย จึงปลดภาพที่ตรึงไว้ชั่วคราว
+// แล้วเลื่อนให้ประโยคโจทย์และช่องพิมพ์อยู่บนสุด พอเลิกพิมพ์ภาพจะกลับมาตรึงเหมือนเดิม
+function keepTypingVisible() {
+  if (matchMedia("(pointer: fine)").matches) return;
+  const practice = C.app.querySelector("#practice");
+  const pin = C.app.querySelector("#pin");
+  const isTyping = el => el?.matches?.("textarea, input:not([type]), input[type=text]");
+  practice.addEventListener("focusin", e => {
+    if (!isTyping(e.target)) return;
+    pin.classList.remove("sticky");
+    practice.style.paddingBottom = "60dvh"; // เผื่อพื้นที่ให้เลื่อนประโยคขึ้นไปบนสุดได้
+    const target = practice.querySelector("p.text-2xl") || e.target;
+    const align = () => {
+      if (document.activeElement !== e.target) return;
+      window.scrollTo({ top: Math.max(0, target.getBoundingClientRect().top + window.scrollY - 12) });
+    };
+    setTimeout(align, 350);
+    window.visualViewport?.addEventListener("resize", align, { once: true });
+  });
+  practice.addEventListener("focusout", () => setTimeout(() => {
+    if (!isTyping(document.activeElement)) { pin.classList.add("sticky"); practice.style.paddingBottom = ""; }
+  }, 150));
+}
 
 // เลื่อนไปที่ส่วนฝึก โดยไม่ให้ถูกภาพที่ตรึงไว้บัง
 function scrollToEl(el) {

@@ -1,7 +1,7 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
-import { openPictures } from "./picture.js?v=10";
+import { openPictures } from "./picture.js?v=13";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
@@ -695,17 +695,17 @@ function showCloze(w, phase) {
     body: card(`
       ${leechBadge(w)}
       <div class="text-[11px] font-semibold uppercase tracking-wider text-zinc-400">Micro-Quiz · เติมคำให้ประโยคสมบูรณ์</div>
-      <p class="mt-3 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${tapBlank(s.en)}</p>
-      <button data-act="hint" class="mt-5 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 hover:bg-amber-100 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล (คำใบ้)</button>
+      <p id="cloze-sent" class="mt-3 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${tapBlank(s.en)}</p>
+      <form id="quiz" class="mt-5 grid gap-3">
+        <input id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"
+          placeholder="พิมพ์คำที่หายไป" class="w-full rounded-2xl bg-white px-5 py-3.5 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-zinc-900 dark:ring-zinc-700">
+        <div class="grid grid-cols-[1fr_auto] gap-3">
+          ${button('type="submit"', "ตรวจคำตอบ")}
+          <button type="button" data-act="choices" class="rounded-2xl px-4 text-sm font-medium text-zinc-500 ring-1 ring-zinc-200 hover:text-purple-600 hover:ring-purple-300 dark:ring-zinc-800">ขอตัวเลือก</button>
+        </div>
+      </form>
+      <button data-act="hint" class="mt-4 inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 hover:bg-amber-100 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล (คำใบ้)</button>
       <p id="hint" class="mt-3 hidden text-zinc-500">${esc(s.th)}</p>`),
-    actions: `<form id="quiz" class="grid gap-3">
-      <input id="ans" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="done"
-        placeholder="พิมพ์คำที่หายไป" class="w-full rounded-2xl bg-white px-5 py-3.5 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-zinc-900 dark:ring-zinc-700">
-      <div class="grid grid-cols-[1fr_auto] gap-3">
-        ${button('type="submit"', "ตรวจคำตอบ")}
-        <button type="button" data-act="choices" class="rounded-2xl px-4 text-sm font-medium text-zinc-500 ring-1 ring-zinc-200 hover:text-purple-600 hover:ring-purple-300 dark:ring-zinc-800">ขอตัวเลือก</button>
-      </div>
-    </form>`,
   });
 
   on("hint", e => {
@@ -739,6 +739,7 @@ function showCloze(w, phase) {
 
   const input = app.querySelector("#ans");
   if (matchMedia("(pointer: fine)").matches) input.focus({ preventScroll: true });
+  keepInView(input, app.querySelector("#cloze-sent"));
   app.querySelector("#quiz").onsubmit = e => {
     e.preventDefault();
     if (input.value.trim()) check(input.value);
@@ -748,6 +749,21 @@ function showCloze(w, phase) {
     form.innerHTML = `<div class="grid gap-3 sm:grid-cols-2">${pickOptions(w, "answer")
       .map((o, i) => button(`type="button" data-opt="${esc(o)}"`, esc(o), "ghost", String(i + 1))).join("")}</div>`;
     form.querySelectorAll("[data-opt]").forEach(b => (b.onclick = () => check(b.dataset.opt)));
+  });
+}
+
+// บนมือถือ เมื่อคีย์บอร์ดเปิด ให้เลื่อนจอจนเห็นประโยคโจทย์อยู่ใต้แถบหัว (ช่องพิมพ์อยู่ใต้ประโยคพอดี)
+function keepInView(input, target) {
+  if (!input || !target || matchMedia("(pointer: fine)").matches) return;
+  const align = () => {
+    if (document.activeElement !== input) return;
+    const head = app.querySelector("header")?.offsetHeight || 0;
+    const y = target.getBoundingClientRect().top + window.scrollY - head - 12;
+    window.scrollTo({ top: Math.max(0, y) });
+  };
+  input.addEventListener("focus", () => {
+    setTimeout(align, 350); // รอคีย์บอร์ดเลื่อนขึ้นเสร็จ
+    window.visualViewport?.addEventListener("resize", align, { once: true });
   });
 }
 
