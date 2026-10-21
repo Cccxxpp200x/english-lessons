@@ -1,7 +1,7 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
-import { openPictures } from "./picture.js?v=13";
+import { openPictures } from "./picture.js?v=14";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
@@ -149,15 +149,17 @@ function lookup(raw) {
   return null;
 }
 
-function closeWordPopup() { document.getElementById("word-pop")?.remove(); }
+// ปิดป๊อปอัปบนสุดก่อน: ถ้าเปิดคำศัพท์ซ้อนบนการ์ดจุดในภาพ ปิดแล้วจะกลับไปที่การ์ดเดิม
+function closeWordPopup() { (document.getElementById("word-pop-top") || document.getElementById("word-pop"))?.remove(); }
 
 function showWordPopup(raw) {
-  closeWordPopup();
+  const stacked = document.getElementById("word-pop")?.dataset.sheet === "1"; // เปิดจากการ์ดจุดในภาพ → ซ้อนด้านบน
+  document.getElementById(stacked ? "word-pop-top" : "word-pop")?.remove();
   const e = lookup(raw);
   const derived = e && e.word.toLowerCase() !== raw.toLowerCase().replace(/’/g, "'");
   const el = document.createElement("div");
-  el.id = "word-pop";
-  el.className = "fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/30 p-3 backdrop-blur-[2px] md:items-center";
+  el.id = stacked ? "word-pop-top" : "word-pop";
+  el.className = "fixed inset-0 z-[60] flex items-end justify-center bg-zinc-900/30 p-3 backdrop-blur-[2px] md:items-center";
   el.innerHTML = `
     <div role="dialog" aria-label="${esc(raw)}" class="animate-pop w-full max-w-md rounded-[28px] bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
       <div class="flex items-start gap-4">

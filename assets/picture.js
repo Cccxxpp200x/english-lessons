@@ -240,12 +240,14 @@ function highlight(i) {
 function showHotspot(i) {
   const h = pic.hotspots[i];
   highlight(i);
+  document.getElementById("word-pop-top")?.remove();
   document.getElementById("word-pop")?.remove();
   const row = (lab, en, th) => `<div class="flex items-start gap-3 rounded-2xl bg-zinc-50 px-4 py-3 dark:bg-zinc-800/60">
       <div class="min-w-0 flex-1">${label(lab)}<div class="mt-0.5 text-lg">${C.hl(en, h.word)}</div><div class="text-sm text-zinc-500">${esc(th)}</div></div>
       ${C.sayBtn(en)}</div>`;
   const el = document.createElement("div");
   el.id = "word-pop";
+  el.dataset.sheet = "1"; // ให้ป๊อปอัปคำศัพท์เปิดซ้อนด้านบน แทนที่จะปิดการ์ดนี้
   el.className = "fixed inset-0 z-50 flex items-end justify-center bg-zinc-900/30 p-3 backdrop-blur-[2px] md:items-center";
   el.innerHTML = `
     <div role="dialog" class="animate-pop max-h-[56dvh] md:max-h-[90dvh] w-full max-w-md overflow-y-auto rounded-[28px] bg-white p-5 pb-[max(20px,env(safe-area-inset-bottom))] shadow-2xl ring-1 ring-zinc-200 dark:bg-zinc-900 dark:ring-zinc-800">
