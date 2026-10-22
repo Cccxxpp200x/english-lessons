@@ -2,6 +2,7 @@
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
 import * as srs from "./srs.js?v=6";
 import { openPictures } from "./picture.js?v=14";
+import { openPatterns } from "./patterns.js?v=15";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
@@ -945,6 +946,7 @@ function renderHome() {
   const pct = words.length ? (100 * learned) / words.length : 0;
   const dateEn = new Date().toLocaleDateString("en-US", { weekday: "long", month: "long", day: "numeric" });
   const practiceN = todayIds().length;
+  const patternsDue = Object.values(store.patterns || {}).filter(c => c.due <= d.date).length;
   const plural = (n, one, many = one + "s") => `${n} ${n === 1 ? one : many}`;
   const seg = (attr, val, cur, label) =>
     `<button ${attr}="${val}" class="flex-1 rounded-xl px-3 py-2 text-sm font-medium transition ${String(val) === String(cur)
@@ -996,6 +998,15 @@ function renderHome() {
         <span class="text-purple-600 transition group-hover:translate-x-1">${icon("arrow", "h-6 w-6")}</span>
       </button>
 
+      <button data-act="patterns" class="animate-pop group flex items-center gap-4 rounded-[28px] bg-white p-5 text-left shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 transition hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
+        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-emerald-300 to-teal-500 text-2xl shadow-lg shadow-teal-500/30">🧩</span>
+        <span class="min-w-0 flex-1">
+          <span class="flex items-center gap-2 text-lg font-bold">Sentence Patterns${patternsDue ? `<span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">${patternsDue} to review</span>` : ""}</span>
+          <span class="block text-sm text-zinc-500">90 everyday sentence patterns. Learn the frame once, then swap the words to say what you need.</span>
+        </span>
+        <span class="text-purple-600 transition group-hover:translate-x-1">${icon("arrow", "h-6 w-6")}</span>
+      </button>
+
       <section class="grid gap-4 md:grid-cols-2">
         ${card(`
           <div class="flex items-baseline justify-between">
@@ -1034,6 +1045,7 @@ function renderHome() {
           <li><b class="text-zinc-900 dark:text-zinc-100">Sentences</b> Build sentences from words you know: read the Thai and order the tiles, or listen and order what you hear. Then repeat the sentence out loud.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Wrap-up</b> Words you missed today come back until you get them all right.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Picture Talk</b> Describe a random photo in 3 steps: overview, details and positions, then what you guess about the scene. Tap the dots to learn words and add them to your review queue.</li>
+          <li><b class="text-zinc-900 dark:text-zinc-100">Sentence Patterns</b> Learn a sentence frame such as "Can I have ___, please?" in 4 steps: notice, swap words, change the form, then say it from Thai. Patterns come back for review like words.</li>
           <li><b class="text-zinc-900 dark:text-zinc-100">Tip</b> Tap any underlined word in a sentence to hear it and see its meaning.</li>
         </ol>
         <button data-act="reset" class="mt-5 text-sm text-rose-600 underline">Reset all progress</button>
@@ -1043,6 +1055,7 @@ function renderHome() {
   on("start", startSession);
   on("practice", startPractice);
   on("pictures", () => openPictures(pictureCtx));
+  on("patterns", () => openPatterns(pictureCtx));
   on("profile", () => showProfileSheet(profileCtx, profile));
   on("reset", () => {
     if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; store.custom = {}; save(); renderHome(); }

@@ -1,0 +1,961 @@
+# คลังรูปประโยค (Sentence Patterns) — แก้ไฟล์นี้แล้วรัน: python tools/build_patterns.py
+#
+# @tab id | English | ไทย | icon          แท็บหลักในแถบเมนูด้านล่าง
+# ## tab.cat | English | ไทย               หมวดย่อย
+# LEVEL | frame | คำแปลไทย | ใช้เมื่อไร | โน้ตไวยากรณ์ (ไม่ใส่ก็ได้)
+# - คำเติมช่อง | คำแปล | อีโมจิ          อย่างน้อย 6 คำ ต้องเข้ากับ frame และทุก variant
+# > คำสั่ง | frame ที่เปลี่ยนรูป | คำแปลไทย  อย่างน้อย 1 แบบ
+# frame ต้องมี {x} หนึ่งที่ แทนตำแหน่งคำที่เปลี่ยนได้
+
+@daily | Daily Life | ชีวิตประจำวัน | home
+@food | Food & Shop | อาหาร/ช้อปปิ้ง | bag
+@travel | Travel | เดินทาง | plane
+@social | Social | คุยกับคนอื่น | chat
+@work | Work & Study | งาน/เรียน | briefcase
+
+## daily.routine | Routines | กิจวัตรประจำวัน
+
+A1 | I usually {x} in the morning. | ปกติฉัน{x}ตอนเช้า | เล่ากิจวัตรตอนเช้า | usually (ปกติ) วางไว้หน้ากริยา
+- get up early | ตื่นเช้า | ⏰
+- drink coffee | ดื่มกาแฟ | ☕
+- take a shower | อาบน้ำ | 🚿
+- go for a walk | ออกไปเดินเล่น | 🚶
+- check emails | เช็กอีเมล | 📧
+- eat rice soup | กินข้าวต้ม | 🍲
+- read the news | อ่านข่าว | 📰
+> เปลี่ยนเป็นคำถาม | Do you usually {x} in the morning? | ปกติคุณ{x}ตอนเช้าไหม
+> เปลี่ยนเป็นปฏิเสธ | I don't usually {x} in the morning. | ปกติฉันไม่ค่อย{x}ตอนเช้า
+
+A1 | How often do you {x}? | คุณ{x}บ่อยแค่ไหน | ถามว่าทำบ่อยไหม
+- go to the gym | ไปยิม | 🏋️
+- eat out | กินข้าวนอกบ้าน | 🍽️
+- call home | โทรกลับบ้าน | 📞
+- watch movies | ดูหนัง | 🎬
+- clean the house | ทำความสะอาดบ้าน | 🧹
+- play sports | เล่นกีฬา | ⚽
+- go shopping | ไปซื้อของ | 🛍️
+> ตอบว่าทำทุกวัน | I {x} every day. | ฉัน{x}ทุกวัน
+> ตอบว่าแทบไม่เคย | I hardly ever {x}. | ฉันแทบไม่เคย{x}เลย
+
+A1 | I always {x} before bed. | ฉัน{x}ก่อนนอนเสมอ | เล่านิสัยก่อนนอน | always (เสมอ) วางไว้หน้ากริยา
+- brush my teeth | แปรงฟัน | 🪥
+- read a book | อ่านหนังสือ | 📖
+- drink warm milk | ดื่มนมอุ่นๆ | 🥛
+- turn off my phone | ปิดโทรศัพท์ | 📵
+- set an alarm | ตั้งนาฬิกาปลุก | ⏰
+- listen to music | ฟังเพลง | 🎧
+- write in my diary | เขียนไดอารี่ | 📔
+> เปลี่ยนเป็นปฏิเสธ (never) | I never {x} before bed. | ฉันไม่เคย{x}ก่อนนอนเลย
+
+A2 | I'm busy {x} right now. | ตอนนี้ฉันกำลังยุ่งอยู่กับการ{x} | บอกว่ากำลังยุ่งทำอะไรอยู่ | busy + กริยาเติม -ing
+- cooking dinner | ทำอาหารเย็น | 🍳
+- doing my homework | ทำการบ้าน | 📚
+- working on a report | ทำรายงาน | 📊
+- cleaning my room | ทำความสะอาดห้อง | 🧹
+- talking to a customer | คุยกับลูกค้า | 👔
+- driving | ขับรถ | 🚗
+- packing my bag | จัดกระเป๋า | 🎒
+> เปลี่ยนเป็นอดีต | I was busy {x} last night. | เมื่อคืนฉันยุ่งอยู่กับการ{x}
+
+A2 | It takes me {x} to get to work. | ฉันใช้เวลา{x}ในการไปทำงาน | บอกเวลาเดินทาง
+- ten minutes | สิบนาที | ⏱️
+- half an hour | ครึ่งชั่วโมง | 🕧
+- about an hour | ประมาณหนึ่งชั่วโมง | 🕐
+- twenty minutes by bus | ยี่สิบนาทีโดยรถเมล์ | 🚌
+- five minutes on foot | เดินห้านาที | 🚶
+- forty minutes by train | สี่สิบนาทีโดยรถไฟ | 🚆
+- two hours in traffic | สองชั่วโมงเพราะรถติด | 🚗
+> เปลี่ยนเป็นคำถาม | Does it take you {x} to get to work? | คุณใช้เวลา{x}ในการไปทำงานใช่ไหม
+
+B1 | I'm used to {x}. | ฉันชินกับ{x}แล้ว | บอกว่าเคยชินกับอะไร | be used to + คำนาม/V-ing = เคยชิน (ต่างจาก used to + V1 = เมื่อก่อนเคยทำ)
+- waking up early | การตื่นเช้า | ⏰
+- eating spicy food | การกินอาหารเผ็ด | 🌶️
+- working late | การทำงานดึก | 🌙
+- living alone | การอยู่คนเดียว | 🏠
+- taking the train | การนั่งรถไฟ | 🚆
+- hot weather | อากาศร้อน | ☀️
+- speaking English at work | การพูดภาษาอังกฤษที่ทำงาน | 💬
+> เปลี่ยนเป็นปฏิเสธ | I'm not used to {x}. | ฉันยังไม่ชินกับ{x}
+> ใช้ getting used to | I'm getting used to {x}. | ฉันเริ่มชินกับ{x}แล้ว
+
+B1 | I used to {x}, but now I don't. | ฉันเคย{x} แต่ตอนนี้ไม่แล้ว | เล่าสิ่งที่เคยทำในอดีต | used to + V1 = เมื่อก่อนเคยทำ (ตอนนี้ไม่ทำแล้ว)
+- smoke | สูบบุหรี่ | 🚬
+- live in Bangkok | อาศัยอยู่กรุงเทพฯ | 🏙️
+- play the guitar | เล่นกีตาร์ | 🎸
+- drink a lot of soda | ดื่มน้ำอัดลมเยอะ | 🥤
+- stay up late | นอนดึก | 🌙
+- eat fast food | กินฟาสต์ฟู้ด | 🍔
+- work on weekends | ทำงานวันหยุด | 📅
+> เปลี่ยนเป็นคำถาม | Did you use to {x}? | เมื่อก่อนคุณเคย{x}ไหม
+
+## daily.likes | Likes & Dislikes | ชอบ / ไม่ชอบ
+
+A1 | I like {x}. | ฉันชอบ{x} | บอกสิ่งที่ชอบ
+- spicy food | อาหารเผ็ด | 🌶️
+- rainy days | วันที่ฝนตก | 🌧️
+- playing football | การเล่นฟุตบอล | ⚽
+- Korean dramas | ซีรีส์เกาหลี | 📺
+- cats | แมว | 🐱
+- listening to music | การฟังเพลง | 🎧
+- cooking at home | การทำอาหารที่บ้าน | 🍳
+> เปลี่ยนเป็นคำถาม | Do you like {x}? | คุณชอบ{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I don't like {x}. | ฉันไม่ชอบ{x}
+
+A1 | My favorite food is {x}. | อาหารที่ฉันชอบที่สุดคือ{x} | บอกอาหารโปรด
+- som tam | ส้มตำ | 🥗
+- pizza | พิซซ่า | 🍕
+- fried rice | ข้าวผัด | 🍚
+- sushi | ซูชิ | 🍣
+- chicken curry | แกงไก่ | 🍛
+- noodle soup | ก๋วยเตี๋ยว | 🍜
+- mango sticky rice | ข้าวเหนียวมะม่วง | 🥭
+> ถามอีกฝ่าย | Is your favorite food {x}? | อาหารที่คุณชอบที่สุดคือ{x}ใช่ไหม
+
+A2 | I'm really into {x}. | ช่วงนี้ฉันชอบ{x}มาก | บอกสิ่งที่ชอบมากๆ (ภาษาพูด) | be into + คำนาม/V-ing = ชอบมาก
+- K-pop | เคป๊อป | 🎤
+- photography | การถ่ายภาพ | 📷
+- running | การวิ่ง | 🏃
+- anime | อนิเมะ | 🎌
+- coffee | กาแฟ | ☕
+- board games | บอร์ดเกม | 🎲
+- hiking | การเดินป่า | 🥾
+> เปลี่ยนเป็นคำถาม | Are you into {x}? | คุณชอบ{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I'm not really into {x}. | ฉันไม่ค่อยชอบ{x}เท่าไหร่
+
+A2 | I enjoy {x} on weekends. | ฉันชอบ{x}ในวันหยุดสุดสัปดาห์ | เล่าสิ่งที่ชอบทำวันหยุด | enjoy + กริยาเติม -ing
+- sleeping in | การนอนตื่นสาย | 😴
+- going to the market | การไปตลาด | 🧺
+- meeting friends | การเจอเพื่อน | 👫
+- riding a bike | การขี่จักรยาน | 🚲
+- watching football | การดูฟุตบอล | ⚽
+- trying new cafes | การลองคาเฟ่ใหม่ๆ | ☕
+- working in the garden | การทำสวน | 🌱
+> เปลี่ยนเป็นคำถาม | Do you enjoy {x} on weekends? | คุณชอบ{x}ในวันหยุดไหม
+
+A2 | What kind of {x} do you like? | คุณชอบ{x}แบบไหน | ถามความชอบของอีกฝ่าย
+- music | เพลง | 🎵
+- movies | หนัง | 🎬
+- food | อาหาร | 🍽️
+- books | หนังสือ | 📚
+- sports | กีฬา | 🏸
+- games | เกม | 🎮
+- coffee | กาแฟ | ☕
+> ตอบ | I like all kinds of {x}. | ฉันชอบ{x}ทุกแบบ
+
+B1 | I'd rather {x} tonight. | คืนนี้ฉันอยาก{x}มากกว่า | บอกสิ่งที่อยากทำมากกว่า | would rather + V1 = อยาก…มากกว่า
+- stay home | อยู่บ้าน | 🏠
+- eat Thai food | กินอาหารไทย | 🍛
+- watch a movie | ดูหนัง | 🎬
+- go to bed early | เข้านอนเร็ว | 😴
+- cook something simple | ทำอะไรง่ายๆ กิน | 🍳
+- take a taxi | นั่งแท็กซี่ | 🚕
+- go somewhere quiet | ไปที่เงียบๆ | 🌿
+> เปลี่ยนเป็นคำถาม | Would you rather {x} tonight? | คืนนี้คุณอยาก{x}มากกว่าไหม
+> เปลี่ยนเป็นปฏิเสธ | I'd rather not {x} tonight. | คืนนี้ฉันไม่อยาก{x}
+
+B1 | I can't stand {x}. | ฉันทน{x}ไม่ได้เลย | บอกสิ่งที่ไม่ชอบมากๆ | can't stand + คำนาม/V-ing = ทนไม่ได้
+- waiting in line | การต่อแถวรอ | ⏳
+- loud music | เพลงเสียงดัง | 🔊
+- hot weather | อากาศร้อน | 🥵
+- people who are late | คนที่มาสาย | ⌚
+- traffic jams | รถติด | 🚗
+- cold coffee | กาแฟที่เย็นชืด | ☕
+- doing the dishes | การล้างจาน | 🍽️
+> ใช้ really hate | I really hate {x}. | ฉันเกลียด{x}มาก
+
+## daily.ability | Abilities | ความสามารถ
+
+A1 | I can {x}. | ฉัน{x}ได้ | บอกสิ่งที่ทำได้ | can + V1 (ไม่เติม s)
+- swim | ว่ายน้ำ | 🏊
+- drive a car | ขับรถ | 🚗
+- cook Thai food | ทำอาหารไทย | 🍛
+- speak English | พูดภาษาอังกฤษ | 💬
+- play the piano | เล่นเปียโน | 🎹
+- ride a motorbike | ขี่มอเตอร์ไซค์ | 🛵
+- use a computer | ใช้คอมพิวเตอร์ | 💻
+> เปลี่ยนเป็นคำถาม | Can you {x}? | คุณ{x}ได้ไหม
+> เปลี่ยนเป็นปฏิเสธ | I can't {x}. | ฉัน{x}ไม่ได้
+
+A2 | I'm good at {x}. | ฉันเก่งเรื่อง{x} | บอกสิ่งที่ถนัด | good at + คำนาม/V-ing
+- math | คณิตศาสตร์ | ➗
+- cooking | การทำอาหาร | 🍳
+- drawing | การวาดรูป | 🎨
+- remembering names | การจำชื่อคน | 🧠
+- fixing things | การซ่อมของ | 🔧
+- singing | การร้องเพลง | 🎤
+- English grammar | ไวยากรณ์อังกฤษ | 📘
+> เปลี่ยนเป็นคำถาม | Are you good at {x}? | คุณเก่งเรื่อง{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I'm not very good at {x}. | ฉันไม่ค่อยเก่งเรื่อง{x}
+
+A2 | I know how to {x}. | ฉันรู้วิธี{x} | บอกว่ารู้วิธีทำ | how to + V1
+- make coffee | ชงกาแฟ | ☕
+- use this app | ใช้แอปนี้ | 📱
+- get to the airport | ไปสนามบิน | ✈️
+- change a tire | เปลี่ยนยางรถ | 🛞
+- fix a computer | ซ่อมคอมพิวเตอร์ | 💻
+- cook rice | หุงข้าว | 🍚
+- set up the Wi-Fi | ตั้งค่า Wi-Fi | 📶
+> เปลี่ยนเป็นคำถาม | Do you know how to {x}? | คุณรู้วิธี{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I don't know how to {x}. | ฉันไม่รู้วิธี{x}
+
+A2 | I'm learning to {x}. | ฉันกำลังหัด{x} | เล่าสิ่งที่กำลังฝึก
+- swim | ว่ายน้ำ | 🏊
+- drive | ขับรถ | 🚗
+- play the guitar | เล่นกีตาร์ | 🎸
+- speak English | พูดภาษาอังกฤษ | 💬
+- cook | ทำอาหาร | 🍳
+- dance | เต้น | 💃
+- write code | เขียนโปรแกรม | 👩‍💻
+> เปลี่ยนเป็นคำถาม | Are you learning to {x}? | คุณกำลังหัด{x}อยู่หรือ
+
+B1 | I'm able to {x} now. | ตอนนี้ฉันสามารถ{x}ได้แล้ว | บอกความสามารถที่พัฒนาขึ้น | be able to + V1 = สามารถ (ใช้ได้ทุก tense)
+- read English news | อ่านข่าวภาษาอังกฤษ | 📰
+- work from home | ทำงานที่บ้าน | 🏠
+- run five kilometers | วิ่งห้ากิโลเมตร | 🏃
+- understand most movies | เข้าใจหนังส่วนใหญ่ | 🎬
+- cook for my family | ทำอาหารให้ครอบครัว | 🍲
+- sleep well again | นอนหลับได้ดีอีกครั้ง | 😴
+- speak more clearly | พูดได้ชัดขึ้น | 🗣️
+> เปลี่ยนเป็นอดีต | I wasn't able to {x} before. | เมื่อก่อนฉันไม่สามารถ{x}ได้
+> เปลี่ยนเป็นอนาคต | I'll be able to {x} soon. | อีกไม่นานฉันจะสามารถ{x}ได้
+
+B1 | It's hard for me to {x}. | มันยากสำหรับฉันที่จะ{x} | บอกสิ่งที่ทำได้ยาก | It's + คุณศัพท์ + for me + to V1
+- wake up early | ตื่นเช้า | ⏰
+- remember new words | จำคำศัพท์ใหม่ | 🧠
+- say no | ปฏิเสธคนอื่น | 🙅
+- speak in public | พูดต่อหน้าคนเยอะๆ | 🎤
+- stay calm | ใจเย็น | 🧘
+- understand fast English | ฟังภาษาอังกฤษเร็วๆ ให้เข้าใจ | 👂
+- save money | เก็บเงิน | 💰
+> เปลี่ยนเป็นตรงข้าม | It's easy for me to {x}. | มันง่ายสำหรับฉันที่จะ{x}
+
+## daily.plans | Plans & Future | แผน / อนาคต
+
+A1 | I'm going to {x} tomorrow. | พรุ่งนี้ฉันจะ{x} | บอกแผนที่ตั้งใจไว้ | be going to + V1 = ตั้งใจจะทำ
+- see a doctor | ไปหาหมอ | 🩺
+- clean the house | ทำความสะอาดบ้าน | 🧹
+- meet a friend | เจอเพื่อน | 👫
+- go to the beach | ไปทะเล | 🏖️
+- buy a new phone | ซื้อโทรศัพท์ใหม่ | 📱
+- start a new job | เริ่มงานใหม่ | 💼
+- take a day off | ลาหยุดหนึ่งวัน | 🌴
+> เปลี่ยนเป็นคำถาม | Are you going to {x} tomorrow? | พรุ่งนี้คุณจะ{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I'm not going to {x} tomorrow. | พรุ่งนี้ฉันจะไม่{x}
+
+A1 | What are you doing {x}? | คุณจะทำอะไร{x} | ถามแผนของอีกฝ่าย | Present Continuous ใช้พูดถึงแผนในอนาคตอันใกล้ได้
+- this weekend | สุดสัปดาห์นี้ | 📅
+- tonight | คืนนี้ | 🌙
+- after work | หลังเลิกงาน | 🏢
+- on Saturday | วันเสาร์ | 🗓️
+- for the holiday | ช่วงวันหยุด | 🎉
+- tomorrow morning | พรุ่งนี้เช้า | 🌅
+- after class | หลังเลิกเรียน | 🏫
+> ตอบ | I'm staying home {x}. | ฉันจะอยู่บ้าน{x}
+
+A2 | I'm planning to {x} next year. | ฉันวางแผนจะ{x}ปีหน้า | เล่าแผนระยะยาว
+- travel to Japan | ไปเที่ยวญี่ปุ่น | 🗾
+- learn Chinese | เรียนภาษาจีน | 🀄
+- buy a car | ซื้อรถ | 🚗
+- move to Chiang Mai | ย้ายไปเชียงใหม่ | 🏔️
+- open a small cafe | เปิดคาเฟ่เล็กๆ | ☕
+- get a better job | หางานที่ดีกว่าเดิม | 💼
+- run a marathon | วิ่งมาราธอน | 🏃
+> เปลี่ยนเป็นคำถาม | Are you planning to {x} next year? | คุณวางแผนจะ{x}ปีหน้าไหม
+
+A2 | I hope to {x} someday. | ฉันหวังว่าสักวันจะได้{x} | พูดถึงความฝัน
+- visit Europe | ไปเที่ยวยุโรป | 🏰
+- own a house | มีบ้านของตัวเอง | 🏡
+- speak English fluently | พูดภาษาอังกฤษคล่อง | 🗣️
+- see the northern lights | เห็นแสงเหนือ | 🌌
+- start my own business | เปิดธุรกิจของตัวเอง | 🏪
+- write a book | เขียนหนังสือ | ✍️
+- learn to fly a plane | หัดขับเครื่องบิน | ✈️
+> ใช้ would like | I'd like to {x} someday. | สักวันฉันอยาก{x}
+
+B1 | If I have time, I'll {x}. | ถ้ามีเวลา ฉันจะ{x} | พูดเงื่อนไขที่เป็นไปได้จริง | If + Present Simple, will + V1
+- call you back | โทรกลับหาคุณ | 📞
+- help you | ช่วยคุณ | 🤝
+- go to the gym | ไปยิม | 🏋️
+- finish the report | ทำรายงานให้เสร็จ | 📊
+- visit the museum | ไปพิพิธภัณฑ์ | 🏛️
+- cook dinner | ทำอาหารเย็น | 🍳
+- read that book | อ่านหนังสือเล่มนั้น | 📖
+> สมมติสิ่งที่ไม่จริง | If I had time, I would {x}. | ถ้าฉันมีเวลา ฉันคงจะ{x}
+
+B1 | I'm thinking about {x}. | ฉันกำลังคิดเรื่อง{x} | บอกสิ่งที่กำลังพิจารณา | think about + V-ing
+- changing jobs | การเปลี่ยนงาน | 🔄
+- moving abroad | การย้ายไปต่างประเทศ | 🌍
+- buying a new laptop | การซื้อแล็ปท็อปใหม่ | 💻
+- going back to school | การกลับไปเรียนต่อ | 🎓
+- getting a dog | การเลี้ยงหมา | 🐶
+- taking a cooking class | การลงเรียนทำอาหาร | 🍳
+- selling the old car | การขายรถคันเก่า | 🚗
+> เปลี่ยนเป็นคำถาม | Are you thinking about {x}? | คุณกำลังคิดเรื่อง{x}อยู่หรือ
+
+@food
+
+## food.order | Ordering & Asking | ขอ / สั่งอาหาร
+
+A1 | Can I have {x}, please? | ขอ{x}หน่อยได้ไหม | ขอสิ่งของอย่างสุภาพ
+- the menu | เมนู | 📋
+- a glass of water | น้ำหนึ่งแก้ว | 🥛
+- the bill | บิล (เช็กบิล) | 🧾
+- some more rice | ข้าวเพิ่มอีกหน่อย | 🍚
+- an extra spoon | ช้อนเพิ่มอีกคัน | 🥄
+- a bag | ถุงหนึ่งใบ | 🛍️
+- a receipt | ใบเสร็จ | 🧾
+> สุภาพขึ้น (Could) | Could I have {x}, please? | รบกวนขอ{x}หน่อยได้ไหม
+
+A1 | I'd like {x}, please. | ขอ{x}ครับ/ค่ะ | สั่งอาหารหรือบอกสิ่งที่ต้องการ | I'd like = I would like (สุภาพกว่า I want)
+- a cup of coffee | กาแฟหนึ่งแก้ว | ☕
+- the chicken fried rice | ข้าวผัดไก่ | 🍚
+- a table for two | โต๊ะสำหรับสองคน | 🪑
+- iced tea | ชาเย็น | 🧋
+- a small bottle of water | น้ำขวดเล็ก | 💧
+- the same thing | อย่างเดียวกัน | 🔁
+- a slice of cake | เค้กหนึ่งชิ้น | 🍰
+> เปลี่ยนเป็นพนักงานถาม | Would you like {x}? | รับ{x}ไหมครับ/คะ
+
+A1 | Do you have {x}? | มี{x}ไหม | ถามว่ามีของที่ต้องการไหม
+- a menu in English | เมนูภาษาอังกฤษ | 📋
+- vegetarian food | อาหารมังสวิรัติ | 🥦
+- free Wi-Fi | Wi-Fi ฟรี | 📶
+- a smaller size | ไซซ์ที่เล็กกว่านี้ | 📏
+- tables outside | โต๊ะข้างนอก | ⛱️
+- oat milk | นมโอ๊ต | 🥛
+- something less spicy | อะไรที่เผ็ดน้อยกว่านี้ | 🌶️
+> ตอบว่ามี | Yes, we have {x}. | มี{x}ครับ/ค่ะ
+
+A1 | No {x}, please. | ไม่ใส่{x}นะครับ/คะ | บอกว่าไม่เอาอะไรในอาหาร
+- sugar | น้ำตาล | 🍬
+- ice | น้ำแข็ง | 🧊
+- chili | พริก | 🌶️
+- salt | เกลือ | 🧂
+- MSG | ผงชูรส | 🥄
+- coriander | ผักชี | 🌿
+- milk | นม | 🥛
+> ขอใส่น้อยลง | Less {x}, please. | ใส่{x}น้อยๆ นะครับ/คะ
+
+A2 | Could you make it {x}? | ช่วยทำแบบ{x}ได้ไหม | ขอปรับอาหาร/เครื่องดื่ม
+- less spicy | เผ็ดน้อยลง | 🌶️
+- a little sweeter | หวานขึ้นอีกนิด | 🍯
+- extra hot | ร้อนๆ หน่อย | 🔥
+- without meat | ไม่ใส่เนื้อสัตว์ | 🥗
+- to go | ใส่กล่องกลับบ้าน | 🥡
+- a large | ไซซ์ใหญ่ | 🥤
+- well done | สุกๆ | 🥩
+> บอกความต้องการ | I'd like it {x}. | ฉันอยากได้แบบ{x}
+
+A2 | What do you recommend for {x}? | แนะนำอะไรสำหรับ{x}ดี | ขอคำแนะนำจากพนักงาน
+- dessert | ของหวาน | 🍨
+- a drink | เครื่องดื่ม | 🍹
+- lunch | มื้อกลางวัน | 🍱
+- two people | สองคน | 👫
+- someone who can't eat spicy food | คนที่กินเผ็ดไม่ได้ | 🙅
+- a quick breakfast | มื้อเช้าแบบเร็วๆ | 🥐
+- kids | เด็กๆ | 🧒
+> ถามอีกแบบ | What's good for {x}? | อะไรอร่อยสำหรับ{x}
+
+B1 | Would it be possible to {x}? | เป็นไปได้ไหมที่จะ{x} | ขอสิ่งที่อาจยุ่งยากอย่างสุภาพมาก
+- change my order | เปลี่ยนออร์เดอร์ | 🔄
+- sit by the window | นั่งริมหน้าต่าง | 🪟
+- split the bill | แยกบิล | ➗
+- get this to go | ห่อกลับบ้าน | 🥡
+- book a table for eight | จองโต๊ะสำหรับแปดคน | 📅
+- pay by card | จ่ายด้วยบัตร | 💳
+- have the sauce on the side | ขอซอสแยก | 🥫
+> แบบสั้นลง | Is it possible to {x}? | {x}ได้ไหม
+
+## food.shop | Shopping & Prices | ซื้อของ / ราคา
+
+A1 | How much is {x}? | {x}ราคาเท่าไหร่ | ถามราคา
+- this shirt | เสื้อตัวนี้ | 👕
+- the blue bag | กระเป๋าสีฟ้า | 👜
+- a ticket | ตั๋วหนึ่งใบ | 🎫
+- one kilo of mangoes | มะม่วงหนึ่งกิโล | 🥭
+- the taxi to the airport | แท็กซี่ไปสนามบิน | 🚕
+- this phone case | เคสโทรศัพท์อันนี้ | 📱
+- a room for one night | ห้องพักหนึ่งคืน | 🛏️
+> ถามด้วย cost | How much does {x} cost? | {x}ราคาเท่าไหร่ (อีกแบบ)
+
+A1 | I'm looking for {x}. | ฉันกำลังหา{x} | บอกพนักงานว่ากำลังหาอะไร
+- a gift for my mom | ของขวัญให้แม่ | 🎁
+- a white T-shirt | เสื้อยืดสีขาว | 👕
+- running shoes | รองเท้าวิ่ง | 👟
+- a phone charger | ที่ชาร์จโทรศัพท์ | 🔌
+- sunscreen | ครีมกันแดด | 🧴
+- the fitting room | ห้องลองเสื้อ | 🚪
+- something cheaper | อะไรที่ถูกกว่านี้ | 💸
+> ขอให้ช่วยหา | Can you help me find {x}? | ช่วยฉันหา{x}หน่อยได้ไหม
+
+A1 | Can I try on {x}? | ขอลอง{x}ได้ไหม | ขอลองเสื้อผ้า/รองเท้า
+- this jacket | เสื้อแจ็กเก็ตตัวนี้ | 🧥
+- these shoes | รองเท้าคู่นี้ | 👞
+- a bigger size | ไซซ์ที่ใหญ่กว่านี้ | 📏
+- the black one | ตัวสีดำ | ⚫
+- this dress | ชุดเดรสตัวนี้ | 👗
+- these jeans | กางเกงยีนส์ตัวนี้ | 👖
+- a smaller one | ตัวที่เล็กกว่านี้ | 🤏
+> ขอดู | Can I see {x}? | ขอดู{x}หน่อยได้ไหม
+
+A2 | Do you have this in {x}? | อันนี้มี{x}ไหม | ถามสีหรือไซซ์อื่น
+- black | สีดำ | ⚫
+- a larger size | ไซซ์ที่ใหญ่กว่า | ⬆️
+- size M | ไซซ์ M | 🏷️
+- another color | สีอื่น | 🎨
+- blue | สีฟ้า | 🔵
+- a smaller size | ไซซ์ที่เล็กกว่า | ⬇️
+- size 40 | เบอร์ 40 | 👟
+> ถามหลายชิ้น | Do you have these in {x}? | อันนี้ (หลายชิ้น) มี{x}ไหม
+
+A2 | Is there a discount on {x}? | {x}มีส่วนลดไหม | ถามส่วนลด
+- this item | สินค้าชิ้นนี้ | 🏷️
+- these shoes | รองเท้าคู่นี้ | 👟
+- the second one | ชิ้นที่สอง | 2️⃣
+- student tickets | ตั๋วนักเรียน | 🎓
+- this set | เซ็ตนี้ | 🎁
+- online orders | การสั่งออนไลน์ | 🛒
+- large orders | การสั่งจำนวนมาก | 📦
+> ขอให้ลดราคา | Can you give me a discount on {x}? | ลดราคา{x}ให้หน่อยได้ไหม
+
+A2 | I'll take {x}. | เอา{x} | ตัดสินใจซื้อ | I'll = I will ใช้ตอนตัดสินใจทันที
+- this one | อันนี้ | 👆
+- the red one | อันสีแดง | 🔴
+- two of these | อันนี้สองชิ้น | ✌️
+- the large size | ไซซ์ใหญ่ | 📏
+- both | ทั้งสองอัน | 👐
+- the cheaper one | อันที่ถูกกว่า | 💸
+- three kilos | สามกิโล | ⚖️
+> แบบสุภาพ | I'd like to buy {x}. | ฉันอยากซื้อ{x}
+
+B1 | I'd like to return {x}. | ฉันอยากคืน{x} | คืนสินค้า
+- this shirt | เสื้อตัวนี้ | 👕
+- these headphones | หูฟังคู่นี้ | 🎧
+- the shoes I bought yesterday | รองเท้าที่ซื้อเมื่อวาน | 👟
+- this broken lamp | โคมไฟที่เสียอันนี้ | 💡
+- this item | สินค้าชิ้นนี้ | 🏷️
+- a gift I don't need | ของขวัญที่ไม่ได้ใช้ | 🎁
+- this jacket | เสื้อแจ็กเก็ตตัวนี้ | 🧥
+> ขอเปลี่ยนแทน | Can I exchange {x}? | ขอเปลี่ยน{x}ได้ไหม
+
+@travel
+
+## travel.directions | Directions & Places | ถามทาง / หาสถานที่
+
+A1 | Where is {x}? | {x}อยู่ที่ไหน | ถามตำแหน่งสถานที่
+- the toilet | ห้องน้ำ | 🚻
+- the train station | สถานีรถไฟ | 🚉
+- the bus stop | ป้ายรถเมล์ | 🚏
+- the exit | ทางออก | 🚪
+- gate five | ประตูห้า | 5️⃣
+- the nearest ATM | ตู้ ATM ที่ใกล้ที่สุด | 🏧
+- the hotel lobby | ล็อบบี้โรงแรม | 🏨
+> เพิ่ม Excuse me | Excuse me, where is {x}? | ขอโทษครับ/ค่ะ {x}อยู่ที่ไหน
+
+A1 | Is there {x} near here? | แถวนี้มี{x}ไหม | ถามว่าแถวนี้มีที่ที่ต้องการไหม
+- a pharmacy | ร้านขายยา | 💊
+- a 7-Eleven | เซเว่น | 🏪
+- a good restaurant | ร้านอาหารอร่อยๆ | 🍽️
+- a hospital | โรงพยาบาล | 🏥
+- a gas station | ปั๊มน้ำมัน | ⛽
+- an ATM | ตู้ ATM | 🏧
+- a coffee shop | ร้านกาแฟ | ☕
+> ตอบว่ามี | Yes, there is {x} near here. | มีครับ/ค่ะ แถวนี้มี{x}
+
+A1 | How do I get to {x}? | ไป{x}ยังไง | ถามทาง
+- the airport | สนามบิน | ✈️
+- the night market | ตลาดกลางคืน | 🌙
+- Siam Square | สยามสแควร์ | 🛍️
+- the museum | พิพิธภัณฑ์ | 🏛️
+- your office | ออฟฟิศของคุณ | 🏢
+- the beach | ชายหาด | 🏖️
+- the old town | เมืองเก่า | 🏯
+> ถามว่าไกลไหม | Is it far to {x}? | ไป{x}ไกลไหม
+
+A2 | Which bus goes to {x}? | รถเมล์สายไหนไป{x} | ถามรถเมล์
+- the city center | ใจกลางเมือง | 🏙️
+- the university | มหาวิทยาลัย | 🎓
+- the airport | สนามบิน | ✈️
+- Chatuchak Market | ตลาดนัดจตุจักร | 🛍️
+- the hospital | โรงพยาบาล | 🏥
+- the train station | สถานีรถไฟ | 🚉
+- the zoo | สวนสัตว์ | 🦁
+> เปลี่ยนเป็นรถไฟ | Which train goes to {x}? | รถไฟขบวนไหนไป{x}
+
+A2 | How long does it take to get to {x}? | ไป{x}ใช้เวลานานแค่ไหน | ถามระยะเวลาเดินทาง
+- the hotel | โรงแรม | 🏨
+- the beach | ชายหาด | 🏖️
+- the airport | สนามบิน | ✈️
+- downtown | ตัวเมือง | 🏙️
+- the next station | สถานีถัดไป | 🚉
+- the border | ชายแดน | 🛂
+- your house | บ้านคุณ | 🏠
+> ถามแบบนั่งแท็กซี่ | How long does it take to get to {x} by taxi? | นั่งแท็กซี่ไป{x}ใช้เวลานานแค่ไหน
+
+A2 | Could you show me {x} on the map? | ช่วยชี้{x}บนแผนที่ให้หน่อยได้ไหม | ขอให้ชี้บนแผนที่
+- the hotel | โรงแรม | 🏨
+- where we are | ว่าเราอยู่ตรงไหน | 📍
+- the way to the temple | ทางไปวัด | 🛕
+- the nearest station | สถานีที่ใกล้ที่สุด | 🚉
+- the restaurant | ร้านอาหาร | 🍽️
+- the main road | ถนนใหญ่ | 🛣️
+- the shortest way | ทางที่สั้นที่สุด | ↗️
+> ใช้ Can | Can you show me {x} on the map? | ชี้{x}บนแผนที่ให้หน่อยได้ไหม
+
+B1 | Do you happen to know where {x} is? | คุณพอจะรู้ไหมว่า{x}อยู่ที่ไหน | ถามทางแบบสุภาพ | คำถามซ้อน: …where + ประธาน + is (ไม่สลับ is ไปข้างหน้า)
+- the post office | ไปรษณีย์ | 📮
+- the nearest hospital | โรงพยาบาลที่ใกล้ที่สุด | 🏥
+- the taxi stand | จุดขึ้นแท็กซี่ | 🚕
+- the meeting room | ห้องประชุม | 🚪
+- the lost and found | แผนกของหาย | 🔍
+- platform three | ชานชาลาสาม | 3️⃣
+- the information desk | จุดประชาสัมพันธ์ | ℹ️
+> ใช้ Could you tell me | Could you tell me where {x} is? | ช่วยบอกหน่อยได้ไหมว่า{x}อยู่ที่ไหน
+
+## travel.trouble | Travel Problems | ปัญหาระหว่างเดินทาง
+
+A1 | I lost {x}. | ฉันทำ{x}หาย | แจ้งว่าของหาย
+- my passport | พาสปอร์ต | 🛂
+- my phone | โทรศัพท์ | 📱
+- my wallet | กระเป๋าสตางค์ | 👛
+- my room key | กุญแจห้อง | 🔑
+- my ticket | ตั๋ว | 🎫
+- my bag | กระเป๋า | 🎒
+- my credit card | บัตรเครดิต | 💳
+> ใช้ Present Perfect | I've lost {x}. | ฉันทำ{x}หายไปแล้ว
+> บอกว่าหาไม่เจอ | I can't find {x}. | ฉันหา{x}ไม่เจอ
+
+A1 | I missed {x}. | ฉันพลาด{x} | บอกว่าตกรถ/ตกเครื่อง
+- my flight | เที่ยวบิน | ✈️
+- the last bus | รถเมล์คันสุดท้าย | 🚌
+- the train | รถไฟ | 🚆
+- my stop | ป้ายที่ต้องลง | 🚏
+- the boat | เรือ | ⛴️
+- the shuttle | รถรับส่ง | 🚐
+- the connecting flight | เที่ยวบินต่อ | 🛫
+> ขอคำแนะนำ | What should I do? I missed {x}. | ทำยังไงดี ฉันพลาด{x}
+
+A2 | There's a problem with {x}. | {x}มีปัญหา | แจ้งปัญหา
+- my room | ห้องของฉัน | 🛏️
+- the air conditioner | แอร์ | ❄️
+- the shower | ฝักบัว | 🚿
+- my booking | การจองของฉัน | 📅
+- the Wi-Fi | Wi-Fi | 📶
+- the bill | บิล | 🧾
+- my seat | ที่นั่งของฉัน | 💺
+> ขอให้คนมาดู | Can someone check {x}? | ช่วยให้คนมาดู{x}หน่อยได้ไหม
+
+A2 | I need to {x} as soon as possible. | ฉันต้อง{x}ให้เร็วที่สุด | บอกเรื่องด่วน | as soon as possible = ให้เร็วที่สุด (ASAP)
+- see a doctor | ไปหาหมอ | 🩺
+- call my embassy | โทรหาสถานทูต | 📞
+- change my ticket | เปลี่ยนตั๋ว | 🎫
+- find a hotel | หาโรงแรม | 🏨
+- charge my phone | ชาร์จโทรศัพท์ | 🔋
+- get to the airport | ไปสนามบิน | ✈️
+- cancel my card | ยกเลิกบัตร | 💳
+> ขอความช่วยเหลือ | Can you help me {x}? | ช่วยฉัน{x}หน่อยได้ไหม
+
+A2 | Our flight is delayed by {x}. | เที่ยวบินของเราเลื่อนไป{x} | แจ้งว่าเที่ยวบินล่าช้า
+- one hour | หนึ่งชั่วโมง | 🕐
+- thirty minutes | สามสิบนาที | 🕧
+- two hours | สองชั่วโมง | 🕑
+- half a day | ครึ่งวัน | 🌗
+- ninety minutes | เก้าสิบนาที | ⏱️
+- three hours | สามชั่วโมง | 🕒
+- about an hour | ประมาณหนึ่งชั่วโมง | ⏰
+> เปลี่ยนเป็นคำถาม | Is our flight delayed by {x}? | เที่ยวบินของเราเลื่อนไป{x}หรือ
+
+B1 | I was wondering if you could {x}. | ไม่ทราบว่าคุณพอจะ{x}ได้ไหม | ขอร้องแบบสุภาพมาก | I was wondering if… = สุภาพกว่า Can you…
+- help me with my luggage | ช่วยยกกระเป๋าเดินทาง | 🧳
+- call a taxi for me | เรียกแท็กซี่ให้ | 🚕
+- change my room | เปลี่ยนห้องให้ | 🔄
+- keep my bag here | ให้ฝากกระเป๋าไว้ที่นี่ | 🎒
+- give me a late checkout | ให้เช็กเอาต์ช้า | 🕛
+- write the address in Thai | เขียนที่อยู่เป็นภาษาไทย | ✍️
+- recommend a good doctor | แนะนำหมอดีๆ | 🩺
+> แบบสั้น | Could you {x}? | ช่วย{x}ได้ไหม
+
+B1 | I should have {x}. | ฉันน่าจะ{x} (แต่ไม่ได้ทำ) | บอกความเสียดาย | should have + V3 = น่าจะทำ (แต่ไม่ได้ทำ)
+- booked earlier | จองเร็วกว่านี้ | 📅
+- left earlier | ออกเร็วกว่านี้ | 🏃
+- checked the weather | เช็กสภาพอากาศ | 🌦️
+- brought an umbrella | เอาร่มมา | ☂️
+- asked for help | ขอความช่วยเหลือ | 🙋
+- taken a taxi | นั่งแท็กซี่ | 🚕
+- packed lighter | จัดกระเป๋าให้เบากว่านี้ | 🎒
+> พูดกับคนอื่น | You should have {x}. | คุณน่าจะ{x}
+
+@social
+
+## social.chat | Small Talk | ทักทาย / คุยเล่น
+
+A1 | I'm from {x}. | ฉันมาจาก{x} | แนะนำตัวว่ามาจากไหน
+- Thailand | ประเทศไทย | 🇹🇭
+- Bangkok | กรุงเทพฯ | 🏙️
+- Ubon Ratchathani | อุบลราชธานี | 🌾
+- the north of Thailand | ภาคเหนือของไทย | 🏔️
+- a small town | เมืองเล็กๆ | 🏘️
+- Isan | ภาคอีสาน | 🌾
+- Japan | ญี่ปุ่น | 🗾
+> เปลี่ยนเป็นคำถาม | Are you from {x}? | คุณมาจาก{x}หรือ
+
+A1 | How was your {x}? | {x}ของคุณเป็นยังไงบ้าง | ถามสารทุกข์สุกดิบ
+- weekend | สุดสัปดาห์ | 📅
+- trip | ทริป | 🧳
+- day | วันนี้ | 🌤️
+- holiday | วันหยุด | 🏖️
+- first day at work | วันแรกที่ทำงาน | 💼
+- exam | การสอบ | 📝
+- flight | เที่ยวบิน | ✈️
+> ตอบ | My {x} was great. | {x}ของฉันดีมาก
+
+A1 | I work as {x}. | ฉันทำงานเป็น{x} | บอกอาชีพ
+- a teacher | ครู | 👩‍🏫
+- a nurse | พยาบาล | 👩‍⚕️
+- an engineer | วิศวกร | 👷
+- a cook | พ่อครัว/แม่ครัว | 👨‍🍳
+- a sales assistant | พนักงานขาย | 🛍️
+- a driver | คนขับรถ | 🚗
+- an office worker | พนักงานออฟฟิศ | 🏢
+> เปลี่ยนเป็นคำถาม | Do you work as {x}? | คุณทำงานเป็น{x}หรือ
+
+A2 | Thanks for {x}. | ขอบคุณสำหรับ{x} | ขอบคุณ | Thanks for + คำนาม/V-ing
+- helping me | การช่วยฉัน | 🤝
+- coming | การมา | 🚶
+- the gift | ของขวัญ | 🎁
+- your time | เวลาของคุณ | ⏳
+- waiting | การรอ | ⌛
+- inviting me | การชวนฉัน | 💌
+- the advice | คำแนะนำ | 💡
+> สุภาพขึ้น | Thank you so much for {x}. | ขอบคุณมากสำหรับ{x}
+
+A2 | I'm sorry to hear about {x}. | เสียใจด้วยเรื่อง{x} | แสดงความเห็นใจ
+- your grandmother | คุณยายของคุณ | 👵
+- your accident | อุบัติเหตุของคุณ | 🚑
+- the bad news | ข่าวร้าย | 📰
+- your job | เรื่องงานของคุณ | 💼
+- your cat | แมวของคุณ | 🐱
+- the flood | น้ำท่วม | 🌊
+- your exam results | ผลสอบของคุณ | 📝
+> แบบสั้น | Sorry about {x}. | เสียใจด้วยเรื่อง{x}นะ
+
+B1 | It's been ages since {x}. | ผ่านมานานมากแล้วตั้งแต่{x} | พูดเมื่อไม่ได้ทำอะไรมานาน | since + ประโยคอดีต
+- we last met | เราเจอกันครั้งล่าสุด | 🤝
+- I saw you | ฉันเห็นคุณ | 👀
+- I went to the beach | ฉันไปทะเล | 🏖️
+- we talked | เราคุยกัน | 💬
+- I ate here | ฉันมากินที่นี่ | 🍽️
+- I played football | ฉันเล่นฟุตบอล | ⚽
+- I took a holiday | ฉันไปเที่ยวพักผ่อน | 🌴
+> ใช้ a long time | It's been a long time since {x}. | ผ่านมานานแล้วตั้งแต่{x}
+
+B1 | By the way, did you {x}? | ว่าแต่ คุณ{x}หรือเปล่า | เปลี่ยนเรื่องคุย | By the way = ว่าแต่… (ใช้เปลี่ยนเรื่อง)
+- hear the news | ได้ยินข่าว | 📰
+- get my message | ได้ข้อความของฉัน | 💬
+- finish the book | อ่านหนังสือจบ | 📖
+- see the game last night | ดูการแข่งขันเมื่อคืน | ⚽
+- try the new cafe | ลองคาเฟ่ใหม่ | ☕
+- call the bank | โทรหาธนาคาร | 🏦
+- watch that movie | ดูหนังเรื่องนั้น | 🎬
+> ถามแบบสั้น | Did you {x}? | คุณ{x}หรือเปล่า
+
+## social.invite | Invitations & Suggestions | ชวน / เสนอแนะ
+
+A1 | Let's {x}. | มา{x}กันเถอะ | ชวนทำอะไรด้วยกัน | Let's = Let us + V1
+- go out | ออกไปข้างนอก | 🚶
+- eat together | กินข้าวด้วยกัน | 🍽️
+- take a break | พัก | ☕
+- get a taxi | เรียกแท็กซี่ | 🚕
+- watch a movie | ดูหนัง | 🎬
+- try that place | ลองร้านนั้น | 🏪
+- meet at six | เจอกันตอนหกโมง | 🕕
+> เปลี่ยนเป็นปฏิเสธ | Let's not {x}. | อย่า{x}กันเลย
+
+A1 | Do you want to {x}? | อยาก{x}ไหม | ชวนแบบเป็นกันเอง
+- get some coffee | ไปกินกาแฟ | ☕
+- come with me | มากับฉัน | 🚶
+- play a game | เล่นเกม | 🎮
+- go shopping | ไปซื้อของ | 🛍️
+- have lunch together | กินข้าวกลางวันด้วยกัน | 🍱
+- watch the game | ดูการแข่งขัน | ⚽
+- join us | มาร่วมกับเรา | 👫
+> สุภาพขึ้น | Would you like to {x}? | คุณอยาก{x}ไหม (สุภาพ)
+
+A2 | How about {x}? | {x}ดีไหม | เสนอความคิด | How about + คำนาม/V-ing
+- going to the beach | ไปทะเล | 🏖️
+- Friday night | คืนวันศุกร์ | 🌙
+- pizza | พิซซ่า | 🍕
+- meeting at the mall | เจอกันที่ห้าง | 🏬
+- taking the train | นั่งรถไฟ | 🚆
+- a short walk | เดินเล่นสั้นๆ | 🚶
+- trying Korean food | ลองอาหารเกาหลี | 🍜
+> ใช้ What about | What about {x}? | แล้ว{x}ล่ะ
+
+A2 | Why don't we {x}? | เรา{x}กันดีไหม | เสนอแนะ | Why don't we + V1 = ทำไมเราไม่…ล่ะ (ชวนอ้อมๆ)
+- order some food | สั่งอาหาร | 🛵
+- leave early | ออกเร็วหน่อย | 🏃
+- ask the teacher | ถามครู | 🙋
+- take a photo | ถ่ายรูป | 📸
+- go by bus | ไปรถเมล์ | 🚌
+- stay a bit longer | อยู่ต่ออีกหน่อย | ⏳
+- share a taxi | นั่งแท็กซี่ไปด้วยกัน | 🚕
+> ใช้ Maybe we could | Maybe we could {x}. | บางทีเราอาจจะ{x}ก็ได้
+
+A2 | Are you free {x}? | คุณว่าง{x}ไหม | ถามว่าอีกฝ่ายว่างไหม
+- tonight | คืนนี้ | 🌙
+- this weekend | สุดสัปดาห์นี้ | 📅
+- on Sunday | วันอาทิตย์ | 🗓️
+- tomorrow afternoon | พรุ่งนี้บ่าย | 🌤️
+- next week | สัปดาห์หน้า | 📆
+- after lunch | หลังมื้อเที่ยง | 🍱
+- at seven | ตอนเจ็ดโมง | 🕖
+> ตอบว่าไม่ว่าง | Sorry, I'm busy {x}. | ขอโทษนะ ฉันไม่ว่าง{x}
+
+B1 | If you're not busy, we could {x}. | ถ้าคุณไม่ยุ่ง เราอาจจะ{x}กันก็ได้ | ชวนแบบไม่กดดัน
+- grab a coffee | แวะกินกาแฟ | ☕
+- go for a walk | ไปเดินเล่น | 🚶
+- study together | ติวด้วยกัน | 📚
+- watch a movie | ดูหนัง | 🎬
+- have dinner | กินข้าวเย็น | 🍽️
+- go to the market | ไปตลาด | 🧺
+- play badminton | ตีแบดมินตัน | 🏸
+> ชวนไว้ทีหลัง | Maybe we could {x} later. | เดี๋ยวเราอาจจะ{x}กันทีหลังก็ได้
+
+B1 | I was thinking we could {x}. | ฉันคิดว่าเราน่าจะ{x}กัน | เสนอแผนอย่างนุ่มนวล
+- try the new restaurant | ลองร้านอาหารใหม่ | 🍽️
+- leave at eight | ออกตอนแปดโมง | 🕗
+- go to the beach this weekend | ไปทะเลสุดสัปดาห์นี้ | 🏖️
+- work on it together | ทำด้วยกัน | 🤝
+- celebrate tonight | ฉลองคืนนี้ | 🎉
+- take the early train | นั่งรถไฟเที่ยวเช้า | 🚆
+- invite a few friends | ชวนเพื่อนสักสองสามคน | 👥
+> ถามความเห็น | Do you think we could {x}? | คุณคิดว่าเรา{x}ได้ไหม
+
+## social.opinion | Opinions & Experiences | ความเห็น / ประสบการณ์
+
+A1 | I think {x}. | ฉันคิดว่า{x} | บอกความเห็น
+- it's a good idea | เป็นความคิดที่ดี | 💡
+- it will rain | ฝนจะตก | 🌧️
+- she is right | เธอพูดถูก | ✅
+- this place is too expensive | ที่นี่แพงเกินไป | 💸
+- we should go now | เราควรไปตอนนี้ | 🏃
+- the movie was great | หนังสนุกมาก | 🎬
+- English is fun | ภาษาอังกฤษสนุก | 😄
+> เปลี่ยนเป็นปฏิเสธ | I don't think {x}. | ฉันไม่คิดว่า{x}
+
+A1 | Have you ever {x}? | คุณเคย{x}ไหม | ถามประสบการณ์ | Have you ever + V3
+- been to Japan | ไปญี่ปุ่น | 🗾
+- eaten durian | กินทุเรียน | 🥭
+- seen snow | เห็นหิมะ | ❄️
+- ridden an elephant | ขี่ช้าง | 🐘
+- tried Thai boxing | ลองมวยไทย | 🥊
+- lost a phone | ทำโทรศัพท์หาย | 📱
+- flown in a helicopter | นั่งเฮลิคอปเตอร์ | 🚁
+> ตอบว่าไม่เคย | I've never {x}. | ฉันไม่เคย{x}
+
+A2 | In my opinion, {x}. | ในความคิดของฉัน {x} | แสดงความเห็นแบบเป็นทางการขึ้น
+- online classes are useful | การเรียนออนไลน์มีประโยชน์ | 💻
+- the city needs more parks | เมืองต้องการสวนสาธารณะเพิ่ม | 🌳
+- this phone is better | โทรศัพท์เครื่องนี้ดีกว่า | 📱
+- we need more time | เราต้องการเวลาเพิ่ม | ⏳
+- reading is important | การอ่านสำคัญ | 📖
+- the price is fair | ราคาสมเหตุสมผล | 🏷️
+- working from home is easier | ทำงานที่บ้านง่ายกว่า | 🏠
+> ถามว่าเห็นด้วยไหม | Do you agree that {x}? | คุณเห็นด้วยไหมว่า{x}
+
+A2 | It's too {x} for me. | มัน{x}เกินไปสำหรับฉัน | บอกว่ามากเกินไป | too + คุณศัพท์ = …เกินไป (ความหมายไม่ดี)
+- expensive | แพง | 💸
+- spicy | เผ็ด | 🌶️
+- hot | ร้อน | 🥵
+- far | ไกล | 🗺️
+- difficult | ยาก | 🧩
+- noisy | เสียงดัง | 🔊
+- early | เช้า | 🌅
+> เปลี่ยนเป็นคำถาม | Is it too {x} for you? | มัน{x}เกินไปสำหรับคุณไหม
+
+A2 | What do you think of {x}? | คุณคิดยังไงกับ{x} | ถามความเห็นอีกฝ่าย
+- this song | เพลงนี้ | 🎵
+- my new haircut | ทรงผมใหม่ของฉัน | 💇
+- the new mall | ห้างใหม่ | 🏬
+- Bangkok | กรุงเทพฯ | 🏙️
+- online shopping | การช้อปออนไลน์ | 🛒
+- the movie | หนังเรื่องนั้น | 🎬
+- our new boss | หัวหน้าคนใหม่ของเรา | 👔
+> ใช้ How do you like | How do you like {x}? | คุณชอบ{x}ไหม
+
+B1 | I'm not sure whether {x}. | ฉันไม่แน่ใจว่า{x}หรือเปล่า | บอกว่าไม่แน่ใจ | whether + ประโยค = ว่า…หรือไม่
+- it's a good idea | มันเป็นความคิดที่ดี | 💡
+- he will come | เขาจะมา | 🚶
+- the shop is open | ร้านเปิด | 🏪
+- I locked the door | ฉันล็อกประตูแล้ว | 🔒
+- we have enough time | เรามีเวลาพอ | ⏳
+- this is the right bus | นี่คือรถเมล์ที่ถูกคัน | 🚌
+- she got my message | เธอได้ข้อความของฉัน | 💬
+> ใช้ I don't know if | I don't know if {x}. | ฉันไม่รู้ว่า{x}หรือเปล่า
+
+B1 | If I were you, I'd {x}. | ถ้าฉันเป็นคุณ ฉันจะ{x} | ให้คำแนะนำ | If I were you (ใช้ were เสมอ) + I'd + V1
+- take the job | รับงานนั้น | 💼
+- see a doctor | ไปหาหมอ | 🩺
+- talk to her | คุยกับเธอ | 💬
+- save the money | เก็บเงินไว้ | 💰
+- wait until tomorrow | รอถึงพรุ่งนี้ | ⏳
+- book the hotel now | จองโรงแรมเลย | 🏨
+- ask for a refund | ขอเงินคืน | 💸
+> แนะนำตรงๆ | You should {x}. | คุณควร{x}
+> เปลี่ยนเป็นปฏิเสธ | If I were you, I wouldn't {x}. | ถ้าฉันเป็นคุณ ฉันจะไม่{x}
+
+B1 | It's really worth {x}. | มันคุ้มค่า{x}จริงๆ | บอกว่าคุ้มค่า | worth + คำนาม/V-ing
+- visiting | ที่จะไปเที่ยว | 🗺️
+- trying | ที่จะลอง | 👅
+- the money | กับเงินที่จ่าย | 💰
+- waiting for | ที่จะรอ | ⏳
+- the trip | กับการเดินทาง | 🧳
+- reading | ที่จะอ่าน | 📖
+- a try | ที่จะลองสักครั้ง | 👍
+> เปลี่ยนเป็นปฏิเสธ | It's not really worth {x}. | มันไม่ค่อยคุ้มค่า{x}
+
+@work
+
+## work.ask | Requests & Permission | ขอร้อง / ขออนุญาต
+
+A1 | Can you {x}, please? | ช่วย{x}หน่อยได้ไหม | ขอร้องให้คนอื่นช่วยทำ
+- say that again | พูดอีกครั้ง | 🔁
+- speak more slowly | พูดช้าลง | 🐢
+- open the window | เปิดหน้าต่าง | 🪟
+- send me the file | ส่งไฟล์มาให้ | 📎
+- close the door | ปิดประตู | 🚪
+- wait a minute | รอสักครู่ | ⏳
+- turn on the light | เปิดไฟ | 💡
+> สุภาพขึ้น (Could) | Could you {x}, please? | รบกวน{x}หน่อยได้ไหม
+
+A1 | Can I {x}? | ฉัน{x}ได้ไหม | ขออนุญาต
+- sit here | นั่งตรงนี้ | 🪑
+- use your pen | ใช้ปากกาของคุณ | 🖊️
+- ask a question | ถามคำถาม | 🙋
+- go home early | กลับบ้านเร็ว | 🏠
+- take a photo | ถ่ายรูป | 📸
+- borrow your charger | ยืมที่ชาร์จของคุณ | 🔌
+- open the window | เปิดหน้าต่าง | 🪟
+> สุภาพขึ้น (May) | May I {x}? | ขออนุญาต{x}ได้ไหม
+
+A2 | Do you mind if I {x}? | คุณจะว่าอะไรไหมถ้าฉัน{x} | ขออนุญาตอย่างสุภาพ | ตอบว่าได้ = "No, not at all." (ไม่ว่าอะไรเลย)
+- sit here | นั่งตรงนี้ | 🪑
+- open the window | เปิดหน้าต่าง | 🪟
+- leave a bit early | กลับก่อนนิดหน่อย | 🏃
+- turn on the fan | เปิดพัดลม | 🌀
+- record the meeting | อัดเสียงการประชุม | 🎙️
+- use your phone | ใช้โทรศัพท์ของคุณ | 📱
+- join you | ไปร่วมด้วย | 👋
+> ใช้ Is it OK | Is it OK if I {x}? | {x}ได้ไหม
+
+A2 | Could you help me {x}? | ช่วยฉัน{x}หน่อยได้ไหม | ขอความช่วยเหลือ | help me + V1 (ไม่ต้องมี to)
+- carry this box | ยกกล่องนี้ | 📦
+- fill in this form | กรอกแบบฟอร์มนี้ | 📝
+- find the file | หาไฟล์ | 🗂️
+- fix my computer | ซ่อมคอมพิวเตอร์ | 💻
+- check my English | ตรวจภาษาอังกฤษ | ✅
+- set up the projector | ติดตั้งโปรเจกเตอร์ | 📽️
+- understand this email | เข้าใจอีเมลนี้ | 📧
+> ใช้ Can | Can you help me {x}? | ช่วยฉัน{x}ได้ไหม
+
+A2 | I need you to {x}. | ฉันต้องการให้คุณ{x} | มอบหมายงาน | need + คน + to V1
+- sign here | เซ็นตรงนี้ | ✍️
+- call the customer | โทรหาลูกค้า | 📞
+- check these numbers | ตรวจตัวเลขเหล่านี้ | 🔢
+- finish this by Friday | ทำให้เสร็จภายในวันศุกร์ | 📅
+- send the report | ส่งรายงาน | 📊
+- come early tomorrow | มาเร็วพรุ่งนี้ | ⏰
+- book a meeting room | จองห้องประชุม | 🚪
+> สุภาพขึ้น | Could you please {x}? | รบกวน{x}หน่อยได้ไหม
+
+B1 | Would you mind {x}? | รบกวน{x}ได้ไหม | ขอร้องแบบสุภาพมาก | Would you mind + V-ing
+- closing the door | ปิดประตู | 🚪
+- waiting a moment | รอสักครู่ | ⏳
+- explaining that again | อธิบายอีกครั้ง | 🔁
+- turning down the music | ลดเสียงเพลง | 🔉
+- sending me a copy | ส่งสำเนาให้ฉัน | 📄
+- moving your bag | ย้ายกระเป๋าของคุณ | 🎒
+- checking my report | ตรวจรายงานของฉัน | 📊
+> เติม please | Would you mind {x}, please? | รบกวน{x}หน่อยได้ไหมครับ/คะ
+
+B1 | Is it possible to {x} by tomorrow? | เป็นไปได้ไหมที่จะ{x}ภายในพรุ่งนี้ | ถามความเป็นไปได้เรื่องเวลา | by + เวลา = ภายใน/ไม่เกิน
+- finish the design | ทำงานออกแบบให้เสร็จ | 🎨
+- get the results | ได้ผลลัพธ์ | 📈
+- fix the problem | แก้ปัญหา | 🔧
+- send the invoice | ส่งใบแจ้งหนี้ | 🧾
+- change the date | เปลี่ยนวัน | 📅
+- prepare the slides | เตรียมสไลด์ | 🖥️
+- confirm the order | ยืนยันคำสั่งซื้อ | ✅
+> เปลี่ยนเป็นภายในวันศุกร์ | Is it possible to {x} by Friday? | เป็นไปได้ไหมที่จะ{x}ภายในวันศุกร์
+
+## work.help | Apologies & Help | ขอโทษ / ขอความช่วยเหลือ
+
+A1 | Sorry, I'm {x}. | ขอโทษ ฉัน{x} | ขอโทษพร้อมบอกเหตุผล
+- late | มาสาย | ⏰
+- lost | หลงทาง | 🗺️
+- busy right now | ยุ่งอยู่ตอนนี้ | 📵
+- not sure | ไม่แน่ใจ | 🤔
+- new here | เพิ่งมาใหม่ | 👋
+- a bit tired | เหนื่อยนิดหน่อย | 😮‍💨
+- still working | ยังทำงานอยู่ | 💻
+> ขอโทษมากขึ้น | I'm so sorry, I'm {x}. | ขอโทษจริงๆ ฉัน{x}
+
+A1 | Sorry, I don't {x}. | ขอโทษ ฉันไม่{x} | ปฏิเสธหรือบอกว่าไม่รู้
+- understand | เข้าใจ | 🤷
+- know | รู้ | ❓
+- have any change | มีเงินทอน | 🪙
+- speak Chinese | พูดภาษาจีน | 🀄
+- eat pork | กินหมู | 🐷
+- have time | มีเวลา | ⏳
+- remember | จำได้ | 🧠
+> เปลี่ยนเป็นอดีต | Sorry, I didn't {x}. | ขอโทษ ฉันไม่ได้{x}
+
+A1 | Excuse me, can you help me with {x}? | ขอโทษนะ ช่วยฉันเรื่อง{x}ได้ไหม | ขอความช่วยเหลือจากคนแปลกหน้า
+- my bag | กระเป๋า | 🎒
+- this machine | เครื่องนี้ | 🖨️
+- my homework | การบ้าน | 📚
+- the ticket machine | เครื่องขายตั๋ว | 🎫
+- this word | คำนี้ | 🔤
+- the door | ประตู | 🚪
+- my order | ออร์เดอร์ของฉัน | 🧾
+> ตัด Excuse me | Can you help me with {x}? | ช่วยฉันเรื่อง{x}ได้ไหม
+
+A2 | I'm sorry for {x}. | ขอโทษสำหรับ{x} | ขอโทษอย่างเจาะจง | sorry for + คำนาม/V-ing
+- being late | การมาสาย | ⏰
+- the mistake | ความผิดพลาด | ❌
+- the noise | เสียงดัง | 🔊
+- the delay | ความล่าช้า | 🐌
+- forgetting your birthday | การลืมวันเกิดคุณ | 🎂
+- not calling you | การไม่ได้โทรหาคุณ | 📵
+- the confusion | ความสับสน | 😵
+> แบบทางการ | I apologize for {x}. | ฉันขออภัยสำหรับ{x}
+
+A2 | What should I do if {x}? | ฉันควรทำยังไงถ้า{x} | ถามวิธีรับมือ
+- I feel sick | ฉันรู้สึกไม่สบาย | 🤒
+- I miss the bus | ฉันตกรถเมล์ | 🚌
+- the shop is closed | ร้านปิด | 🏪
+- I forget my password | ฉันลืมรหัสผ่าน | 🔐
+- it rains | ฝนตก | 🌧️
+- nobody answers | ไม่มีใครรับสาย | 📞
+- I get lost | ฉันหลงทาง | 🗺️
+> ถามผลที่จะเกิด | What happens if {x}? | จะเกิดอะไรขึ้นถ้า{x}
+
+A2 | I'm having trouble {x}. | ฉันมีปัญหาในการ{x} | บอกว่าทำอะไรไม่ได้ | have trouble + V-ing
+- logging in | ล็อกอิน | 🔑
+- finding the hotel | หาโรงแรม | 🏨
+- sleeping | นอนหลับ | 😴
+- understanding the instructions | เข้าใจคำแนะนำ | 📄
+- connecting to the Wi-Fi | เชื่อมต่อ Wi-Fi | 📶
+- opening this file | เปิดไฟล์นี้ | 📁
+- paying online | จ่ายเงินออนไลน์ | 💳
+> เปลี่ยนเป็นคำถาม | Are you having trouble {x}? | คุณมีปัญหาในการ{x}หรือเปล่า
+
+B1 | I'm afraid I can't {x}. | เกรงว่าฉันคง{x}ไม่ได้ | ปฏิเสธอย่างสุภาพ | I'm afraid… = เกรงว่า… (ใช้บอกข่าวที่ไม่ดีอย่างสุภาพ)
+- come tomorrow | มาพรุ่งนี้ | 📅
+- finish it today | ทำให้เสร็จวันนี้ | ⏳
+- help you right now | ช่วยคุณตอนนี้ | 🙏
+- join the party | ไปงานปาร์ตี้ | 🎉
+- lend you money | ให้คุณยืมเงิน | 💰
+- make it on time | ไปให้ทันเวลา | ⏰
+- accept this offer | รับข้อเสนอนี้ | 📄
+> แบบขอโทษ | Sorry, I won't be able to {x}. | ขอโทษนะ ฉันคงไม่สามารถ{x}ได้
