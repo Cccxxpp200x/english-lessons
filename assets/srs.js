@@ -76,7 +76,9 @@ export function usableSentence(en) {
 }
 
 // จัดคิวของวันนี้ แยกเป็น 4 ช่วง
-export function buildSession(ids, cards, daily, newPerDay, today) {
+// maxReviews: จำนวนคำทบทวนสูงสุดต่อวัน คำที่เกินจะรอวันถัดไป (เรียงจากคำที่ค้างนานที่สุดก่อน)
+// โหมดตามงาน (catch-up): ถ้าคำค้างทบทวนเกินเพดาน ลดคำใหม่ลงครึ่งหนึ่ง และงดคำใหม่ถ้าค้างเกิน 2 เท่า
+export function buildSession(ids, cards, daily, newPerDay, today, maxReviews = Infinity) {
   const yesterday = addDays(today, -1);
   const inWrap = new Set(daily.wrap);
   const done = new Set(daily.done);
@@ -88,15 +90,24 @@ export function buildSession(ids, cards, daily, newPerDay, today) {
     })
     .slice(0, WARMUP_MAX);
 
-  const review = ids
+  const allDue = ids
     .filter(id => {
       const c = cards[id];
       return c && c.due <= today && !inWrap.has(id) && !done.has(id);
     })
     .sort((a, b) => cards[a].due.localeCompare(cards[b].due));
+  // นับคำที่ทบทวนไปแล้ววันนี้ (ผ่านแล้วแต่ไม่ใช่คำใหม่) เข้าเพดานด้วย
+  const newToday = new Set(daily.newIds);
+  const reviewedToday = daily.done.filter(id => !newToday.has(id)).length;
+  const room = Math.max(0, maxReviews - reviewedToday);
+  const review = allDue.slice(0, room);
+  const backlog = allDue.length - review.length; // ค้างไว้ทบทวนวันถัดไป
 
-  const quota = Math.max(0, newPerDay - daily.newIds.length);
+  const pending = allDue.length + reviewedToday;
+  const catchUp = pending > maxReviews;
+  const target = !catchUp ? newPerDay : pending > maxReviews * 2 ? 0 : Math.floor(newPerDay / 2);
+  const quota = Math.max(0, target - daily.newIds.length);
   const fresh = ids.filter(id => !cards[id]).slice(0, quota);
 
-  return { warm, review, fresh, wrap: [...daily.wrap] };
+  return { warm, review, fresh, wrap: [...daily.wrap], backlog, catchUp, newTarget: target };
 }

@@ -1,6 +1,6 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=6";
+import * as srs from "./srs.js?v=7";
 import { openPictures } from "./picture.js?v=14";
 import { openPatterns } from "./patterns.js?v=15";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
@@ -11,7 +11,9 @@ const app = document.getElementById("app");
 
 let words = [];
 let byId = {};
-const defaultStore = () => ({ cards: {}, daily: null, settings: { newPerDay: 5, sentencesPerDay: 5, accent: "en-US" } });
+const defaultStore = () => ({ cards: {}, daily: null, settings: { newPerDay: 5, sentencesPerDay: 5, maxReviews: 30, accent: "en-US" } });
+// เพดานคำทบทวนต่อวัน กันไม่ให้คำค้างท่วมเมื่อไม่ได้เข้ามาหลายวัน
+const maxReviews = () => store.settings.maxReviews ?? 30;
 let store = defaultStore();
 let session = null;
 
@@ -520,7 +522,7 @@ function complete(id, phase) {
 function startSession() {
   unlockAudio(); // การกดปุ่มเริ่มเรียนนับเป็นการแตะของผู้ใช้ ใช้ปลดล็อกเสียง
   const d = daily();
-  const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date);
+  const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date, maxReviews());
   const tasks = [
     ...plan.warm.map(id => ({ phase: "warm", id, kind: "warm" })),
     ...plan.review.map(id => ({ phase: "review", id, kind: "recall" })),
@@ -932,10 +934,102 @@ const pictureCtx = {
   nouns: () => (nounSet ??= new Set(words.filter(w => w.pos === "noun").map(w => w.word.toLowerCase()))),
 };
 
+// ---------- ความคืบหน้าตามระดับ ----------
+// คลังคำเรียงตามความถี่ จึงประมาณระดับจากลำดับคำ (คำที่ใช้บ่อยที่สุดคือระดับต้น)
+const LEVEL_BANDS = [
+  { lv: "A1", from: 1, to: 500, th: "พื้นฐาน" },
+  { lv: "A2", from: 501, to: 1200, th: "เบื้องต้น" },
+  { lv: "B1", from: 1201, to: 2000, th: "กลาง" },
+  { lv: "B2", from: 2001, to: 3000, th: "กลางค่อนสูง" },
+];
+let patternMeta = null;
+
+async function renderProgress() {
+  const base = words.filter(w => !String(w.id).startsWith("pic-")); // ไม่รวมคำที่เพิ่มจากภาพ
+  const stat = list => {
+    const cs = list.map(w => store.cards[w.id]).filter(Boolean);
+    const remembered = cs.filter(c => c.interval >= 7).length;
+    const mastered = cs.filter(c => c.interval >= 30).length;
+    return { total: list.length, learned: cs.length, learning: cs.length - remembered, remembered, mastered };
+  };
+  const rows = LEVEL_BANDS.map(b => ({ ...b, ...stat(base.slice(b.from - 1, b.to)) }));
+  const sum = stat(base);
+  const picWords = Object.keys(store.custom || {}).length;
+  const pct = (n, t) => (t ? Math.round((100 * n) / t) : 0);
+  const bar = r => `<div class="mt-1.5 flex h-2 overflow-hidden rounded-full bg-zinc-100 dark:bg-zinc-800">
+      <div class="bg-teal-600" style="width:${(100 * r.mastered) / r.total}%"></div>
+      <div class="bg-teal-400" style="width:${(100 * (r.remembered - r.mastered)) / r.total}%"></div>
+      <div class="bg-purple-300 dark:bg-purple-500/60" style="width:${(100 * r.learning) / r.total}%"></div></div>`;
+  const num = (n, t, cls = "") => `<td class="px-2 py-3 text-right align-top tabular-nums ${cls}"><div class="font-semibold">${n}</div><div class="text-[11px] text-zinc-400">${pct(n, t)}%</div></td>`;
+
+  try {
+    patternMeta ??= (await (await fetch("data/patterns.json")).json()).patterns.map(p => ({ id: p.id, level: p.level }));
+  } catch { patternMeta = []; }
+  const pc = store.patterns || {};
+  const prow = lv => {
+    const list = patternMeta.filter(p => p.level === lv);
+    const cs = list.map(p => pc[p.id]).filter(Boolean);
+    return { lv, total: list.length, learned: cs.length, remembered: cs.filter(c => c.interval >= 7).length };
+  };
+
+  app.innerHTML = `
+    <header class="sticky top-0 z-20 -mx-4 flex items-center gap-3 bg-zinc-50/85 px-4 pb-3 pt-[max(12px,env(safe-area-inset-top))] backdrop-blur-md dark:bg-zinc-950/85">
+      <button data-act="home" aria-label="กลับหน้าแรก" class="grid h-10 w-10 shrink-0 place-items-center rounded-full text-zinc-500 hover:bg-zinc-200/70 dark:hover:bg-zinc-800">${icon("close")}</button>
+      <div><div class="font-semibold">My Progress</div><div class="text-xs text-zinc-500">จำคำศัพท์แต่ละระดับได้แค่ไหนแล้ว</div></div>
+    </header>
+    <main class="grid gap-4 py-4">
+      ${card(`
+        <div class="grid grid-cols-3 gap-3 text-center">
+          <div><div class="text-3xl font-bold tabular-nums">${sum.learned}</div><div class="text-xs text-zinc-500">Learned<br>เรียนแล้ว</div></div>
+          <div><div class="text-3xl font-bold tabular-nums text-teal-600 dark:text-teal-400">${sum.remembered}</div><div class="text-xs text-zinc-500">Remembered<br>จำได้</div></div>
+          <div><div class="text-3xl font-bold tabular-nums text-teal-700 dark:text-teal-300">${sum.mastered}</div><div class="text-xs text-zinc-500">Mastered<br>จำแม่น</div></div>
+        </div>`, "!p-5")}
+
+      ${card(`
+        <h3 class="font-semibold">Vocabulary by level <span class="font-normal text-zinc-400">· คำศัพท์ตามระดับ</span></h3>
+        <div class="-mx-2 mt-2 overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead><tr class="border-b border-zinc-100 text-left text-xs text-zinc-500 dark:border-zinc-800">
+              <th class="px-2 py-2 font-medium">Level</th><th class="px-2 py-2 text-right font-medium">Learned</th>
+              <th class="px-2 py-2 text-right font-medium">Remembered</th><th class="px-2 py-2 text-right font-medium">Mastered</th></tr></thead>
+            <tbody>${rows.map(r => `
+              <tr class="border-b border-zinc-100 last:border-0 dark:border-zinc-800">
+                <td class="w-[40%] px-2 py-3 align-top">
+                  <div class="flex items-baseline gap-1.5"><b class="text-base">${r.lv}</b><span class="text-xs text-zinc-500">${r.th}</span></div>
+                  <div class="text-[11px] text-zinc-400">${r.total} words · #${r.from}–${r.to}</div>${bar(r)}</td>
+                ${num(r.learned, r.total)}${num(r.remembered, r.total, "text-teal-600 dark:text-teal-400")}${num(r.mastered, r.total, "text-teal-700 dark:text-teal-300")}
+              </tr>`).join("")}</tbody>
+          </table>
+        </div>
+        <div class="mt-3 grid gap-1 text-xs text-zinc-500">
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-purple-300"></span>Learning · กำลังเรียน (ยังต้องทบทวนถี่)</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-teal-400"></span>Remembered · จำได้ ทบทวนห่างได้ 7 วันขึ้นไป</span>
+          <span class="flex items-center gap-1.5"><span class="h-2.5 w-2.5 shrink-0 rounded-full bg-teal-600"></span>Mastered · จำแม่น ทบทวนห่างได้ 30 วันขึ้นไป</span>
+        </div>
+        <p class="mt-3 text-xs text-zinc-400">ระดับประมาณจากลำดับความถี่ของคำ: 500 คำที่ใช้บ่อยที่สุด ≈ A1 · ถัดไปถึงคำที่ 1,200 ≈ A2 · ถึง 2,000 ≈ B1 · ถึง 3,000 ≈ B2</p>`, "!p-5")}
+
+      ${card(`
+        <h3 class="font-semibold">Sentence Patterns <span class="font-normal text-zinc-400">· รูปประโยค</span></h3>
+        <table class="mt-2 w-full text-sm">
+          <thead><tr class="border-b border-zinc-100 text-left text-xs text-zinc-500 dark:border-zinc-800">
+            <th class="py-2 font-medium">Level</th><th class="py-2 text-right font-medium">Learned</th><th class="py-2 text-right font-medium">Remembered</th></tr></thead>
+          <tbody>${["A1", "A2", "B1"].map(prow).map(r => `
+            <tr class="border-b border-zinc-100 last:border-0 dark:border-zinc-800">
+              <td class="py-2.5"><b>${r.lv}</b> <span class="text-xs text-zinc-400">${r.total} patterns</span></td>
+              <td class="py-2.5 text-right tabular-nums">${r.learned} <span class="text-[11px] text-zinc-400">${pct(r.learned, r.total)}%</span></td>
+              <td class="py-2.5 text-right tabular-nums text-teal-600 dark:text-teal-400">${r.remembered} <span class="text-[11px] text-zinc-400">${pct(r.remembered, r.total)}%</span></td>
+            </tr>`).join("")}</tbody>
+        </table>
+        ${picWords ? `<p class="mt-3 text-sm text-zinc-500">🖼️ Words added from Picture Talk: <b>${picWords}</b></p>` : ""}`, "!p-5")}
+    </main>`;
+  on("home", renderHome);
+  window.scrollTo({ top: 0 });
+}
+
 // ---------- home ----------
 function renderHome() {
   const d = daily();
-  const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date);
+  const plan = srs.buildSession(words.map(w => w.id), store.cards, d, store.settings.newPerDay, d.date, maxReviews());
   const wordsToday = plan.warm.length + plan.review.length + plan.fresh.length + plan.wrap.length;
   const cards = Object.values(store.cards);
   const sentToday = Math.min(sentencesLeft(), cards.length + plan.fresh.length);
@@ -986,6 +1080,7 @@ function renderHome() {
         <button data-act="start" ${total ? "" : "disabled"} class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98] disabled:opacity-60">
           ${total ? `${practiceN ? "Continue" : "Start"} today's lesson ${icon("arrow", "h-5 w-5")}` : `Tomorrow: ${plural(tomorrow, "word")} to review`}
         </button>
+        ${plan.catchUp ? `<p class="mt-3 rounded-2xl bg-white/15 px-4 py-3 text-sm leading-relaxed ring-1 ring-white/20">🧘 <b>Catch-up mode</b> · ${plan.backlog ? `${plural(plan.backlog, "review")} will wait for the next days so today stays at ${maxReviews()}. ` : ""}New words today: ${plan.newTarget} until your reviews are back on track.</p>` : ""}
         ${practiceBtn}
       </section>
 
@@ -1020,12 +1115,16 @@ function renderHome() {
           <div class="mt-4 grid grid-cols-2 gap-3 text-sm">
             <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">Due tomorrow</div><div class="text-xl font-bold tabular-nums">${tomorrow}</div></div>
             <div class="rounded-2xl bg-zinc-50 p-3 dark:bg-zinc-800/60"><div class="text-zinc-500">Tricky words</div><div class="text-xl font-bold tabular-nums text-amber-600 dark:text-amber-400">${leeches}</div></div>
-          </div>`, "!p-6")}
+          </div>
+          <button data-act="progress" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-purple-50 px-4 py-2.5 text-sm font-semibold text-purple-700 ring-1 ring-purple-100 hover:bg-purple-100 dark:bg-purple-500/10 dark:text-purple-300 dark:ring-purple-500/20">📊 Progress by level ${icon("arrow", "h-4 w-4")}</button>`, "!p-6")}
         ${card(`
           <h3 class="font-semibold">Settings</h3>
           <div class="mt-4 text-sm text-zinc-500">New words per day</div>
           <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-new", n, store.settings.newPerDay, `${n} words`)).join("")}</div>
           <p class="mt-1.5 text-xs text-zinc-500">More new words today means more reviews in the days ahead.</p>
+          <div class="mt-4 text-sm text-zinc-500">Max reviews per day</div>
+          <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[20, 30, 50].map(n => seg("data-maxrev", n, maxReviews(), `${n} reviews`)).join("")}</div>
+          <p class="mt-1.5 text-xs text-zinc-500">If you miss a few days, extra reviews wait for later days and new words slow down until you catch up.</p>
           <div class="mt-4 text-sm text-zinc-500">Sentences per day</div>
           <div class="mt-2 flex gap-1 rounded-2xl bg-zinc-100 p-1 dark:bg-zinc-800">${[5, 10, 20].map(n => seg("data-sent", n, store.settings.sentencesPerDay ?? 5, `${n} sentences`)).join("")}</div>
           <div class="mt-4 text-sm text-zinc-500">Voice accent</div>
@@ -1061,6 +1160,8 @@ function renderHome() {
     if (confirm("Reset all progress? This can't be undone.")) { store.cards = {}; store.daily = null; store.custom = {}; save(); renderHome(); }
   });
   app.querySelectorAll("[data-new]").forEach(b => (b.onclick = () => { store.settings.newPerDay = Number(b.dataset.new); save(); renderHome(); }));
+  app.querySelectorAll("[data-maxrev]").forEach(b => (b.onclick = () => { store.settings.maxReviews = Number(b.dataset.maxrev); save(); renderHome(); }));
+  on("progress", renderProgress);
   app.querySelectorAll("[data-sent]").forEach(b => (b.onclick = () => { store.settings.sentencesPerDay = Number(b.dataset.sent); save(); renderHome(); }));
   on("test-sound", () => {
     unlockAudio();
