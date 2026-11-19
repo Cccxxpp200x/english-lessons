@@ -2,6 +2,8 @@
 // เรียน 1 รูปประโยค = 4 ขั้น: สังเกต → สลับคำ → เปลี่ยนรูป → เห็นไทยแล้วพูด แล้วให้คะแนนเพื่อเข้ารอบทบทวน (SRS)
 // ใช้ helper จาก app.js ผ่าน ctx เหมือน picture.js
 
+import { micWidget, speechMatches, stopListening, SR } from "./speech.js?v=17";
+
 const UI_KEY = "english-lessons:pat-ui";
 
 let C = null;
@@ -88,53 +90,27 @@ function tokens(frame, slot, merge) {
 const tileText = (t, i) => (i === 0 && !/^I(\b|')/.test(t) && !/^[A-Z]{2}/.test(t) ? t[0].toLowerCase() + t.slice(1) : t);
 
 // ---------- speech ----------
-const CONTRACTIONS = {
-  "i'm": "i am", "you're": "you are", "we're": "we are", "they're": "they are", "he's": "he is", "she's": "she is",
-  "it's": "it is", "that's": "that is", "there's": "there is", "what's": "what is", "let's": "let us",
-  "i'd": "i would", "i'll": "i will", "i've": "i have", "don't": "do not", "doesn't": "does not", "didn't": "did not",
-  "can't": "can not", "cannot": "can not", "won't": "will not", "isn't": "is not", "aren't": "are not",
-  "wasn't": "was not", "wouldn't": "would not", "you'll": "you will", "we'll": "we will", "ok": "okay",
-};
-const normWords = s => s.toLowerCase().replace(/[’]/g, "'").replace(/[^a-z0-9' -]/g, " ").split(/\s+/).filter(Boolean)
-  .flatMap(w => (CONTRACTIONS[w] || w.replace(/'/g, "")).split(" "));
-
-function wordDistance(a, b) {
-  const d = Array.from({ length: a.length + 1 }, (_, i) => [i, ...Array(b.length).fill(0)]);
-  for (let j = 1; j <= b.length; j++) d[0][j] = j;
-  for (let i = 1; i <= a.length; i++) for (let j = 1; j <= b.length; j++) {
-    d[i][j] = Math.min(d[i - 1][j] + 1, d[i][j - 1] + 1, d[i - 1][j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
-  }
-  return d[a.length][b.length];
-}
-// ยอมให้ผิดได้เล็กน้อย เพราะระบบแปลงเสียงอาจฟังคำสั้นๆ ผิด
-export function speechMatches(heard, target) {
-  const a = normWords(heard), b = normWords(target);
-  return wordDistance(a, b) <= Math.max(1, Math.floor(b.length / 5));
-}
-
-let rec = null;
-function stopMic() { try { rec?.abort(); } catch { /* ข้าม */ } rec = null; }
-
-function listenOnce({ onResult, onError, onEnd }) {
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  window.speechSynthesis?.cancel();
-  stopMic();
-  rec = new SR();
-  rec.lang = C.store.settings.accent || "en-US";
-  rec.interimResults = false;
-  rec.maxAlternatives = 3;
-  rec.onresult = e => onResult([...e.results[0]].map(a => a.transcript));
-  rec.onerror = e => onError(e.error);
-  rec.onend = () => { rec = null; onEnd(); };
-  try { rec.start(); } catch { onError("start"); }
-}
+export { speechMatches };
+const stopMic = () => stopListening(true);
 
 // ---------- list page ----------
-export async function openPatterns(ctx) {
+export async function openPatterns(ctx, opts = {}) {
   C = ctx;
   C.unlockAudio();
   try { await loadData(); } catch (e) { C.app.innerHTML = `<p class="py-10 text-center text-rose-600">${esc(e.message)}</p>`; return; }
   loadUi();
+  if (opts.daily) return startDaily();
+  renderList();
+}
+
+// ภารกิจประจำวัน: ทบทวนรูปประโยคที่ถึงรอบก่อน แล้วเรียนรูปประโยคใหม่ 1 รูป (เรียงจาก A1 → B1)
+const LEVEL_ORDER = { A1: 0, A2: 1, B1: 2 };
+const nextNewPattern = () => [...data.patterns].sort((a, b) => LEVEL_ORDER[a.level] - LEVEL_ORDER[b.level]).find(p => !cards()[p.id]);
+function startDaily() {
+  const q = dueList();
+  if (q.length) return startPractice(q[0], "review", q.slice(1), true);
+  const p = nextNewPattern();
+  if (p) return startPractice(p, "learn", [], true);
   renderList();
 }
 
@@ -246,8 +222,8 @@ function buildTasks(p, mode) {
   ];
 }
 
-function startPractice(p, mode, queue) {
-  S = { p, mode, queue, tasks: buildTasks(p, mode), i: 0, right: 0, total: 0 };
+function startPractice(p, mode, queue, daily = S?.daily || false) {
+  S = { p, mode, queue, daily, tasks: buildTasks(p, mode), i: 0, right: 0, total: 0 };
   window.scrollTo({ top: 0 });
   showTask();
 }
@@ -465,19 +441,17 @@ function transform(t) {
   tileBoard(C.app.querySelector("#board"), toks, end, firstTry => done(firstTry, v.frame, v.th, s));
 }
 
-// ขั้น 4: เห็นประโยคไทย → พูดเป็นภาษาอังกฤษ (ไมค์) หรือใช้บัตรคำช่วย
+// ขั้น 4: เห็นประโยคไทย → พูดเป็นภาษาอังกฤษ (ไมค์ แสดงคำที่พูดแบบสด) หรือใช้บัตรคำช่วย
 function speakTask(t) {
   const p = S.p, s = t.slot;
   const target = fill(p.frame, s);
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   shell(`
     <section class="${CARD} text-center">
       <div class="text-5xl">${s.emoji}</div>
       <p class="mt-2 text-sm text-zinc-500">พูดประโยคนี้เป็นภาษาอังกฤษ</p>
       <p class="mt-1 text-2xl font-semibold text-purple-700 dark:text-purple-300">${esc(fillTh(p.th, s))}</p>
       <div id="speak-area" class="mt-5 grid gap-3">
-        ${SR ? `<button data-act="mic" class="mx-auto inline-flex items-center gap-2 rounded-full bg-rose-600 px-6 py-3.5 text-lg font-semibold text-white shadow-lg shadow-rose-600/25 transition active:scale-95"><span>🎙️</span><span data-lab>กดแล้วพูด</span></button>
-          <p data-status class="text-sm text-zinc-500">พูดให้ครบทั้งประโยค แล้วระบบจะตรวจให้</p>` : `<p class="text-sm text-zinc-500">เบราว์เซอร์นี้แปลงเสียงไม่ได้ ใช้บัตรคำแทน</p>`}
+        <div id="mic" class="grid gap-3"></div>
         <div class="flex flex-wrap justify-center gap-2">
           <button data-act="tiles" class="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">🧩 ใช้บัตรคำช่วย</button>
           <button data-act="reveal" class="rounded-full bg-zinc-100 px-4 py-2 text-sm font-medium text-zinc-700 dark:bg-zinc-800 dark:text-zinc-200">ดูเฉลย</button>
@@ -487,7 +461,7 @@ function speakTask(t) {
     </section>
     <div id="res" class="grid gap-3"></div>`);
   const area = C.app.querySelector("#speak-area");
-  let usedHelp = false;
+  let tries = 0;
   // ok = นับคะแนน / shown = แสดงว่าตอบถูก (เรียงบัตรคำได้ถูกแต่ไม่นับคะแนนเพราะใช้ตัวช่วย)
   const finish = (ok, heard, shown = ok) => {
     stopMic();
@@ -495,37 +469,22 @@ function speakTask(t) {
     area.remove();
     C.app.querySelector("#board").innerHTML = "";
     const res = C.app.querySelector("#res");
-    res.innerHTML = (heard ? `<p class="text-center text-sm text-zinc-500">ระบบได้ยินว่า: “${esc(heard)}”</p>` : "") +
+    res.innerHTML = (heard ? `<p class="text-center text-sm text-zinc-500">คุณพูดว่า: “${esc(heard)}”</p>` : "") +
       resultBlock(shown, target, fillTh(p.th, s), s, p.frame) +
       (shown && !ok ? `<p class="text-center text-sm text-zinc-500">ใช้ตัวช่วยแล้ว ข้อนี้จึงยังไม่นับคะแนน รอบหน้าลองพูดเองดูนะ</p>` : "");
     bindSay(res);
     res.querySelector('[data-act="next"]').onclick = nextTask;
     C.speak(target);
   };
-  const mic = C.app.querySelector('[data-act="mic"]');
-  if (mic) mic.onclick = () => {
-    const lab = mic.querySelector("[data-lab]"), status = C.app.querySelector("[data-status]");
-    if (rec) { stopMic(); lab.textContent = "กดแล้วพูด"; return; }
-    lab.textContent = "กำลังฟัง… (แตะเพื่อหยุด)";
-    mic.classList.add("animate-pulse");
-    let got = false;
-    listenOnce({
-      onResult: alts => {
-        got = true;
-        const ok = alts.some(a => speechMatches(a, target));
-        if (ok) finish(!usedHelp, alts.find(a => speechMatches(a, target)));
-        else { status.innerHTML = `ได้ยินว่า “${esc(alts[0])}” ยังไม่ตรง ลองพูดอีกครั้ง หรือใช้บัตรคำช่วย`; usedHelp = true; }
-      },
-      onError: err => {
-        status.textContent = err === "not-allowed" || err === "service-not-allowed"
-          ? "ไม่ได้รับอนุญาตให้ใช้ไมค์ (iPhone: ตั้งค่า > Safari > ไมโครโฟน และเปิด Siri & Dictation)"
-          : err === "no-speech" ? "ไม่ได้ยินเสียง ลองพูดอีกครั้ง" : `ไมค์มีปัญหา (${err}) ลองใหม่ หรือใช้บัตรคำ`;
-      },
-      onEnd: () => { if (!got && document.body.contains(mic)) { lab.textContent = "กดแล้วพูด"; mic.classList.remove("animate-pulse"); } else if (document.body.contains(mic)) { lab.textContent = "กดแล้วพูดอีกครั้ง"; mic.classList.remove("animate-pulse"); } },
-    });
-  };
+  const w = micWidget(C.app.querySelector("#mic"), {
+    target, lang: C.store.settings.accent || "en-US", esc,
+    onResult: (heard, ok) => {
+      if (ok) return setTimeout(() => finish(tries === 0, heard), 700); // ให้เห็นคำที่พูดก่อนสักครู่
+      tries++;
+      w.status.innerHTML = `ยังไม่ตรง (คำสีแดงคือคำที่ต่างจากเฉลย) ลองพูดอีกครั้ง${tries >= 2 ? " หรือกด <b>ใช้บัตรคำช่วย</b>" : ""}`;
+    },
+  });
   C.app.querySelector('[data-act="tiles"]').onclick = () => {
-    usedHelp = true;
     stopMic();
     area.remove();
     const { toks, end } = tokens(p.frame, s, false);
@@ -558,6 +517,7 @@ function rate() {
     // Again ในโหมดนี้ให้กลับมาพรุ่งนี้ (ไม่วนซ้ำวันเดียวกัน เพราะเพิ่งฝึกครบแล้ว)
     if (b.dataset.rate === "again") c = { ...c, due: C.srs.addDays(today(), 1), interval: 0 };
     cards()[p.id] = c;
+    if (S.mode === "learn" && !card) { const d = C.daily(); d.patNew = (d.patNew || 0) + 1; }
     C.save();
     afterRate();
   }));
@@ -570,15 +530,19 @@ function afterRate() {
   }
   const p = S.p;
   const sameCat = data.patterns.filter(x => x.cat === p.cat);
-  const nextNew = sameCat.find(x => !cards()[x.id]);
+  const nextNew = S.daily ? nextNewPattern() : sameCat.find(x => !cards()[x.id]);
+  const needNew = S.daily && (C.daily().patNew || 0) < 1 && nextNew;
   shell(`
     <section class="${CARD} text-center">
       <div class="text-5xl">🎉</div>
       <p class="mt-3 text-xl font-bold">${S.mode === "review" ? "ทบทวนครบทุกรูปประโยคของวันนี้แล้ว" : "บันทึกแล้ว"}</p>
       <p class="mt-1 text-zinc-500">${S.mode === "review" ? "รูปประโยคจะกลับมาให้ทบทวนตามรอบ" : "รูปประโยคนี้จะกลับมาให้ทบทวนตามรอบ"}</p>
     </section>
-    ${nextNew && S.mode === "learn" ? C.button('data-act="next-new"', `รูปประโยคถัดไป: ${esc(nextNew.frame).replace("{x}", "…")}`) : ""}
-    ${C.button('data-act="to-list"', "กลับหน้ารวม", "ghost")}`);
+    ${needNew ? `<p class="text-center text-sm text-zinc-500">ภารกิจวันนี้: เรียนรูปประโยคใหม่อีก 1 รูป</p>` : ""}
+    ${nextNew && (S.mode === "learn" || needNew) ? C.button('data-act="next-new"', `${needNew ? "ต่อ: " : "รูปประโยคถัดไป: "}${esc(nextNew.frame).replace("{x}", "…")}`, needNew ? "primary" : "ghost") : ""}
+    ${S.daily && !needNew ? C.button('data-act="home"', `ภารกิจนี้เสร็จแล้ว · ไปภารกิจถัดไป ${icon("arrow", "ml-2 h-5 w-5")}`) : ""}
+    ${C.button('data-act="to-list"', "ดูรูปประโยคทั้งหมด", "ghost")}`);
+  C.app.querySelector('[data-act="home"]')?.addEventListener("click", () => { S = null; C.renderHome(); });
   C.app.querySelector('[data-act="next-new"]')?.addEventListener("click", () => startPractice(nextNew, "learn", []));
   C.app.querySelector('[data-act="to-list"]').onclick = () => { S = null; renderList(); };
 }

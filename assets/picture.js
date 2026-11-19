@@ -2,6 +2,8 @@
 // Level 1 เลือกคำตอบ/เรียงประโยค · Level 2 เติมคำ · Level 3 พูด/เขียนอิสระ + ตรวจ + ฟังคำตอบตัวอย่าง
 // ใช้ helper จาก app.js ผ่าน ctx เพื่อไม่ให้ import วนกัน
 
+import { listen, stopListening, micErrorText, SR } from "./speech.js?v=17";
+
 const BAG_KEY = "english-lessons:picbag";
 const AI_KEY = "english-lessons:anthropic-key";
 const SDK_URL = "https://cdn.jsdelivr.net/npm/@anthropic-ai/sdk@0.131.0/+esm";
@@ -379,6 +381,7 @@ function level1() {
         return;
       }
       right++;
+      markPicDone();
       C.speak(detail.en);
       box.innerHTML = `<div class="${CARD()} text-center">
         <div class="text-5xl">🎯</div>
@@ -396,6 +399,12 @@ function level1() {
 }
 
 const cap = s => s[0].toUpperCase() + s.slice(1);
+
+// จบเลเวลใดก็ได้ = ทำภารกิจ Picture Talk ของวันนี้แล้ว
+function markPicDone() {
+  const d = C.daily();
+  if (!d.picDone) { d.picDone = true; C.save(); }
+}
 
 // ---------- Level 2: เติมคำในประโยคอธิบายภาพ ----------
 function level2() {
@@ -453,6 +462,7 @@ function level2() {
   }
 
   function summary() {
+    markPicDone();
     box.innerHTML = `<div class="${CARD()}">
       <div class="text-center"><div class="text-5xl">📝</div><p class="mt-3 text-xl font-bold">Level 2 เสร็จแล้ว · ถูก ${right} / ${model.length}</p>
       <p class="mt-1 text-zinc-500">นี่คือคำอธิบายภาพฉบับเต็ม ฟังแล้วพูดตาม (Shadowing)</p></div>
@@ -489,17 +499,16 @@ function bindModel(root) {
 }
 
 // ---------- Level 3: พูด/เขียนอิสระ ----------
-let rec = null, recTimer = null;
+let recording = false, recTimer = null;
 function stopMic() {
+  recording = false;
   clearInterval(recTimer);
   recTimer = null;
-  try { rec?.stop(); } catch { /* ข้าม */ }
-  rec = null;
+  stopListening();
 }
 
 function level3() {
   const box = C.app.querySelector("#practice");
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
   const hasKey = !!getKey();
   box.innerHTML = `<div class="${CARD()}">
     <div class="flex items-start gap-3"><p class="flex-1 text-xl font-semibold">Describe what you see in this picture.</p>${C.sayBtn("Describe what you see in this picture.")}</div>
@@ -560,34 +569,35 @@ function level3() {
   if (del) del.onclick = () => { try { localStorage.removeItem(AI_KEY); } catch { /* ข้าม */ } level3(); };
 }
 
+// พูดอธิบายภาพได้ถึง 30 วินาที: บน iPhone ระบบหยุดเองเมื่อเว้นวรรค จึงเริ่มฟังต่อให้อัตโนมัติจนครบเวลาหรือกดหยุด
 function toggleMic(box, ta) {
   const lab = box.querySelector("#mic-label"), status = box.querySelector("#mic-status");
-  if (rec) { stopMic(); lab.textContent = "กดเพื่อพูด"; status.textContent = "หยุดฟังแล้ว แก้ไขข้อความได้ แล้วกดตรวจ"; return; }
-  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
-  window.speechSynthesis?.cancel();
-  rec = new SR();
-  rec.lang = C.store.settings.accent || "en-US";
-  rec.continuous = true;
-  rec.interimResults = true;
-  const base = ta.value.trim() ? ta.value.trimEnd() + " " : "";
-  rec.onresult = e => {
-    let text = "";
-    for (let i = 0; i < e.results.length; i++) text += e.results[i][0].transcript;
-    ta.value = base + text.trim();
-  };
-  rec.onerror = e => {
-    status.textContent = e.error === "not-allowed" || e.error === "service-not-allowed"
-      ? "ไม่ได้รับอนุญาตให้ใช้ไมค์ (iPhone: ตั้งค่า > Safari > ไมโครโฟน และเปิด Siri & Dictation)"
-      : `ไมค์มีปัญหา (${e.error}) ลองอีกครั้ง หรือพิมพ์แทน`;
-  };
-  rec.onend = () => { if (rec) { stopMic(); lab.textContent = "กดเพื่อพูด"; } };
-  try { rec.start(); } catch { status.textContent = "เริ่มไมค์ไม่ได้ ลองอีกครั้ง"; rec = null; return; }
+  if (recording) { stopMic(); lab.textContent = "กดเพื่อพูด"; status.textContent = "หยุดฟังแล้ว แก้ไขข้อความได้ แล้วกดตรวจ"; return; }
+  recording = true;
+  let said = ta.value.trim();
+  const join = (x, y) => (x && y ? `${x} ${y}` : x || y);
+  const round = () => listen({
+    lang: C.store.settings.accent || "en-US", silenceMs: 2500, maxMs: 30000,
+    onText: text => { ta.value = join(said, text); ta.scrollTop = ta.scrollHeight; },
+    onDone: text => {
+      said = join(said, text);
+      ta.value = said;
+      if (recording) round();
+    },
+    onError: err => {
+      if (recording && err === "no-speech") return round(); // เงียบไปช่วงหนึ่ง ฟังต่อ
+      stopMic();
+      lab.textContent = "กดเพื่อพูด";
+      status.textContent = micErrorText(err);
+    },
+  });
+  round();
   let left = 30;
   lab.textContent = "หยุด";
-  status.textContent = `กำลังฟัง… ${left} วินาที`;
+  status.textContent = `กำลังฟัง… ${left} วินาที (คำที่พูดจะขึ้นในกล่องด้านล่าง)`;
   recTimer = setInterval(() => {
     left--;
-    status.textContent = `กำลังฟัง… ${left} วินาที`;
+    status.textContent = `กำลังฟัง… ${left} วินาที (คำที่พูดจะขึ้นในกล่องด้านล่าง)`;
     if (left <= 0) { stopMic(); lab.textContent = "กดเพื่อพูด"; status.textContent = "ครบ 30 วินาทีแล้ว กดตรวจได้เลย"; }
   }, 1000);
 }
@@ -671,6 +681,7 @@ function feedback(box, text) {
     return;
   }
   const r = analyze(text, pic, C.verbs(), C.nouns());
+  markPicDone();
   let fixed = text;
   // แก้ตามจุดที่พบ โดยคงตัวพิมพ์ใหญ่ของตัวแรกไว้ (A woman sit → A woman is sitting)
   for (const i of r.issues) {

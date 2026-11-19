@@ -959,3 +959,727 @@ B1 | I'm afraid I can't {x}. | เกรงว่าฉันคง{x}ไม่�
 - make it on time | ไปให้ทันเวลา | ⏰
 - accept this offer | รับข้อเสนอนี้ | 📄
 > แบบขอโทษ | Sorry, I won't be able to {x}. | ขอโทษนะ ฉันคงไม่สามารถ{x}ได้
+
+# ================= เพิ่มเติม: หมวดชีวิตประจำวันที่ใช้บ่อย =================
+
+@daily
+
+## daily.health | Health | สุขภาพ / หาหมอ
+
+A1 | I have {x} today. | วันนี้ฉัน{x} | บอกอาการป่วย
+- a headache | ปวดหัว | 🤕
+- a fever | มีไข้ | 🤒
+- a sore throat | เจ็บคอ | 😷
+- a cold | เป็นหวัด | 🤧
+- a stomachache | ปวดท้อง | 🤢
+- a toothache | ปวดฟัน | 🦷
+- a bad cough | ไอหนัก | 😮‍💨
+> เปลี่ยนเป็นคำถาม | Do you have {x} today? | วันนี้คุณ{x}ไหม
+> เปลี่ยนเป็นอดีต | I had {x} yesterday. | เมื่อวานฉัน{x}
+
+A1 | My {x} hurts. | ฉันเจ็บ{x} | บอกว่าเจ็บตรงไหน | ใช้ hurts เพราะประธานเป็นเอกพจน์ (My back)
+- back | หลัง | 🔙
+- head | หัว | 🤕
+- leg | ขา | 🦵
+- arm | แขน | 💪
+- stomach | ท้อง | 🤢
+- foot | เท้า | 🦶
+- neck | คอ | 🧣
+> เปลี่ยนเป็นคำถาม | Does your {x} hurt? | คุณเจ็บ{x}ไหม
+> เปลี่ยนเป็นอดีต | My {x} hurt all night. | เมื่อคืนฉันเจ็บ{x}ทั้งคืน
+
+A2 | Do you have anything for {x}? | มียาแก้{x}ไหม | ถามยาที่ร้านขายยา
+- a headache | ปวดหัว | 💊
+- a cough | ไอ | 😮‍💨
+- a sore throat | เจ็บคอ | 😷
+- mosquito bites | ยุงกัด | 🦟
+- an upset stomach | ท้องไส้ปั่นป่วน | 🤢
+- a runny nose | น้ำมูกไหล | 🤧
+- sunburn | ผิวไหม้แดด | ☀️
+> ใช้ need | I need something for {x}. | ฉันต้องการยาแก้{x}
+
+A2 | I've been feeling {x} since yesterday. | ฉันรู้สึก{x}ตั้งแต่เมื่อวาน | บอกหมอว่าเป็นมานานแค่ไหน | have been + V-ing = เป็นมาตั้งแต่…จนถึงตอนนี้
+- tired | เหนื่อย | 😩
+- dizzy | เวียนหัว | 😵
+- sick | ไม่สบาย | 🤒
+- weak | อ่อนเพลีย | 🥱
+- cold | หนาวสั่น | 🥶
+- hot | ตัวร้อน | 🥵
+- much better | ดีขึ้นมาก | 😊
+> เปลี่ยนเป็นคำถาม | Have you been feeling {x} since yesterday? | คุณรู้สึก{x}ตั้งแต่เมื่อวานหรือ
+
+A2 | How often should I {x}? | ฉันควร{x}บ่อยแค่ไหน | ถามวิธีใช้ยาหรือคำแนะนำของหมอ
+- take this medicine | กินยานี้ | 💊
+- use this cream | ทาครีมนี้ | 🧴
+- change the bandage | เปลี่ยนผ้าพันแผล | 🩹
+- come back for a check-up | กลับมาตรวจ | 🩺
+- drink water | ดื่มน้ำ | 💧
+- do these exercises | ทำท่าบริหารเหล่านี้ | 🤸
+- clean the wound | ทำความสะอาดแผล | 🧼
+> ถามว่าเมื่อไร | When should I {x}? | ฉันควร{x}ตอนไหน
+
+B1 | I'd like to make an appointment for {x}. | ฉันอยากนัด{x} | นัดหมอหรือคลินิก
+- a check-up | ตรวจสุขภาพ | 🩺
+- tomorrow morning | พรุ่งนี้เช้า | 🌅
+- next Monday | วันจันทร์หน้า | 📅
+- this afternoon | บ่ายนี้ | 🌤️
+- a dental cleaning | ขูดหินปูน | 🦷
+- an eye test | ตรวจสายตา | 👓
+- a blood test | ตรวจเลือด | 🩸
+> ถามว่าจองได้ไหม | Is it possible to book {x}? | จอง{x}ได้ไหม
+
+## daily.feelings | Feelings | ความรู้สึก
+
+A1 | I feel {x} today. | วันนี้ฉันรู้สึก{x} | บอกความรู้สึก
+- happy | มีความสุข | 😊
+- tired | เหนื่อย | 😩
+- sleepy | ง่วง | 😴
+- great | ดีมาก | 😄
+- a bit sad | เศร้านิดหน่อย | 😔
+- stressed | เครียด | 😣
+- bored | เบื่อ | 🥱
+> เปลี่ยนเป็นคำถาม | Do you feel {x} today? | วันนี้คุณรู้สึก{x}ไหม
+> เปลี่ยนเป็นอดีต | I felt {x} yesterday. | เมื่อวานฉันรู้สึก{x}
+
+A2 | I'm worried about {x}. | ฉันกังวลเรื่อง{x} | บอกสิ่งที่กังวล | worried about + คำนาม/V-ing
+- the exam | การสอบ | 📝
+- work | งาน | 💼
+- the weather | สภาพอากาศ | 🌧️
+- money | เงิน | 💸
+- the future | อนาคต | 🔮
+- being late | การไปสาย | ⏰
+- the interview | การสัมภาษณ์ | 👔
+> ปลอบใจ | Don't worry about {x}. | ไม่ต้องกังวลเรื่อง{x}
+> เปลี่ยนเป็นคำถาม | Are you worried about {x}? | คุณกังวลเรื่อง{x}ไหม
+
+A2 | I'm so excited about {x}! | ฉันตื่นเต้นมากกับ{x} | บอกว่าตั้งตารอ
+- the trip | ทริป | 🧳
+- the weekend | สุดสัปดาห์นี้ | 🎉
+- the concert | คอนเสิร์ต | 🎤
+- the new job | งานใหม่ | 💼
+- the holiday | วันหยุด | 🏖️
+- the party | ปาร์ตี้ | 🥳
+- the match | การแข่งขัน | ⚽
+> เปลี่ยนเป็นคำถาม | Are you excited about {x}? | คุณตื่นเต้นกับ{x}ไหม
+
+A2 | That makes me feel {x}. | นั่นทำให้ฉันรู้สึก{x} | บอกว่าสิ่งหนึ่งทำให้รู้สึกอย่างไร | make + คน + V1
+- better | ดีขึ้น | 🙂
+- relaxed | ผ่อนคลาย | 😌
+- nervous | ประหม่า | 😬
+- angry | โกรธ | 😠
+- proud | ภูมิใจ | 🏅
+- lonely | เหงา | 🥺
+- safe | ปลอดภัย | 🛡️
+> เปลี่ยนเป็นคำถาม | Does that make you feel {x}? | นั่นทำให้คุณรู้สึก{x}ไหม
+
+B1 | I'm really fed up with {x}. | ฉันเบื่อ{x}สุดๆ | บ่นว่าทนไม่ไหวแล้ว | fed up with = เบื่อจนทนไม่ไหว
+- the traffic | รถติด | 🚗
+- this weather | อากาศแบบนี้ | 🌧️
+- waiting | การรอ | ⏳
+- this old phone | โทรศัพท์เครื่องเก่านี้ | 📱
+- the noise | เสียงดัง | 🔊
+- working late | การทำงานดึก | 🌙
+- doing the same thing | การทำอะไรเดิมๆ | 🔁
+> เปลี่ยนเป็นคำถาม | Are you fed up with {x}? | คุณเบื่อ{x}หรือ
+
+B1 | I was surprised that {x}. | ฉันแปลกใจที่{x} | เล่าเรื่องที่ไม่คาดคิด
+- the shop was closed | ร้านปิด | 🏪
+- he remembered my name | เขาจำชื่อฉันได้ | 🧠
+- it was so cheap | มันถูกมาก | 💸
+- nobody came | ไม่มีใครมาเลย | 🪑
+- she spoke Thai | เธอพูดภาษาไทยได้ | 💬
+- the test was easy | ข้อสอบง่าย | 📝
+- it started on time | มันเริ่มตรงเวลา | ⏰
+> เปลี่ยนเป็นคำถาม | Were you surprised that {x}? | คุณแปลกใจไหมที่{x}
+
+## daily.home | Home & Chores | บ้าน / งานบ้าน
+
+A1 | I need to {x} today. | วันนี้ฉันต้อง{x} | บอกงานที่ต้องทำ
+- do the laundry | ซักผ้า | 🧺
+- wash the dishes | ล้างจาน | 🍽️
+- clean the bathroom | ทำความสะอาดห้องน้ำ | 🚽
+- take out the trash | เอาขยะไปทิ้ง | 🗑️
+- water the plants | รดน้ำต้นไม้ | 🪴
+- cook dinner | ทำอาหารเย็น | 🍳
+- pay the bills | จ่ายบิล | 🧾
+> เปลี่ยนเป็นคำถาม | Do you need to {x} today? | วันนี้คุณต้อง{x}ไหม
+> เปลี่ยนเป็นปฏิเสธ | I don't need to {x} today. | วันนี้ฉันไม่ต้อง{x}
+
+A1 | Where do you keep {x}? | คุณเก็บ{x}ไว้ที่ไหน | ถามที่เก็บของในบ้าน
+- the scissors | กรรไกร | ✂️
+- the towels | ผ้าเช็ดตัว | 🧻
+- the keys | กุญแจ | 🔑
+- the remote | รีโมต | 📺
+- the cups | แก้ว | 🥤
+- the umbrella | ร่ม | ☂️
+- the first aid kit | ชุดปฐมพยาบาล | 🩹
+> ตอบ | I keep {x} in the cupboard. | ฉันเก็บ{x}ไว้ในตู้
+
+A2 | Could you please turn off {x}? | ช่วยปิด{x}หน่อยได้ไหม | ขอให้ปิดเครื่องใช้ไฟฟ้า | turn off = ปิด / turn on = เปิด
+- the TV | ทีวี | 📺
+- the lights | ไฟ | 💡
+- the fan | พัดลม | 🌀
+- the air conditioner | แอร์ | ❄️
+- the music | เพลง | 🎵
+- the tap | ก๊อกน้ำ | 🚰
+- the oven | เตาอบ | 🔥
+> เปลี่ยนเป็นเปิด | Could you please turn on {x}? | ช่วยเปิด{x}หน่อยได้ไหม
+
+A2 | It's your turn to {x}. | ถึงตาคุณ{x}แล้ว | แบ่งงานบ้าน
+- cook | ทำอาหาร | 🍳
+- wash the dishes | ล้างจาน | 🍽️
+- do the shopping | ไปซื้อของ | 🛒
+- clean the kitchen | ทำความสะอาดครัว | 🧽
+- feed the cat | ให้อาหารแมว | 🐱
+- take out the trash | เอาขยะไปทิ้ง | 🗑️
+- walk the dog | พาหมาไปเดินเล่น | 🐕
+> เปลี่ยนเป็นตาฉัน | It's my turn to {x}. | ถึงตาฉัน{x}แล้ว
+
+A2 | The {x} is broken. | {x}เสีย | แจ้งว่าของในบ้านเสีย
+- washing machine | เครื่องซักผ้า | 🧺
+- fridge | ตู้เย็น | 🧊
+- light | ไฟ | 💡
+- door lock | ลูกบิดประตู | 🔒
+- shower | ฝักบัว | 🚿
+- microwave | ไมโครเวฟ | 📟
+- toilet | ชักโครก | 🚽
+> เปลี่ยนเป็นคำถาม | Is the {x} broken? | {x}เสียหรือ
+> ขอให้ซ่อม | Can you fix the {x}? | ช่วยซ่อม{x}ได้ไหม
+
+B1 | I'm thinking of getting {x} for the living room. | ฉันคิดจะซื้อ{x}มาไว้ห้องนั่งเล่น | ปรึกษาเรื่องแต่งบ้าน | think of + V-ing = คิดจะทำ
+- a new sofa | โซฟาใหม่ | 🛋️
+- a bigger TV | ทีวีที่ใหญ่กว่าเดิม | 📺
+- some plants | ต้นไม้ | 🪴
+- a rug | พรม | 🟫
+- a bookshelf | ชั้นหนังสือ | 📚
+- new curtains | ผ้าม่านใหม่ | 🪟
+- a floor lamp | โคมไฟตั้งพื้น | 💡
+> เปลี่ยนเป็นคำถาม | Are you thinking of getting {x} for the living room? | คุณคิดจะซื้อ{x}มาไว้ห้องนั่งเล่นหรือ
+
+## daily.time | Time & Weather | เวลา / อากาศ
+
+A1 | It's {x} today. | วันนี้{x} | พูดเรื่องอากาศ
+- hot | อากาศร้อน | ☀️
+- cold | อากาศหนาว | 🥶
+- sunny | แดดออก | 🌞
+- rainy | ฝนตก | 🌧️
+- windy | ลมแรง | 💨
+- cloudy | เมฆมาก | ☁️
+- really humid | อากาศชื้นมาก | 💦
+> เปลี่ยนเป็นคำถาม | Is it {x} today? | วันนี้{x}ไหม
+> เปลี่ยนเป็นอดีต | It was {x} yesterday. | เมื่อวาน{x}
+
+A1 | What time does {x} start? | {x}เริ่มกี่โมง | ถามเวลาเริ่ม
+- the movie | หนัง | 🎬
+- the class | คลาส | 🏫
+- the meeting | การประชุม | 💼
+- the concert | คอนเสิร์ต | 🎤
+- the game | การแข่งขัน | ⚽
+- the show | การแสดง | 🎭
+- the tour | ทัวร์ | 🚌
+> ถามเวลาจบ | What time does {x} finish? | {x}จบกี่โมง
+
+A1 | See you {x}! | เจอกัน{x} | บอกลา
+- tomorrow | พรุ่งนี้ | 👋
+- on Monday | วันจันทร์ | 📅
+- later | ทีหลัง | 🕐
+- next week | สัปดาห์หน้า | 📆
+- at six | ตอนหกโมง | 🕕
+- soon | เร็วๆ นี้ | ⏳
+- tonight | คืนนี้ | 🌙
+> คุยกันทีหลัง | Talk to you {x}! | แล้วคุยกัน{x}
+
+A2 | It's going to rain {x}. | {x}ฝนจะตก | พยากรณ์อากาศ | be going to ใช้ทำนายจากสิ่งที่เห็น (เช่น เมฆดำ)
+- this afternoon | บ่ายนี้ | 🌤️
+- tonight | คืนนี้ | 🌙
+- tomorrow | พรุ่งนี้ | 📅
+- all day | ทั้งวัน | 🌧️
+- later | อีกเดี๋ยว | ⏳
+- this weekend | สุดสัปดาห์นี้ | 🗓️
+- in the evening | ตอนเย็น | 🌆
+> เปลี่ยนเป็นคำถาม | Is it going to rain {x}? | {x}ฝนจะตกไหม
+
+A2 | I'll be there in {x}. | อีก{x}ฉันจะไปถึง | บอกว่าจะไปถึงเมื่อไร
+- five minutes | ห้านาที | ⏱️
+- ten minutes | สิบนาที | 🕙
+- half an hour | ครึ่งชั่วโมง | 🕧
+- a few minutes | ไม่กี่นาที | ⏳
+- an hour | หนึ่งชั่วโมง | 🕐
+- two minutes | สองนาที | 🏃
+- twenty minutes | ยี่สิบนาที | 🚗
+> เปลี่ยนเป็นคำถาม | Will you be there in {x}? | อีก{x}คุณจะไปถึงไหม
+
+B1 | It depends on {x}. | ขึ้นอยู่กับ{x} | ตอบแบบยังไม่แน่นอน
+- the weather | สภาพอากาศ | 🌦️
+- the price | ราคา | 🏷️
+- how much time we have | ว่าเรามีเวลาแค่ไหน | ⏳
+- the traffic | การจราจร | 🚗
+- what you want | ว่าคุณต้องการอะไร | 🤔
+- my schedule | ตารางของฉัน | 📅
+- the boss | หัวหน้า | 👔
+> เปลี่ยนเป็นปฏิเสธ | It doesn't depend on {x}. | ไม่ได้ขึ้นอยู่กับ{x}
+
+@food
+
+## food.restaurant | At the Restaurant | ในร้านอาหาร / ปัญหา
+
+A1 | This {x} is delicious. | {x}นี้อร่อยมาก | ชมอาหาร
+- soup | ซุป | 🍲
+- curry | แกง | 🍛
+- cake | เค้ก | 🍰
+- salad | สลัด | 🥗
+- coffee | กาแฟ | ☕
+- pasta | พาสต้า | 🍝
+- fried chicken | ไก่ทอด | 🍗
+> เปลี่ยนเป็นคำถาม | Is this {x} good? | {x}นี้อร่อยไหม
+> เปลี่ยนเป็นปฏิเสธ | This {x} isn't very good. | {x}นี้ไม่ค่อยอร่อย
+
+A1 | Excuse me, this isn't {x}. | ขอโทษ อันนี้ไม่ใช่{x} | แจ้งว่าได้อาหารผิด
+- what I ordered | ที่ฉันสั่ง | 🧾
+- my drink | เครื่องดื่มของฉัน | 🥤
+- my order | ออร์เดอร์ของฉัน | 📋
+- the right dish | จานที่ถูก | 🍽️
+- iced tea | ชาเย็น | 🧋
+- the vegetarian one | จานมังสวิรัติ | 🥦
+- chicken | ไก่ | 🍗
+> เปลี่ยนเป็นคำถาม | Excuse me, is this {x}? | ขอโทษ อันนี้คือ{x}หรือ
+
+A2 | We've been waiting for {x}. | เรารอ{x}มาแล้ว | ตามอาหารหรือบิลอย่างสุภาพ
+- twenty minutes | ยี่สิบนาที | ⏱️
+- half an hour | ครึ่งชั่วโมง | 🕧
+- a long time | นานมาก | ⏳
+- the food | อาหาร | 🍽️
+- the bill | บิล | 🧾
+- almost an hour | เกือบชั่วโมง | 🕐
+- the drinks | เครื่องดื่ม | 🥤
+> เปลี่ยนเป็นคำถาม | Have you been waiting for {x}? | คุณรอ{x}มาแล้วหรือ
+
+A2 | Can we get {x}, please? | ขอ{x}หน่อยได้ไหม | ขอของเพิ่ม (สำหรับทั้งโต๊ะ)
+- the check | บิล | 🧾
+- some napkins | ทิชชู่ | 🧻
+- another plate | จานอีกใบ | 🍽️
+- two more beers | เบียร์อีกสองขวด | 🍺
+- a high chair | เก้าอี้เด็ก | 🪑
+- some ice | น้ำแข็ง | 🧊
+- the dessert menu | เมนูของหวาน | 🍨
+> เปลี่ยนเป็น I | Can I get {x}, please? | ขอ{x}หน่อยได้ไหม (สำหรับตัวเอง)
+
+A2 | Is {x} included? | รวม{x}แล้วหรือยัง | ถามว่าราคารวมอะไรบ้าง
+- service | ค่าบริการ | 🛎️
+- tax | ภาษี | 🧾
+- breakfast | อาหารเช้า | 🍳
+- the drink | เครื่องดื่ม | 🥤
+- delivery | ค่าส่ง | 🛵
+- rice | ข้าว | 🍚
+- the tip | ทิป | 💵
+> ตอบว่าไม่รวม | Sorry, {x} isn't included. | ขอโทษค่ะ/ครับ ไม่รวม{x}
+
+A2 | I'm allergic to {x}. | ฉันแพ้{x} | บอกว่าแพ้อาหาร
+- peanuts | ถั่วลิสง | 🥜
+- seafood | อาหารทะเล | 🦐
+- shrimp | กุ้ง | 🍤
+- milk | นม | 🥛
+- eggs | ไข่ | 🥚
+- wheat | แป้งสาลี | 🌾
+- MSG | ผงชูรส | 🧂
+> เปลี่ยนเป็นคำถาม | Are you allergic to {x}? | คุณแพ้{x}ไหม
+> ถามว่าในอาหารมีไหม | Does this have {x} in it? | อันนี้มี{x}ไหม
+
+B1 | I'm afraid there's a problem with {x}. | ขอโทษนะ {x}มีปัญหา | แจ้งปัญหาอย่างสุภาพ
+- the soup | ซุป | 🍲
+- my steak | สเต๊กของฉัน | 🥩
+- the bill | บิล | 🧾
+- this glass | แก้วใบนี้ | 🥛
+- our table | โต๊ะของเรา | 🪑
+- the order | ออร์เดอร์ | 📋
+- the fish | ปลา | 🐟
+> เปลี่ยนเป็นคำถาม (พนักงาน) | Is there a problem with {x}? | {x}มีปัญหาหรือ
+
+@travel
+
+## travel.hotel | Hotels | โรงแรม
+
+A1 | I have a reservation for {x}. | ฉันจองไว้{x} | เช็กอินโรงแรม
+- two nights | สองคืน | 🛏️
+- tonight | คืนนี้ | 🌙
+- three people | สามคน | 👨‍👩‍👦
+- a double room | ห้องเตียงคู่ | 🛏️
+- one week | หนึ่งสัปดาห์ | 📅
+- next Friday | วันศุกร์หน้า | 🗓️
+- a single room | ห้องเดี่ยว | 🚪
+> เปลี่ยนเป็นคำถาม (พนักงาน) | Do you have a reservation for {x}? | คุณจองไว้{x}ไหม
+
+A1 | What time is {x}? | {x}กี่โมง | ถามเวลาในโรงแรม
+- breakfast | อาหารเช้า | 🍳
+- check-out | เช็กเอาต์ | 🧳
+- check-in | เช็กอิน | 🛎️
+- the shuttle | รถรับส่ง | 🚐
+- dinner | อาหารเย็น | 🍽️
+- the next bus | รถเมล์คันถัดไป | 🚌
+- the tour | ทัวร์ | 🗺️
+> ถามแบบยืนยัน | Is {x} at seven? | {x}ตอนเจ็ดโมงหรือ
+
+A2 | Could I get {x} for my room? | ขอ{x}สำหรับห้องได้ไหม | ขอของเพิ่มในห้องพัก
+- extra towels | ผ้าเช็ดตัวเพิ่ม | 🧻
+- another pillow | หมอนอีกใบ | 🛏️
+- a blanket | ผ้าห่ม | 🧣
+- some water | น้ำดื่ม | 💧
+- a new key card | คีย์การ์ดใบใหม่ | 🔑
+- toilet paper | กระดาษชำระ | 🧻
+- an iron | เตารีด | 👔
+> ใช้ need | I need {x} for my room. | ฉันต้องการ{x}สำหรับห้อง
+
+A2 | Is there {x} in the room? | ในห้องมี{x}ไหม | ถามสิ่งอำนวยความสะดวก
+- a safe | ตู้เซฟ | 🔐
+- a hair dryer | ไดร์เป่าผม | 💨
+- a fridge | ตู้เย็น | 🧊
+- a kettle | กาต้มน้ำ | ☕
+- free Wi-Fi | Wi-Fi ฟรี | 📶
+- a balcony | ระเบียง | 🌇
+- a bathtub | อ่างอาบน้ำ | 🛁
+> ตอบว่ามี | Yes, there's {x} in the room. | มี{x}ในห้องครับ/ค่ะ
+
+A2 | Can I leave {x} here? | ฝาก{x}ไว้ที่นี่ได้ไหม | ฝากของกับโรงแรม
+- my luggage | กระเป๋าเดินทาง | 🧳
+- my bags | กระเป๋า | 🎒
+- this box | กล่องนี้ | 📦
+- my bike | จักรยาน | 🚲
+- the key | กุญแจ | 🔑
+- a message | ข้อความ | ✉️
+- my coat | เสื้อโค้ต | 🧥
+> สุภาพขึ้น | Would it be OK to leave {x} here? | ขอฝาก{x}ไว้ที่นี่ได้ไหม
+
+B1 | Would it be possible to change to {x}? | เปลี่ยนเป็น{x}ได้ไหม | ขอเปลี่ยนห้อง
+- a quieter room | ห้องที่เงียบกว่า | 🤫
+- a room with a view | ห้องที่มีวิว | 🏞️
+- a non-smoking room | ห้องปลอดบุหรี่ | 🚭
+- a bigger room | ห้องที่ใหญ่กว่า | 📏
+- a lower floor | ชั้นที่ต่ำกว่า | ⬇️
+- twin beds | เตียงแยก | 🛏️
+- a later date | วันที่หลังกว่านี้ | 📅
+> แบบตรงๆ | Can I change to {x}? | ขอเปลี่ยนเป็น{x}ได้ไหม
+
+## travel.transport | Taxis & Transport | แท็กซี่ / การเดินทาง
+
+A1 | Please take me to {x}. | ช่วยพาไป{x}หน่อย | บอกคนขับแท็กซี่
+- this address | ที่อยู่นี้ | 📍
+- the airport | สนามบิน | ✈️
+- the station | สถานี | 🚉
+- Central World | เซ็นทรัลเวิลด์ | 🏬
+- the hospital | โรงพยาบาล | 🏥
+- my hotel | โรงแรมของฉัน | 🏨
+- the city center | ใจกลางเมือง | 🏙️
+> สุภาพขึ้น | Could you take me to {x}? | ช่วยพาไป{x}ได้ไหม
+
+A1 | Please stop {x}. | ช่วยจอด{x}หน่อย | บอกให้จอดรถ
+- here | ตรงนี้ | 🛑
+- at the corner | ตรงหัวมุม | ↩️
+- over there | ตรงโน้น | 👉
+- in front of the bank | หน้าธนาคาร | 🏦
+- at the next light | ไฟแดงข้างหน้า | 🚦
+- near the gate | ใกล้ประตู | 🚪
+- by the 7-Eleven | ข้างเซเว่น | 🏪
+> สุภาพขึ้น | Could you stop {x}, please? | ช่วยจอด{x}หน่อยได้ไหม
+
+A2 | How much is it to {x}? | ไป{x}ราคาเท่าไหร่ | ถามค่าโดยสาร
+- the airport | สนามบิน | ✈️
+- downtown | ตัวเมือง | 🏙️
+- the beach | ชายหาด | 🏖️
+- Khao San Road | ถนนข้าวสาร | 🛣️
+- the train station | สถานีรถไฟ | 🚉
+- the night market | ตลาดกลางคืน | 🌙
+- Pattaya | พัทยา | 🌴
+> ถามระยะทาง | How far is it to {x}? | ไป{x}ไกลแค่ไหน
+
+A2 | Does this train stop at {x}? | รถไฟขบวนนี้จอดที่{x}ไหม | ถามป้ายที่รถจอด
+- Siam | สยาม | 🚉
+- the airport | สนามบิน | ✈️
+- the next town | เมืองถัดไป | 🏘️
+- Asok | อโศก | 🚇
+- the central station | สถานีกลาง | 🏛️
+- Chiang Mai | เชียงใหม่ | 🏔️
+- Ayutthaya | อยุธยา | 🛕
+> เปลี่ยนเป็นรถบัส | Does this bus stop at {x}? | รถบัสคันนี้จอดที่{x}ไหม
+
+A2 | Could you use {x}, please? | ช่วยใช้{x}หน่อยได้ไหม | ขอคนขับแท็กซี่
+- the meter | มิเตอร์ | 🧾
+- the highway | ทางด่วน | 🛣️
+- a different road | ถนนเส้นอื่น | ↪️
+- the GPS | จีพีเอส | 🗺️
+- the shortcut | ทางลัด | ⚡
+- the main road | ถนนใหญ่ | 🛣️
+- the air conditioning | แอร์ | ❄️
+> เปลี่ยนเป็นคำถาม | Are you going to use {x}? | คุณจะใช้{x}ไหม
+
+B1 | I'd rather take {x} than walk. | ฉันขอนั่ง{x}ดีกว่าเดิน | บอกทางเลือกการเดินทาง | would rather A than B = อยาก A มากกว่า B
+- a taxi | แท็กซี่ | 🚕
+- the bus | รถเมล์ | 🚌
+- the subway | รถไฟใต้ดิน | 🚇
+- a tuk-tuk | ตุ๊กตุ๊ก | 🛺
+- a motorbike taxi | วินมอเตอร์ไซค์ | 🛵
+- the train | รถไฟ | 🚆
+- a Grab | แกร็บ | 📱
+> เปลี่ยนเป็นคำถาม | Would you rather take {x} than walk? | คุณอยากนั่ง{x}มากกว่าเดินไหม
+
+@social
+
+## social.family | Family & Relationships | ครอบครัว / ความสัมพันธ์
+
+A1 | This is my {x}. | นี่คือ{x}ของฉัน | แนะนำคนในครอบครัว
+- sister | พี่สาว/น้องสาว | 👩
+- brother | พี่ชาย/น้องชาย | 👨
+- mother | แม่ | 👩‍🦱
+- father | พ่อ | 👨‍🦳
+- best friend | เพื่อนสนิท | 🤝
+- husband | สามี | 💑
+- wife | ภรรยา | 💍
+> เปลี่ยนเป็นคำถาม | Is this your {x}? | นี่คือ{x}ของคุณหรือ
+
+A1 | I have {x}. | ฉันมี{x} | เล่าเรื่องครอบครัว
+- two brothers | พี่น้องผู้ชายสองคน | 👬
+- one sister | พี่น้องผู้หญิงหนึ่งคน | 👩
+- a big family | ครอบครัวใหญ่ | 👨‍👩‍👧‍👦
+- three kids | ลูกสามคน | 👧
+- a little son | ลูกชายตัวเล็ก | 👶
+- a cat and a dog | แมวกับหมา | 🐱
+- many cousins | ลูกพี่ลูกน้องหลายคน | 👥
+> เปลี่ยนเป็นคำถาม | Do you have {x}? | คุณมี{x}ไหม
+
+A2 | My {x} lives in Bangkok. | {x}ของฉันอาศัยอยู่ที่กรุงเทพฯ | เล่าว่าใครอยู่ที่ไหน | ประธานเอกพจน์ กริยาเติม s (lives)
+- sister | พี่สาว/น้องสาว | 👩
+- brother | พี่ชาย/น้องชาย | 👨
+- aunt | ป้า/น้า | 👩‍🦰
+- uncle | ลุง/อา | 👨‍🦲
+- grandmother | ยาย/ย่า | 👵
+- best friend | เพื่อนสนิท | 🤝
+- cousin | ลูกพี่ลูกน้อง | 🧑
+> เปลี่ยนเป็นคำถาม | Does your {x} live in Bangkok? | {x}ของคุณอาศัยอยู่ที่กรุงเทพฯหรือ
+
+A2 | I get along well with {x}. | ฉันเข้ากับ{x}ได้ดี | เล่าความสัมพันธ์ | get along with = เข้ากันได้
+- my parents | พ่อแม่ | 👪
+- my sister | พี่สาว/น้องสาว | 👩
+- my boss | หัวหน้า | 👔
+- my neighbors | เพื่อนบ้าน | 🏘️
+- my classmates | เพื่อนร่วมชั้น | 🎓
+- everyone at work | ทุกคนที่ทำงาน | 💼
+- my roommate | เพื่อนร่วมห้อง | 🛏️
+> เปลี่ยนเป็นปฏิเสธ | I don't get along with {x}. | ฉันเข้ากับ{x}ไม่ค่อยได้
+
+A2 | How long have you been {x}? | คุณ{x}มานานแค่ไหนแล้ว | ถามระยะเวลา | Present Perfect: have been = เป็นมาตั้งแต่อดีตจนถึงตอนนี้
+- married | แต่งงาน | 💍
+- together | คบกัน | 💑
+- friends | เป็นเพื่อนกัน | 🤝
+- living here | อาศัยอยู่ที่นี่ | 🏠
+- working there | ทำงานที่นั่น | 🏢
+- learning English | เรียนภาษาอังกฤษ | 📘
+- a teacher | เป็นครู | 👩‍🏫
+> ตอบ | I've been {x} for two years. | ฉัน{x}มาสองปีแล้ว
+
+B1 | I really miss {x}. | ฉันคิดถึง{x}มาก | บอกความคิดถึง
+- my family | ครอบครัว | 👨‍👩‍👧
+- my hometown | บ้านเกิด | 🏡
+- my old friends | เพื่อนเก่า | 👫
+- Thai food | อาหารไทย | 🍛
+- my grandmother | ยาย | 👵
+- living by the sea | การอยู่ใกล้ทะเล | 🌊
+- my school days | สมัยเรียน | 🎒
+> เปลี่ยนเป็นปฏิเสธ | I don't miss {x} at all. | ฉันไม่คิดถึง{x}เลย
+
+## social.agree | Agree & Clarify | เห็นด้วย / ถามให้ชัด
+
+A1 | I agree with {x}. | ฉันเห็นด้วยกับ{x} | บอกว่าเห็นด้วย
+- you | คุณ | 👍
+- her | เธอ | 👩
+- your idea | ความคิดของคุณ | 💡
+- that | เรื่องนั้น | ✅
+- the teacher | ครู | 👩‍🏫
+- most of it | ส่วนใหญ่ | 📊
+- everything you said | ทุกอย่างที่คุณพูด | 💬
+> เปลี่ยนเป็นปฏิเสธ | I don't agree with {x}. | ฉันไม่เห็นด้วยกับ{x}
+
+A1 | Sorry, what does {x} mean? | ขอโทษ {x}แปลว่าอะไร | ถามความหมาย | does + V1 (mean ไม่เติม s)
+- this word | คำนี้ | 🔤
+- ASAP | ASAP | ⏩
+- that sign | ป้ายนั้น | 🪧
+- this sentence | ประโยคนี้ | 📝
+- FAQ | FAQ | ❓
+- that phrase | วลีนั้น | 💬
+- this symbol | สัญลักษณ์นี้ | ⚠️
+> ขอให้อธิบาย | Can you explain {x}? | ช่วยอธิบาย{x}ได้ไหม
+
+A2 | Do you mean {x}? | คุณหมายถึง{x}หรือ | ถามเพื่อให้แน่ใจ
+- the red one | อันสีแดง | 🔴
+- next Monday | วันจันทร์หน้า | 📅
+- this street | ถนนนี้ | 🛣️
+- the new teacher | ครูคนใหม่ | 👩‍🏫
+- twelve or twenty | สิบสองหรือยี่สิบ | 🔢
+- tomorrow morning | พรุ่งนี้เช้า | 🌅
+- the big one | อันใหญ่ | 📏
+> ตอบแก้ | No, I mean {x}. | ไม่ใช่ ฉันหมายถึง{x}
+
+A2 | That's a good point, but {x}. | เป็นประเด็นที่ดี แต่{x} | ไม่เห็นด้วยอย่างสุภาพ
+- it's too expensive | มันแพงเกินไป | 💸
+- we don't have time | เราไม่มีเวลา | ⏳
+- I'm not sure | ฉันไม่แน่ใจ | 🤔
+- it might rain | ฝนอาจจะตก | 🌧️
+- it's very far | มันไกลมาก | 🗺️
+- the boss said no | หัวหน้าบอกว่าไม่ได้ | 🙅
+- I need to think | ฉันต้องคิดก่อน | 💭
+> ใช้ I see what you mean | I see what you mean, but {x}. | ฉันเข้าใจที่คุณพูด แต่{x}
+
+B1 | Could you explain {x} again? | ช่วยอธิบาย{x}อีกครั้งได้ไหม | ขอให้อธิบายซ้ำ
+- the last part | ส่วนสุดท้าย | 🔚
+- the rules | กฎ | 📜
+- how it works | ว่ามันทำงานยังไง | ⚙️
+- the second step | ขั้นตอนที่สอง | 2️⃣
+- what you mean | ที่คุณหมายถึง | 🤔
+- the plan | แผน | 🗺️
+- that word | คำนั้น | 🔤
+> ขอให้ช้าลง | Could you explain {x} more slowly? | ช่วยอธิบาย{x}ช้าๆ ได้ไหม
+
+B1 | I see your point, but I think {x}. | ฉันเข้าใจมุมของคุณ แต่ฉันคิดว่า{x} | แย้งอย่างสุภาพ
+- we should wait | เราควรรอ | ⏳
+- it's too risky | มันเสี่ยงเกินไป | ⚠️
+- she's right | เธอพูดถูก | ✅
+- we need more information | เราต้องการข้อมูลเพิ่ม | 📊
+- the price is fair | ราคาก็สมเหตุสมผล | 🏷️
+- there's a better way | มีวิธีที่ดีกว่า | 💡
+- it can work | มันเป็นไปได้ | 👍
+> แบบสั้น | Maybe, but I think {x}. | อาจจะใช่ แต่ฉันคิดว่า{x}
+
+@work
+
+## work.phone | Phone & Messages | โทรศัพท์ / ข้อความ
+
+A1 | Can I speak to {x}, please? | ขอสาย{x}หน่อยได้ไหม | โทรขอสายคนที่ต้องการ
+- Mr. Smith | คุณสมิธ | 👨‍💼
+- the manager | ผู้จัดการ | 👔
+- someone in sales | คนในฝ่ายขาย | 📈
+- Dr. Lee | หมอลี | 🩺
+- the person in charge | ผู้รับผิดชอบ | 🙋
+- your boss | หัวหน้าของคุณ | 💼
+- Anna | แอนนา | 👩
+> สุภาพขึ้น | Could I speak to {x}, please? | ขอเรียนสาย{x}ได้ไหม
+
+A1 | I'm calling about {x}. | ฉันโทรมาเรื่อง{x} | บอกเหตุผลที่โทร
+- my order | ออร์เดอร์ของฉัน | 📦
+- the job | ตำแหน่งงานที่ประกาศ | 💼
+- my appointment | นัดของฉัน | 📅
+- the apartment | ห้องเช่า | 🏢
+- your email | อีเมลของคุณ | 📧
+- the delivery | การส่งของ | 🚚
+- the bill | บิล | 🧾
+> เปลี่ยนเป็นอดีต | I called yesterday about {x}. | เมื่อวานฉันโทรมาเรื่อง{x}
+
+A2 | Could you tell him that {x}? | ช่วยบอกเขาว่า{x}ได้ไหม | ฝากข้อความ
+- I called | ฉันโทรมา | 📞
+- I'll be late | ฉันจะไปสาย | ⏰
+- the meeting is cancelled | การประชุมยกเลิก | ❌
+- I sent the file | ฉันส่งไฟล์แล้ว | 📎
+- I'm waiting outside | ฉันรออยู่ข้างนอก | 🚪
+- the car is ready | รถพร้อมแล้ว | 🚗
+- dinner is at seven | อาหารเย็นตอนหนึ่งทุ่ม | 🍽️
+> เปลี่ยนเป็น her | Could you tell her that {x}? | ช่วยบอกเธอว่า{x}ได้ไหม
+
+A2 | Sorry, the line is bad. Could you {x}? | ขอโทษ สัญญาณไม่ดี ช่วย{x}ได้ไหม | แก้ปัญหาตอนคุยโทรศัพท์
+- say that again | พูดอีกครั้ง | 🔁
+- speak up | พูดดังขึ้น | 🔊
+- call me back | โทรกลับมา | 📞
+- repeat the number | ทวนเบอร์ | 🔢
+- spell your name | สะกดชื่อ | 🔤
+- text me | ส่งข้อความมา | 💬
+- speak more slowly | พูดช้าลง | 🐢
+> แบบสั้น | Sorry, could you {x}? | ขอโทษ ช่วย{x}ได้ไหม
+
+A2 | I'll send you {x} later. | เดี๋ยวฉันจะส่ง{x}ให้ | สัญญาว่าจะส่งข้อมูล
+- the photos | รูป | 📷
+- the address | ที่อยู่ | 📍
+- the details | รายละเอียด | 📝
+- a message | ข้อความ | 💬
+- the link | ลิงก์ | 🔗
+- the file | ไฟล์ | 📁
+- the location | โลเคชัน | 🗺️
+> ขอให้ส่ง | Could you send me {x}? | ช่วยส่ง{x}มาให้หน่อยได้ไหม
+
+B1 | Sorry I missed your call, I was {x}. | ขอโทษที่ไม่ได้รับสาย ตอนนั้นฉัน{x} | ขอโทษที่ไม่รับสาย
+- driving | ขับรถอยู่ | 🚗
+- in a meeting | ประชุมอยู่ | 💼
+- in the shower | อาบน้ำอยู่ | 🚿
+- asleep | หลับอยู่ | 😴
+- at the gym | อยู่ที่ยิม | 🏋️
+- on another call | คุยสายอื่นอยู่ | 📞
+- teaching a class | สอนหนังสืออยู่ | 👩‍🏫
+> ตอบข้อความช้า | Sorry for the late reply, I was {x}. | ขอโทษที่ตอบช้า ตอนนั้นฉัน{x}
+
+## work.meeting | Meetings & Projects | ประชุม / ทำงาน
+
+A1 | I'm working on {x}. | ฉันกำลังทำ{x}อยู่ | เล่างานที่ทำอยู่
+- a new project | โปรเจกต์ใหม่ | 🆕
+- the report | รายงาน | 📊
+- the website | เว็บไซต์ | 🌐
+- the presentation | งานนำเสนอ | 🖥️
+- the budget | งบประมาณ | 💰
+- a design | งานออกแบบ | 🎨
+- the schedule | ตารางงาน | 📅
+> เปลี่ยนเป็นคำถาม | Are you working on {x}? | คุณกำลังทำ{x}อยู่หรือ
+
+A1 | Can we meet {x}? | เราเจอกัน{x}ได้ไหม | นัดประชุม
+- tomorrow | พรุ่งนี้ | 📅
+- this afternoon | บ่ายนี้ | 🌤️
+- at ten | ตอนสิบโมง | 🕙
+- next week | สัปดาห์หน้า | 📆
+- after lunch | หลังมื้อเที่ยง | 🍱
+- on Friday | วันศุกร์ | 🗓️
+- online | ออนไลน์ | 💻
+> เสนอแบบชวน | Let's meet {x}. | เจอกัน{x}นะ
+
+A2 | I've finished {x}. | ฉันทำ{x}เสร็จแล้ว | รายงานความคืบหน้า | Present Perfect: have + V3 = ทำเสร็จแล้ว (ผลยังอยู่ถึงตอนนี้)
+- the report | รายงาน | 📊
+- the first part | ส่วนแรก | 1️⃣
+- the homework | การบ้าน | 📚
+- the slides | สไลด์ | 🖥️
+- the email | อีเมล | 📧
+- the design | งานออกแบบ | 🎨
+- everything | ทุกอย่าง | ✅
+> เปลี่ยนเป็นคำถาม | Have you finished {x}? | คุณทำ{x}เสร็จหรือยัง
+> ยังไม่เสร็จ | I haven't finished {x} yet. | ฉันยังทำ{x}ไม่เสร็จ
+
+A2 | The deadline for {x} is Friday. | กำหนดส่ง{x}คือวันศุกร์ | บอกกำหนดส่งงาน
+- the report | รายงาน | 📊
+- this project | โปรเจกต์นี้ | 📁
+- the application | ใบสมัคร | 📝
+- the essay | เรียงความ | ✍️
+- the payment | การชำระเงิน | 💳
+- the design | งานออกแบบ | 🎨
+- registration | การลงทะเบียน | 🗂️
+> เปลี่ยนเป็นคำถาม | Is the deadline for {x} Friday? | กำหนดส่ง{x}คือวันศุกร์หรือ
+
+A2 | Let me check {x} and get back to you. | ขอเช็ก{x}ก่อนแล้วจะติดต่อกลับ | ขอเวลาตรวจสอบ
+- my schedule | ตารางของฉัน | 📅
+- the price | ราคา | 🏷️
+- with my boss | กับหัวหน้า | 👔
+- the details | รายละเอียด | 📝
+- the numbers | ตัวเลข | 🔢
+- my email | อีเมลของฉัน | 📧
+- the stock | สต็อก | 📦
+> บอกว่าต้องเช็กก่อน | I need to check {x} first. | ฉันต้องเช็ก{x}ก่อน
+
+B1 | I'd like to suggest that we {x}. | ฉันขอเสนอว่าเรา{x} | เสนอความเห็นในที่ประชุม
+- start earlier | เริ่มเร็วขึ้น | ⏰
+- take a short break | พักสั้นๆ | ☕
+- ask the customer | ถามลูกค้า | 🙋
+- try a new design | ลองแบบใหม่ | 🎨
+- work in pairs | ทำงานเป็นคู่ | 👥
+- cut the budget | ลดงบประมาณ | ✂️
+- meet every week | ประชุมทุกสัปดาห์ | 📅
+> แบบ Why don't we | Why don't we {x}? | ทำไมเราไม่{x}ล่ะ
+
+B1 | Could we move the meeting to {x}? | เราเลื่อนประชุมไป{x}ได้ไหม | ขอเลื่อนนัด
+- Thursday | วันพฤหัส | 📅
+- next week | สัปดาห์หน้า | 📆
+- the afternoon | ช่วงบ่าย | 🌤️
+- ten o'clock | สิบโมง | 🕙
+- tomorrow morning | พรุ่งนี้เช้า | 🌅
+- another day | วันอื่น | 🔄
+- the big room | ห้องใหญ่ | 🚪
+> ถามว่าเลื่อนได้ไหม | Is it OK to move the meeting to {x}? | เลื่อนประชุมไป{x}ได้ไหม

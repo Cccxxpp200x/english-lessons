@@ -1,0 +1,1944 @@
+{
+ "cats": [
+  {
+   "id": "greet",
+   "en": "Meeting People",
+   "th": "ทักทาย / ทำความรู้จัก",
+   "emoji": "👋"
+  },
+  {
+   "id": "cafe",
+   "en": "Cafe & Restaurant",
+   "th": "ร้านกาแฟ / ร้านอาหาร",
+   "emoji": "☕"
+  },
+  {
+   "id": "shop",
+   "en": "Shopping",
+   "th": "ซื้อของ",
+   "emoji": "🛍️"
+  },
+  {
+   "id": "move",
+   "en": "Directions & Transport",
+   "th": "ถามทาง / เดินทาง",
+   "emoji": "🚕"
+  },
+  {
+   "id": "hotel",
+   "en": "Hotel",
+   "th": "โรงแรม",
+   "emoji": "🏨"
+  },
+  {
+   "id": "airport",
+   "en": "Airport",
+   "th": "สนามบิน",
+   "emoji": "✈️"
+  },
+  {
+   "id": "health",
+   "en": "Health",
+   "th": "สุขภาพ",
+   "emoji": "🩺"
+  },
+  {
+   "id": "phone",
+   "en": "Phone Calls",
+   "th": "คุยโทรศัพท์",
+   "emoji": "📞"
+  },
+  {
+   "id": "work",
+   "en": "Work & Study",
+   "th": "งาน / เรียน",
+   "emoji": "💼"
+  },
+  {
+   "id": "plans",
+   "en": "Plans with Friends",
+   "th": "นัดเพื่อน",
+   "emoji": "🎉"
+  },
+  {
+   "id": "home",
+   "en": "Home & Neighbors",
+   "th": "บ้าน / เพื่อนบ้าน",
+   "emoji": "🏠"
+  },
+  {
+   "id": "help",
+   "en": "Emergencies & Help",
+   "th": "ขอความช่วยเหลือ",
+   "emoji": "🆘"
+  }
+ ],
+ "dialogs": [
+  {
+   "id": "meeting-someone-new",
+   "cat": "greet",
+   "level": "A1",
+   "en": "Meeting someone new",
+   "th": "เจอคนใหม่",
+   "emoji": "🤝",
+   "scene": "คุณเจอคนใหม่ที่งานเลี้ยงของเพื่อน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hi, I'm Tom. Nice to meet you.",
+     "th": "สวัสดี ผมทอม ยินดีที่ได้รู้จัก"
+    },
+    {
+     "who": "B",
+     "en": "Hi Tom, I'm Nok. Nice to meet you too.",
+     "th": "สวัสดีทอม ฉันนก ยินดีที่ได้รู้จักเช่นกัน"
+    },
+    {
+     "who": "A",
+     "en": "Where are you from?",
+     "th": "คุณมาจากไหน"
+    },
+    {
+     "who": "B",
+     "en": "I'm from Thailand. How about you?",
+     "th": "ฉันมาจากประเทศไทย แล้วคุณล่ะ"
+    },
+    {
+     "who": "A",
+     "en": "I'm from Canada. What do you do?",
+     "th": "ผมมาจากแคนาดา คุณทำงานอะไร"
+    },
+    {
+     "who": "B",
+     "en": "I'm a nurse. I work at a hospital.",
+     "th": "ฉันเป็นพยาบาล ทำงานที่โรงพยาบาล"
+    },
+    {
+     "who": "A",
+     "en": "That sounds interesting!",
+     "th": "ฟังดูน่าสนใจนะ"
+    },
+    {
+     "who": "B",
+     "en": "Thanks. It's busy, but I like it.",
+     "th": "ขอบคุณ งานยุ่งแต่ฉันชอบ"
+    }
+   ]
+  },
+  {
+   "id": "catching-up-with-a-friend",
+   "cat": "greet",
+   "level": "A1",
+   "en": "Catching up with a friend",
+   "th": "เจอเพื่อนเก่า",
+   "emoji": "😄",
+   "scene": "คุณบังเอิญเจอเพื่อนที่ไม่ได้เจอกันนาน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hey! Long time no see. How are you?",
+     "th": "เฮ้ ไม่ได้เจอกันนานเลย สบายดีไหม"
+    },
+    {
+     "who": "B",
+     "en": "I'm good, thanks! How have you been?",
+     "th": "สบายดี ขอบคุณ แล้วเธอเป็นยังไงบ้าง"
+    },
+    {
+     "who": "A",
+     "en": "Pretty busy. I started a new job.",
+     "th": "ยุ่งมากเลย ฉันเพิ่งเริ่มงานใหม่"
+    },
+    {
+     "who": "B",
+     "en": "Really? Congratulations! Do you like it?",
+     "th": "จริงเหรอ ยินดีด้วย ชอบไหม"
+    },
+    {
+     "who": "A",
+     "en": "Yes, my team is great.",
+     "th": "ชอบ ทีมของฉันดีมาก"
+    },
+    {
+     "who": "B",
+     "en": "That's wonderful. Let's get coffee sometime.",
+     "th": "ดีจังเลย เดี๋ยวไปกินกาแฟกันสักวันนะ"
+    },
+    {
+     "who": "A",
+     "en": "Sure! I'll message you.",
+     "th": "ได้เลย เดี๋ยวฉันส่งข้อความหานะ"
+    }
+   ]
+  },
+  {
+   "id": "introducing-a-friend",
+   "cat": "greet",
+   "level": "A2",
+   "en": "Introducing a friend",
+   "th": "แนะนำเพื่อน",
+   "emoji": "👥",
+   "scene": "คุณแนะนำเพื่อนให้รู้จักกับเพื่อนร่วมงาน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Who's your friend?",
+     "th": "เพื่อนของคุณคือใคร"
+    },
+    {
+     "who": "B",
+     "en": "This is Mai. We went to school together.",
+     "th": "นี่คือใหม่ เราเรียนโรงเรียนเดียวกัน"
+    },
+    {
+     "who": "A",
+     "en": "Nice to meet you, Mai.",
+     "th": "ยินดีที่ได้รู้จักนะ ใหม่"
+    },
+    {
+     "who": "B",
+     "en": "Mai just moved here from Chiang Mai.",
+     "th": "ใหม่เพิ่งย้ายมาจากเชียงใหม่"
+    },
+    {
+     "who": "A",
+     "en": "Oh, welcome! How do you like the city?",
+     "th": "โอ้ ยินดีต้อนรับ ชอบเมืองนี้ไหม"
+    },
+    {
+     "who": "B",
+     "en": "She loves the food, but not the traffic.",
+     "th": "เธอชอบอาหาร แต่ไม่ชอบรถติด"
+    },
+    {
+     "who": "A",
+     "en": "Ha ha, nobody likes the traffic!",
+     "th": "ฮ่าๆ ไม่มีใครชอบรถติดหรอก"
+    }
+   ]
+  },
+  {
+   "id": "ordering-coffee",
+   "cat": "cafe",
+   "level": "A1",
+   "en": "Ordering coffee",
+   "th": "สั่งกาแฟ",
+   "emoji": "☕",
+   "scene": "คุณสั่งเครื่องดื่มที่ร้านกาแฟ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hi! What can I get for you?",
+     "th": "สวัสดีค่ะ รับอะไรดีคะ"
+    },
+    {
+     "who": "B",
+     "en": "Can I have an iced latte, please?",
+     "th": "ขอลาเต้เย็นหนึ่งแก้วครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Sure. What size would you like?",
+     "th": "ได้ค่ะ เอาไซซ์ไหนคะ"
+    },
+    {
+     "who": "B",
+     "en": "A medium, please. Less sugar.",
+     "th": "ไซซ์กลางครับ/ค่ะ หวานน้อย"
+    },
+    {
+     "who": "A",
+     "en": "For here or to go?",
+     "th": "ทานที่นี่หรือกลับบ้านคะ"
+    },
+    {
+     "who": "B",
+     "en": "To go, please.",
+     "th": "กลับบ้านครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "That's eighty-five baht.",
+     "th": "แปดสิบห้าบาทค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Here you are. Can I pay by QR code?",
+     "th": "นี่ครับ/ค่ะ จ่ายด้วย QR ได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Of course.",
+     "th": "ได้แน่นอนค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "ordering-dinner",
+   "cat": "cafe",
+   "level": "A1",
+   "en": "Ordering dinner",
+   "th": "สั่งอาหารเย็น",
+   "emoji": "🍛",
+   "scene": "คุณกับเพื่อนสั่งอาหารที่ร้าน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Are you ready to order?",
+     "th": "พร้อมสั่งหรือยังคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes. I'd like the green curry, please.",
+     "th": "พร้อมแล้ว ขอแกงเขียวหวานครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Would you like rice with that?",
+     "th": "รับข้าวด้วยไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, please. And a glass of water.",
+     "th": "ใช่ครับ/ค่ะ แล้วก็น้ำหนึ่งแก้ว"
+    },
+    {
+     "who": "A",
+     "en": "How spicy would you like it?",
+     "th": "เอาเผ็ดแค่ไหนคะ"
+    },
+    {
+     "who": "B",
+     "en": "Not too spicy, please.",
+     "th": "ไม่เผ็ดมากครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Okay. Anything else?",
+     "th": "ได้ค่ะ รับอะไรเพิ่มไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "No, that's all. Thank you.",
+     "th": "ไม่แล้วครับ/ค่ะ ขอบคุณ"
+    }
+   ]
+  },
+  {
+   "id": "a-problem-with-the-bill",
+   "cat": "cafe",
+   "level": "A2",
+   "en": "A problem with the bill",
+   "th": "ปัญหาเรื่องบิล",
+   "emoji": "🧾",
+   "scene": "บิลค่าอาหารคิดเงินผิด",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Here's your bill.",
+     "th": "นี่บิลค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Excuse me, I think there's a mistake.",
+     "th": "ขอโทษครับ/ค่ะ ผมว่ามีอะไรผิดนิดหน่อย"
+    },
+    {
+     "who": "A",
+     "en": "Oh, let me see.",
+     "th": "โอ้ ขอดูหน่อยค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "We only ordered two drinks, not three.",
+     "th": "เราสั่งเครื่องดื่มแค่สองแก้ว ไม่ใช่สาม"
+    },
+    {
+     "who": "A",
+     "en": "You're right. I'm so sorry about that.",
+     "th": "ถูกต้องค่ะ ขอโทษจริงๆ ค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "No problem. Can we split the bill?",
+     "th": "ไม่เป็นไร แยกบิลได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Of course. I'll bring two bills.",
+     "th": "ได้ค่ะ เดี๋ยวนำบิลมาสองใบ"
+    },
+    {
+     "who": "B",
+     "en": "Thank you very much.",
+     "th": "ขอบคุณมากครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "buying-clothes",
+   "cat": "shop",
+   "level": "A1",
+   "en": "Buying clothes",
+   "th": "ซื้อเสื้อผ้า",
+   "emoji": "👕",
+   "scene": "คุณกำลังหาเสื้อในร้านเสื้อผ้า",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello. Can I help you?",
+     "th": "สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes. I'm looking for a white shirt.",
+     "th": "ครับ/ค่ะ ผมกำลังหาเสื้อเชิ้ตสีขาว"
+    },
+    {
+     "who": "A",
+     "en": "What size do you wear?",
+     "th": "ใส่ไซซ์อะไรคะ"
+    },
+    {
+     "who": "B",
+     "en": "Medium, I think. Can I try this one on?",
+     "th": "น่าจะไซซ์กลาง ขอลองตัวนี้ได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Sure. The fitting room is over there.",
+     "th": "ได้ค่ะ ห้องลองอยู่ตรงนั้น"
+    },
+    {
+     "who": "B",
+     "en": "It's a little big. Do you have a small?",
+     "th": "มันใหญ่ไปนิด มีไซซ์เล็กไหม"
+    },
+    {
+     "who": "A",
+     "en": "Yes, here you go.",
+     "th": "มีค่ะ นี่ค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Perfect. I'll take it.",
+     "th": "พอดีเลย เอาตัวนี้ครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "at-the-market",
+   "cat": "shop",
+   "level": "A2",
+   "en": "At the market",
+   "th": "ซื้อของที่ตลาด",
+   "emoji": "🥭",
+   "scene": "คุณซื้อผลไม้และต่อราคาที่ตลาด",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Fresh mangoes! Very sweet!",
+     "th": "มะม่วงสดๆ หวานมาก"
+    },
+    {
+     "who": "B",
+     "en": "How much are the mangoes?",
+     "th": "มะม่วงราคาเท่าไหร่"
+    },
+    {
+     "who": "A",
+     "en": "Eighty baht a kilo.",
+     "th": "กิโลละแปดสิบบาท"
+    },
+    {
+     "who": "B",
+     "en": "That's a bit expensive. Can you do seventy?",
+     "th": "แพงไปหน่อย เจ็ดสิบได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "If you buy two kilos, seventy each.",
+     "th": "ถ้าซื้อสองกิโล กิโลละเจ็ดสิบ"
+    },
+    {
+     "who": "B",
+     "en": "Okay, two kilos, please.",
+     "th": "ตกลง เอาสองกิโล"
+    },
+    {
+     "who": "A",
+     "en": "Here you are. That's one hundred and forty baht.",
+     "th": "นี่ครับ ร้อยสี่สิบบาท"
+    },
+    {
+     "who": "B",
+     "en": "Thank you. Can I have a bag?",
+     "th": "ขอบคุณ ขอถุงด้วยได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "returning-an-item",
+   "cat": "shop",
+   "level": "A2",
+   "en": "Returning an item",
+   "th": "คืนสินค้า",
+   "emoji": "🔄",
+   "scene": "หูฟังที่ซื้อมาเสีย คุณนำมาคืนที่ร้าน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hi, how can I help you?",
+     "th": "สวัสดีค่ะ มีอะไรให้ช่วยคะ"
+    },
+    {
+     "who": "B",
+     "en": "I bought these headphones last week, but they don't work.",
+     "th": "ผมซื้อหูฟังนี้เมื่อสัปดาห์ที่แล้ว แต่มันใช้ไม่ได้"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry to hear that. Do you have the receipt?",
+     "th": "เสียใจด้วยค่ะ มีใบเสร็จไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, here it is.",
+     "th": "มีครับ/ค่ะ นี่ครับ"
+    },
+    {
+     "who": "A",
+     "en": "Would you like a refund or a new pair?",
+     "th": "ต้องการเงินคืนหรือเปลี่ยนคู่ใหม่คะ"
+    },
+    {
+     "who": "B",
+     "en": "A new pair, please.",
+     "th": "ขอเปลี่ยนคู่ใหม่ครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "No problem. Here you go.",
+     "th": "ได้ค่ะ นี่ค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Thanks for your help.",
+     "th": "ขอบคุณที่ช่วยนะครับ/คะ"
+    }
+   ]
+  },
+  {
+   "id": "asking-the-way",
+   "cat": "move",
+   "level": "A1",
+   "en": "Asking the way",
+   "th": "ถามทาง",
+   "emoji": "🗺️",
+   "scene": "คุณหลงทางและถามทางไปสถานีรถไฟฟ้า",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Are you okay? You look lost.",
+     "th": "เป็นอะไรไหม ดูเหมือนหลงทาง"
+    },
+    {
+     "who": "B",
+     "en": "Yes, how do I get to the BTS station?",
+     "th": "ใช่ ไปสถานีบีทีเอสยังไง"
+    },
+    {
+     "who": "A",
+     "en": "Go straight and turn left at the bank.",
+     "th": "เดินตรงไปแล้วเลี้ยวซ้ายที่ธนาคาร"
+    },
+    {
+     "who": "B",
+     "en": "Turn left at the bank. Is it far?",
+     "th": "เลี้ยวซ้ายที่ธนาคาร ไกลไหม"
+    },
+    {
+     "who": "A",
+     "en": "No, it's about five minutes on foot.",
+     "th": "ไม่ไกล เดินประมาณห้านาที"
+    },
+    {
+     "who": "B",
+     "en": "Great. Thank you so much!",
+     "th": "เยี่ยมเลย ขอบคุณมากนะ"
+    },
+    {
+     "who": "A",
+     "en": "You're welcome.",
+     "th": "ไม่เป็นไร"
+    }
+   ]
+  },
+  {
+   "id": "taking-a-taxi",
+   "cat": "move",
+   "level": "A1",
+   "en": "Taking a taxi",
+   "th": "นั่งแท็กซี่",
+   "emoji": "🚕",
+   "scene": "คุณขึ้นแท็กซี่ไปสนามบิน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Where to?",
+     "th": "ไปไหนครับ"
+    },
+    {
+     "who": "B",
+     "en": "The airport, please. Can you use the meter?",
+     "th": "ไปสนามบินครับ/ค่ะ ใช้มิเตอร์ได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Sure. Which terminal?",
+     "th": "ได้ครับ อาคารผู้โดยสารไหน"
+    },
+    {
+     "who": "B",
+     "en": "International departures, please.",
+     "th": "ขาออกระหว่างประเทศครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Do you want to take the highway?",
+     "th": "จะขึ้นทางด่วนไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, please. I'm in a bit of a hurry.",
+     "th": "ขึ้นครับ/ค่ะ ฉันรีบนิดหน่อย"
+    },
+    {
+     "who": "A",
+     "en": "No problem. We'll be there in thirty minutes.",
+     "th": "ได้ครับ อีกสามสิบนาทีถึง"
+    },
+    {
+     "who": "B",
+     "en": "Thank you.",
+     "th": "ขอบคุณครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "buying-a-train-ticket",
+   "cat": "move",
+   "level": "A2",
+   "en": "Buying a train ticket",
+   "th": "ซื้อตั๋วรถไฟ",
+   "emoji": "🚆",
+   "scene": "คุณซื้อตั๋วรถไฟไปเชียงใหม่",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Next, please.",
+     "th": "คนต่อไปครับ"
+    },
+    {
+     "who": "B",
+     "en": "One ticket to Chiang Mai, please.",
+     "th": "ขอตั๋วไปเชียงใหม่หนึ่งใบครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "For today?",
+     "th": "สำหรับวันนี้ไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "No, for tomorrow night. Do you have a sleeper?",
+     "th": "ไม่ใช่ สำหรับคืนพรุ่งนี้ มีตู้นอนไหม"
+    },
+    {
+     "who": "A",
+     "en": "Yes. Upper or lower bed?",
+     "th": "มีครับ เตียงบนหรือล่าง"
+    },
+    {
+     "who": "B",
+     "en": "Lower, please. How much is it?",
+     "th": "ขอเตียงล่างครับ/ค่ะ ราคาเท่าไหร่"
+    },
+    {
+     "who": "A",
+     "en": "It's nine hundred baht.",
+     "th": "เก้าร้อยบาทครับ"
+    },
+    {
+     "who": "B",
+     "en": "Okay. What time does the train leave?",
+     "th": "โอเค รถไฟออกกี่โมง"
+    },
+    {
+     "who": "A",
+     "en": "At six in the evening, from platform three.",
+     "th": "หกโมงเย็น ชานชาลาที่สามครับ"
+    }
+   ]
+  },
+  {
+   "id": "checking-in",
+   "cat": "hotel",
+   "level": "A1",
+   "en": "Checking in",
+   "th": "เช็กอิน",
+   "emoji": "🛎️",
+   "scene": "คุณเช็กอินที่โรงแรม",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Good evening. Welcome to the Sunrise Hotel.",
+     "th": "สวัสดีตอนเย็นครับ ยินดีต้อนรับสู่โรงแรมซันไรส์"
+    },
+    {
+     "who": "B",
+     "en": "Hi. I have a reservation under the name Kan.",
+     "th": "สวัสดี ฉันจองไว้ในชื่อกานต์"
+    },
+    {
+     "who": "A",
+     "en": "Let me check. Yes, two nights, right?",
+     "th": "ขอเช็กก่อนนะครับ ใช่ สองคืนใช่ไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "That's right. What time is breakfast?",
+     "th": "ใช่ อาหารเช้ากี่โมง"
+    },
+    {
+     "who": "A",
+     "en": "From six to ten on the second floor.",
+     "th": "หกโมงถึงสิบโมง ที่ชั้นสอง"
+    },
+    {
+     "who": "B",
+     "en": "Great. And what's the Wi-Fi password?",
+     "th": "เยี่ยม แล้วรหัส Wi-Fi คืออะไร"
+    },
+    {
+     "who": "A",
+     "en": "It's on your key card.",
+     "th": "อยู่บนคีย์การ์ดครับ"
+    },
+    {
+     "who": "B",
+     "en": "Thank you very much.",
+     "th": "ขอบคุณมากครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "a-problem-with-the-room",
+   "cat": "hotel",
+   "level": "A2",
+   "en": "A problem with the room",
+   "th": "ห้องพักมีปัญหา",
+   "emoji": "🛏️",
+   "scene": "แอร์ในห้องพักเสีย คุณโทรแจ้งแผนกต้อนรับ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Front desk. How can I help you?",
+     "th": "แผนกต้อนรับค่ะ มีอะไรให้ช่วยคะ"
+    },
+    {
+     "who": "B",
+     "en": "Hi, the air conditioner in my room isn't working.",
+     "th": "สวัสดี แอร์ในห้องของฉันไม่ทำงาน"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry about that. I'll send someone to check it.",
+     "th": "ขอโทษด้วยค่ะ เดี๋ยวส่งคนไปดูให้"
+    },
+    {
+     "who": "B",
+     "en": "How long will it take? It's really hot.",
+     "th": "ใช้เวลานานไหม ร้อนมากเลย"
+    },
+    {
+     "who": "A",
+     "en": "About fifteen minutes.",
+     "th": "ประมาณสิบห้านาทีค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "If it can't be fixed, can I change rooms?",
+     "th": "ถ้าซ่อมไม่ได้ ขอเปลี่ยนห้องได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Of course. We'll find you another room.",
+     "th": "ได้แน่นอนค่ะ เราจะหาห้องอื่นให้"
+    },
+    {
+     "who": "B",
+     "en": "Thank you for your help.",
+     "th": "ขอบคุณที่ช่วยครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "checking-out",
+   "cat": "hotel",
+   "level": "A2",
+   "en": "Checking out",
+   "th": "เช็กเอาต์",
+   "emoji": "🧳",
+   "scene": "คุณเช็กเอาต์และขอฝากกระเป๋า",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Good morning. Are you checking out?",
+     "th": "สวัสดีตอนเช้าค่ะ จะเช็กเอาต์ใช่ไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes. Here's my key card.",
+     "th": "ใช่ นี่คีย์การ์ดครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Did you use anything from the minibar?",
+     "th": "ได้ใช้อะไรจากมินิบาร์ไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Just two bottles of water.",
+     "th": "แค่น้ำสองขวดครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Okay, that's forty baht.",
+     "th": "ได้ค่ะ สี่สิบบาทค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Can I leave my bags here until three?",
+     "th": "ฝากกระเป๋าไว้ถึงบ่ายสามได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Sure. Here's your ticket for the bags.",
+     "th": "ได้ค่ะ นี่ตั๋วรับกระเป๋าค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Thanks. Could you also call a taxi for me at three?",
+     "th": "ขอบคุณ ช่วยเรียกแท็กซี่ให้ตอนบ่ายสามด้วยได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "at-the-check-in-counter",
+   "cat": "airport",
+   "level": "A2",
+   "en": "At the check-in counter",
+   "th": "เคาน์เตอร์เช็กอิน",
+   "emoji": "🎫",
+   "scene": "คุณเช็กอินเที่ยวบินที่สนามบิน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Good morning. Passport, please.",
+     "th": "สวัสดีตอนเช้าค่ะ ขอพาสปอร์ตด้วยค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Here you are.",
+     "th": "นี่ครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Are you checking any bags today?",
+     "th": "วันนี้มีกระเป๋าโหลดไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, just one suitcase.",
+     "th": "มี แค่กระเป๋าเดินทางใบเดียว"
+    },
+    {
+     "who": "A",
+     "en": "Would you like a window or an aisle seat?",
+     "th": "ต้องการที่นั่งริมหน้าต่างหรือริมทางเดินคะ"
+    },
+    {
+     "who": "B",
+     "en": "A window seat, please.",
+     "th": "ขอที่นั่งริมหน้าต่างครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Here's your boarding pass. Gate twelve.",
+     "th": "นี่บัตรขึ้นเครื่องค่ะ ประตูสิบสอง"
+    },
+    {
+     "who": "B",
+     "en": "What time does boarding start?",
+     "th": "เริ่มขึ้นเครื่องกี่โมง"
+    },
+    {
+     "who": "A",
+     "en": "At nine thirty.",
+     "th": "เก้าโมงครึ่งค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "at-immigration",
+   "cat": "airport",
+   "level": "A2",
+   "en": "At immigration",
+   "th": "ด่านตรวจคนเข้าเมือง",
+   "emoji": "🛂",
+   "scene": "คุณผ่านด่านตรวจคนเข้าเมืองในต่างประเทศ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "What's the purpose of your visit?",
+     "th": "มาด้วยจุดประสงค์อะไรครับ"
+    },
+    {
+     "who": "B",
+     "en": "I'm here on holiday.",
+     "th": "ฉันมาเที่ยวพักผ่อน"
+    },
+    {
+     "who": "A",
+     "en": "How long are you staying?",
+     "th": "จะอยู่นานแค่ไหนครับ"
+    },
+    {
+     "who": "B",
+     "en": "For ten days.",
+     "th": "สิบวันครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Where are you staying?",
+     "th": "พักที่ไหนครับ"
+    },
+    {
+     "who": "B",
+     "en": "At a hotel in the city center.",
+     "th": "ที่โรงแรมในใจกลางเมือง"
+    },
+    {
+     "who": "A",
+     "en": "Do you have a return ticket?",
+     "th": "มีตั๋วขากลับไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, here it is.",
+     "th": "มี นี่ครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Okay. Enjoy your stay.",
+     "th": "โอเคครับ ขอให้เที่ยวให้สนุก"
+    }
+   ]
+  },
+  {
+   "id": "lost-luggage",
+   "cat": "airport",
+   "level": "B1",
+   "en": "Lost luggage",
+   "th": "กระเป๋าหาย",
+   "emoji": "🧳",
+   "scene": "กระเป๋าเดินทางของคุณไม่มาที่สายพาน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello, can I help you?",
+     "th": "สวัสดีครับ มีอะไรให้ช่วยไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, my suitcase didn't come out on the belt.",
+     "th": "ใช่ กระเป๋าเดินทางของฉันไม่ออกมาที่สายพาน"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry. Which flight were you on?",
+     "th": "ขอโทษด้วยครับ มากับเที่ยวบินไหนครับ"
+    },
+    {
+     "who": "B",
+     "en": "The morning flight from Tokyo.",
+     "th": "เที่ยวบินเช้าจากโตเกียว"
+    },
+    {
+     "who": "A",
+     "en": "Can you describe your bag?",
+     "th": "ช่วยอธิบายลักษณะกระเป๋าได้ไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "It's a large black suitcase with a red tag.",
+     "th": "เป็นกระเป๋าเดินทางสีดำใบใหญ่ มีป้ายสีแดง"
+    },
+    {
+     "who": "A",
+     "en": "We'll find it and deliver it to your hotel.",
+     "th": "เราจะตามหาและส่งไปที่โรงแรมให้ครับ"
+    },
+    {
+     "who": "B",
+     "en": "Thank you. Here's my phone number and address.",
+     "th": "ขอบคุณ นี่เบอร์โทรและที่อยู่ของฉัน"
+    }
+   ]
+  },
+  {
+   "id": "at-the-pharmacy",
+   "cat": "health",
+   "level": "A1",
+   "en": "At the pharmacy",
+   "th": "ร้านขายยา",
+   "emoji": "💊",
+   "scene": "คุณไปซื้อยาที่ร้านขายยา",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello. What can I do for you?",
+     "th": "สวัสดีค่ะ ให้ช่วยอะไรคะ"
+    },
+    {
+     "who": "B",
+     "en": "I have a sore throat and a cough.",
+     "th": "ฉันเจ็บคอและไอ"
+    },
+    {
+     "who": "A",
+     "en": "Do you have a fever?",
+     "th": "มีไข้ไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "No, I don't.",
+     "th": "ไม่มีครับ/ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Take this medicine three times a day.",
+     "th": "กินยานี้วันละสามครั้งค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Before or after meals?",
+     "th": "ก่อนหรือหลังอาหาร"
+    },
+    {
+     "who": "A",
+     "en": "After meals. Drink a lot of water too.",
+     "th": "หลังอาหารค่ะ ดื่มน้ำเยอะๆ ด้วยนะคะ"
+    },
+    {
+     "who": "B",
+     "en": "Okay. Thank you.",
+     "th": "โอเค ขอบคุณครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "at-the-doctor",
+   "cat": "health",
+   "level": "A2",
+   "en": "At the doctor",
+   "th": "หาหมอ",
+   "emoji": "🩺",
+   "scene": "คุณไปพบแพทย์เพราะปวดท้อง",
+   "lines": [
+    {
+     "who": "A",
+     "en": "What seems to be the problem?",
+     "th": "เป็นอะไรมาครับ"
+    },
+    {
+     "who": "B",
+     "en": "I've had a stomachache since last night.",
+     "th": "ฉันปวดท้องตั้งแต่เมื่อคืน"
+    },
+    {
+     "who": "A",
+     "en": "Did you eat anything unusual?",
+     "th": "กินอะไรแปลกๆ ไปไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "I had some seafood at a street stall.",
+     "th": "ฉันกินอาหารทะเลที่ร้านริมทาง"
+    },
+    {
+     "who": "A",
+     "en": "It might be food poisoning.",
+     "th": "อาจจะเป็นอาหารเป็นพิษนะครับ"
+    },
+    {
+     "who": "B",
+     "en": "Is it serious?",
+     "th": "เป็นอันตรายไหม"
+    },
+    {
+     "who": "A",
+     "en": "Not really. Rest and drink plenty of water.",
+     "th": "ไม่มากครับ พักผ่อนและดื่มน้ำมากๆ"
+    },
+    {
+     "who": "B",
+     "en": "Should I come back if it gets worse?",
+     "th": "ถ้าอาการแย่ลงควรกลับมาไหม"
+    },
+    {
+     "who": "A",
+     "en": "Yes, please come back in two days if it doesn't improve.",
+     "th": "ใช่ครับ ถ้าไม่ดีขึ้นกลับมาภายในสองวัน"
+    }
+   ]
+  },
+  {
+   "id": "calling-in-sick",
+   "cat": "health",
+   "level": "A2",
+   "en": "Calling in sick",
+   "th": "โทรลาป่วย",
+   "emoji": "🤒",
+   "scene": "คุณโทรบอกหัวหน้าว่าวันนี้ไม่สบาย",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello, this is Mark.",
+     "th": "ฮัลโหล มาร์กพูดครับ"
+    },
+    {
+     "who": "B",
+     "en": "Hi Mark, it's Nok. I'm sorry, but I can't come to work today.",
+     "th": "สวัสดีมาร์ก นกนะ ขอโทษนะ วันนี้ฉันมาทำงานไม่ได้"
+    },
+    {
+     "who": "A",
+     "en": "Oh, what's wrong?",
+     "th": "โอ้ เป็นอะไรไป"
+    },
+    {
+     "who": "B",
+     "en": "I have a high fever and a bad headache.",
+     "th": "ฉันมีไข้สูงและปวดหัวมาก"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry to hear that. Take care of yourself.",
+     "th": "เสียใจด้วยนะ ดูแลตัวเองด้วย"
+    },
+    {
+     "who": "B",
+     "en": "Thanks. I'll send the report by email.",
+     "th": "ขอบคุณ เดี๋ยวฉันส่งรายงานทางอีเมล"
+    },
+    {
+     "who": "A",
+     "en": "Don't worry about it. Just get some rest.",
+     "th": "ไม่ต้องห่วงเรื่องนั้น พักผ่อนเถอะ"
+    },
+    {
+     "who": "B",
+     "en": "Thank you. See you tomorrow, I hope.",
+     "th": "ขอบคุณ หวังว่าพรุ่งนี้จะได้เจอกันนะ"
+    }
+   ]
+  },
+  {
+   "id": "making-an-appointment",
+   "cat": "phone",
+   "level": "A2",
+   "en": "Making an appointment",
+   "th": "นัดหมายทางโทรศัพท์",
+   "emoji": "📅",
+   "scene": "คุณโทรนัดตัดผม",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Good morning, Style Salon.",
+     "th": "สวัสดีตอนเช้าค่ะ สไตล์ซาลอนค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Hi, I'd like to make an appointment for a haircut.",
+     "th": "สวัสดี ฉันอยากนัดตัดผม"
+    },
+    {
+     "who": "A",
+     "en": "Sure. When would you like to come?",
+     "th": "ได้ค่ะ อยากมาวันไหนคะ"
+    },
+    {
+     "who": "B",
+     "en": "Do you have anything on Saturday afternoon?",
+     "th": "วันเสาร์บ่ายมีคิวว่างไหม"
+    },
+    {
+     "who": "A",
+     "en": "We have two o'clock or four o'clock.",
+     "th": "มีบ่ายสองหรือสี่โมงค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Two o'clock is perfect.",
+     "th": "บ่ายสองโมงพอดีเลย"
+    },
+    {
+     "who": "A",
+     "en": "Can I have your name, please?",
+     "th": "ขอชื่อด้วยค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "My name is Kan. Thank you.",
+     "th": "ชื่อกานต์ค่ะ ขอบคุณค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Great. See you on Saturday.",
+     "th": "เรียบร้อยค่ะ เจอกันวันเสาร์"
+    }
+   ]
+  },
+  {
+   "id": "leaving-a-message",
+   "cat": "phone",
+   "level": "A2",
+   "en": "Leaving a message",
+   "th": "ฝากข้อความ",
+   "emoji": "📝",
+   "scene": "คนที่คุณโทรหาไม่อยู่ คุณฝากข้อความไว้",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello, Blue Sky Company.",
+     "th": "สวัสดีค่ะ บริษัทบลูสกายค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Hi, can I speak to Mr. Brown, please?",
+     "th": "สวัสดี ขอสายคุณบราวน์หน่อยได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry, he's in a meeting. Can I take a message?",
+     "th": "ขอโทษค่ะ เขาประชุมอยู่ ฝากข้อความไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, please. This is Nok from ABC Travel.",
+     "th": "ได้ค่ะ ฉันนกจากเอบีซีทราเวล"
+    },
+    {
+     "who": "A",
+     "en": "Okay. What's the message?",
+     "th": "ค่ะ ข้อความว่าอะไรคะ"
+    },
+    {
+     "who": "B",
+     "en": "Could you ask him to call me back this afternoon?",
+     "th": "ช่วยบอกให้เขาโทรกลับหาฉันบ่ายนี้ได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Sure. Does he have your number?",
+     "th": "ได้ค่ะ เขามีเบอร์ของคุณไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, he does. Thank you for your help.",
+     "th": "มีค่ะ ขอบคุณที่ช่วยนะคะ"
+    },
+    {
+     "who": "A",
+     "en": "Got it. I'll give him the message.",
+     "th": "รับทราบค่ะ จะส่งข้อความให้เขานะคะ"
+    }
+   ]
+  },
+  {
+   "id": "wrong-order-delivery",
+   "cat": "phone",
+   "level": "B1",
+   "en": "Wrong order delivery",
+   "th": "ส่งของผิด",
+   "emoji": "📦",
+   "scene": "ของที่สั่งออนไลน์มาผิด คุณโทรหาฝ่ายบริการลูกค้า",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Customer service, how can I help?",
+     "th": "ฝ่ายบริการลูกค้าค่ะ มีอะไรให้ช่วยคะ"
+    },
+    {
+     "who": "B",
+     "en": "Hi, I received the wrong item in my order.",
+     "th": "สวัสดี ฉันได้รับสินค้าผิดในออร์เดอร์"
+    },
+    {
+     "who": "A",
+     "en": "I'm sorry about that. What's your order number?",
+     "th": "ขอโทษด้วยค่ะ หมายเลขคำสั่งซื้ออะไรคะ"
+    },
+    {
+     "who": "B",
+     "en": "Sorry, I don't have it with me. My name is Kan.",
+     "th": "ขอโทษ ไม่ได้เอามา ฉันชื่อกานต์"
+    },
+    {
+     "who": "A",
+     "en": "That's okay, I found your order. What did you receive?",
+     "th": "ไม่เป็นไรค่ะ เจอออร์เดอร์แล้ว ได้รับอะไรไปคะ"
+    },
+    {
+     "who": "B",
+     "en": "I ordered a blue jacket, but I got a green one.",
+     "th": "ฉันสั่งเสื้อแจ็กเก็ตสีฟ้า แต่ได้สีเขียวมา"
+    },
+    {
+     "who": "A",
+     "en": "We'll send the right one tomorrow.",
+     "th": "เราจะส่งตัวที่ถูกไปพรุ่งนี้ค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Great. What should I do with the green one?",
+     "th": "ดีเลย แล้วตัวสีเขียวต้องทำยังไง"
+    },
+    {
+     "who": "A",
+     "en": "A courier will pick it up when they deliver the new one.",
+     "th": "พนักงานส่งของจะมารับคืนตอนส่งตัวใหม่ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "first-day-at-work",
+   "cat": "work",
+   "level": "A2",
+   "en": "First day at work",
+   "th": "วันแรกที่ทำงาน",
+   "emoji": "🏢",
+   "scene": "วันแรกที่ทำงาน คุณคุยกับเพื่อนร่วมงาน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hi, you must be the new designer. I'm Lisa.",
+     "th": "สวัสดี คุณคงเป็นดีไซเนอร์คนใหม่ ฉันลิซ่า"
+    },
+    {
+     "who": "B",
+     "en": "Yes, I'm Kan. Nice to meet you, Lisa.",
+     "th": "ใช่ ฉันกานต์ ยินดีที่ได้รู้จักนะลิซ่า"
+    },
+    {
+     "who": "A",
+     "en": "Welcome to the team! How's your first day?",
+     "th": "ยินดีต้อนรับสู่ทีม วันแรกเป็นยังไงบ้าง"
+    },
+    {
+     "who": "B",
+     "en": "Good, but there's a lot to learn.",
+     "th": "ดี แต่มีอะไรต้องเรียนรู้เยอะเลย"
+    },
+    {
+     "who": "A",
+     "en": "Don't worry. Ask me if you need anything.",
+     "th": "ไม่ต้องห่วง ถ้าต้องการอะไรถามฉันได้เลย"
+    },
+    {
+     "who": "B",
+     "en": "Thanks. Where do people usually eat lunch?",
+     "th": "ขอบคุณ ปกติทุกคนกินข้าวเที่ยงที่ไหน"
+    },
+    {
+     "who": "A",
+     "en": "There's a nice food court downstairs. Want to join us?",
+     "th": "มีฟู้ดคอร์ทดีๆ ข้างล่าง อยากไปด้วยกันไหม"
+    },
+    {
+     "who": "B",
+     "en": "I'd love to. Thank you!",
+     "th": "อยากไปมากเลย ขอบคุณนะ"
+    }
+   ]
+  },
+  {
+   "id": "asking-for-a-day-off",
+   "cat": "work",
+   "level": "B1",
+   "en": "Asking for a day off",
+   "th": "ขอลางาน",
+   "emoji": "🌴",
+   "scene": "คุณขอลางานกับหัวหน้า",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Come in. You wanted to talk to me?",
+     "th": "เข้ามาสิ อยากคุยกับผมหรือ"
+    },
+    {
+     "who": "B",
+     "en": "Yes. Do you have a minute?",
+     "th": "ใช่ค่ะ มีเวลาสักครู่ไหมคะ"
+    },
+    {
+     "who": "A",
+     "en": "Sure. What's up?",
+     "th": "ได้สิ มีอะไรหรือ"
+    },
+    {
+     "who": "B",
+     "en": "Could I take next Friday off?",
+     "th": "ขอลาวันศุกร์หน้าได้ไหมคะ"
+    },
+    {
+     "who": "A",
+     "en": "What's the reason?",
+     "th": "ด้วยเหตุผลอะไร"
+    },
+    {
+     "who": "B",
+     "en": "My sister is getting married in Chiang Mai.",
+     "th": "น้องสาวฉันแต่งงานที่เชียงใหม่"
+    },
+    {
+     "who": "A",
+     "en": "That's great news! Have you finished the report?",
+     "th": "ข่าวดีเลย แล้วรายงานเสร็จหรือยัง"
+    },
+    {
+     "who": "B",
+     "en": "Not yet, but I'll finish it by Thursday.",
+     "th": "ยังเลย แต่จะทำให้เสร็จภายในวันพฤหัส"
+    },
+    {
+     "who": "A",
+     "en": "Okay, then Friday is fine.",
+     "th": "โอเค งั้นวันศุกร์ได้เลย"
+    }
+   ]
+  },
+  {
+   "id": "talking-to-a-teacher",
+   "cat": "work",
+   "level": "A2",
+   "en": "Talking to a teacher",
+   "th": "คุยกับอาจารย์",
+   "emoji": "👩‍🏫",
+   "scene": "คุณขอเวลาเพิ่มสำหรับส่งงาน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello. Did you want to see me?",
+     "th": "สวัสดี อยากพบครูหรือ"
+    },
+    {
+     "who": "B",
+     "en": "Yes. I have a question about the homework.",
+     "th": "ใช่ครับ/ค่ะ มีคำถามเรื่องการบ้าน"
+    },
+    {
+     "who": "A",
+     "en": "Of course. What is it?",
+     "th": "ได้เลย อะไรหรือ"
+    },
+    {
+     "who": "B",
+     "en": "I don't understand the last part.",
+     "th": "ผมไม่เข้าใจส่วนสุดท้าย"
+    },
+    {
+     "who": "A",
+     "en": "You need to write about your own experience.",
+     "th": "ต้องเขียนเกี่ยวกับประสบการณ์ของตัวเอง"
+    },
+    {
+     "who": "B",
+     "en": "I see. Can I have one more day to finish it?",
+     "th": "เข้าใจแล้ว ขอเวลาอีกหนึ่งวันเพื่อทำให้เสร็จได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Okay, but please send it by Friday.",
+     "th": "ได้ แต่ส่งภายในวันศุกร์นะ"
+    },
+    {
+     "who": "B",
+     "en": "Thank you so much. I will.",
+     "th": "ขอบคุณมากครับ/ค่ะ จะส่งแน่นอน"
+    }
+   ]
+  },
+  {
+   "id": "making-weekend-plans",
+   "cat": "plans",
+   "level": "A1",
+   "en": "Making weekend plans",
+   "th": "วางแผนวันหยุด",
+   "emoji": "📅",
+   "scene": "คุณชวนเพื่อนไปเที่ยววันเสาร์",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Are you free this Saturday?",
+     "th": "วันเสาร์นี้ว่างไหม"
+    },
+    {
+     "who": "B",
+     "en": "Yes, I am. What's up?",
+     "th": "ว่าง มีอะไรหรือ"
+    },
+    {
+     "who": "A",
+     "en": "Do you want to go to the night market?",
+     "th": "อยากไปตลาดกลางคืนไหม"
+    },
+    {
+     "who": "B",
+     "en": "Sounds fun! What time?",
+     "th": "ฟังดูสนุก กี่โมง"
+    },
+    {
+     "who": "A",
+     "en": "How about six o'clock?",
+     "th": "หกโมงดีไหม"
+    },
+    {
+     "who": "B",
+     "en": "Six is good. Where should we meet?",
+     "th": "หกโมงได้ เจอกันที่ไหนดี"
+    },
+    {
+     "who": "A",
+     "en": "Let's meet at the station.",
+     "th": "เจอกันที่สถานีนะ"
+    },
+    {
+     "who": "B",
+     "en": "Okay. See you on Saturday!",
+     "th": "โอเค เจอกันวันเสาร์"
+    }
+   ]
+  },
+  {
+   "id": "inviting-to-a-party",
+   "cat": "plans",
+   "level": "A2",
+   "en": "Inviting to a party",
+   "th": "ชวนไปงานวันเกิด",
+   "emoji": "🎂",
+   "scene": "เพื่อนชวนคุณไปงานวันเกิด",
+   "lines": [
+    {
+     "who": "A",
+     "en": "I'm having a birthday party on Friday. Can you come?",
+     "th": "ฉันจะจัดงานวันเกิดวันศุกร์ มาได้ไหม"
+    },
+    {
+     "who": "B",
+     "en": "I'd love to! Where is it?",
+     "th": "อยากไปมาก จัดที่ไหน"
+    },
+    {
+     "who": "A",
+     "en": "At my place. It starts at seven.",
+     "th": "ที่บ้านฉัน เริ่มหนึ่งทุ่ม"
+    },
+    {
+     "who": "B",
+     "en": "Should I bring anything?",
+     "th": "ต้องเอาอะไรไปไหม"
+    },
+    {
+     "who": "A",
+     "en": "Just bring yourself!",
+     "th": "แค่ตัวเธอมาก็พอ"
+    },
+    {
+     "who": "B",
+     "en": "Can I bring my sister too?",
+     "th": "พาน้องสาวไปด้วยได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Of course, the more the merrier.",
+     "th": "ได้แน่นอน ยิ่งคนเยอะยิ่งสนุก"
+    },
+    {
+     "who": "B",
+     "en": "Great. See you on Friday!",
+     "th": "เยี่ยม เจอกันวันศุกร์นะ"
+    }
+   ]
+  },
+  {
+   "id": "cancelling-plans",
+   "cat": "plans",
+   "level": "B1",
+   "en": "Cancelling plans",
+   "th": "ยกเลิกนัด",
+   "emoji": "🙏",
+   "scene": "คุณต้องยกเลิกนัดกับเพื่อน",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hey, are we still meeting tonight?",
+     "th": "เฮ้ คืนนี้ยังเจอกันอยู่ใช่ไหม"
+    },
+    {
+     "who": "B",
+     "en": "I'm so sorry, but I can't make it tonight.",
+     "th": "ขอโทษจริงๆ คืนนี้ฉันไปไม่ได้"
+    },
+    {
+     "who": "A",
+     "en": "Oh no. Is everything okay?",
+     "th": "โอ้ไม่นะ ทุกอย่างโอเคไหม"
+    },
+    {
+     "who": "B",
+     "en": "Something came up at work and I have to stay late.",
+     "th": "มีงานด่วนเข้ามา ต้องอยู่ดึก"
+    },
+    {
+     "who": "A",
+     "en": "That's too bad. Maybe another day?",
+     "th": "น่าเสียดาย วันอื่นได้ไหม"
+    },
+    {
+     "who": "B",
+     "en": "How about next Tuesday? It's my treat.",
+     "th": "วันอังคารหน้าดีไหม ฉันเลี้ยงเอง"
+    },
+    {
+     "who": "A",
+     "en": "Deal! Don't work too hard.",
+     "th": "ตกลง อย่าทำงานหนักเกินไปนะ"
+    },
+    {
+     "who": "B",
+     "en": "Thanks for understanding.",
+     "th": "ขอบคุณที่เข้าใจนะ"
+    }
+   ]
+  },
+  {
+   "id": "meeting-a-neighbor",
+   "cat": "home",
+   "level": "A1",
+   "en": "Meeting a neighbor",
+   "th": "ทักทายเพื่อนบ้าน",
+   "emoji": "🏘️",
+   "scene": "คุณเจอเพื่อนบ้านใหม่หน้าลิฟต์",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hi! I just moved in next door.",
+     "th": "สวัสดี ฉันเพิ่งย้ายมาอยู่ห้องข้างๆ"
+    },
+    {
+     "who": "B",
+     "en": "Oh, welcome! I'm Nok. I live across the hall.",
+     "th": "โอ้ ยินดีต้อนรับ ฉันนก อยู่ห้องฝั่งตรงข้าม"
+    },
+    {
+     "who": "A",
+     "en": "Nice to meet you. I'm Sam.",
+     "th": "ยินดีที่ได้รู้จัก ฉันแซม"
+    },
+    {
+     "who": "B",
+     "en": "Do you need any help with your boxes?",
+     "th": "ต้องการให้ช่วยยกกล่องไหม"
+    },
+    {
+     "who": "A",
+     "en": "That's kind of you, but I'm okay.",
+     "th": "ใจดีจัง แต่ฉันโอเค"
+    },
+    {
+     "who": "B",
+     "en": "Let me know if you need anything.",
+     "th": "ถ้าต้องการอะไรบอกได้เลยนะ"
+    },
+    {
+     "who": "A",
+     "en": "Thanks! Is there a good supermarket near here?",
+     "th": "ขอบคุณ แถวนี้มีซูเปอร์มาร์เก็ตดีๆ ไหม"
+    },
+    {
+     "who": "B",
+     "en": "Yes, there's one across the street.",
+     "th": "มี อยู่ฝั่งตรงข้ามถนน"
+    }
+   ]
+  },
+  {
+   "id": "a-delivery-arrives",
+   "cat": "home",
+   "level": "A2",
+   "en": "A delivery arrives",
+   "th": "รับพัสดุ",
+   "emoji": "📦",
+   "scene": "พนักงานส่งของมาส่งพัสดุให้คุณ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Hello, delivery for Kan!",
+     "th": "สวัสดีครับ พัสดุของคุณกานต์ครับ"
+    },
+    {
+     "who": "B",
+     "en": "That's me. Thank you.",
+     "th": "ฉันเองค่ะ ขอบคุณ"
+    },
+    {
+     "who": "A",
+     "en": "Can you sign here, please?",
+     "th": "ช่วยเซ็นตรงนี้ด้วยครับ"
+    },
+    {
+     "who": "B",
+     "en": "Sure. Is there only one box?",
+     "th": "ได้ค่ะ มีกล่องเดียวหรือคะ"
+    },
+    {
+     "who": "A",
+     "en": "No, there's another one in the truck.",
+     "th": "ไม่ครับ มีอีกกล่องอยู่ในรถ"
+    },
+    {
+     "who": "B",
+     "en": "Could you leave it by the door, please?",
+     "th": "ช่วยวางไว้ข้างประตูได้ไหมคะ"
+    },
+    {
+     "who": "A",
+     "en": "No problem. Have a nice day!",
+     "th": "ได้ครับ ขอให้เป็นวันที่ดีครับ"
+    },
+    {
+     "who": "B",
+     "en": "You too. Thanks a lot.",
+     "th": "เช่นกันค่ะ ขอบคุณมาก"
+    }
+   ]
+  },
+  {
+   "id": "asking-about-noise",
+   "cat": "home",
+   "level": "B1",
+   "en": "Asking about noise",
+   "th": "ขอให้ลดเสียง",
+   "emoji": "🔊",
+   "scene": "ห้องข้างๆ เปิดเพลงเสียงดังตอนดึก คุณไปขอร้องอย่างสุภาพ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Oh, hi. Can I help you?",
+     "th": "โอ้ สวัสดี มีอะไรหรือเปล่า"
+    },
+    {
+     "who": "B",
+     "en": "Hi, sorry to bother you so late.",
+     "th": "สวัสดี ขอโทษที่มารบกวนดึกขนาดนี้"
+    },
+    {
+     "who": "A",
+     "en": "No problem. What's wrong?",
+     "th": "ไม่เป็นไร มีอะไรหรือ"
+    },
+    {
+     "who": "B",
+     "en": "The music is a bit loud, and I have work early tomorrow.",
+     "th": "เพลงเสียงดังไปหน่อย และพรุ่งนี้ฉันต้องทำงานแต่เช้า"
+    },
+    {
+     "who": "A",
+     "en": "Oh, I'm so sorry. I didn't realize.",
+     "th": "โอ้ ขอโทษจริงๆ ไม่ทันคิดเลย"
+    },
+    {
+     "who": "B",
+     "en": "Would you mind turning it down a little?",
+     "th": "รบกวนลดเสียงลงหน่อยได้ไหม"
+    },
+    {
+     "who": "A",
+     "en": "Of course. I'll turn it down right now.",
+     "th": "ได้แน่นอน จะลดเดี๋ยวนี้เลย"
+    },
+    {
+     "who": "B",
+     "en": "Thank you. I really appreciate it.",
+     "th": "ขอบคุณ ขอบคุณมากจริงๆ"
+    }
+   ]
+  },
+  {
+   "id": "lost-phone",
+   "cat": "help",
+   "level": "A2",
+   "en": "Lost phone",
+   "th": "โทรศัพท์หาย",
+   "emoji": "📱",
+   "scene": "คุณทำโทรศัพท์หายและไปแจ้งที่จุดบริการ",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Can I help you?",
+     "th": "มีอะไรให้ช่วยไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, I think I lost my phone on the bus.",
+     "th": "ใช่ ฉันคิดว่าทำโทรศัพท์หายบนรถเมล์"
+    },
+    {
+     "who": "A",
+     "en": "What does it look like?",
+     "th": "มีลักษณะยังไงคะ"
+    },
+    {
+     "who": "B",
+     "en": "It's a black phone with a blue case.",
+     "th": "เป็นโทรศัพท์สีดำ มีเคสสีฟ้า"
+    },
+    {
+     "who": "A",
+     "en": "When did you lose it?",
+     "th": "หายตอนไหนคะ"
+    },
+    {
+     "who": "B",
+     "en": "About an hour ago, on the bus to Siam.",
+     "th": "ประมาณชั่วโมงที่แล้ว บนรถเมล์ไปสยาม"
+    },
+    {
+     "who": "A",
+     "en": "Please fill in this form. We'll call you if we find it.",
+     "th": "กรอกแบบฟอร์มนี้นะคะ ถ้าเจอจะโทรแจ้ง"
+    },
+    {
+     "who": "B",
+     "en": "Thank you. Can I use your phone to call my friend?",
+     "th": "ขอบคุณ ขอยืมโทรศัพท์โทรหาเพื่อนได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "the-atm-kept-my-card",
+   "cat": "help",
+   "level": "A2",
+   "en": "The ATM kept my card",
+   "th": "ตู้ ATM กลืนบัตร",
+   "emoji": "🏧",
+   "scene": "ตู้ ATM กลืนบัตรของคุณ คุณเข้าไปติดต่อธนาคาร",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Good afternoon. How can I help you?",
+     "th": "สวัสดีตอนบ่ายค่ะ มีอะไรให้ช่วยคะ"
+    },
+    {
+     "who": "B",
+     "en": "The ATM outside kept my card.",
+     "th": "ตู้ ATM ข้างนอกกลืนบัตรของฉัน"
+    },
+    {
+     "who": "A",
+     "en": "I see. Do you have your ID card with you?",
+     "th": "เข้าใจแล้วค่ะ มีบัตรประชาชนมาไหมคะ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, here it is.",
+     "th": "มี นี่ค่ะ"
+    },
+    {
+     "who": "A",
+     "en": "Please wait a moment while I check.",
+     "th": "รอสักครู่นะคะ ขอตรวจสอบก่อน"
+    },
+    {
+     "who": "B",
+     "en": "How long will it take?",
+     "th": "ใช้เวลานานไหม"
+    },
+    {
+     "who": "A",
+     "en": "About ten minutes.",
+     "th": "ประมาณสิบนาทีค่ะ"
+    },
+    {
+     "who": "B",
+     "en": "Okay, I'll wait. Thank you.",
+     "th": "โอเค จะรอค่ะ ขอบคุณ"
+    }
+   ]
+  },
+  {
+   "id": "asking-for-help-in-an-emergency",
+   "cat": "help",
+   "level": "B1",
+   "en": "Asking for help in an emergency",
+   "th": "ขอความช่วยเหลือเร่งด่วน",
+   "emoji": "🚑",
+   "scene": "มีคนล้มบนถนน คุณโทรเรียกรถพยาบาล",
+   "lines": [
+    {
+     "who": "A",
+     "en": "Emergency services. What's your emergency?",
+     "th": "หน่วยฉุกเฉินครับ มีเหตุอะไรครับ"
+    },
+    {
+     "who": "B",
+     "en": "A man fell down and he's not moving.",
+     "th": "มีผู้ชายล้มลงและเขาไม่ขยับเลย"
+    },
+    {
+     "who": "A",
+     "en": "Is he breathing?",
+     "th": "เขายังหายใจอยู่ไหมครับ"
+    },
+    {
+     "who": "B",
+     "en": "Yes, but he's breathing very slowly.",
+     "th": "หายใจ แต่หายใจช้ามาก"
+    },
+    {
+     "who": "A",
+     "en": "Where are you right now?",
+     "th": "ตอนนี้คุณอยู่ที่ไหนครับ"
+    },
+    {
+     "who": "B",
+     "en": "I'm on Sukhumvit Road, near the post office.",
+     "th": "อยู่ถนนสุขุมวิท ใกล้ที่ทำการไปรษณีย์"
+    },
+    {
+     "who": "A",
+     "en": "An ambulance is on the way. Stay with him.",
+     "th": "รถพยาบาลกำลังไป อยู่กับเขาไว้นะครับ"
+    },
+    {
+     "who": "B",
+     "en": "Okay. Please hurry.",
+     "th": "ได้ค่ะ ช่วยรีบหน่อยนะคะ"
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,396 @@
+# บทสนทนาจำลอง (Conversations) — แก้ไฟล์นี้แล้วรัน: python tools/build_dialogues.py
+#
+# ## หมวด | English | ไทย | อีโมจิ
+# = LEVEL | ชื่อภาษาอังกฤษ | ชื่อภาษาไทย | อีโมจิ | สถานการณ์ (ไทย)
+# A: ประโยค | คำแปล        A = แอปพูดให้ฟัง
+# B: ประโยค | คำแปล        B = ผู้เรียนพูด (ฝึกพูดด้วยไมค์)
+
+## greet | Meeting People | ทักทาย / ทำความรู้จัก | 👋
+
+= A1 | Meeting someone new | เจอคนใหม่ | 🤝 | คุณเจอคนใหม่ที่งานเลี้ยงของเพื่อน
+A: Hi, I'm Tom. Nice to meet you. | สวัสดี ผมทอม ยินดีที่ได้รู้จัก
+B: Hi Tom, I'm Nok. Nice to meet you too. | สวัสดีทอม ฉันนก ยินดีที่ได้รู้จักเช่นกัน
+A: Where are you from? | คุณมาจากไหน
+B: I'm from Thailand. How about you? | ฉันมาจากประเทศไทย แล้วคุณล่ะ
+A: I'm from Canada. What do you do? | ผมมาจากแคนาดา คุณทำงานอะไร
+B: I'm a nurse. I work at a hospital. | ฉันเป็นพยาบาล ทำงานที่โรงพยาบาล
+A: That sounds interesting! | ฟังดูน่าสนใจนะ
+B: Thanks. It's busy, but I like it. | ขอบคุณ งานยุ่งแต่ฉันชอบ
+
+= A1 | Catching up with a friend | เจอเพื่อนเก่า | 😄 | คุณบังเอิญเจอเพื่อนที่ไม่ได้เจอกันนาน
+A: Hey! Long time no see. How are you? | เฮ้ ไม่ได้เจอกันนานเลย สบายดีไหม
+B: I'm good, thanks! How have you been? | สบายดี ขอบคุณ แล้วเธอเป็นยังไงบ้าง
+A: Pretty busy. I started a new job. | ยุ่งมากเลย ฉันเพิ่งเริ่มงานใหม่
+B: Really? Congratulations! Do you like it? | จริงเหรอ ยินดีด้วย ชอบไหม
+A: Yes, my team is great. | ชอบ ทีมของฉันดีมาก
+B: That's wonderful. Let's get coffee sometime. | ดีจังเลย เดี๋ยวไปกินกาแฟกันสักวันนะ
+A: Sure! I'll message you. | ได้เลย เดี๋ยวฉันส่งข้อความหานะ
+
+= A2 | Introducing a friend | แนะนำเพื่อน | 👥 | คุณแนะนำเพื่อนให้รู้จักกับเพื่อนร่วมงาน
+A: Who's your friend? | เพื่อนของคุณคือใคร
+B: This is Mai. We went to school together. | นี่คือใหม่ เราเรียนโรงเรียนเดียวกัน
+A: Nice to meet you, Mai. | ยินดีที่ได้รู้จักนะ ใหม่
+B: Mai just moved here from Chiang Mai. | ใหม่เพิ่งย้ายมาจากเชียงใหม่
+A: Oh, welcome! How do you like the city? | โอ้ ยินดีต้อนรับ ชอบเมืองนี้ไหม
+B: She loves the food, but not the traffic. | เธอชอบอาหาร แต่ไม่ชอบรถติด
+A: Ha ha, nobody likes the traffic! | ฮ่าๆ ไม่มีใครชอบรถติดหรอก
+
+## cafe | Cafe & Restaurant | ร้านกาแฟ / ร้านอาหาร | ☕
+
+= A1 | Ordering coffee | สั่งกาแฟ | ☕ | คุณสั่งเครื่องดื่มที่ร้านกาแฟ
+A: Hi! What can I get for you? | สวัสดีค่ะ รับอะไรดีคะ
+B: Can I have an iced latte, please? | ขอลาเต้เย็นหนึ่งแก้วครับ/ค่ะ
+A: Sure. What size would you like? | ได้ค่ะ เอาไซซ์ไหนคะ
+B: A medium, please. Less sugar. | ไซซ์กลางครับ/ค่ะ หวานน้อย
+A: For here or to go? | ทานที่นี่หรือกลับบ้านคะ
+B: To go, please. | กลับบ้านครับ/ค่ะ
+A: That's eighty-five baht. | แปดสิบห้าบาทค่ะ
+B: Here you are. Can I pay by QR code? | นี่ครับ/ค่ะ จ่ายด้วย QR ได้ไหม
+A: Of course. | ได้แน่นอนค่ะ
+
+= A1 | Ordering dinner | สั่งอาหารเย็น | 🍛 | คุณกับเพื่อนสั่งอาหารที่ร้าน
+A: Are you ready to order? | พร้อมสั่งหรือยังคะ
+B: Yes. I'd like the green curry, please. | พร้อมแล้ว ขอแกงเขียวหวานครับ/ค่ะ
+A: Would you like rice with that? | รับข้าวด้วยไหมคะ
+B: Yes, please. And a glass of water. | ใช่ครับ/ค่ะ แล้วก็น้ำหนึ่งแก้ว
+A: How spicy would you like it? | เอาเผ็ดแค่ไหนคะ
+B: Not too spicy, please. | ไม่เผ็ดมากครับ/ค่ะ
+A: Okay. Anything else? | ได้ค่ะ รับอะไรเพิ่มไหมคะ
+B: No, that's all. Thank you. | ไม่แล้วครับ/ค่ะ ขอบคุณ
+
+= A2 | A problem with the bill | ปัญหาเรื่องบิล | 🧾 | บิลค่าอาหารคิดเงินผิด
+A: Here's your bill. | นี่บิลค่ะ
+B: Excuse me, I think there's a mistake. | ขอโทษครับ/ค่ะ ผมว่ามีอะไรผิดนิดหน่อย
+A: Oh, let me see. | โอ้ ขอดูหน่อยค่ะ
+B: We only ordered two drinks, not three. | เราสั่งเครื่องดื่มแค่สองแก้ว ไม่ใช่สาม
+A: You're right. I'm so sorry about that. | ถูกต้องค่ะ ขอโทษจริงๆ ค่ะ
+B: No problem. Can we split the bill? | ไม่เป็นไร แยกบิลได้ไหม
+A: Of course. I'll bring two bills. | ได้ค่ะ เดี๋ยวนำบิลมาสองใบ
+B: Thank you very much. | ขอบคุณมากครับ/ค่ะ
+
+## shop | Shopping | ซื้อของ | 🛍️
+
+= A1 | Buying clothes | ซื้อเสื้อผ้า | 👕 | คุณกำลังหาเสื้อในร้านเสื้อผ้า
+A: Hello. Can I help you? | สวัสดีค่ะ มีอะไรให้ช่วยไหมคะ
+B: Yes. I'm looking for a white shirt. | ครับ/ค่ะ ผมกำลังหาเสื้อเชิ้ตสีขาว
+A: What size do you wear? | ใส่ไซซ์อะไรคะ
+B: Medium, I think. Can I try this one on? | น่าจะไซซ์กลาง ขอลองตัวนี้ได้ไหม
+A: Sure. The fitting room is over there. | ได้ค่ะ ห้องลองอยู่ตรงนั้น
+B: It's a little big. Do you have a small? | มันใหญ่ไปนิด มีไซซ์เล็กไหม
+A: Yes, here you go. | มีค่ะ นี่ค่ะ
+B: Perfect. I'll take it. | พอดีเลย เอาตัวนี้ครับ/ค่ะ
+
+= A2 | At the market | ซื้อของที่ตลาด | 🥭 | คุณซื้อผลไม้และต่อราคาที่ตลาด
+A: Fresh mangoes! Very sweet! | มะม่วงสดๆ หวานมาก
+B: How much are the mangoes? | มะม่วงราคาเท่าไหร่
+A: Eighty baht a kilo. | กิโลละแปดสิบบาท
+B: That's a bit expensive. Can you do seventy? | แพงไปหน่อย เจ็ดสิบได้ไหม
+A: If you buy two kilos, seventy each. | ถ้าซื้อสองกิโล กิโลละเจ็ดสิบ
+B: Okay, two kilos, please. | ตกลง เอาสองกิโล
+A: Here you are. That's one hundred and forty baht. | นี่ครับ ร้อยสี่สิบบาท
+B: Thank you. Can I have a bag? | ขอบคุณ ขอถุงด้วยได้ไหม
+
+= A2 | Returning an item | คืนสินค้า | 🔄 | หูฟังที่ซื้อมาเสีย คุณนำมาคืนที่ร้าน
+A: Hi, how can I help you? | สวัสดีค่ะ มีอะไรให้ช่วยคะ
+B: I bought these headphones last week, but they don't work. | ผมซื้อหูฟังนี้เมื่อสัปดาห์ที่แล้ว แต่มันใช้ไม่ได้
+A: I'm sorry to hear that. Do you have the receipt? | เสียใจด้วยค่ะ มีใบเสร็จไหมคะ
+B: Yes, here it is. | มีครับ/ค่ะ นี่ครับ
+A: Would you like a refund or a new pair? | ต้องการเงินคืนหรือเปลี่ยนคู่ใหม่คะ
+B: A new pair, please. | ขอเปลี่ยนคู่ใหม่ครับ/ค่ะ
+A: No problem. Here you go. | ได้ค่ะ นี่ค่ะ
+B: Thanks for your help. | ขอบคุณที่ช่วยนะครับ/คะ
+
+## move | Directions & Transport | ถามทาง / เดินทาง | 🚕
+
+= A1 | Asking the way | ถามทาง | 🗺️ | คุณหลงทางและถามทางไปสถานีรถไฟฟ้า
+A: Are you okay? You look lost. | เป็นอะไรไหม ดูเหมือนหลงทาง
+B: Yes, how do I get to the BTS station? | ใช่ ไปสถานีบีทีเอสยังไง
+A: Go straight and turn left at the bank. | เดินตรงไปแล้วเลี้ยวซ้ายที่ธนาคาร
+B: Turn left at the bank. Is it far? | เลี้ยวซ้ายที่ธนาคาร ไกลไหม
+A: No, it's about five minutes on foot. | ไม่ไกล เดินประมาณห้านาที
+B: Great. Thank you so much! | เยี่ยมเลย ขอบคุณมากนะ
+A: You're welcome. | ไม่เป็นไร
+
+= A1 | Taking a taxi | นั่งแท็กซี่ | 🚕 | คุณขึ้นแท็กซี่ไปสนามบิน
+A: Where to? | ไปไหนครับ
+B: The airport, please. Can you use the meter? | ไปสนามบินครับ/ค่ะ ใช้มิเตอร์ได้ไหม
+A: Sure. Which terminal? | ได้ครับ อาคารผู้โดยสารไหน
+B: International departures, please. | ขาออกระหว่างประเทศครับ/ค่ะ
+A: Do you want to take the highway? | จะขึ้นทางด่วนไหมครับ
+B: Yes, please. I'm in a bit of a hurry. | ขึ้นครับ/ค่ะ ฉันรีบนิดหน่อย
+A: No problem. We'll be there in thirty minutes. | ได้ครับ อีกสามสิบนาทีถึง
+B: Thank you. | ขอบคุณครับ/ค่ะ
+
+= A2 | Buying a train ticket | ซื้อตั๋วรถไฟ | 🚆 | คุณซื้อตั๋วรถไฟไปเชียงใหม่
+A: Next, please. | คนต่อไปครับ
+B: One ticket to Chiang Mai, please. | ขอตั๋วไปเชียงใหม่หนึ่งใบครับ/ค่ะ
+A: For today? | สำหรับวันนี้ไหมครับ
+B: No, for tomorrow night. Do you have a sleeper? | ไม่ใช่ สำหรับคืนพรุ่งนี้ มีตู้นอนไหม
+A: Yes. Upper or lower bed? | มีครับ เตียงบนหรือล่าง
+B: Lower, please. How much is it? | ขอเตียงล่างครับ/ค่ะ ราคาเท่าไหร่
+A: It's nine hundred baht. | เก้าร้อยบาทครับ
+B: Okay. What time does the train leave? | โอเค รถไฟออกกี่โมง
+A: At six in the evening, from platform three. | หกโมงเย็น ชานชาลาที่สามครับ
+
+## hotel | Hotel | โรงแรม | 🏨
+
+= A1 | Checking in | เช็กอิน | 🛎️ | คุณเช็กอินที่โรงแรม
+A: Good evening. Welcome to the Sunrise Hotel. | สวัสดีตอนเย็นครับ ยินดีต้อนรับสู่โรงแรมซันไรส์
+B: Hi. I have a reservation under the name Kan. | สวัสดี ฉันจองไว้ในชื่อกานต์
+A: Let me check. Yes, two nights, right? | ขอเช็กก่อนนะครับ ใช่ สองคืนใช่ไหมครับ
+B: That's right. What time is breakfast? | ใช่ อาหารเช้ากี่โมง
+A: From six to ten on the second floor. | หกโมงถึงสิบโมง ที่ชั้นสอง
+B: Great. And what's the Wi-Fi password? | เยี่ยม แล้วรหัส Wi-Fi คืออะไร
+A: It's on your key card. | อยู่บนคีย์การ์ดครับ
+B: Thank you very much. | ขอบคุณมากครับ/ค่ะ
+
+= A2 | A problem with the room | ห้องพักมีปัญหา | 🛏️ | แอร์ในห้องพักเสีย คุณโทรแจ้งแผนกต้อนรับ
+A: Front desk. How can I help you? | แผนกต้อนรับค่ะ มีอะไรให้ช่วยคะ
+B: Hi, the air conditioner in my room isn't working. | สวัสดี แอร์ในห้องของฉันไม่ทำงาน
+A: I'm sorry about that. I'll send someone to check it. | ขอโทษด้วยค่ะ เดี๋ยวส่งคนไปดูให้
+B: How long will it take? It's really hot. | ใช้เวลานานไหม ร้อนมากเลย
+A: About fifteen minutes. | ประมาณสิบห้านาทีค่ะ
+B: If it can't be fixed, can I change rooms? | ถ้าซ่อมไม่ได้ ขอเปลี่ยนห้องได้ไหม
+A: Of course. We'll find you another room. | ได้แน่นอนค่ะ เราจะหาห้องอื่นให้
+B: Thank you for your help. | ขอบคุณที่ช่วยครับ/ค่ะ
+
+= A2 | Checking out | เช็กเอาต์ | 🧳 | คุณเช็กเอาต์และขอฝากกระเป๋า
+A: Good morning. Are you checking out? | สวัสดีตอนเช้าค่ะ จะเช็กเอาต์ใช่ไหมคะ
+B: Yes. Here's my key card. | ใช่ นี่คีย์การ์ดครับ/ค่ะ
+A: Did you use anything from the minibar? | ได้ใช้อะไรจากมินิบาร์ไหมคะ
+B: Just two bottles of water. | แค่น้ำสองขวดครับ/ค่ะ
+A: Okay, that's forty baht. | ได้ค่ะ สี่สิบบาทค่ะ
+B: Can I leave my bags here until three? | ฝากกระเป๋าไว้ถึงบ่ายสามได้ไหม
+A: Sure. Here's your ticket for the bags. | ได้ค่ะ นี่ตั๋วรับกระเป๋าค่ะ
+B: Thanks. Could you also call a taxi for me at three? | ขอบคุณ ช่วยเรียกแท็กซี่ให้ตอนบ่ายสามด้วยได้ไหม
+
+## airport | Airport | สนามบิน | ✈️
+
+= A2 | At the check-in counter | เคาน์เตอร์เช็กอิน | 🎫 | คุณเช็กอินเที่ยวบินที่สนามบิน
+A: Good morning. Passport, please. | สวัสดีตอนเช้าค่ะ ขอพาสปอร์ตด้วยค่ะ
+B: Here you are. | นี่ครับ/ค่ะ
+A: Are you checking any bags today? | วันนี้มีกระเป๋าโหลดไหมคะ
+B: Yes, just one suitcase. | มี แค่กระเป๋าเดินทางใบเดียว
+A: Would you like a window or an aisle seat? | ต้องการที่นั่งริมหน้าต่างหรือริมทางเดินคะ
+B: A window seat, please. | ขอที่นั่งริมหน้าต่างครับ/ค่ะ
+A: Here's your boarding pass. Gate twelve. | นี่บัตรขึ้นเครื่องค่ะ ประตูสิบสอง
+B: What time does boarding start? | เริ่มขึ้นเครื่องกี่โมง
+A: At nine thirty. | เก้าโมงครึ่งค่ะ
+
+= A2 | At immigration | ด่านตรวจคนเข้าเมือง | 🛂 | คุณผ่านด่านตรวจคนเข้าเมืองในต่างประเทศ
+A: What's the purpose of your visit? | มาด้วยจุดประสงค์อะไรครับ
+B: I'm here on holiday. | ฉันมาเที่ยวพักผ่อน
+A: How long are you staying? | จะอยู่นานแค่ไหนครับ
+B: For ten days. | สิบวันครับ/ค่ะ
+A: Where are you staying? | พักที่ไหนครับ
+B: At a hotel in the city center. | ที่โรงแรมในใจกลางเมือง
+A: Do you have a return ticket? | มีตั๋วขากลับไหมครับ
+B: Yes, here it is. | มี นี่ครับ/ค่ะ
+A: Okay. Enjoy your stay. | โอเคครับ ขอให้เที่ยวให้สนุก
+
+= B1 | Lost luggage | กระเป๋าหาย | 🧳 | กระเป๋าเดินทางของคุณไม่มาที่สายพาน
+A: Hello, can I help you? | สวัสดีครับ มีอะไรให้ช่วยไหมครับ
+B: Yes, my suitcase didn't come out on the belt. | ใช่ กระเป๋าเดินทางของฉันไม่ออกมาที่สายพาน
+A: I'm sorry. Which flight were you on? | ขอโทษด้วยครับ มากับเที่ยวบินไหนครับ
+B: The morning flight from Tokyo. | เที่ยวบินเช้าจากโตเกียว
+A: Can you describe your bag? | ช่วยอธิบายลักษณะกระเป๋าได้ไหมครับ
+B: It's a large black suitcase with a red tag. | เป็นกระเป๋าเดินทางสีดำใบใหญ่ มีป้ายสีแดง
+A: We'll find it and deliver it to your hotel. | เราจะตามหาและส่งไปที่โรงแรมให้ครับ
+B: Thank you. Here's my phone number and address. | ขอบคุณ นี่เบอร์โทรและที่อยู่ของฉัน
+
+## health | Health | สุขภาพ | 🩺
+
+= A1 | At the pharmacy | ร้านขายยา | 💊 | คุณไปซื้อยาที่ร้านขายยา
+A: Hello. What can I do for you? | สวัสดีค่ะ ให้ช่วยอะไรคะ
+B: I have a sore throat and a cough. | ฉันเจ็บคอและไอ
+A: Do you have a fever? | มีไข้ไหมคะ
+B: No, I don't. | ไม่มีครับ/ค่ะ
+A: Take this medicine three times a day. | กินยานี้วันละสามครั้งค่ะ
+B: Before or after meals? | ก่อนหรือหลังอาหาร
+A: After meals. Drink a lot of water too. | หลังอาหารค่ะ ดื่มน้ำเยอะๆ ด้วยนะคะ
+B: Okay. Thank you. | โอเค ขอบคุณครับ/ค่ะ
+
+= A2 | At the doctor | หาหมอ | 🩺 | คุณไปพบแพทย์เพราะปวดท้อง
+A: What seems to be the problem? | เป็นอะไรมาครับ
+B: I've had a stomachache since last night. | ฉันปวดท้องตั้งแต่เมื่อคืน
+A: Did you eat anything unusual? | กินอะไรแปลกๆ ไปไหมครับ
+B: I had some seafood at a street stall. | ฉันกินอาหารทะเลที่ร้านริมทาง
+A: It might be food poisoning. | อาจจะเป็นอาหารเป็นพิษนะครับ
+B: Is it serious? | เป็นอันตรายไหม
+A: Not really. Rest and drink plenty of water. | ไม่มากครับ พักผ่อนและดื่มน้ำมากๆ
+B: Should I come back if it gets worse? | ถ้าอาการแย่ลงควรกลับมาไหม
+A: Yes, please come back in two days if it doesn't improve. | ใช่ครับ ถ้าไม่ดีขึ้นกลับมาภายในสองวัน
+
+= A2 | Calling in sick | โทรลาป่วย | 🤒 | คุณโทรบอกหัวหน้าว่าวันนี้ไม่สบาย
+A: Hello, this is Mark. | ฮัลโหล มาร์กพูดครับ
+B: Hi Mark, it's Nok. I'm sorry, but I can't come to work today. | สวัสดีมาร์ก นกนะ ขอโทษนะ วันนี้ฉันมาทำงานไม่ได้
+A: Oh, what's wrong? | โอ้ เป็นอะไรไป
+B: I have a high fever and a bad headache. | ฉันมีไข้สูงและปวดหัวมาก
+A: I'm sorry to hear that. Take care of yourself. | เสียใจด้วยนะ ดูแลตัวเองด้วย
+B: Thanks. I'll send the report by email. | ขอบคุณ เดี๋ยวฉันส่งรายงานทางอีเมล
+A: Don't worry about it. Just get some rest. | ไม่ต้องห่วงเรื่องนั้น พักผ่อนเถอะ
+B: Thank you. See you tomorrow, I hope. | ขอบคุณ หวังว่าพรุ่งนี้จะได้เจอกันนะ
+
+## phone | Phone Calls | คุยโทรศัพท์ | 📞
+
+= A2 | Making an appointment | นัดหมายทางโทรศัพท์ | 📅 | คุณโทรนัดตัดผม
+A: Good morning, Style Salon. | สวัสดีตอนเช้าค่ะ สไตล์ซาลอนค่ะ
+B: Hi, I'd like to make an appointment for a haircut. | สวัสดี ฉันอยากนัดตัดผม
+A: Sure. When would you like to come? | ได้ค่ะ อยากมาวันไหนคะ
+B: Do you have anything on Saturday afternoon? | วันเสาร์บ่ายมีคิวว่างไหม
+A: We have two o'clock or four o'clock. | มีบ่ายสองหรือสี่โมงค่ะ
+B: Two o'clock is perfect. | บ่ายสองโมงพอดีเลย
+A: Can I have your name, please? | ขอชื่อด้วยค่ะ
+B: My name is Kan. Thank you. | ชื่อกานต์ค่ะ ขอบคุณค่ะ
+A: Great. See you on Saturday. | เรียบร้อยค่ะ เจอกันวันเสาร์
+
+= A2 | Leaving a message | ฝากข้อความ | 📝 | คนที่คุณโทรหาไม่อยู่ คุณฝากข้อความไว้
+A: Hello, Blue Sky Company. | สวัสดีค่ะ บริษัทบลูสกายค่ะ
+B: Hi, can I speak to Mr. Brown, please? | สวัสดี ขอสายคุณบราวน์หน่อยได้ไหม
+A: I'm sorry, he's in a meeting. Can I take a message? | ขอโทษค่ะ เขาประชุมอยู่ ฝากข้อความไหมคะ
+B: Yes, please. This is Nok from ABC Travel. | ได้ค่ะ ฉันนกจากเอบีซีทราเวล
+A: Okay. What's the message? | ค่ะ ข้อความว่าอะไรคะ
+B: Could you ask him to call me back this afternoon? | ช่วยบอกให้เขาโทรกลับหาฉันบ่ายนี้ได้ไหม
+A: Sure. Does he have your number? | ได้ค่ะ เขามีเบอร์ของคุณไหมคะ
+B: Yes, he does. Thank you for your help. | มีค่ะ ขอบคุณที่ช่วยนะคะ
+A: Got it. I'll give him the message. | รับทราบค่ะ จะส่งข้อความให้เขานะคะ
+
+= B1 | Wrong order delivery | ส่งของผิด | 📦 | ของที่สั่งออนไลน์มาผิด คุณโทรหาฝ่ายบริการลูกค้า
+A: Customer service, how can I help? | ฝ่ายบริการลูกค้าค่ะ มีอะไรให้ช่วยคะ
+B: Hi, I received the wrong item in my order. | สวัสดี ฉันได้รับสินค้าผิดในออร์เดอร์
+A: I'm sorry about that. What's your order number? | ขอโทษด้วยค่ะ หมายเลขคำสั่งซื้ออะไรคะ
+B: Sorry, I don't have it with me. My name is Kan. | ขอโทษ ไม่ได้เอามา ฉันชื่อกานต์
+A: That's okay, I found your order. What did you receive? | ไม่เป็นไรค่ะ เจอออร์เดอร์แล้ว ได้รับอะไรไปคะ
+B: I ordered a blue jacket, but I got a green one. | ฉันสั่งเสื้อแจ็กเก็ตสีฟ้า แต่ได้สีเขียวมา
+A: We'll send the right one tomorrow. | เราจะส่งตัวที่ถูกไปพรุ่งนี้ค่ะ
+B: Great. What should I do with the green one? | ดีเลย แล้วตัวสีเขียวต้องทำยังไง
+A: A courier will pick it up when they deliver the new one. | พนักงานส่งของจะมารับคืนตอนส่งตัวใหม่ค่ะ
+
+## work | Work & Study | งาน / เรียน | 💼
+
+= A2 | First day at work | วันแรกที่ทำงาน | 🏢 | วันแรกที่ทำงาน คุณคุยกับเพื่อนร่วมงาน
+A: Hi, you must be the new designer. I'm Lisa. | สวัสดี คุณคงเป็นดีไซเนอร์คนใหม่ ฉันลิซ่า
+B: Yes, I'm Kan. Nice to meet you, Lisa. | ใช่ ฉันกานต์ ยินดีที่ได้รู้จักนะลิซ่า
+A: Welcome to the team! How's your first day? | ยินดีต้อนรับสู่ทีม วันแรกเป็นยังไงบ้าง
+B: Good, but there's a lot to learn. | ดี แต่มีอะไรต้องเรียนรู้เยอะเลย
+A: Don't worry. Ask me if you need anything. | ไม่ต้องห่วง ถ้าต้องการอะไรถามฉันได้เลย
+B: Thanks. Where do people usually eat lunch? | ขอบคุณ ปกติทุกคนกินข้าวเที่ยงที่ไหน
+A: There's a nice food court downstairs. Want to join us? | มีฟู้ดคอร์ทดีๆ ข้างล่าง อยากไปด้วยกันไหม
+B: I'd love to. Thank you! | อยากไปมากเลย ขอบคุณนะ
+
+= B1 | Asking for a day off | ขอลางาน | 🌴 | คุณขอลางานกับหัวหน้า
+A: Come in. You wanted to talk to me? | เข้ามาสิ อยากคุยกับผมหรือ
+B: Yes. Do you have a minute? | ใช่ค่ะ มีเวลาสักครู่ไหมคะ
+A: Sure. What's up? | ได้สิ มีอะไรหรือ
+B: Could I take next Friday off? | ขอลาวันศุกร์หน้าได้ไหมคะ
+A: What's the reason? | ด้วยเหตุผลอะไร
+B: My sister is getting married in Chiang Mai. | น้องสาวฉันแต่งงานที่เชียงใหม่
+A: That's great news! Have you finished the report? | ข่าวดีเลย แล้วรายงานเสร็จหรือยัง
+B: Not yet, but I'll finish it by Thursday. | ยังเลย แต่จะทำให้เสร็จภายในวันพฤหัส
+A: Okay, then Friday is fine. | โอเค งั้นวันศุกร์ได้เลย
+
+= A2 | Talking to a teacher | คุยกับอาจารย์ | 👩‍🏫 | คุณขอเวลาเพิ่มสำหรับส่งงาน
+A: Hello. Did you want to see me? | สวัสดี อยากพบครูหรือ
+B: Yes. I have a question about the homework. | ใช่ครับ/ค่ะ มีคำถามเรื่องการบ้าน
+A: Of course. What is it? | ได้เลย อะไรหรือ
+B: I don't understand the last part. | ผมไม่เข้าใจส่วนสุดท้าย
+A: You need to write about your own experience. | ต้องเขียนเกี่ยวกับประสบการณ์ของตัวเอง
+B: I see. Can I have one more day to finish it? | เข้าใจแล้ว ขอเวลาอีกหนึ่งวันเพื่อทำให้เสร็จได้ไหม
+A: Okay, but please send it by Friday. | ได้ แต่ส่งภายในวันศุกร์นะ
+B: Thank you so much. I will. | ขอบคุณมากครับ/ค่ะ จะส่งแน่นอน
+
+## plans | Plans with Friends | นัดเพื่อน | 🎉
+
+= A1 | Making weekend plans | วางแผนวันหยุด | 📅 | คุณชวนเพื่อนไปเที่ยววันเสาร์
+A: Are you free this Saturday? | วันเสาร์นี้ว่างไหม
+B: Yes, I am. What's up? | ว่าง มีอะไรหรือ
+A: Do you want to go to the night market? | อยากไปตลาดกลางคืนไหม
+B: Sounds fun! What time? | ฟังดูสนุก กี่โมง
+A: How about six o'clock? | หกโมงดีไหม
+B: Six is good. Where should we meet? | หกโมงได้ เจอกันที่ไหนดี
+A: Let's meet at the station. | เจอกันที่สถานีนะ
+B: Okay. See you on Saturday! | โอเค เจอกันวันเสาร์
+
+= A2 | Inviting to a party | ชวนไปงานวันเกิด | 🎂 | เพื่อนชวนคุณไปงานวันเกิด
+A: I'm having a birthday party on Friday. Can you come? | ฉันจะจัดงานวันเกิดวันศุกร์ มาได้ไหม
+B: I'd love to! Where is it? | อยากไปมาก จัดที่ไหน
+A: At my place. It starts at seven. | ที่บ้านฉัน เริ่มหนึ่งทุ่ม
+B: Should I bring anything? | ต้องเอาอะไรไปไหม
+A: Just bring yourself! | แค่ตัวเธอมาก็พอ
+B: Can I bring my sister too? | พาน้องสาวไปด้วยได้ไหม
+A: Of course, the more the merrier. | ได้แน่นอน ยิ่งคนเยอะยิ่งสนุก
+B: Great. See you on Friday! | เยี่ยม เจอกันวันศุกร์นะ
+
+= B1 | Cancelling plans | ยกเลิกนัด | 🙏 | คุณต้องยกเลิกนัดกับเพื่อน
+A: Hey, are we still meeting tonight? | เฮ้ คืนนี้ยังเจอกันอยู่ใช่ไหม
+B: I'm so sorry, but I can't make it tonight. | ขอโทษจริงๆ คืนนี้ฉันไปไม่ได้
+A: Oh no. Is everything okay? | โอ้ไม่นะ ทุกอย่างโอเคไหม
+B: Something came up at work and I have to stay late. | มีงานด่วนเข้ามา ต้องอยู่ดึก
+A: That's too bad. Maybe another day? | น่าเสียดาย วันอื่นได้ไหม
+B: How about next Tuesday? It's my treat. | วันอังคารหน้าดีไหม ฉันเลี้ยงเอง
+A: Deal! Don't work too hard. | ตกลง อย่าทำงานหนักเกินไปนะ
+B: Thanks for understanding. | ขอบคุณที่เข้าใจนะ
+
+## home | Home & Neighbors | บ้าน / เพื่อนบ้าน | 🏠
+
+= A1 | Meeting a neighbor | ทักทายเพื่อนบ้าน | 🏘️ | คุณเจอเพื่อนบ้านใหม่หน้าลิฟต์
+A: Hi! I just moved in next door. | สวัสดี ฉันเพิ่งย้ายมาอยู่ห้องข้างๆ
+B: Oh, welcome! I'm Nok. I live across the hall. | โอ้ ยินดีต้อนรับ ฉันนก อยู่ห้องฝั่งตรงข้าม
+A: Nice to meet you. I'm Sam. | ยินดีที่ได้รู้จัก ฉันแซม
+B: Do you need any help with your boxes? | ต้องการให้ช่วยยกกล่องไหม
+A: That's kind of you, but I'm okay. | ใจดีจัง แต่ฉันโอเค
+B: Let me know if you need anything. | ถ้าต้องการอะไรบอกได้เลยนะ
+A: Thanks! Is there a good supermarket near here? | ขอบคุณ แถวนี้มีซูเปอร์มาร์เก็ตดีๆ ไหม
+B: Yes, there's one across the street. | มี อยู่ฝั่งตรงข้ามถนน
+
+= A2 | A delivery arrives | รับพัสดุ | 📦 | พนักงานส่งของมาส่งพัสดุให้คุณ
+A: Hello, delivery for Kan! | สวัสดีครับ พัสดุของคุณกานต์ครับ
+B: That's me. Thank you. | ฉันเองค่ะ ขอบคุณ
+A: Can you sign here, please? | ช่วยเซ็นตรงนี้ด้วยครับ
+B: Sure. Is there only one box? | ได้ค่ะ มีกล่องเดียวหรือคะ
+A: No, there's another one in the truck. | ไม่ครับ มีอีกกล่องอยู่ในรถ
+B: Could you leave it by the door, please? | ช่วยวางไว้ข้างประตูได้ไหมคะ
+A: No problem. Have a nice day! | ได้ครับ ขอให้เป็นวันที่ดีครับ
+B: You too. Thanks a lot. | เช่นกันค่ะ ขอบคุณมาก
+
+= B1 | Asking about noise | ขอให้ลดเสียง | 🔊 | ห้องข้างๆ เปิดเพลงเสียงดังตอนดึก คุณไปขอร้องอย่างสุภาพ
+A: Oh, hi. Can I help you? | โอ้ สวัสดี มีอะไรหรือเปล่า
+B: Hi, sorry to bother you so late. | สวัสดี ขอโทษที่มารบกวนดึกขนาดนี้
+A: No problem. What's wrong? | ไม่เป็นไร มีอะไรหรือ
+B: The music is a bit loud, and I have work early tomorrow. | เพลงเสียงดังไปหน่อย และพรุ่งนี้ฉันต้องทำงานแต่เช้า
+A: Oh, I'm so sorry. I didn't realize. | โอ้ ขอโทษจริงๆ ไม่ทันคิดเลย
+B: Would you mind turning it down a little? | รบกวนลดเสียงลงหน่อยได้ไหม
+A: Of course. I'll turn it down right now. | ได้แน่นอน จะลดเดี๋ยวนี้เลย
+B: Thank you. I really appreciate it. | ขอบคุณ ขอบคุณมากจริงๆ
+
+## help | Emergencies & Help | ขอความช่วยเหลือ | 🆘
+
+= A2 | Lost phone | โทรศัพท์หาย | 📱 | คุณทำโทรศัพท์หายและไปแจ้งที่จุดบริการ
+A: Can I help you? | มีอะไรให้ช่วยไหมคะ
+B: Yes, I think I lost my phone on the bus. | ใช่ ฉันคิดว่าทำโทรศัพท์หายบนรถเมล์
+A: What does it look like? | มีลักษณะยังไงคะ
+B: It's a black phone with a blue case. | เป็นโทรศัพท์สีดำ มีเคสสีฟ้า
+A: When did you lose it? | หายตอนไหนคะ
+B: About an hour ago, on the bus to Siam. | ประมาณชั่วโมงที่แล้ว บนรถเมล์ไปสยาม
+A: Please fill in this form. We'll call you if we find it. | กรอกแบบฟอร์มนี้นะคะ ถ้าเจอจะโทรแจ้ง
+B: Thank you. Can I use your phone to call my friend? | ขอบคุณ ขอยืมโทรศัพท์โทรหาเพื่อนได้ไหม
+
+= A2 | The ATM kept my card | ตู้ ATM กลืนบัตร | 🏧 | ตู้ ATM กลืนบัตรของคุณ คุณเข้าไปติดต่อธนาคาร
+A: Good afternoon. How can I help you? | สวัสดีตอนบ่ายค่ะ มีอะไรให้ช่วยคะ
+B: The ATM outside kept my card. | ตู้ ATM ข้างนอกกลืนบัตรของฉัน
+A: I see. Do you have your ID card with you? | เข้าใจแล้วค่ะ มีบัตรประชาชนมาไหมคะ
+B: Yes, here it is. | มี นี่ค่ะ
+A: Please wait a moment while I check. | รอสักครู่นะคะ ขอตรวจสอบก่อน
+B: How long will it take? | ใช้เวลานานไหม
+A: About ten minutes. | ประมาณสิบนาทีค่ะ
+B: Okay, I'll wait. Thank you. | โอเค จะรอค่ะ ขอบคุณ
+
+= B1 | Asking for help in an emergency | ขอความช่วยเหลือเร่งด่วน | 🚑 | มีคนล้มบนถนน คุณโทรเรียกรถพยาบาล
+A: Emergency services. What's your emergency? | หน่วยฉุกเฉินครับ มีเหตุอะไรครับ
+B: A man fell down and he's not moving. | มีผู้ชายล้มลงและเขาไม่ขยับเลย
+A: Is he breathing? | เขายังหายใจอยู่ไหมครับ
+B: Yes, but he's breathing very slowly. | หายใจ แต่หายใจช้ามาก
+A: Where are you right now? | ตอนนี้คุณอยู่ที่ไหนครับ
+B: I'm on Sukhumvit Road, near the post office. | อยู่ถนนสุขุมวิท ใกล้ที่ทำการไปรษณีย์
+A: An ambulance is on the way. Stay with him. | รถพยาบาลกำลังไป อยู่กับเขาไว้นะครับ
+B: Okay. Please hurry. | ได้ค่ะ ช่วยรีบหน่อยนะคะ

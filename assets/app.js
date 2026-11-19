@@ -1,8 +1,9 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=7";
-import { openPictures } from "./picture.js?v=14";
-import { openPatterns } from "./patterns.js?v=15";
+import * as srs from "./srs.js?v=17";
+import { openPictures } from "./picture.js?v=17";
+import { openPatterns } from "./patterns.js?v=17";
+import { openDialogs } from "./dialogs.js?v=17";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
@@ -912,7 +913,7 @@ function finish() {
           ${stat(s.sentences, "ประโยค", "text-sky-600 dark:text-sky-300")}
           ${s.practice ? "" : stat(s.cleared, "เก็บตกสำเร็จ", "text-rose-500")}
         </div>
-        <div class="mt-6">${button('data-act="home"', "กลับหน้าแรก")}</div>`)}
+        <div class="mt-6">${button('data-act="home"', s.practice ? "กลับหน้าแรก" : `ไปภารกิจถัดไป ${icon("arrow", "ml-2 h-5 w-5")}`)}</div>`)}
     </main>`;
   on("home", renderHome);
 }
@@ -1026,6 +1027,41 @@ async function renderProgress() {
   window.scrollTo({ top: 0 });
 }
 
+// ---------- ภารกิจประจำวัน ----------
+function dailyMissions(total, wordsToday, sentToday, patternsDue) {
+  const d = daily();
+  const plural = (n, one, many = one + "s") => `${n} ${n === 1 ? one : many}`;
+  return [
+    { id: "words", emoji: "📚", title: "Words", th: "คำศัพท์ประจำวัน", done: total === 0,
+      detail: total ? `${plural(wordsToday, "word")} · ${plural(sentToday, "sentence")}` : "Finished for today" },
+    { id: "patterns", emoji: "🧩", title: "Sentence Pattern", th: "รูปประโยค", done: patternsDue === 0 && (d.patNew || 0) >= 1,
+      detail: patternsDue ? `${plural(patternsDue, "review")} + 1 new pattern` : (d.patNew || 0) >= 1 ? "Learned a new pattern" : "Learn 1 new pattern" },
+    { id: "talk", emoji: "💬", title: "Conversation", th: "บทสนทนา", done: (d.dialogs || 0) >= 1,
+      detail: (d.dialogs || 0) >= 1 ? `Practiced ${plural(d.dialogs, "dialogue")}` : "Role-play 1 everyday dialogue" },
+    { id: "picture", emoji: "🖼️", title: "Picture Talk", th: "อธิบายภาพ", done: !!d.picDone,
+      detail: d.picDone ? "Described a picture" : "Describe 1 photo (any level)" },
+  ];
+}
+
+// นับวันต่อเนื่องที่ทำภารกิจครบทั้ง 4 อย่าง
+function updateStreak(allDone) {
+  const today = daily().date, yesterday = srs.addDays(today, -1);
+  const st = store.streak || {};
+  if (allDone && st.date !== today) {
+    store.streak = { date: today, count: st.date === yesterday ? (st.count || 0) + 1 : 1 };
+    save();
+  }
+  const s = store.streak;
+  return s && (s.date === today || s.date === yesterday) ? s.count : 0;
+}
+
+function startMission(id, total) {
+  if (id === "words") return total ? startSession() : startPractice();
+  if (id === "patterns") return openPatterns(pictureCtx, { daily: true });
+  if (id === "talk") return openDialogs(pictureCtx, { daily: true });
+  if (id === "picture") return openPictures(pictureCtx);
+}
+
 // ---------- home ----------
 function renderHome() {
   const d = daily();
@@ -1051,7 +1087,12 @@ function renderHome() {
       <span class="flex items-center gap-2.5"><span class="h-2.5 w-2.5 rounded-full ${PHASES[key].dot} ring-2 ring-white/40"></span>${PHASES[key].en}</span>
       <span class="text-lg font-bold tabular-nums">${n}</span>
     </li>`;
-  const practiceBtn = practiceN ? `
+  // ภารกิจประจำวัน 4 อย่าง ให้ได้ฝึกครบทุกโหมด (ไม่ใช่แค่ท่องคำศัพท์)
+  const missions = dailyMissions(total, wordsToday, sentToday, patternsDue);
+  const next = missions.find(m => !m.done);
+  const doneCount = missions.filter(m => m.done).length;
+  const streak = updateStreak(doneCount === missions.length);
+  const practiceBtn = practiceN && !total ? `
     <button data-act="practice" class="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white/15 px-5 py-3.5 font-semibold text-white ring-1 ring-white/30 transition hover:bg-white/25 active:scale-[.98]">
       ${icon("repeat", "h-5 w-5")} Practice today's ${plural(practiceN, "word")} again
     </button>
@@ -1070,37 +1111,47 @@ function renderHome() {
       </button>
     </header>
     <main class="grid gap-4 py-6">
-      <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-6 text-white shadow-xl shadow-purple-600/25 md:p-8">
-        <p class="text-sm text-white/70">${esc(dateEn)}</p>
-        <h2 class="mt-1 text-2xl font-bold">${total ? `Today: ${plural(wordsToday, "word")} · ${plural(sentToday, "sentence")}` : "All done for today 🎉"}</h2>
-        <ul class="mt-5 grid gap-2">
-          ${phaseRow("warm", plan.warm.length)}${phaseRow("review", plan.review.length)}
-          ${phaseRow("new", plan.fresh.length)}${phaseRow("sentence", sentToday)}${phaseRow("wrap", plan.wrap.length)}
+      <section class="animate-pop overflow-hidden rounded-[28px] bg-gradient-to-br from-purple-600 via-purple-600 to-indigo-700 p-5 text-white shadow-xl shadow-purple-600/25 md:p-7">
+        <div class="flex items-center justify-between gap-2">
+          <p class="text-sm text-white/70">${esc(dateEn)}</p>
+          ${streak ? `<span class="rounded-full bg-white/15 px-3 py-1 text-sm font-semibold ring-1 ring-white/20">🔥 ${plural(streak, "day")}</span>` : ""}
+        </div>
+        <h2 class="mt-1 text-2xl font-bold">Today's plan <span class="text-lg font-semibold text-white/70">· ${doneCount}/${missions.length} done</span></h2>
+        <div class="mt-3 grid grid-cols-4 gap-1.5">${missions.map(m => `<span class="h-1.5 rounded-full ${m.done ? "bg-emerald-300" : "bg-white/20"}"></span>`).join("")}</div>
+        <ul class="mt-4 grid gap-2">
+          ${missions.map((m, i) => `
+            <li><button data-mission="${m.id}" class="flex w-full items-center gap-3 rounded-2xl px-3 py-3 text-left transition active:scale-[.99] ${m.done ? "bg-white/5" : m === next ? "bg-white/20 ring-1 ring-white/40" : "bg-white/10 hover:bg-white/15"}">
+              <span class="grid h-11 w-11 shrink-0 place-items-center rounded-xl text-xl ${m.done ? "bg-emerald-400 text-white" : "bg-white/15"}">${m.done ? icon("check", "h-6 w-6") : m.emoji}</span>
+              <span class="min-w-0 flex-1">
+                <span class="flex items-baseline gap-2"><span class="font-semibold ${m.done ? "text-white/70 line-through decoration-white/40" : ""}">${i + 1}. ${m.title}</span><span class="truncate text-xs text-white/60">${m.th}</span></span>
+                <span class="block text-sm text-white/75">${m.detail}</span>
+              </span>
+              <span class="shrink-0 text-white/70">${m.done ? "" : icon("arrow", "h-5 w-5")}</span>
+            </button></li>`).join("")}
         </ul>
-        <button data-act="start" ${total ? "" : "disabled"} class="mt-5 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98] disabled:opacity-60">
-          ${total ? `${practiceN ? "Continue" : "Start"} today's lesson ${icon("arrow", "h-5 w-5")}` : `Tomorrow: ${plural(tomorrow, "word")} to review`}
+        ${total ? `<p class="mt-2 px-1 text-xs text-white/60">Words today: warm-up ${plan.warm.length} · review ${plan.review.length} · new ${plan.fresh.length} · sentences ${sentToday} · wrap-up ${plan.wrap.length}</p>` : ""}
+        <button data-act="start" class="mt-4 inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-5 py-4 text-lg font-bold text-purple-700 shadow-lg transition hover:bg-purple-50 active:scale-[.98]">
+          ${next ? `${doneCount ? "Next" : "Start"}: ${next.title} ${icon("arrow", "h-5 w-5")}` : "All done today 🎉 Practice more"}
         </button>
         ${plan.catchUp ? `<p class="mt-3 rounded-2xl bg-white/15 px-4 py-3 text-sm leading-relaxed ring-1 ring-white/20">🧘 <b>Catch-up mode</b> · ${plan.backlog ? `${plural(plan.backlog, "review")} will wait for the next days so today stays at ${maxReviews()}. ` : ""}New words today: ${plan.newTarget} until your reviews are back on track.</p>` : ""}
         ${practiceBtn}
       </section>
 
-      <button data-act="pictures" class="animate-pop group flex items-center gap-4 rounded-[28px] bg-white p-5 text-left shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 transition hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
-        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-amber-300 to-rose-400 text-2xl shadow-lg shadow-rose-400/30">🖼️</span>
-        <span class="min-w-0 flex-1">
-          <span class="block text-lg font-bold">Picture Talk</span>
-          <span class="block text-sm text-zinc-500">Describe a random photo: words in the picture, sentence starters, 3 practice levels, and speaking with your mic.</span>
-        </span>
-        <span class="text-purple-600 transition group-hover:translate-x-1">${icon("arrow", "h-6 w-6")}</span>
-      </button>
-
-      <button data-act="patterns" class="animate-pop group flex items-center gap-4 rounded-[28px] bg-white p-5 text-left shadow-[0_1px_2px_rgba(0,0,0,.04),0_12px_32px_-16px_rgba(76,29,149,.25)] ring-1 ring-zinc-200/70 transition hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
-        <span class="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-gradient-to-br from-emerald-300 to-teal-500 text-2xl shadow-lg shadow-teal-500/30">🧩</span>
-        <span class="min-w-0 flex-1">
-          <span class="flex items-center gap-2 text-lg font-bold">Sentence Patterns${patternsDue ? `<span class="rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">${patternsDue} to review</span>` : ""}</span>
-          <span class="block text-sm text-zinc-500">90 everyday sentence patterns. Learn the frame once, then swap the words to say what you need.</span>
-        </span>
-        <span class="text-purple-600 transition group-hover:translate-x-1">${icon("arrow", "h-6 w-6")}</span>
-      </button>
+      <section>
+        <h3 class="mb-2 px-1 text-sm font-semibold text-zinc-500">All practice modes · ฝึกเพิ่มได้ทุกเมื่อ</h3>
+        <div class="grid grid-cols-3 gap-3">
+          ${[
+            ["patterns", "🧩", "Patterns", "from-emerald-300 to-teal-500", patternsDue ? `${patternsDue} due` : ""],
+            ["dialogs", "💬", "Conversations", "from-sky-300 to-indigo-500", ""],
+            ["pictures", "🖼️", "Picture Talk", "from-amber-300 to-rose-400", ""],
+          ].map(([act, emoji, name, grad, badge]) => `
+            <button data-act="${act}" class="animate-pop relative flex flex-col items-center gap-2 rounded-[22px] bg-white px-2 py-4 text-center ring-1 ring-zinc-200/70 transition hover:ring-purple-300 dark:bg-zinc-900 dark:ring-zinc-800">
+              <span class="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br ${grad} text-2xl shadow-md">${emoji}</span>
+              <span class="text-sm font-semibold leading-tight">${name}</span>
+              ${badge ? `<span class="absolute right-2 top-2 rounded-full bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800 dark:bg-amber-500/15 dark:text-amber-300">${badge}</span>` : ""}
+            </button>`).join("")}
+        </div>
+      </section>
 
       <section class="grid gap-4 md:grid-cols-2">
         ${card(`
@@ -1151,7 +1202,9 @@ function renderHome() {
       </details>
     </main>`;
 
-  on("start", startSession);
+  on("start", () => (next ? startMission(next.id, total) : startPractice()));
+  app.querySelectorAll("[data-mission]").forEach(b => (b.onclick = () => startMission(b.dataset.mission, total)));
+  on("dialogs", () => openDialogs(pictureCtx));
   on("practice", startPractice);
   on("pictures", () => openPictures(pictureCtx));
   on("patterns", () => openPatterns(pictureCtx));

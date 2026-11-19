@@ -109,6 +109,72 @@
    "tab": "work",
    "en": "Apologies & Help",
    "th": "ขอโทษ / ขอความช่วยเหลือ"
+  },
+  {
+   "id": "daily.health",
+   "tab": "daily",
+   "en": "Health",
+   "th": "สุขภาพ / หาหมอ"
+  },
+  {
+   "id": "daily.feelings",
+   "tab": "daily",
+   "en": "Feelings",
+   "th": "ความรู้สึก"
+  },
+  {
+   "id": "daily.home",
+   "tab": "daily",
+   "en": "Home & Chores",
+   "th": "บ้าน / งานบ้าน"
+  },
+  {
+   "id": "daily.time",
+   "tab": "daily",
+   "en": "Time & Weather",
+   "th": "เวลา / อากาศ"
+  },
+  {
+   "id": "food.restaurant",
+   "tab": "food",
+   "en": "At the Restaurant",
+   "th": "ในร้านอาหาร / ปัญหา"
+  },
+  {
+   "id": "travel.hotel",
+   "tab": "travel",
+   "en": "Hotels",
+   "th": "โรงแรม"
+  },
+  {
+   "id": "travel.transport",
+   "tab": "travel",
+   "en": "Taxis & Transport",
+   "th": "แท็กซี่ / การเดินทาง"
+  },
+  {
+   "id": "social.family",
+   "tab": "social",
+   "en": "Family & Relationships",
+   "th": "ครอบครัว / ความสัมพันธ์"
+  },
+  {
+   "id": "social.agree",
+   "tab": "social",
+   "en": "Agree & Clarify",
+   "th": "เห็นด้วย / ถามให้ชัด"
+  },
+  {
+   "id": "work.phone",
+   "tab": "work",
+   "en": "Phone & Messages",
+   "th": "โทรศัพท์ / ข้อความ"
+  },
+  {
+   "id": "work.meeting",
+   "tab": "work",
+   "en": "Meetings & Projects",
+   "th": "ประชุม / ทำงาน"
   }
  ],
  "patterns": [
@@ -4944,6 +5010,3660 @@
      "label": "แบบขอโทษ",
      "frame": "Sorry, I won't be able to {x}.",
      "th": "ขอโทษนะ ฉันคงไม่สามารถ{x}ได้"
+    }
+   ]
+  },
+  {
+   "id": "i-have-x-today",
+   "cat": "daily.health",
+   "level": "A1",
+   "frame": "I have {x} today.",
+   "th": "วันนี้ฉัน{x}",
+   "use": "บอกอาการป่วย",
+   "note": "",
+   "slots": [
+    {
+     "en": "a headache",
+     "th": "ปวดหัว",
+     "emoji": "🤕"
+    },
+    {
+     "en": "a fever",
+     "th": "มีไข้",
+     "emoji": "🤒"
+    },
+    {
+     "en": "a sore throat",
+     "th": "เจ็บคอ",
+     "emoji": "😷"
+    },
+    {
+     "en": "a cold",
+     "th": "เป็นหวัด",
+     "emoji": "🤧"
+    },
+    {
+     "en": "a stomachache",
+     "th": "ปวดท้อง",
+     "emoji": "🤢"
+    },
+    {
+     "en": "a toothache",
+     "th": "ปวดฟัน",
+     "emoji": "🦷"
+    },
+    {
+     "en": "a bad cough",
+     "th": "ไอหนัก",
+     "emoji": "😮‍💨"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Do you have {x} today?",
+     "th": "วันนี้คุณ{x}ไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นอดีต",
+     "frame": "I had {x} yesterday.",
+     "th": "เมื่อวานฉัน{x}"
+    }
+   ]
+  },
+  {
+   "id": "my-x-hurts",
+   "cat": "daily.health",
+   "level": "A1",
+   "frame": "My {x} hurts.",
+   "th": "ฉันเจ็บ{x}",
+   "use": "บอกว่าเจ็บตรงไหน",
+   "note": "ใช้ hurts เพราะประธานเป็นเอกพจน์ (My back)",
+   "slots": [
+    {
+     "en": "back",
+     "th": "หลัง",
+     "emoji": "🔙"
+    },
+    {
+     "en": "head",
+     "th": "หัว",
+     "emoji": "🤕"
+    },
+    {
+     "en": "leg",
+     "th": "ขา",
+     "emoji": "🦵"
+    },
+    {
+     "en": "arm",
+     "th": "แขน",
+     "emoji": "💪"
+    },
+    {
+     "en": "stomach",
+     "th": "ท้อง",
+     "emoji": "🤢"
+    },
+    {
+     "en": "foot",
+     "th": "เท้า",
+     "emoji": "🦶"
+    },
+    {
+     "en": "neck",
+     "th": "คอ",
+     "emoji": "🧣"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Does your {x} hurt?",
+     "th": "คุณเจ็บ{x}ไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นอดีต",
+     "frame": "My {x} hurt all night.",
+     "th": "เมื่อคืนฉันเจ็บ{x}ทั้งคืน"
+    }
+   ]
+  },
+  {
+   "id": "do-you-have-anything-for-x",
+   "cat": "daily.health",
+   "level": "A2",
+   "frame": "Do you have anything for {x}?",
+   "th": "มียาแก้{x}ไหม",
+   "use": "ถามยาที่ร้านขายยา",
+   "note": "",
+   "slots": [
+    {
+     "en": "a headache",
+     "th": "ปวดหัว",
+     "emoji": "💊"
+    },
+    {
+     "en": "a cough",
+     "th": "ไอ",
+     "emoji": "😮‍💨"
+    },
+    {
+     "en": "a sore throat",
+     "th": "เจ็บคอ",
+     "emoji": "😷"
+    },
+    {
+     "en": "mosquito bites",
+     "th": "ยุงกัด",
+     "emoji": "🦟"
+    },
+    {
+     "en": "an upset stomach",
+     "th": "ท้องไส้ปั่นป่วน",
+     "emoji": "🤢"
+    },
+    {
+     "en": "a runny nose",
+     "th": "น้ำมูกไหล",
+     "emoji": "🤧"
+    },
+    {
+     "en": "sunburn",
+     "th": "ผิวไหม้แดด",
+     "emoji": "☀️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ใช้ need",
+     "frame": "I need something for {x}.",
+     "th": "ฉันต้องการยาแก้{x}"
+    }
+   ]
+  },
+  {
+   "id": "i-ve-been-feeling-x-since-yesterday",
+   "cat": "daily.health",
+   "level": "A2",
+   "frame": "I've been feeling {x} since yesterday.",
+   "th": "ฉันรู้สึก{x}ตั้งแต่เมื่อวาน",
+   "use": "บอกหมอว่าเป็นมานานแค่ไหน",
+   "note": "have been + V-ing = เป็นมาตั้งแต่…จนถึงตอนนี้",
+   "slots": [
+    {
+     "en": "tired",
+     "th": "เหนื่อย",
+     "emoji": "😩"
+    },
+    {
+     "en": "dizzy",
+     "th": "เวียนหัว",
+     "emoji": "😵"
+    },
+    {
+     "en": "sick",
+     "th": "ไม่สบาย",
+     "emoji": "🤒"
+    },
+    {
+     "en": "weak",
+     "th": "อ่อนเพลีย",
+     "emoji": "🥱"
+    },
+    {
+     "en": "cold",
+     "th": "หนาวสั่น",
+     "emoji": "🥶"
+    },
+    {
+     "en": "hot",
+     "th": "ตัวร้อน",
+     "emoji": "🥵"
+    },
+    {
+     "en": "much better",
+     "th": "ดีขึ้นมาก",
+     "emoji": "😊"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Have you been feeling {x} since yesterday?",
+     "th": "คุณรู้สึก{x}ตั้งแต่เมื่อวานหรือ"
+    }
+   ]
+  },
+  {
+   "id": "how-often-should-i-x",
+   "cat": "daily.health",
+   "level": "A2",
+   "frame": "How often should I {x}?",
+   "th": "ฉันควร{x}บ่อยแค่ไหน",
+   "use": "ถามวิธีใช้ยาหรือคำแนะนำของหมอ",
+   "note": "",
+   "slots": [
+    {
+     "en": "take this medicine",
+     "th": "กินยานี้",
+     "emoji": "💊"
+    },
+    {
+     "en": "use this cream",
+     "th": "ทาครีมนี้",
+     "emoji": "🧴"
+    },
+    {
+     "en": "change the bandage",
+     "th": "เปลี่ยนผ้าพันแผล",
+     "emoji": "🩹"
+    },
+    {
+     "en": "come back for a check-up",
+     "th": "กลับมาตรวจ",
+     "emoji": "🩺"
+    },
+    {
+     "en": "drink water",
+     "th": "ดื่มน้ำ",
+     "emoji": "💧"
+    },
+    {
+     "en": "do these exercises",
+     "th": "ทำท่าบริหารเหล่านี้",
+     "emoji": "🤸"
+    },
+    {
+     "en": "clean the wound",
+     "th": "ทำความสะอาดแผล",
+     "emoji": "🧼"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามว่าเมื่อไร",
+     "frame": "When should I {x}?",
+     "th": "ฉันควร{x}ตอนไหน"
+    }
+   ]
+  },
+  {
+   "id": "i-d-like-to-make-an-appointment-for-x",
+   "cat": "daily.health",
+   "level": "B1",
+   "frame": "I'd like to make an appointment for {x}.",
+   "th": "ฉันอยากนัด{x}",
+   "use": "นัดหมอหรือคลินิก",
+   "note": "",
+   "slots": [
+    {
+     "en": "a check-up",
+     "th": "ตรวจสุขภาพ",
+     "emoji": "🩺"
+    },
+    {
+     "en": "tomorrow morning",
+     "th": "พรุ่งนี้เช้า",
+     "emoji": "🌅"
+    },
+    {
+     "en": "next Monday",
+     "th": "วันจันทร์หน้า",
+     "emoji": "📅"
+    },
+    {
+     "en": "this afternoon",
+     "th": "บ่ายนี้",
+     "emoji": "🌤️"
+    },
+    {
+     "en": "a dental cleaning",
+     "th": "ขูดหินปูน",
+     "emoji": "🦷"
+    },
+    {
+     "en": "an eye test",
+     "th": "ตรวจสายตา",
+     "emoji": "👓"
+    },
+    {
+     "en": "a blood test",
+     "th": "ตรวจเลือด",
+     "emoji": "🩸"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามว่าจองได้ไหม",
+     "frame": "Is it possible to book {x}?",
+     "th": "จอง{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-feel-x-today",
+   "cat": "daily.feelings",
+   "level": "A1",
+   "frame": "I feel {x} today.",
+   "th": "วันนี้ฉันรู้สึก{x}",
+   "use": "บอกความรู้สึก",
+   "note": "",
+   "slots": [
+    {
+     "en": "happy",
+     "th": "มีความสุข",
+     "emoji": "😊"
+    },
+    {
+     "en": "tired",
+     "th": "เหนื่อย",
+     "emoji": "😩"
+    },
+    {
+     "en": "sleepy",
+     "th": "ง่วง",
+     "emoji": "😴"
+    },
+    {
+     "en": "great",
+     "th": "ดีมาก",
+     "emoji": "😄"
+    },
+    {
+     "en": "a bit sad",
+     "th": "เศร้านิดหน่อย",
+     "emoji": "😔"
+    },
+    {
+     "en": "stressed",
+     "th": "เครียด",
+     "emoji": "😣"
+    },
+    {
+     "en": "bored",
+     "th": "เบื่อ",
+     "emoji": "🥱"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Do you feel {x} today?",
+     "th": "วันนี้คุณรู้สึก{x}ไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นอดีต",
+     "frame": "I felt {x} yesterday.",
+     "th": "เมื่อวานฉันรู้สึก{x}"
+    }
+   ]
+  },
+  {
+   "id": "i-m-worried-about-x",
+   "cat": "daily.feelings",
+   "level": "A2",
+   "frame": "I'm worried about {x}.",
+   "th": "ฉันกังวลเรื่อง{x}",
+   "use": "บอกสิ่งที่กังวล",
+   "note": "worried about + คำนาม/V-ing",
+   "slots": [
+    {
+     "en": "the exam",
+     "th": "การสอบ",
+     "emoji": "📝"
+    },
+    {
+     "en": "work",
+     "th": "งาน",
+     "emoji": "💼"
+    },
+    {
+     "en": "the weather",
+     "th": "สภาพอากาศ",
+     "emoji": "🌧️"
+    },
+    {
+     "en": "money",
+     "th": "เงิน",
+     "emoji": "💸"
+    },
+    {
+     "en": "the future",
+     "th": "อนาคต",
+     "emoji": "🔮"
+    },
+    {
+     "en": "being late",
+     "th": "การไปสาย",
+     "emoji": "⏰"
+    },
+    {
+     "en": "the interview",
+     "th": "การสัมภาษณ์",
+     "emoji": "👔"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ปลอบใจ",
+     "frame": "Don't worry about {x}.",
+     "th": "ไม่ต้องกังวลเรื่อง{x}"
+    },
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you worried about {x}?",
+     "th": "คุณกังวลเรื่อง{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-m-so-excited-about-x",
+   "cat": "daily.feelings",
+   "level": "A2",
+   "frame": "I'm so excited about {x}!",
+   "th": "ฉันตื่นเต้นมากกับ{x}",
+   "use": "บอกว่าตั้งตารอ",
+   "note": "",
+   "slots": [
+    {
+     "en": "the trip",
+     "th": "ทริป",
+     "emoji": "🧳"
+    },
+    {
+     "en": "the weekend",
+     "th": "สุดสัปดาห์นี้",
+     "emoji": "🎉"
+    },
+    {
+     "en": "the concert",
+     "th": "คอนเสิร์ต",
+     "emoji": "🎤"
+    },
+    {
+     "en": "the new job",
+     "th": "งานใหม่",
+     "emoji": "💼"
+    },
+    {
+     "en": "the holiday",
+     "th": "วันหยุด",
+     "emoji": "🏖️"
+    },
+    {
+     "en": "the party",
+     "th": "ปาร์ตี้",
+     "emoji": "🥳"
+    },
+    {
+     "en": "the match",
+     "th": "การแข่งขัน",
+     "emoji": "⚽"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you excited about {x}?",
+     "th": "คุณตื่นเต้นกับ{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "that-makes-me-feel-x",
+   "cat": "daily.feelings",
+   "level": "A2",
+   "frame": "That makes me feel {x}.",
+   "th": "นั่นทำให้ฉันรู้สึก{x}",
+   "use": "บอกว่าสิ่งหนึ่งทำให้รู้สึกอย่างไร",
+   "note": "make + คน + V1",
+   "slots": [
+    {
+     "en": "better",
+     "th": "ดีขึ้น",
+     "emoji": "🙂"
+    },
+    {
+     "en": "relaxed",
+     "th": "ผ่อนคลาย",
+     "emoji": "😌"
+    },
+    {
+     "en": "nervous",
+     "th": "ประหม่า",
+     "emoji": "😬"
+    },
+    {
+     "en": "angry",
+     "th": "โกรธ",
+     "emoji": "😠"
+    },
+    {
+     "en": "proud",
+     "th": "ภูมิใจ",
+     "emoji": "🏅"
+    },
+    {
+     "en": "lonely",
+     "th": "เหงา",
+     "emoji": "🥺"
+    },
+    {
+     "en": "safe",
+     "th": "ปลอดภัย",
+     "emoji": "🛡️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Does that make you feel {x}?",
+     "th": "นั่นทำให้คุณรู้สึก{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-m-really-fed-up-with-x",
+   "cat": "daily.feelings",
+   "level": "B1",
+   "frame": "I'm really fed up with {x}.",
+   "th": "ฉันเบื่อ{x}สุดๆ",
+   "use": "บ่นว่าทนไม่ไหวแล้ว",
+   "note": "fed up with = เบื่อจนทนไม่ไหว",
+   "slots": [
+    {
+     "en": "the traffic",
+     "th": "รถติด",
+     "emoji": "🚗"
+    },
+    {
+     "en": "this weather",
+     "th": "อากาศแบบนี้",
+     "emoji": "🌧️"
+    },
+    {
+     "en": "waiting",
+     "th": "การรอ",
+     "emoji": "⏳"
+    },
+    {
+     "en": "this old phone",
+     "th": "โทรศัพท์เครื่องเก่านี้",
+     "emoji": "📱"
+    },
+    {
+     "en": "the noise",
+     "th": "เสียงดัง",
+     "emoji": "🔊"
+    },
+    {
+     "en": "working late",
+     "th": "การทำงานดึก",
+     "emoji": "🌙"
+    },
+    {
+     "en": "doing the same thing",
+     "th": "การทำอะไรเดิมๆ",
+     "emoji": "🔁"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you fed up with {x}?",
+     "th": "คุณเบื่อ{x}หรือ"
+    }
+   ]
+  },
+  {
+   "id": "i-was-surprised-that-x",
+   "cat": "daily.feelings",
+   "level": "B1",
+   "frame": "I was surprised that {x}.",
+   "th": "ฉันแปลกใจที่{x}",
+   "use": "เล่าเรื่องที่ไม่คาดคิด",
+   "note": "",
+   "slots": [
+    {
+     "en": "the shop was closed",
+     "th": "ร้านปิด",
+     "emoji": "🏪"
+    },
+    {
+     "en": "he remembered my name",
+     "th": "เขาจำชื่อฉันได้",
+     "emoji": "🧠"
+    },
+    {
+     "en": "it was so cheap",
+     "th": "มันถูกมาก",
+     "emoji": "💸"
+    },
+    {
+     "en": "nobody came",
+     "th": "ไม่มีใครมาเลย",
+     "emoji": "🪑"
+    },
+    {
+     "en": "she spoke Thai",
+     "th": "เธอพูดภาษาไทยได้",
+     "emoji": "💬"
+    },
+    {
+     "en": "the test was easy",
+     "th": "ข้อสอบง่าย",
+     "emoji": "📝"
+    },
+    {
+     "en": "it started on time",
+     "th": "มันเริ่มตรงเวลา",
+     "emoji": "⏰"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Were you surprised that {x}?",
+     "th": "คุณแปลกใจไหมที่{x}"
+    }
+   ]
+  },
+  {
+   "id": "i-need-to-x-today",
+   "cat": "daily.home",
+   "level": "A1",
+   "frame": "I need to {x} today.",
+   "th": "วันนี้ฉันต้อง{x}",
+   "use": "บอกงานที่ต้องทำ",
+   "note": "",
+   "slots": [
+    {
+     "en": "do the laundry",
+     "th": "ซักผ้า",
+     "emoji": "🧺"
+    },
+    {
+     "en": "wash the dishes",
+     "th": "ล้างจาน",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "clean the bathroom",
+     "th": "ทำความสะอาดห้องน้ำ",
+     "emoji": "🚽"
+    },
+    {
+     "en": "take out the trash",
+     "th": "เอาขยะไปทิ้ง",
+     "emoji": "🗑️"
+    },
+    {
+     "en": "water the plants",
+     "th": "รดน้ำต้นไม้",
+     "emoji": "🪴"
+    },
+    {
+     "en": "cook dinner",
+     "th": "ทำอาหารเย็น",
+     "emoji": "🍳"
+    },
+    {
+     "en": "pay the bills",
+     "th": "จ่ายบิล",
+     "emoji": "🧾"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Do you need to {x} today?",
+     "th": "วันนี้คุณต้อง{x}ไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "I don't need to {x} today.",
+     "th": "วันนี้ฉันไม่ต้อง{x}"
+    }
+   ]
+  },
+  {
+   "id": "where-do-you-keep-x",
+   "cat": "daily.home",
+   "level": "A1",
+   "frame": "Where do you keep {x}?",
+   "th": "คุณเก็บ{x}ไว้ที่ไหน",
+   "use": "ถามที่เก็บของในบ้าน",
+   "note": "",
+   "slots": [
+    {
+     "en": "the scissors",
+     "th": "กรรไกร",
+     "emoji": "✂️"
+    },
+    {
+     "en": "the towels",
+     "th": "ผ้าเช็ดตัว",
+     "emoji": "🧻"
+    },
+    {
+     "en": "the keys",
+     "th": "กุญแจ",
+     "emoji": "🔑"
+    },
+    {
+     "en": "the remote",
+     "th": "รีโมต",
+     "emoji": "📺"
+    },
+    {
+     "en": "the cups",
+     "th": "แก้ว",
+     "emoji": "🥤"
+    },
+    {
+     "en": "the umbrella",
+     "th": "ร่ม",
+     "emoji": "☂️"
+    },
+    {
+     "en": "the first aid kit",
+     "th": "ชุดปฐมพยาบาล",
+     "emoji": "🩹"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบ",
+     "frame": "I keep {x} in the cupboard.",
+     "th": "ฉันเก็บ{x}ไว้ในตู้"
+    }
+   ]
+  },
+  {
+   "id": "could-you-please-turn-off-x",
+   "cat": "daily.home",
+   "level": "A2",
+   "frame": "Could you please turn off {x}?",
+   "th": "ช่วยปิด{x}หน่อยได้ไหม",
+   "use": "ขอให้ปิดเครื่องใช้ไฟฟ้า",
+   "note": "turn off = ปิด / turn on = เปิด",
+   "slots": [
+    {
+     "en": "the TV",
+     "th": "ทีวี",
+     "emoji": "📺"
+    },
+    {
+     "en": "the lights",
+     "th": "ไฟ",
+     "emoji": "💡"
+    },
+    {
+     "en": "the fan",
+     "th": "พัดลม",
+     "emoji": "🌀"
+    },
+    {
+     "en": "the air conditioner",
+     "th": "แอร์",
+     "emoji": "❄️"
+    },
+    {
+     "en": "the music",
+     "th": "เพลง",
+     "emoji": "🎵"
+    },
+    {
+     "en": "the tap",
+     "th": "ก๊อกน้ำ",
+     "emoji": "🚰"
+    },
+    {
+     "en": "the oven",
+     "th": "เตาอบ",
+     "emoji": "🔥"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นเปิด",
+     "frame": "Could you please turn on {x}?",
+     "th": "ช่วยเปิด{x}หน่อยได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "it-s-your-turn-to-x",
+   "cat": "daily.home",
+   "level": "A2",
+   "frame": "It's your turn to {x}.",
+   "th": "ถึงตาคุณ{x}แล้ว",
+   "use": "แบ่งงานบ้าน",
+   "note": "",
+   "slots": [
+    {
+     "en": "cook",
+     "th": "ทำอาหาร",
+     "emoji": "🍳"
+    },
+    {
+     "en": "wash the dishes",
+     "th": "ล้างจาน",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "do the shopping",
+     "th": "ไปซื้อของ",
+     "emoji": "🛒"
+    },
+    {
+     "en": "clean the kitchen",
+     "th": "ทำความสะอาดครัว",
+     "emoji": "🧽"
+    },
+    {
+     "en": "feed the cat",
+     "th": "ให้อาหารแมว",
+     "emoji": "🐱"
+    },
+    {
+     "en": "take out the trash",
+     "th": "เอาขยะไปทิ้ง",
+     "emoji": "🗑️"
+    },
+    {
+     "en": "walk the dog",
+     "th": "พาหมาไปเดินเล่น",
+     "emoji": "🐕"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นตาฉัน",
+     "frame": "It's my turn to {x}.",
+     "th": "ถึงตาฉัน{x}แล้ว"
+    }
+   ]
+  },
+  {
+   "id": "the-x-is-broken",
+   "cat": "daily.home",
+   "level": "A2",
+   "frame": "The {x} is broken.",
+   "th": "{x}เสีย",
+   "use": "แจ้งว่าของในบ้านเสีย",
+   "note": "",
+   "slots": [
+    {
+     "en": "washing machine",
+     "th": "เครื่องซักผ้า",
+     "emoji": "🧺"
+    },
+    {
+     "en": "fridge",
+     "th": "ตู้เย็น",
+     "emoji": "🧊"
+    },
+    {
+     "en": "light",
+     "th": "ไฟ",
+     "emoji": "💡"
+    },
+    {
+     "en": "door lock",
+     "th": "ลูกบิดประตู",
+     "emoji": "🔒"
+    },
+    {
+     "en": "shower",
+     "th": "ฝักบัว",
+     "emoji": "🚿"
+    },
+    {
+     "en": "microwave",
+     "th": "ไมโครเวฟ",
+     "emoji": "📟"
+    },
+    {
+     "en": "toilet",
+     "th": "ชักโครก",
+     "emoji": "🚽"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is the {x} broken?",
+     "th": "{x}เสียหรือ"
+    },
+    {
+     "label": "ขอให้ซ่อม",
+     "frame": "Can you fix the {x}?",
+     "th": "ช่วยซ่อม{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-m-thinking-of-getting-x-for-the-living-room",
+   "cat": "daily.home",
+   "level": "B1",
+   "frame": "I'm thinking of getting {x} for the living room.",
+   "th": "ฉันคิดจะซื้อ{x}มาไว้ห้องนั่งเล่น",
+   "use": "ปรึกษาเรื่องแต่งบ้าน",
+   "note": "think of + V-ing = คิดจะทำ",
+   "slots": [
+    {
+     "en": "a new sofa",
+     "th": "โซฟาใหม่",
+     "emoji": "🛋️"
+    },
+    {
+     "en": "a bigger TV",
+     "th": "ทีวีที่ใหญ่กว่าเดิม",
+     "emoji": "📺"
+    },
+    {
+     "en": "some plants",
+     "th": "ต้นไม้",
+     "emoji": "🪴"
+    },
+    {
+     "en": "a rug",
+     "th": "พรม",
+     "emoji": "🟫"
+    },
+    {
+     "en": "a bookshelf",
+     "th": "ชั้นหนังสือ",
+     "emoji": "📚"
+    },
+    {
+     "en": "new curtains",
+     "th": "ผ้าม่านใหม่",
+     "emoji": "🪟"
+    },
+    {
+     "en": "a floor lamp",
+     "th": "โคมไฟตั้งพื้น",
+     "emoji": "💡"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you thinking of getting {x} for the living room?",
+     "th": "คุณคิดจะซื้อ{x}มาไว้ห้องนั่งเล่นหรือ"
+    }
+   ]
+  },
+  {
+   "id": "it-s-x-today",
+   "cat": "daily.time",
+   "level": "A1",
+   "frame": "It's {x} today.",
+   "th": "วันนี้{x}",
+   "use": "พูดเรื่องอากาศ",
+   "note": "",
+   "slots": [
+    {
+     "en": "hot",
+     "th": "อากาศร้อน",
+     "emoji": "☀️"
+    },
+    {
+     "en": "cold",
+     "th": "อากาศหนาว",
+     "emoji": "🥶"
+    },
+    {
+     "en": "sunny",
+     "th": "แดดออก",
+     "emoji": "🌞"
+    },
+    {
+     "en": "rainy",
+     "th": "ฝนตก",
+     "emoji": "🌧️"
+    },
+    {
+     "en": "windy",
+     "th": "ลมแรง",
+     "emoji": "💨"
+    },
+    {
+     "en": "cloudy",
+     "th": "เมฆมาก",
+     "emoji": "☁️"
+    },
+    {
+     "en": "really humid",
+     "th": "อากาศชื้นมาก",
+     "emoji": "💦"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is it {x} today?",
+     "th": "วันนี้{x}ไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นอดีต",
+     "frame": "It was {x} yesterday.",
+     "th": "เมื่อวาน{x}"
+    }
+   ]
+  },
+  {
+   "id": "what-time-does-x-start",
+   "cat": "daily.time",
+   "level": "A1",
+   "frame": "What time does {x} start?",
+   "th": "{x}เริ่มกี่โมง",
+   "use": "ถามเวลาเริ่ม",
+   "note": "",
+   "slots": [
+    {
+     "en": "the movie",
+     "th": "หนัง",
+     "emoji": "🎬"
+    },
+    {
+     "en": "the class",
+     "th": "คลาส",
+     "emoji": "🏫"
+    },
+    {
+     "en": "the meeting",
+     "th": "การประชุม",
+     "emoji": "💼"
+    },
+    {
+     "en": "the concert",
+     "th": "คอนเสิร์ต",
+     "emoji": "🎤"
+    },
+    {
+     "en": "the game",
+     "th": "การแข่งขัน",
+     "emoji": "⚽"
+    },
+    {
+     "en": "the show",
+     "th": "การแสดง",
+     "emoji": "🎭"
+    },
+    {
+     "en": "the tour",
+     "th": "ทัวร์",
+     "emoji": "🚌"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามเวลาจบ",
+     "frame": "What time does {x} finish?",
+     "th": "{x}จบกี่โมง"
+    }
+   ]
+  },
+  {
+   "id": "see-you-x",
+   "cat": "daily.time",
+   "level": "A1",
+   "frame": "See you {x}!",
+   "th": "เจอกัน{x}",
+   "use": "บอกลา",
+   "note": "",
+   "slots": [
+    {
+     "en": "tomorrow",
+     "th": "พรุ่งนี้",
+     "emoji": "👋"
+    },
+    {
+     "en": "on Monday",
+     "th": "วันจันทร์",
+     "emoji": "📅"
+    },
+    {
+     "en": "later",
+     "th": "ทีหลัง",
+     "emoji": "🕐"
+    },
+    {
+     "en": "next week",
+     "th": "สัปดาห์หน้า",
+     "emoji": "📆"
+    },
+    {
+     "en": "at six",
+     "th": "ตอนหกโมง",
+     "emoji": "🕕"
+    },
+    {
+     "en": "soon",
+     "th": "เร็วๆ นี้",
+     "emoji": "⏳"
+    },
+    {
+     "en": "tonight",
+     "th": "คืนนี้",
+     "emoji": "🌙"
+    }
+   ],
+   "variants": [
+    {
+     "label": "คุยกันทีหลัง",
+     "frame": "Talk to you {x}!",
+     "th": "แล้วคุยกัน{x}"
+    }
+   ]
+  },
+  {
+   "id": "it-s-going-to-rain-x",
+   "cat": "daily.time",
+   "level": "A2",
+   "frame": "It's going to rain {x}.",
+   "th": "{x}ฝนจะตก",
+   "use": "พยากรณ์อากาศ",
+   "note": "be going to ใช้ทำนายจากสิ่งที่เห็น (เช่น เมฆดำ)",
+   "slots": [
+    {
+     "en": "this afternoon",
+     "th": "บ่ายนี้",
+     "emoji": "🌤️"
+    },
+    {
+     "en": "tonight",
+     "th": "คืนนี้",
+     "emoji": "🌙"
+    },
+    {
+     "en": "tomorrow",
+     "th": "พรุ่งนี้",
+     "emoji": "📅"
+    },
+    {
+     "en": "all day",
+     "th": "ทั้งวัน",
+     "emoji": "🌧️"
+    },
+    {
+     "en": "later",
+     "th": "อีกเดี๋ยว",
+     "emoji": "⏳"
+    },
+    {
+     "en": "this weekend",
+     "th": "สุดสัปดาห์นี้",
+     "emoji": "🗓️"
+    },
+    {
+     "en": "in the evening",
+     "th": "ตอนเย็น",
+     "emoji": "🌆"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is it going to rain {x}?",
+     "th": "{x}ฝนจะตกไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-ll-be-there-in-x",
+   "cat": "daily.time",
+   "level": "A2",
+   "frame": "I'll be there in {x}.",
+   "th": "อีก{x}ฉันจะไปถึง",
+   "use": "บอกว่าจะไปถึงเมื่อไร",
+   "note": "",
+   "slots": [
+    {
+     "en": "five minutes",
+     "th": "ห้านาที",
+     "emoji": "⏱️"
+    },
+    {
+     "en": "ten minutes",
+     "th": "สิบนาที",
+     "emoji": "🕙"
+    },
+    {
+     "en": "half an hour",
+     "th": "ครึ่งชั่วโมง",
+     "emoji": "🕧"
+    },
+    {
+     "en": "a few minutes",
+     "th": "ไม่กี่นาที",
+     "emoji": "⏳"
+    },
+    {
+     "en": "an hour",
+     "th": "หนึ่งชั่วโมง",
+     "emoji": "🕐"
+    },
+    {
+     "en": "two minutes",
+     "th": "สองนาที",
+     "emoji": "🏃"
+    },
+    {
+     "en": "twenty minutes",
+     "th": "ยี่สิบนาที",
+     "emoji": "🚗"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Will you be there in {x}?",
+     "th": "อีก{x}คุณจะไปถึงไหม"
+    }
+   ]
+  },
+  {
+   "id": "it-depends-on-x",
+   "cat": "daily.time",
+   "level": "B1",
+   "frame": "It depends on {x}.",
+   "th": "ขึ้นอยู่กับ{x}",
+   "use": "ตอบแบบยังไม่แน่นอน",
+   "note": "",
+   "slots": [
+    {
+     "en": "the weather",
+     "th": "สภาพอากาศ",
+     "emoji": "🌦️"
+    },
+    {
+     "en": "the price",
+     "th": "ราคา",
+     "emoji": "🏷️"
+    },
+    {
+     "en": "how much time we have",
+     "th": "ว่าเรามีเวลาแค่ไหน",
+     "emoji": "⏳"
+    },
+    {
+     "en": "the traffic",
+     "th": "การจราจร",
+     "emoji": "🚗"
+    },
+    {
+     "en": "what you want",
+     "th": "ว่าคุณต้องการอะไร",
+     "emoji": "🤔"
+    },
+    {
+     "en": "my schedule",
+     "th": "ตารางของฉัน",
+     "emoji": "📅"
+    },
+    {
+     "en": "the boss",
+     "th": "หัวหน้า",
+     "emoji": "👔"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "It doesn't depend on {x}.",
+     "th": "ไม่ได้ขึ้นอยู่กับ{x}"
+    }
+   ]
+  },
+  {
+   "id": "this-x-is-delicious",
+   "cat": "food.restaurant",
+   "level": "A1",
+   "frame": "This {x} is delicious.",
+   "th": "{x}นี้อร่อยมาก",
+   "use": "ชมอาหาร",
+   "note": "",
+   "slots": [
+    {
+     "en": "soup",
+     "th": "ซุป",
+     "emoji": "🍲"
+    },
+    {
+     "en": "curry",
+     "th": "แกง",
+     "emoji": "🍛"
+    },
+    {
+     "en": "cake",
+     "th": "เค้ก",
+     "emoji": "🍰"
+    },
+    {
+     "en": "salad",
+     "th": "สลัด",
+     "emoji": "🥗"
+    },
+    {
+     "en": "coffee",
+     "th": "กาแฟ",
+     "emoji": "☕"
+    },
+    {
+     "en": "pasta",
+     "th": "พาสต้า",
+     "emoji": "🍝"
+    },
+    {
+     "en": "fried chicken",
+     "th": "ไก่ทอด",
+     "emoji": "🍗"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is this {x} good?",
+     "th": "{x}นี้อร่อยไหม"
+    },
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "This {x} isn't very good.",
+     "th": "{x}นี้ไม่ค่อยอร่อย"
+    }
+   ]
+  },
+  {
+   "id": "excuse-me-this-isn-t-x",
+   "cat": "food.restaurant",
+   "level": "A1",
+   "frame": "Excuse me, this isn't {x}.",
+   "th": "ขอโทษ อันนี้ไม่ใช่{x}",
+   "use": "แจ้งว่าได้อาหารผิด",
+   "note": "",
+   "slots": [
+    {
+     "en": "what I ordered",
+     "th": "ที่ฉันสั่ง",
+     "emoji": "🧾"
+    },
+    {
+     "en": "my drink",
+     "th": "เครื่องดื่มของฉัน",
+     "emoji": "🥤"
+    },
+    {
+     "en": "my order",
+     "th": "ออร์เดอร์ของฉัน",
+     "emoji": "📋"
+    },
+    {
+     "en": "the right dish",
+     "th": "จานที่ถูก",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "iced tea",
+     "th": "ชาเย็น",
+     "emoji": "🧋"
+    },
+    {
+     "en": "the vegetarian one",
+     "th": "จานมังสวิรัติ",
+     "emoji": "🥦"
+    },
+    {
+     "en": "chicken",
+     "th": "ไก่",
+     "emoji": "🍗"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Excuse me, is this {x}?",
+     "th": "ขอโทษ อันนี้คือ{x}หรือ"
+    }
+   ]
+  },
+  {
+   "id": "we-ve-been-waiting-for-x",
+   "cat": "food.restaurant",
+   "level": "A2",
+   "frame": "We've been waiting for {x}.",
+   "th": "เรารอ{x}มาแล้ว",
+   "use": "ตามอาหารหรือบิลอย่างสุภาพ",
+   "note": "",
+   "slots": [
+    {
+     "en": "twenty minutes",
+     "th": "ยี่สิบนาที",
+     "emoji": "⏱️"
+    },
+    {
+     "en": "half an hour",
+     "th": "ครึ่งชั่วโมง",
+     "emoji": "🕧"
+    },
+    {
+     "en": "a long time",
+     "th": "นานมาก",
+     "emoji": "⏳"
+    },
+    {
+     "en": "the food",
+     "th": "อาหาร",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "the bill",
+     "th": "บิล",
+     "emoji": "🧾"
+    },
+    {
+     "en": "almost an hour",
+     "th": "เกือบชั่วโมง",
+     "emoji": "🕐"
+    },
+    {
+     "en": "the drinks",
+     "th": "เครื่องดื่ม",
+     "emoji": "🥤"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Have you been waiting for {x}?",
+     "th": "คุณรอ{x}มาแล้วหรือ"
+    }
+   ]
+  },
+  {
+   "id": "can-we-get-x-please",
+   "cat": "food.restaurant",
+   "level": "A2",
+   "frame": "Can we get {x}, please?",
+   "th": "ขอ{x}หน่อยได้ไหม",
+   "use": "ขอของเพิ่ม (สำหรับทั้งโต๊ะ)",
+   "note": "",
+   "slots": [
+    {
+     "en": "the check",
+     "th": "บิล",
+     "emoji": "🧾"
+    },
+    {
+     "en": "some napkins",
+     "th": "ทิชชู่",
+     "emoji": "🧻"
+    },
+    {
+     "en": "another plate",
+     "th": "จานอีกใบ",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "two more beers",
+     "th": "เบียร์อีกสองขวด",
+     "emoji": "🍺"
+    },
+    {
+     "en": "a high chair",
+     "th": "เก้าอี้เด็ก",
+     "emoji": "🪑"
+    },
+    {
+     "en": "some ice",
+     "th": "น้ำแข็ง",
+     "emoji": "🧊"
+    },
+    {
+     "en": "the dessert menu",
+     "th": "เมนูของหวาน",
+     "emoji": "🍨"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็น I",
+     "frame": "Can I get {x}, please?",
+     "th": "ขอ{x}หน่อยได้ไหม (สำหรับตัวเอง)"
+    }
+   ]
+  },
+  {
+   "id": "is-x-included",
+   "cat": "food.restaurant",
+   "level": "A2",
+   "frame": "Is {x} included?",
+   "th": "รวม{x}แล้วหรือยัง",
+   "use": "ถามว่าราคารวมอะไรบ้าง",
+   "note": "",
+   "slots": [
+    {
+     "en": "service",
+     "th": "ค่าบริการ",
+     "emoji": "🛎️"
+    },
+    {
+     "en": "tax",
+     "th": "ภาษี",
+     "emoji": "🧾"
+    },
+    {
+     "en": "breakfast",
+     "th": "อาหารเช้า",
+     "emoji": "🍳"
+    },
+    {
+     "en": "the drink",
+     "th": "เครื่องดื่ม",
+     "emoji": "🥤"
+    },
+    {
+     "en": "delivery",
+     "th": "ค่าส่ง",
+     "emoji": "🛵"
+    },
+    {
+     "en": "rice",
+     "th": "ข้าว",
+     "emoji": "🍚"
+    },
+    {
+     "en": "the tip",
+     "th": "ทิป",
+     "emoji": "💵"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบว่าไม่รวม",
+     "frame": "Sorry, {x} isn't included.",
+     "th": "ขอโทษค่ะ/ครับ ไม่รวม{x}"
+    }
+   ]
+  },
+  {
+   "id": "i-m-allergic-to-x",
+   "cat": "food.restaurant",
+   "level": "A2",
+   "frame": "I'm allergic to {x}.",
+   "th": "ฉันแพ้{x}",
+   "use": "บอกว่าแพ้อาหาร",
+   "note": "",
+   "slots": [
+    {
+     "en": "peanuts",
+     "th": "ถั่วลิสง",
+     "emoji": "🥜"
+    },
+    {
+     "en": "seafood",
+     "th": "อาหารทะเล",
+     "emoji": "🦐"
+    },
+    {
+     "en": "shrimp",
+     "th": "กุ้ง",
+     "emoji": "🍤"
+    },
+    {
+     "en": "milk",
+     "th": "นม",
+     "emoji": "🥛"
+    },
+    {
+     "en": "eggs",
+     "th": "ไข่",
+     "emoji": "🥚"
+    },
+    {
+     "en": "wheat",
+     "th": "แป้งสาลี",
+     "emoji": "🌾"
+    },
+    {
+     "en": "MSG",
+     "th": "ผงชูรส",
+     "emoji": "🧂"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you allergic to {x}?",
+     "th": "คุณแพ้{x}ไหม"
+    },
+    {
+     "label": "ถามว่าในอาหารมีไหม",
+     "frame": "Does this have {x} in it?",
+     "th": "อันนี้มี{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-m-afraid-there-s-a-problem-with-x",
+   "cat": "food.restaurant",
+   "level": "B1",
+   "frame": "I'm afraid there's a problem with {x}.",
+   "th": "ขอโทษนะ {x}มีปัญหา",
+   "use": "แจ้งปัญหาอย่างสุภาพ",
+   "note": "",
+   "slots": [
+    {
+     "en": "the soup",
+     "th": "ซุป",
+     "emoji": "🍲"
+    },
+    {
+     "en": "my steak",
+     "th": "สเต๊กของฉัน",
+     "emoji": "🥩"
+    },
+    {
+     "en": "the bill",
+     "th": "บิล",
+     "emoji": "🧾"
+    },
+    {
+     "en": "this glass",
+     "th": "แก้วใบนี้",
+     "emoji": "🥛"
+    },
+    {
+     "en": "our table",
+     "th": "โต๊ะของเรา",
+     "emoji": "🪑"
+    },
+    {
+     "en": "the order",
+     "th": "ออร์เดอร์",
+     "emoji": "📋"
+    },
+    {
+     "en": "the fish",
+     "th": "ปลา",
+     "emoji": "🐟"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม (พนักงาน)",
+     "frame": "Is there a problem with {x}?",
+     "th": "{x}มีปัญหาหรือ"
+    }
+   ]
+  },
+  {
+   "id": "i-have-a-reservation-for-x",
+   "cat": "travel.hotel",
+   "level": "A1",
+   "frame": "I have a reservation for {x}.",
+   "th": "ฉันจองไว้{x}",
+   "use": "เช็กอินโรงแรม",
+   "note": "",
+   "slots": [
+    {
+     "en": "two nights",
+     "th": "สองคืน",
+     "emoji": "🛏️"
+    },
+    {
+     "en": "tonight",
+     "th": "คืนนี้",
+     "emoji": "🌙"
+    },
+    {
+     "en": "three people",
+     "th": "สามคน",
+     "emoji": "👨‍👩‍👦"
+    },
+    {
+     "en": "a double room",
+     "th": "ห้องเตียงคู่",
+     "emoji": "🛏️"
+    },
+    {
+     "en": "one week",
+     "th": "หนึ่งสัปดาห์",
+     "emoji": "📅"
+    },
+    {
+     "en": "next Friday",
+     "th": "วันศุกร์หน้า",
+     "emoji": "🗓️"
+    },
+    {
+     "en": "a single room",
+     "th": "ห้องเดี่ยว",
+     "emoji": "🚪"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม (พนักงาน)",
+     "frame": "Do you have a reservation for {x}?",
+     "th": "คุณจองไว้{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "what-time-is-x",
+   "cat": "travel.hotel",
+   "level": "A1",
+   "frame": "What time is {x}?",
+   "th": "{x}กี่โมง",
+   "use": "ถามเวลาในโรงแรม",
+   "note": "",
+   "slots": [
+    {
+     "en": "breakfast",
+     "th": "อาหารเช้า",
+     "emoji": "🍳"
+    },
+    {
+     "en": "check-out",
+     "th": "เช็กเอาต์",
+     "emoji": "🧳"
+    },
+    {
+     "en": "check-in",
+     "th": "เช็กอิน",
+     "emoji": "🛎️"
+    },
+    {
+     "en": "the shuttle",
+     "th": "รถรับส่ง",
+     "emoji": "🚐"
+    },
+    {
+     "en": "dinner",
+     "th": "อาหารเย็น",
+     "emoji": "🍽️"
+    },
+    {
+     "en": "the next bus",
+     "th": "รถเมล์คันถัดไป",
+     "emoji": "🚌"
+    },
+    {
+     "en": "the tour",
+     "th": "ทัวร์",
+     "emoji": "🗺️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามแบบยืนยัน",
+     "frame": "Is {x} at seven?",
+     "th": "{x}ตอนเจ็ดโมงหรือ"
+    }
+   ]
+  },
+  {
+   "id": "could-i-get-x-for-my-room",
+   "cat": "travel.hotel",
+   "level": "A2",
+   "frame": "Could I get {x} for my room?",
+   "th": "ขอ{x}สำหรับห้องได้ไหม",
+   "use": "ขอของเพิ่มในห้องพัก",
+   "note": "",
+   "slots": [
+    {
+     "en": "extra towels",
+     "th": "ผ้าเช็ดตัวเพิ่ม",
+     "emoji": "🧻"
+    },
+    {
+     "en": "another pillow",
+     "th": "หมอนอีกใบ",
+     "emoji": "🛏️"
+    },
+    {
+     "en": "a blanket",
+     "th": "ผ้าห่ม",
+     "emoji": "🧣"
+    },
+    {
+     "en": "some water",
+     "th": "น้ำดื่ม",
+     "emoji": "💧"
+    },
+    {
+     "en": "a new key card",
+     "th": "คีย์การ์ดใบใหม่",
+     "emoji": "🔑"
+    },
+    {
+     "en": "toilet paper",
+     "th": "กระดาษชำระ",
+     "emoji": "🧻"
+    },
+    {
+     "en": "an iron",
+     "th": "เตารีด",
+     "emoji": "👔"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ใช้ need",
+     "frame": "I need {x} for my room.",
+     "th": "ฉันต้องการ{x}สำหรับห้อง"
+    }
+   ]
+  },
+  {
+   "id": "is-there-x-in-the-room",
+   "cat": "travel.hotel",
+   "level": "A2",
+   "frame": "Is there {x} in the room?",
+   "th": "ในห้องมี{x}ไหม",
+   "use": "ถามสิ่งอำนวยความสะดวก",
+   "note": "",
+   "slots": [
+    {
+     "en": "a safe",
+     "th": "ตู้เซฟ",
+     "emoji": "🔐"
+    },
+    {
+     "en": "a hair dryer",
+     "th": "ไดร์เป่าผม",
+     "emoji": "💨"
+    },
+    {
+     "en": "a fridge",
+     "th": "ตู้เย็น",
+     "emoji": "🧊"
+    },
+    {
+     "en": "a kettle",
+     "th": "กาต้มน้ำ",
+     "emoji": "☕"
+    },
+    {
+     "en": "free Wi-Fi",
+     "th": "Wi-Fi ฟรี",
+     "emoji": "📶"
+    },
+    {
+     "en": "a balcony",
+     "th": "ระเบียง",
+     "emoji": "🌇"
+    },
+    {
+     "en": "a bathtub",
+     "th": "อ่างอาบน้ำ",
+     "emoji": "🛁"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบว่ามี",
+     "frame": "Yes, there's {x} in the room.",
+     "th": "มี{x}ในห้องครับ/ค่ะ"
+    }
+   ]
+  },
+  {
+   "id": "can-i-leave-x-here",
+   "cat": "travel.hotel",
+   "level": "A2",
+   "frame": "Can I leave {x} here?",
+   "th": "ฝาก{x}ไว้ที่นี่ได้ไหม",
+   "use": "ฝากของกับโรงแรม",
+   "note": "",
+   "slots": [
+    {
+     "en": "my luggage",
+     "th": "กระเป๋าเดินทาง",
+     "emoji": "🧳"
+    },
+    {
+     "en": "my bags",
+     "th": "กระเป๋า",
+     "emoji": "🎒"
+    },
+    {
+     "en": "this box",
+     "th": "กล่องนี้",
+     "emoji": "📦"
+    },
+    {
+     "en": "my bike",
+     "th": "จักรยาน",
+     "emoji": "🚲"
+    },
+    {
+     "en": "the key",
+     "th": "กุญแจ",
+     "emoji": "🔑"
+    },
+    {
+     "en": "a message",
+     "th": "ข้อความ",
+     "emoji": "✉️"
+    },
+    {
+     "en": "my coat",
+     "th": "เสื้อโค้ต",
+     "emoji": "🧥"
+    }
+   ],
+   "variants": [
+    {
+     "label": "สุภาพขึ้น",
+     "frame": "Would it be OK to leave {x} here?",
+     "th": "ขอฝาก{x}ไว้ที่นี่ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "would-it-be-possible-to-change-to-x",
+   "cat": "travel.hotel",
+   "level": "B1",
+   "frame": "Would it be possible to change to {x}?",
+   "th": "เปลี่ยนเป็น{x}ได้ไหม",
+   "use": "ขอเปลี่ยนห้อง",
+   "note": "",
+   "slots": [
+    {
+     "en": "a quieter room",
+     "th": "ห้องที่เงียบกว่า",
+     "emoji": "🤫"
+    },
+    {
+     "en": "a room with a view",
+     "th": "ห้องที่มีวิว",
+     "emoji": "🏞️"
+    },
+    {
+     "en": "a non-smoking room",
+     "th": "ห้องปลอดบุหรี่",
+     "emoji": "🚭"
+    },
+    {
+     "en": "a bigger room",
+     "th": "ห้องที่ใหญ่กว่า",
+     "emoji": "📏"
+    },
+    {
+     "en": "a lower floor",
+     "th": "ชั้นที่ต่ำกว่า",
+     "emoji": "⬇️"
+    },
+    {
+     "en": "twin beds",
+     "th": "เตียงแยก",
+     "emoji": "🛏️"
+    },
+    {
+     "en": "a later date",
+     "th": "วันที่หลังกว่านี้",
+     "emoji": "📅"
+    }
+   ],
+   "variants": [
+    {
+     "label": "แบบตรงๆ",
+     "frame": "Can I change to {x}?",
+     "th": "ขอเปลี่ยนเป็น{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "please-take-me-to-x",
+   "cat": "travel.transport",
+   "level": "A1",
+   "frame": "Please take me to {x}.",
+   "th": "ช่วยพาไป{x}หน่อย",
+   "use": "บอกคนขับแท็กซี่",
+   "note": "",
+   "slots": [
+    {
+     "en": "this address",
+     "th": "ที่อยู่นี้",
+     "emoji": "📍"
+    },
+    {
+     "en": "the airport",
+     "th": "สนามบิน",
+     "emoji": "✈️"
+    },
+    {
+     "en": "the station",
+     "th": "สถานี",
+     "emoji": "🚉"
+    },
+    {
+     "en": "Central World",
+     "th": "เซ็นทรัลเวิลด์",
+     "emoji": "🏬"
+    },
+    {
+     "en": "the hospital",
+     "th": "โรงพยาบาล",
+     "emoji": "🏥"
+    },
+    {
+     "en": "my hotel",
+     "th": "โรงแรมของฉัน",
+     "emoji": "🏨"
+    },
+    {
+     "en": "the city center",
+     "th": "ใจกลางเมือง",
+     "emoji": "🏙️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "สุภาพขึ้น",
+     "frame": "Could you take me to {x}?",
+     "th": "ช่วยพาไป{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "please-stop-x",
+   "cat": "travel.transport",
+   "level": "A1",
+   "frame": "Please stop {x}.",
+   "th": "ช่วยจอด{x}หน่อย",
+   "use": "บอกให้จอดรถ",
+   "note": "",
+   "slots": [
+    {
+     "en": "here",
+     "th": "ตรงนี้",
+     "emoji": "🛑"
+    },
+    {
+     "en": "at the corner",
+     "th": "ตรงหัวมุม",
+     "emoji": "↩️"
+    },
+    {
+     "en": "over there",
+     "th": "ตรงโน้น",
+     "emoji": "👉"
+    },
+    {
+     "en": "in front of the bank",
+     "th": "หน้าธนาคาร",
+     "emoji": "🏦"
+    },
+    {
+     "en": "at the next light",
+     "th": "ไฟแดงข้างหน้า",
+     "emoji": "🚦"
+    },
+    {
+     "en": "near the gate",
+     "th": "ใกล้ประตู",
+     "emoji": "🚪"
+    },
+    {
+     "en": "by the 7-Eleven",
+     "th": "ข้างเซเว่น",
+     "emoji": "🏪"
+    }
+   ],
+   "variants": [
+    {
+     "label": "สุภาพขึ้น",
+     "frame": "Could you stop {x}, please?",
+     "th": "ช่วยจอด{x}หน่อยได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "how-much-is-it-to-x",
+   "cat": "travel.transport",
+   "level": "A2",
+   "frame": "How much is it to {x}?",
+   "th": "ไป{x}ราคาเท่าไหร่",
+   "use": "ถามค่าโดยสาร",
+   "note": "",
+   "slots": [
+    {
+     "en": "the airport",
+     "th": "สนามบิน",
+     "emoji": "✈️"
+    },
+    {
+     "en": "downtown",
+     "th": "ตัวเมือง",
+     "emoji": "🏙️"
+    },
+    {
+     "en": "the beach",
+     "th": "ชายหาด",
+     "emoji": "🏖️"
+    },
+    {
+     "en": "Khao San Road",
+     "th": "ถนนข้าวสาร",
+     "emoji": "🛣️"
+    },
+    {
+     "en": "the train station",
+     "th": "สถานีรถไฟ",
+     "emoji": "🚉"
+    },
+    {
+     "en": "the night market",
+     "th": "ตลาดกลางคืน",
+     "emoji": "🌙"
+    },
+    {
+     "en": "Pattaya",
+     "th": "พัทยา",
+     "emoji": "🌴"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามระยะทาง",
+     "frame": "How far is it to {x}?",
+     "th": "ไป{x}ไกลแค่ไหน"
+    }
+   ]
+  },
+  {
+   "id": "does-this-train-stop-at-x",
+   "cat": "travel.transport",
+   "level": "A2",
+   "frame": "Does this train stop at {x}?",
+   "th": "รถไฟขบวนนี้จอดที่{x}ไหม",
+   "use": "ถามป้ายที่รถจอด",
+   "note": "",
+   "slots": [
+    {
+     "en": "Siam",
+     "th": "สยาม",
+     "emoji": "🚉"
+    },
+    {
+     "en": "the airport",
+     "th": "สนามบิน",
+     "emoji": "✈️"
+    },
+    {
+     "en": "the next town",
+     "th": "เมืองถัดไป",
+     "emoji": "🏘️"
+    },
+    {
+     "en": "Asok",
+     "th": "อโศก",
+     "emoji": "🚇"
+    },
+    {
+     "en": "the central station",
+     "th": "สถานีกลาง",
+     "emoji": "🏛️"
+    },
+    {
+     "en": "Chiang Mai",
+     "th": "เชียงใหม่",
+     "emoji": "🏔️"
+    },
+    {
+     "en": "Ayutthaya",
+     "th": "อยุธยา",
+     "emoji": "🛕"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นรถบัส",
+     "frame": "Does this bus stop at {x}?",
+     "th": "รถบัสคันนี้จอดที่{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "could-you-use-x-please",
+   "cat": "travel.transport",
+   "level": "A2",
+   "frame": "Could you use {x}, please?",
+   "th": "ช่วยใช้{x}หน่อยได้ไหม",
+   "use": "ขอคนขับแท็กซี่",
+   "note": "",
+   "slots": [
+    {
+     "en": "the meter",
+     "th": "มิเตอร์",
+     "emoji": "🧾"
+    },
+    {
+     "en": "the highway",
+     "th": "ทางด่วน",
+     "emoji": "🛣️"
+    },
+    {
+     "en": "a different road",
+     "th": "ถนนเส้นอื่น",
+     "emoji": "↪️"
+    },
+    {
+     "en": "the GPS",
+     "th": "จีพีเอส",
+     "emoji": "🗺️"
+    },
+    {
+     "en": "the shortcut",
+     "th": "ทางลัด",
+     "emoji": "⚡"
+    },
+    {
+     "en": "the main road",
+     "th": "ถนนใหญ่",
+     "emoji": "🛣️"
+    },
+    {
+     "en": "the air conditioning",
+     "th": "แอร์",
+     "emoji": "❄️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you going to use {x}?",
+     "th": "คุณจะใช้{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-d-rather-take-x-than-walk",
+   "cat": "travel.transport",
+   "level": "B1",
+   "frame": "I'd rather take {x} than walk.",
+   "th": "ฉันขอนั่ง{x}ดีกว่าเดิน",
+   "use": "บอกทางเลือกการเดินทาง",
+   "note": "would rather A than B = อยาก A มากกว่า B",
+   "slots": [
+    {
+     "en": "a taxi",
+     "th": "แท็กซี่",
+     "emoji": "🚕"
+    },
+    {
+     "en": "the bus",
+     "th": "รถเมล์",
+     "emoji": "🚌"
+    },
+    {
+     "en": "the subway",
+     "th": "รถไฟใต้ดิน",
+     "emoji": "🚇"
+    },
+    {
+     "en": "a tuk-tuk",
+     "th": "ตุ๊กตุ๊ก",
+     "emoji": "🛺"
+    },
+    {
+     "en": "a motorbike taxi",
+     "th": "วินมอเตอร์ไซค์",
+     "emoji": "🛵"
+    },
+    {
+     "en": "the train",
+     "th": "รถไฟ",
+     "emoji": "🚆"
+    },
+    {
+     "en": "a Grab",
+     "th": "แกร็บ",
+     "emoji": "📱"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Would you rather take {x} than walk?",
+     "th": "คุณอยากนั่ง{x}มากกว่าเดินไหม"
+    }
+   ]
+  },
+  {
+   "id": "this-is-my-x",
+   "cat": "social.family",
+   "level": "A1",
+   "frame": "This is my {x}.",
+   "th": "นี่คือ{x}ของฉัน",
+   "use": "แนะนำคนในครอบครัว",
+   "note": "",
+   "slots": [
+    {
+     "en": "sister",
+     "th": "พี่สาว/น้องสาว",
+     "emoji": "👩"
+    },
+    {
+     "en": "brother",
+     "th": "พี่ชาย/น้องชาย",
+     "emoji": "👨"
+    },
+    {
+     "en": "mother",
+     "th": "แม่",
+     "emoji": "👩‍🦱"
+    },
+    {
+     "en": "father",
+     "th": "พ่อ",
+     "emoji": "👨‍🦳"
+    },
+    {
+     "en": "best friend",
+     "th": "เพื่อนสนิท",
+     "emoji": "🤝"
+    },
+    {
+     "en": "husband",
+     "th": "สามี",
+     "emoji": "💑"
+    },
+    {
+     "en": "wife",
+     "th": "ภรรยา",
+     "emoji": "💍"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is this your {x}?",
+     "th": "นี่คือ{x}ของคุณหรือ"
+    }
+   ]
+  },
+  {
+   "id": "i-have-x",
+   "cat": "social.family",
+   "level": "A1",
+   "frame": "I have {x}.",
+   "th": "ฉันมี{x}",
+   "use": "เล่าเรื่องครอบครัว",
+   "note": "",
+   "slots": [
+    {
+     "en": "two brothers",
+     "th": "พี่น้องผู้ชายสองคน",
+     "emoji": "👬"
+    },
+    {
+     "en": "one sister",
+     "th": "พี่น้องผู้หญิงหนึ่งคน",
+     "emoji": "👩"
+    },
+    {
+     "en": "a big family",
+     "th": "ครอบครัวใหญ่",
+     "emoji": "👨‍👩‍👧‍👦"
+    },
+    {
+     "en": "three kids",
+     "th": "ลูกสามคน",
+     "emoji": "👧"
+    },
+    {
+     "en": "a little son",
+     "th": "ลูกชายตัวเล็ก",
+     "emoji": "👶"
+    },
+    {
+     "en": "a cat and a dog",
+     "th": "แมวกับหมา",
+     "emoji": "🐱"
+    },
+    {
+     "en": "many cousins",
+     "th": "ลูกพี่ลูกน้องหลายคน",
+     "emoji": "👥"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Do you have {x}?",
+     "th": "คุณมี{x}ไหม"
+    }
+   ]
+  },
+  {
+   "id": "my-x-lives-in-bangkok",
+   "cat": "social.family",
+   "level": "A2",
+   "frame": "My {x} lives in Bangkok.",
+   "th": "{x}ของฉันอาศัยอยู่ที่กรุงเทพฯ",
+   "use": "เล่าว่าใครอยู่ที่ไหน",
+   "note": "ประธานเอกพจน์ กริยาเติม s (lives)",
+   "slots": [
+    {
+     "en": "sister",
+     "th": "พี่สาว/น้องสาว",
+     "emoji": "👩"
+    },
+    {
+     "en": "brother",
+     "th": "พี่ชาย/น้องชาย",
+     "emoji": "👨"
+    },
+    {
+     "en": "aunt",
+     "th": "ป้า/น้า",
+     "emoji": "👩‍🦰"
+    },
+    {
+     "en": "uncle",
+     "th": "ลุง/อา",
+     "emoji": "👨‍🦲"
+    },
+    {
+     "en": "grandmother",
+     "th": "ยาย/ย่า",
+     "emoji": "👵"
+    },
+    {
+     "en": "best friend",
+     "th": "เพื่อนสนิท",
+     "emoji": "🤝"
+    },
+    {
+     "en": "cousin",
+     "th": "ลูกพี่ลูกน้อง",
+     "emoji": "🧑"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Does your {x} live in Bangkok?",
+     "th": "{x}ของคุณอาศัยอยู่ที่กรุงเทพฯหรือ"
+    }
+   ]
+  },
+  {
+   "id": "i-get-along-well-with-x",
+   "cat": "social.family",
+   "level": "A2",
+   "frame": "I get along well with {x}.",
+   "th": "ฉันเข้ากับ{x}ได้ดี",
+   "use": "เล่าความสัมพันธ์",
+   "note": "get along with = เข้ากันได้",
+   "slots": [
+    {
+     "en": "my parents",
+     "th": "พ่อแม่",
+     "emoji": "👪"
+    },
+    {
+     "en": "my sister",
+     "th": "พี่สาว/น้องสาว",
+     "emoji": "👩"
+    },
+    {
+     "en": "my boss",
+     "th": "หัวหน้า",
+     "emoji": "👔"
+    },
+    {
+     "en": "my neighbors",
+     "th": "เพื่อนบ้าน",
+     "emoji": "🏘️"
+    },
+    {
+     "en": "my classmates",
+     "th": "เพื่อนร่วมชั้น",
+     "emoji": "🎓"
+    },
+    {
+     "en": "everyone at work",
+     "th": "ทุกคนที่ทำงาน",
+     "emoji": "💼"
+    },
+    {
+     "en": "my roommate",
+     "th": "เพื่อนร่วมห้อง",
+     "emoji": "🛏️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "I don't get along with {x}.",
+     "th": "ฉันเข้ากับ{x}ไม่ค่อยได้"
+    }
+   ]
+  },
+  {
+   "id": "how-long-have-you-been-x",
+   "cat": "social.family",
+   "level": "A2",
+   "frame": "How long have you been {x}?",
+   "th": "คุณ{x}มานานแค่ไหนแล้ว",
+   "use": "ถามระยะเวลา",
+   "note": "Present Perfect: have been = เป็นมาตั้งแต่อดีตจนถึงตอนนี้",
+   "slots": [
+    {
+     "en": "married",
+     "th": "แต่งงาน",
+     "emoji": "💍"
+    },
+    {
+     "en": "together",
+     "th": "คบกัน",
+     "emoji": "💑"
+    },
+    {
+     "en": "friends",
+     "th": "เป็นเพื่อนกัน",
+     "emoji": "🤝"
+    },
+    {
+     "en": "living here",
+     "th": "อาศัยอยู่ที่นี่",
+     "emoji": "🏠"
+    },
+    {
+     "en": "working there",
+     "th": "ทำงานที่นั่น",
+     "emoji": "🏢"
+    },
+    {
+     "en": "learning English",
+     "th": "เรียนภาษาอังกฤษ",
+     "emoji": "📘"
+    },
+    {
+     "en": "a teacher",
+     "th": "เป็นครู",
+     "emoji": "👩‍🏫"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบ",
+     "frame": "I've been {x} for two years.",
+     "th": "ฉัน{x}มาสองปีแล้ว"
+    }
+   ]
+  },
+  {
+   "id": "i-really-miss-x",
+   "cat": "social.family",
+   "level": "B1",
+   "frame": "I really miss {x}.",
+   "th": "ฉันคิดถึง{x}มาก",
+   "use": "บอกความคิดถึง",
+   "note": "",
+   "slots": [
+    {
+     "en": "my family",
+     "th": "ครอบครัว",
+     "emoji": "👨‍👩‍👧"
+    },
+    {
+     "en": "my hometown",
+     "th": "บ้านเกิด",
+     "emoji": "🏡"
+    },
+    {
+     "en": "my old friends",
+     "th": "เพื่อนเก่า",
+     "emoji": "👫"
+    },
+    {
+     "en": "Thai food",
+     "th": "อาหารไทย",
+     "emoji": "🍛"
+    },
+    {
+     "en": "my grandmother",
+     "th": "ยาย",
+     "emoji": "👵"
+    },
+    {
+     "en": "living by the sea",
+     "th": "การอยู่ใกล้ทะเล",
+     "emoji": "🌊"
+    },
+    {
+     "en": "my school days",
+     "th": "สมัยเรียน",
+     "emoji": "🎒"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "I don't miss {x} at all.",
+     "th": "ฉันไม่คิดถึง{x}เลย"
+    }
+   ]
+  },
+  {
+   "id": "i-agree-with-x",
+   "cat": "social.agree",
+   "level": "A1",
+   "frame": "I agree with {x}.",
+   "th": "ฉันเห็นด้วยกับ{x}",
+   "use": "บอกว่าเห็นด้วย",
+   "note": "",
+   "slots": [
+    {
+     "en": "you",
+     "th": "คุณ",
+     "emoji": "👍"
+    },
+    {
+     "en": "her",
+     "th": "เธอ",
+     "emoji": "👩"
+    },
+    {
+     "en": "your idea",
+     "th": "ความคิดของคุณ",
+     "emoji": "💡"
+    },
+    {
+     "en": "that",
+     "th": "เรื่องนั้น",
+     "emoji": "✅"
+    },
+    {
+     "en": "the teacher",
+     "th": "ครู",
+     "emoji": "👩‍🏫"
+    },
+    {
+     "en": "most of it",
+     "th": "ส่วนใหญ่",
+     "emoji": "📊"
+    },
+    {
+     "en": "everything you said",
+     "th": "ทุกอย่างที่คุณพูด",
+     "emoji": "💬"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นปฏิเสธ",
+     "frame": "I don't agree with {x}.",
+     "th": "ฉันไม่เห็นด้วยกับ{x}"
+    }
+   ]
+  },
+  {
+   "id": "sorry-what-does-x-mean",
+   "cat": "social.agree",
+   "level": "A1",
+   "frame": "Sorry, what does {x} mean?",
+   "th": "ขอโทษ {x}แปลว่าอะไร",
+   "use": "ถามความหมาย",
+   "note": "does + V1 (mean ไม่เติม s)",
+   "slots": [
+    {
+     "en": "this word",
+     "th": "คำนี้",
+     "emoji": "🔤"
+    },
+    {
+     "en": "ASAP",
+     "th": "ASAP",
+     "emoji": "⏩"
+    },
+    {
+     "en": "that sign",
+     "th": "ป้ายนั้น",
+     "emoji": "🪧"
+    },
+    {
+     "en": "this sentence",
+     "th": "ประโยคนี้",
+     "emoji": "📝"
+    },
+    {
+     "en": "FAQ",
+     "th": "FAQ",
+     "emoji": "❓"
+    },
+    {
+     "en": "that phrase",
+     "th": "วลีนั้น",
+     "emoji": "💬"
+    },
+    {
+     "en": "this symbol",
+     "th": "สัญลักษณ์นี้",
+     "emoji": "⚠️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ขอให้อธิบาย",
+     "frame": "Can you explain {x}?",
+     "th": "ช่วยอธิบาย{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "do-you-mean-x",
+   "cat": "social.agree",
+   "level": "A2",
+   "frame": "Do you mean {x}?",
+   "th": "คุณหมายถึง{x}หรือ",
+   "use": "ถามเพื่อให้แน่ใจ",
+   "note": "",
+   "slots": [
+    {
+     "en": "the red one",
+     "th": "อันสีแดง",
+     "emoji": "🔴"
+    },
+    {
+     "en": "next Monday",
+     "th": "วันจันทร์หน้า",
+     "emoji": "📅"
+    },
+    {
+     "en": "this street",
+     "th": "ถนนนี้",
+     "emoji": "🛣️"
+    },
+    {
+     "en": "the new teacher",
+     "th": "ครูคนใหม่",
+     "emoji": "👩‍🏫"
+    },
+    {
+     "en": "twelve or twenty",
+     "th": "สิบสองหรือยี่สิบ",
+     "emoji": "🔢"
+    },
+    {
+     "en": "tomorrow morning",
+     "th": "พรุ่งนี้เช้า",
+     "emoji": "🌅"
+    },
+    {
+     "en": "the big one",
+     "th": "อันใหญ่",
+     "emoji": "📏"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบแก้",
+     "frame": "No, I mean {x}.",
+     "th": "ไม่ใช่ ฉันหมายถึง{x}"
+    }
+   ]
+  },
+  {
+   "id": "that-s-a-good-point-but-x",
+   "cat": "social.agree",
+   "level": "A2",
+   "frame": "That's a good point, but {x}.",
+   "th": "เป็นประเด็นที่ดี แต่{x}",
+   "use": "ไม่เห็นด้วยอย่างสุภาพ",
+   "note": "",
+   "slots": [
+    {
+     "en": "it's too expensive",
+     "th": "มันแพงเกินไป",
+     "emoji": "💸"
+    },
+    {
+     "en": "we don't have time",
+     "th": "เราไม่มีเวลา",
+     "emoji": "⏳"
+    },
+    {
+     "en": "I'm not sure",
+     "th": "ฉันไม่แน่ใจ",
+     "emoji": "🤔"
+    },
+    {
+     "en": "it might rain",
+     "th": "ฝนอาจจะตก",
+     "emoji": "🌧️"
+    },
+    {
+     "en": "it's very far",
+     "th": "มันไกลมาก",
+     "emoji": "🗺️"
+    },
+    {
+     "en": "the boss said no",
+     "th": "หัวหน้าบอกว่าไม่ได้",
+     "emoji": "🙅"
+    },
+    {
+     "en": "I need to think",
+     "th": "ฉันต้องคิดก่อน",
+     "emoji": "💭"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ใช้ I see what you mean",
+     "frame": "I see what you mean, but {x}.",
+     "th": "ฉันเข้าใจที่คุณพูด แต่{x}"
+    }
+   ]
+  },
+  {
+   "id": "could-you-explain-x-again",
+   "cat": "social.agree",
+   "level": "B1",
+   "frame": "Could you explain {x} again?",
+   "th": "ช่วยอธิบาย{x}อีกครั้งได้ไหม",
+   "use": "ขอให้อธิบายซ้ำ",
+   "note": "",
+   "slots": [
+    {
+     "en": "the last part",
+     "th": "ส่วนสุดท้าย",
+     "emoji": "🔚"
+    },
+    {
+     "en": "the rules",
+     "th": "กฎ",
+     "emoji": "📜"
+    },
+    {
+     "en": "how it works",
+     "th": "ว่ามันทำงานยังไง",
+     "emoji": "⚙️"
+    },
+    {
+     "en": "the second step",
+     "th": "ขั้นตอนที่สอง",
+     "emoji": "2️⃣"
+    },
+    {
+     "en": "what you mean",
+     "th": "ที่คุณหมายถึง",
+     "emoji": "🤔"
+    },
+    {
+     "en": "the plan",
+     "th": "แผน",
+     "emoji": "🗺️"
+    },
+    {
+     "en": "that word",
+     "th": "คำนั้น",
+     "emoji": "🔤"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ขอให้ช้าลง",
+     "frame": "Could you explain {x} more slowly?",
+     "th": "ช่วยอธิบาย{x}ช้าๆ ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-see-your-point-but-i-think-x",
+   "cat": "social.agree",
+   "level": "B1",
+   "frame": "I see your point, but I think {x}.",
+   "th": "ฉันเข้าใจมุมของคุณ แต่ฉันคิดว่า{x}",
+   "use": "แย้งอย่างสุภาพ",
+   "note": "",
+   "slots": [
+    {
+     "en": "we should wait",
+     "th": "เราควรรอ",
+     "emoji": "⏳"
+    },
+    {
+     "en": "it's too risky",
+     "th": "มันเสี่ยงเกินไป",
+     "emoji": "⚠️"
+    },
+    {
+     "en": "she's right",
+     "th": "เธอพูดถูก",
+     "emoji": "✅"
+    },
+    {
+     "en": "we need more information",
+     "th": "เราต้องการข้อมูลเพิ่ม",
+     "emoji": "📊"
+    },
+    {
+     "en": "the price is fair",
+     "th": "ราคาก็สมเหตุสมผล",
+     "emoji": "🏷️"
+    },
+    {
+     "en": "there's a better way",
+     "th": "มีวิธีที่ดีกว่า",
+     "emoji": "💡"
+    },
+    {
+     "en": "it can work",
+     "th": "มันเป็นไปได้",
+     "emoji": "👍"
+    }
+   ],
+   "variants": [
+    {
+     "label": "แบบสั้น",
+     "frame": "Maybe, but I think {x}.",
+     "th": "อาจจะใช่ แต่ฉันคิดว่า{x}"
+    }
+   ]
+  },
+  {
+   "id": "can-i-speak-to-x-please",
+   "cat": "work.phone",
+   "level": "A1",
+   "frame": "Can I speak to {x}, please?",
+   "th": "ขอสาย{x}หน่อยได้ไหม",
+   "use": "โทรขอสายคนที่ต้องการ",
+   "note": "",
+   "slots": [
+    {
+     "en": "Mr. Smith",
+     "th": "คุณสมิธ",
+     "emoji": "👨‍💼"
+    },
+    {
+     "en": "the manager",
+     "th": "ผู้จัดการ",
+     "emoji": "👔"
+    },
+    {
+     "en": "someone in sales",
+     "th": "คนในฝ่ายขาย",
+     "emoji": "📈"
+    },
+    {
+     "en": "Dr. Lee",
+     "th": "หมอลี",
+     "emoji": "🩺"
+    },
+    {
+     "en": "the person in charge",
+     "th": "ผู้รับผิดชอบ",
+     "emoji": "🙋"
+    },
+    {
+     "en": "your boss",
+     "th": "หัวหน้าของคุณ",
+     "emoji": "💼"
+    },
+    {
+     "en": "Anna",
+     "th": "แอนนา",
+     "emoji": "👩"
+    }
+   ],
+   "variants": [
+    {
+     "label": "สุภาพขึ้น",
+     "frame": "Could I speak to {x}, please?",
+     "th": "ขอเรียนสาย{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-m-calling-about-x",
+   "cat": "work.phone",
+   "level": "A1",
+   "frame": "I'm calling about {x}.",
+   "th": "ฉันโทรมาเรื่อง{x}",
+   "use": "บอกเหตุผลที่โทร",
+   "note": "",
+   "slots": [
+    {
+     "en": "my order",
+     "th": "ออร์เดอร์ของฉัน",
+     "emoji": "📦"
+    },
+    {
+     "en": "the job",
+     "th": "ตำแหน่งงานที่ประกาศ",
+     "emoji": "💼"
+    },
+    {
+     "en": "my appointment",
+     "th": "นัดของฉัน",
+     "emoji": "📅"
+    },
+    {
+     "en": "the apartment",
+     "th": "ห้องเช่า",
+     "emoji": "🏢"
+    },
+    {
+     "en": "your email",
+     "th": "อีเมลของคุณ",
+     "emoji": "📧"
+    },
+    {
+     "en": "the delivery",
+     "th": "การส่งของ",
+     "emoji": "🚚"
+    },
+    {
+     "en": "the bill",
+     "th": "บิล",
+     "emoji": "🧾"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นอดีต",
+     "frame": "I called yesterday about {x}.",
+     "th": "เมื่อวานฉันโทรมาเรื่อง{x}"
+    }
+   ]
+  },
+  {
+   "id": "could-you-tell-him-that-x",
+   "cat": "work.phone",
+   "level": "A2",
+   "frame": "Could you tell him that {x}?",
+   "th": "ช่วยบอกเขาว่า{x}ได้ไหม",
+   "use": "ฝากข้อความ",
+   "note": "",
+   "slots": [
+    {
+     "en": "I called",
+     "th": "ฉันโทรมา",
+     "emoji": "📞"
+    },
+    {
+     "en": "I'll be late",
+     "th": "ฉันจะไปสาย",
+     "emoji": "⏰"
+    },
+    {
+     "en": "the meeting is cancelled",
+     "th": "การประชุมยกเลิก",
+     "emoji": "❌"
+    },
+    {
+     "en": "I sent the file",
+     "th": "ฉันส่งไฟล์แล้ว",
+     "emoji": "📎"
+    },
+    {
+     "en": "I'm waiting outside",
+     "th": "ฉันรออยู่ข้างนอก",
+     "emoji": "🚪"
+    },
+    {
+     "en": "the car is ready",
+     "th": "รถพร้อมแล้ว",
+     "emoji": "🚗"
+    },
+    {
+     "en": "dinner is at seven",
+     "th": "อาหารเย็นตอนหนึ่งทุ่ม",
+     "emoji": "🍽️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็น her",
+     "frame": "Could you tell her that {x}?",
+     "th": "ช่วยบอกเธอว่า{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "sorry-the-line-is-bad-could-you-x",
+   "cat": "work.phone",
+   "level": "A2",
+   "frame": "Sorry, the line is bad. Could you {x}?",
+   "th": "ขอโทษ สัญญาณไม่ดี ช่วย{x}ได้ไหม",
+   "use": "แก้ปัญหาตอนคุยโทรศัพท์",
+   "note": "",
+   "slots": [
+    {
+     "en": "say that again",
+     "th": "พูดอีกครั้ง",
+     "emoji": "🔁"
+    },
+    {
+     "en": "speak up",
+     "th": "พูดดังขึ้น",
+     "emoji": "🔊"
+    },
+    {
+     "en": "call me back",
+     "th": "โทรกลับมา",
+     "emoji": "📞"
+    },
+    {
+     "en": "repeat the number",
+     "th": "ทวนเบอร์",
+     "emoji": "🔢"
+    },
+    {
+     "en": "spell your name",
+     "th": "สะกดชื่อ",
+     "emoji": "🔤"
+    },
+    {
+     "en": "text me",
+     "th": "ส่งข้อความมา",
+     "emoji": "💬"
+    },
+    {
+     "en": "speak more slowly",
+     "th": "พูดช้าลง",
+     "emoji": "🐢"
+    }
+   ],
+   "variants": [
+    {
+     "label": "แบบสั้น",
+     "frame": "Sorry, could you {x}?",
+     "th": "ขอโทษ ช่วย{x}ได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "i-ll-send-you-x-later",
+   "cat": "work.phone",
+   "level": "A2",
+   "frame": "I'll send you {x} later.",
+   "th": "เดี๋ยวฉันจะส่ง{x}ให้",
+   "use": "สัญญาว่าจะส่งข้อมูล",
+   "note": "",
+   "slots": [
+    {
+     "en": "the photos",
+     "th": "รูป",
+     "emoji": "📷"
+    },
+    {
+     "en": "the address",
+     "th": "ที่อยู่",
+     "emoji": "📍"
+    },
+    {
+     "en": "the details",
+     "th": "รายละเอียด",
+     "emoji": "📝"
+    },
+    {
+     "en": "a message",
+     "th": "ข้อความ",
+     "emoji": "💬"
+    },
+    {
+     "en": "the link",
+     "th": "ลิงก์",
+     "emoji": "🔗"
+    },
+    {
+     "en": "the file",
+     "th": "ไฟล์",
+     "emoji": "📁"
+    },
+    {
+     "en": "the location",
+     "th": "โลเคชัน",
+     "emoji": "🗺️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ขอให้ส่ง",
+     "frame": "Could you send me {x}?",
+     "th": "ช่วยส่ง{x}มาให้หน่อยได้ไหม"
+    }
+   ]
+  },
+  {
+   "id": "sorry-i-missed-your-call-i-was-x",
+   "cat": "work.phone",
+   "level": "B1",
+   "frame": "Sorry I missed your call, I was {x}.",
+   "th": "ขอโทษที่ไม่ได้รับสาย ตอนนั้นฉัน{x}",
+   "use": "ขอโทษที่ไม่รับสาย",
+   "note": "",
+   "slots": [
+    {
+     "en": "driving",
+     "th": "ขับรถอยู่",
+     "emoji": "🚗"
+    },
+    {
+     "en": "in a meeting",
+     "th": "ประชุมอยู่",
+     "emoji": "💼"
+    },
+    {
+     "en": "in the shower",
+     "th": "อาบน้ำอยู่",
+     "emoji": "🚿"
+    },
+    {
+     "en": "asleep",
+     "th": "หลับอยู่",
+     "emoji": "😴"
+    },
+    {
+     "en": "at the gym",
+     "th": "อยู่ที่ยิม",
+     "emoji": "🏋️"
+    },
+    {
+     "en": "on another call",
+     "th": "คุยสายอื่นอยู่",
+     "emoji": "📞"
+    },
+    {
+     "en": "teaching a class",
+     "th": "สอนหนังสืออยู่",
+     "emoji": "👩‍🏫"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ตอบข้อความช้า",
+     "frame": "Sorry for the late reply, I was {x}.",
+     "th": "ขอโทษที่ตอบช้า ตอนนั้นฉัน{x}"
+    }
+   ]
+  },
+  {
+   "id": "i-m-working-on-x",
+   "cat": "work.meeting",
+   "level": "A1",
+   "frame": "I'm working on {x}.",
+   "th": "ฉันกำลังทำ{x}อยู่",
+   "use": "เล่างานที่ทำอยู่",
+   "note": "",
+   "slots": [
+    {
+     "en": "a new project",
+     "th": "โปรเจกต์ใหม่",
+     "emoji": "🆕"
+    },
+    {
+     "en": "the report",
+     "th": "รายงาน",
+     "emoji": "📊"
+    },
+    {
+     "en": "the website",
+     "th": "เว็บไซต์",
+     "emoji": "🌐"
+    },
+    {
+     "en": "the presentation",
+     "th": "งานนำเสนอ",
+     "emoji": "🖥️"
+    },
+    {
+     "en": "the budget",
+     "th": "งบประมาณ",
+     "emoji": "💰"
+    },
+    {
+     "en": "a design",
+     "th": "งานออกแบบ",
+     "emoji": "🎨"
+    },
+    {
+     "en": "the schedule",
+     "th": "ตารางงาน",
+     "emoji": "📅"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Are you working on {x}?",
+     "th": "คุณกำลังทำ{x}อยู่หรือ"
+    }
+   ]
+  },
+  {
+   "id": "can-we-meet-x",
+   "cat": "work.meeting",
+   "level": "A1",
+   "frame": "Can we meet {x}?",
+   "th": "เราเจอกัน{x}ได้ไหม",
+   "use": "นัดประชุม",
+   "note": "",
+   "slots": [
+    {
+     "en": "tomorrow",
+     "th": "พรุ่งนี้",
+     "emoji": "📅"
+    },
+    {
+     "en": "this afternoon",
+     "th": "บ่ายนี้",
+     "emoji": "🌤️"
+    },
+    {
+     "en": "at ten",
+     "th": "ตอนสิบโมง",
+     "emoji": "🕙"
+    },
+    {
+     "en": "next week",
+     "th": "สัปดาห์หน้า",
+     "emoji": "📆"
+    },
+    {
+     "en": "after lunch",
+     "th": "หลังมื้อเที่ยง",
+     "emoji": "🍱"
+    },
+    {
+     "en": "on Friday",
+     "th": "วันศุกร์",
+     "emoji": "🗓️"
+    },
+    {
+     "en": "online",
+     "th": "ออนไลน์",
+     "emoji": "💻"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เสนอแบบชวน",
+     "frame": "Let's meet {x}.",
+     "th": "เจอกัน{x}นะ"
+    }
+   ]
+  },
+  {
+   "id": "i-ve-finished-x",
+   "cat": "work.meeting",
+   "level": "A2",
+   "frame": "I've finished {x}.",
+   "th": "ฉันทำ{x}เสร็จแล้ว",
+   "use": "รายงานความคืบหน้า",
+   "note": "Present Perfect: have + V3 = ทำเสร็จแล้ว (ผลยังอยู่ถึงตอนนี้)",
+   "slots": [
+    {
+     "en": "the report",
+     "th": "รายงาน",
+     "emoji": "📊"
+    },
+    {
+     "en": "the first part",
+     "th": "ส่วนแรก",
+     "emoji": "1️⃣"
+    },
+    {
+     "en": "the homework",
+     "th": "การบ้าน",
+     "emoji": "📚"
+    },
+    {
+     "en": "the slides",
+     "th": "สไลด์",
+     "emoji": "🖥️"
+    },
+    {
+     "en": "the email",
+     "th": "อีเมล",
+     "emoji": "📧"
+    },
+    {
+     "en": "the design",
+     "th": "งานออกแบบ",
+     "emoji": "🎨"
+    },
+    {
+     "en": "everything",
+     "th": "ทุกอย่าง",
+     "emoji": "✅"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Have you finished {x}?",
+     "th": "คุณทำ{x}เสร็จหรือยัง"
+    },
+    {
+     "label": "ยังไม่เสร็จ",
+     "frame": "I haven't finished {x} yet.",
+     "th": "ฉันยังทำ{x}ไม่เสร็จ"
+    }
+   ]
+  },
+  {
+   "id": "the-deadline-for-x-is-friday",
+   "cat": "work.meeting",
+   "level": "A2",
+   "frame": "The deadline for {x} is Friday.",
+   "th": "กำหนดส่ง{x}คือวันศุกร์",
+   "use": "บอกกำหนดส่งงาน",
+   "note": "",
+   "slots": [
+    {
+     "en": "the report",
+     "th": "รายงาน",
+     "emoji": "📊"
+    },
+    {
+     "en": "this project",
+     "th": "โปรเจกต์นี้",
+     "emoji": "📁"
+    },
+    {
+     "en": "the application",
+     "th": "ใบสมัคร",
+     "emoji": "📝"
+    },
+    {
+     "en": "the essay",
+     "th": "เรียงความ",
+     "emoji": "✍️"
+    },
+    {
+     "en": "the payment",
+     "th": "การชำระเงิน",
+     "emoji": "💳"
+    },
+    {
+     "en": "the design",
+     "th": "งานออกแบบ",
+     "emoji": "🎨"
+    },
+    {
+     "en": "registration",
+     "th": "การลงทะเบียน",
+     "emoji": "🗂️"
+    }
+   ],
+   "variants": [
+    {
+     "label": "เปลี่ยนเป็นคำถาม",
+     "frame": "Is the deadline for {x} Friday?",
+     "th": "กำหนดส่ง{x}คือวันศุกร์หรือ"
+    }
+   ]
+  },
+  {
+   "id": "let-me-check-x-and-get-back-to-you",
+   "cat": "work.meeting",
+   "level": "A2",
+   "frame": "Let me check {x} and get back to you.",
+   "th": "ขอเช็ก{x}ก่อนแล้วจะติดต่อกลับ",
+   "use": "ขอเวลาตรวจสอบ",
+   "note": "",
+   "slots": [
+    {
+     "en": "my schedule",
+     "th": "ตารางของฉัน",
+     "emoji": "📅"
+    },
+    {
+     "en": "the price",
+     "th": "ราคา",
+     "emoji": "🏷️"
+    },
+    {
+     "en": "with my boss",
+     "th": "กับหัวหน้า",
+     "emoji": "👔"
+    },
+    {
+     "en": "the details",
+     "th": "รายละเอียด",
+     "emoji": "📝"
+    },
+    {
+     "en": "the numbers",
+     "th": "ตัวเลข",
+     "emoji": "🔢"
+    },
+    {
+     "en": "my email",
+     "th": "อีเมลของฉัน",
+     "emoji": "📧"
+    },
+    {
+     "en": "the stock",
+     "th": "สต็อก",
+     "emoji": "📦"
+    }
+   ],
+   "variants": [
+    {
+     "label": "บอกว่าต้องเช็กก่อน",
+     "frame": "I need to check {x} first.",
+     "th": "ฉันต้องเช็ก{x}ก่อน"
+    }
+   ]
+  },
+  {
+   "id": "i-d-like-to-suggest-that-we-x",
+   "cat": "work.meeting",
+   "level": "B1",
+   "frame": "I'd like to suggest that we {x}.",
+   "th": "ฉันขอเสนอว่าเรา{x}",
+   "use": "เสนอความเห็นในที่ประชุม",
+   "note": "",
+   "slots": [
+    {
+     "en": "start earlier",
+     "th": "เริ่มเร็วขึ้น",
+     "emoji": "⏰"
+    },
+    {
+     "en": "take a short break",
+     "th": "พักสั้นๆ",
+     "emoji": "☕"
+    },
+    {
+     "en": "ask the customer",
+     "th": "ถามลูกค้า",
+     "emoji": "🙋"
+    },
+    {
+     "en": "try a new design",
+     "th": "ลองแบบใหม่",
+     "emoji": "🎨"
+    },
+    {
+     "en": "work in pairs",
+     "th": "ทำงานเป็นคู่",
+     "emoji": "👥"
+    },
+    {
+     "en": "cut the budget",
+     "th": "ลดงบประมาณ",
+     "emoji": "✂️"
+    },
+    {
+     "en": "meet every week",
+     "th": "ประชุมทุกสัปดาห์",
+     "emoji": "📅"
+    }
+   ],
+   "variants": [
+    {
+     "label": "แบบ Why don't we",
+     "frame": "Why don't we {x}?",
+     "th": "ทำไมเราไม่{x}ล่ะ"
+    }
+   ]
+  },
+  {
+   "id": "could-we-move-the-meeting-to-x",
+   "cat": "work.meeting",
+   "level": "B1",
+   "frame": "Could we move the meeting to {x}?",
+   "th": "เราเลื่อนประชุมไป{x}ได้ไหม",
+   "use": "ขอเลื่อนนัด",
+   "note": "",
+   "slots": [
+    {
+     "en": "Thursday",
+     "th": "วันพฤหัส",
+     "emoji": "📅"
+    },
+    {
+     "en": "next week",
+     "th": "สัปดาห์หน้า",
+     "emoji": "📆"
+    },
+    {
+     "en": "the afternoon",
+     "th": "ช่วงบ่าย",
+     "emoji": "🌤️"
+    },
+    {
+     "en": "ten o'clock",
+     "th": "สิบโมง",
+     "emoji": "🕙"
+    },
+    {
+     "en": "tomorrow morning",
+     "th": "พรุ่งนี้เช้า",
+     "emoji": "🌅"
+    },
+    {
+     "en": "another day",
+     "th": "วันอื่น",
+     "emoji": "🔄"
+    },
+    {
+     "en": "the big room",
+     "th": "ห้องใหญ่",
+     "emoji": "🚪"
+    }
+   ],
+   "variants": [
+    {
+     "label": "ถามว่าเลื่อนได้ไหม",
+     "frame": "Is it OK to move the meeting to {x}?",
+     "th": "เลื่อนประชุมไป{x}ได้ไหม"
     }
    ]
   }

@@ -52,7 +52,7 @@ export function graduate(card, today) {
 }
 
 export function emptyDaily(today) {
-  return { date: today, newIds: [], warmDone: false, wrap: [], done: [], sentences: 0 };
+  return { date: today, newIds: [], warmDone: false, wrap: [], done: [], sentences: 0, patNew: 0, dialogs: 0, picDone: false };
 }
 
 // ---------- ฝึกเรียงประโยค ----------
