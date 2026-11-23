@@ -39,7 +39,10 @@ async function createProfile(name, emoji, pin) {
   const p = { id: randomHex(6), name, emoji, salt, pinHash: await hashPin(pin, salt), created: new Date().toISOString() };
   // โปรไฟล์แรก: ย้ายความคืบหน้าเดิม (ก่อนมีโปรไฟล์) เข้ามา ข้อมูลเดิมยังเก็บไว้ไม่ลบ
   const legacy = legacyData();
-  if (legacy && !profiles().length) {
+  if (pendingImport) {
+    write(dataKey(p.id), pendingImport);
+    pendingImport = null;
+  } else if (legacy && !profiles().length) {
     write(dataKey(p.id), legacy);
     localStorage.setItem(MIGRATED_KEY, p.id);
   }
@@ -54,6 +57,118 @@ function deleteProfile(id) {
   try { localStorage.removeItem(dataKey(id)); } catch { /* ข้าม */ }
   if (activeProfile()?.id === id) setActive(null);
 }
+
+// ---------- ย้ายไปเครื่องอื่น (ลิงก์ / QR / ไฟล์) ----------
+// ข้อมูลทั้งโปรไฟล์ (ชื่อ, PIN แบบแฮช, ประวัติการเรียน) ถูกบีบอัดแล้วใส่ไว้หลังเครื่องหมาย # ของลิงก์
+// ส่วนหลัง # ไม่ถูกส่งไปที่เซิร์ฟเวอร์ ข้อมูลจึงเดินทางจากเครื่องถึงเครื่องผ่านช่องทางที่ผู้ใช้แชร์เองเท่านั้น
+const QR_LIB = "https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js";
+const QR_MAX = 2300; // ความยาวลิงก์สูงสุดที่ยังสแกน QR จากจอมือถือได้สบาย
+let pendingImport = null; // ข้อมูลจากไฟล์รุ่นเก่า (ไม่มี PIN) ที่รอสร้างโปรไฟล์ใหม่
+
+const toB64url = bytes => {
+  let s = "";
+  for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode(...bytes.subarray(i, i + 0x8000));
+  return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+};
+const fromB64url = str => Uint8Array.from(atob(str.replace(/-/g, "+").replace(/_/g, "/")), c => c.charCodeAt(0));
+const streamBytes = async (bytes, tf) => new Uint8Array(await new Response(new Blob([bytes]).stream().pipeThrough(tf)).arrayBuffer());
+
+async function pack(obj) {
+  const json = new TextEncoder().encode(JSON.stringify(obj));
+  if (window.CompressionStream) return "g" + toB64url(await streamBytes(json, new CompressionStream("gzip")));
+  return "j" + toB64url(json);
+}
+async function unpack(code) {
+  let bytes = fromB64url(code.slice(1));
+  if (code[0] === "g") bytes = await streamBytes(bytes, new DecompressionStream("gzip"));
+  return JSON.parse(new TextDecoder().decode(bytes));
+}
+
+function exportObj(p) {
+  return {
+    app: "english-lessons", version: 2, exportedAt: new Date().toISOString(),
+    profile: { id: p.id, name: p.name, emoji: p.emoji, salt: p.salt, pinHash: p.pinHash, created: p.created },
+    data: read(dataKey(p.id)) || {},
+  };
+}
+const transferLink = async p => `${location.origin}${location.pathname}#import=${await pack(exportObj(p))}`;
+const fileName = p => `english-progress-${p.name.replace(/[^\w฀-๿-]+/g, "_")}-${new Date().toISOString().slice(0, 10)}.json`;
+
+// นำเข้าโปรไฟล์: id เดียวกันมีอยู่แล้ว → แทนที่ข้อมูล / ไม่มี → เพิ่มใหม่ (ใช้ PIN เดิม)
+// คืน null ถ้าเป็นไฟล์รุ่นเก่าที่ไม่มี PIN (ต้องสร้างโปรไฟล์และตั้ง PIN ใหม่)
+function importProfile(obj) {
+  const data = obj?.app === "english-lessons" ? obj.data : obj;
+  if (!data || typeof data.cards !== "object") throw new Error("bad");
+  const meta = obj.profile;
+  if (!meta?.pinHash || !meta?.salt) return null;
+  const list = profiles();
+  const same = list.find(x => x.id === meta.id);
+  const entry = { id: meta.id || randomHex(6), name: meta.name || "Me", emoji: meta.emoji || "🙂", salt: meta.salt, pinHash: meta.pinHash, created: meta.created || new Date().toISOString() };
+  if (!same && list.some(x => x.name.toLowerCase() === entry.name.toLowerCase())) entry.name += " (2)";
+  saveProfiles(same ? list.map(x => (x.id === entry.id ? { ...x, ...entry } : x)) : [...list, entry]);
+  write(dataKey(entry.id), data);
+  if (!localStorage.getItem(MIGRATED_KEY)) localStorage.setItem(MIGRATED_KEY, entry.id); // ไม่ต้องย้ายข้อมูลเก่าทับอีก
+  return { profile: entry, replaced: !!same };
+}
+
+// เปิดจากลิงก์ #import=… บนเครื่องใหม่
+export const hasImportLink = () => location.hash.startsWith("#import=");
+export async function showImportLink(ctx) {
+  C = ctx;
+  const code = location.hash.slice("#import=".length);
+  const clearHash = () => history.replaceState(null, "", location.pathname + location.search);
+  let obj;
+  try { obj = await unpack(code); if (!obj?.profile || !obj?.data) throw new Error("bad"); } catch {
+    clearHash();
+    screen(`<section class="${CARD} text-center"><div class="text-4xl">⚠️</div><p class="mt-2 font-semibold">ลิงก์ย้ายข้อมูลไม่สมบูรณ์</p>
+      <p class="mt-1 text-sm text-zinc-500">ลิงก์อาจถูกตัดตอนส่งต่อ ลองส่งใหม่ หรือใช้วิธีส่งเป็นไฟล์แทน</p>
+      <div class="mt-4">${C.button('data-act="ok"', "ไปหน้าเลือกโปรไฟล์")}</div></section>`);
+    C.app.querySelector('[data-act="ok"]').onclick = () => showProfiles(C);
+    return;
+  }
+  const meta = obj.profile;
+  const existing = profiles().find(x => x.id === meta.id);
+  const words = learnedCount(obj.data);
+  screen(`
+    <section class="${CARD} text-center">
+      <div class="text-sm font-semibold text-purple-600 dark:text-purple-300">📲 รับข้อมูลจากเครื่องอื่น</div>
+      <div class="mt-3 flex justify-center">${avatar(meta)}</div>
+      <h2 class="mt-2 text-xl font-bold">${esc(meta.name)}</h2>
+      <p class="text-sm text-zinc-500">ประวัติการเรียน ${words} คำ · ส่งมาเมื่อ ${new Date(obj.exportedAt).toLocaleString("th-TH", { dateStyle: "medium", timeStyle: "short" })}</p>
+      ${existing ? `<p class="mt-3 rounded-2xl bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:bg-amber-500/10 dark:text-amber-200">เครื่องนี้มีโปรไฟล์นี้อยู่แล้ว (${learnedCount(read(dataKey(existing.id)))} คำ) จะถูกแทนที่ด้วยข้อมูลใหม่</p>` : ""}
+      <p class="mt-3 text-sm text-zinc-500">หลังนำเข้า ใช้ PIN เดิมของโปรไฟล์นี้เพื่อเข้าใช้</p>
+      <div class="mt-5 grid gap-2">${C.button('data-act="import"', existing ? "แทนที่ด้วยข้อมูลใหม่" : "นำเข้าโปรไฟล์นี้")}${C.button('data-act="cancel"', "ยกเลิก", "ghost")}</div>
+    </section>`);
+  C.app.querySelector('[data-act="cancel"]').onclick = () => { clearHash(); showProfiles(C); };
+  C.app.querySelector('[data-act="import"]').onclick = () => {
+    const r = importProfile(obj);
+    clearHash();
+    setActive(null);
+    showUnlock(r.profile);
+  };
+}
+
+// ปุ่มนำเข้าจากไฟล์ (ใช้บนหน้าเลือก/สร้างโปรไฟล์ของเครื่องใหม่)
+function bindImportFile(root) {
+  const input = root.querySelector("[data-import-file]");
+  root.querySelector('[data-act="import-file"]').onclick = () => input.click();
+  input.onchange = async () => {
+    const f = input.files[0];
+    input.value = "";
+    if (!f) return;
+    try {
+      const obj = JSON.parse(await f.text());
+      const r = importProfile(obj);
+      if (r) return showUnlock(r.profile);
+      pendingImport = obj?.app === "english-lessons" ? obj.data : obj; // ไฟล์รุ่นเก่า: ตั้งชื่อ + PIN ใหม่
+      showCreate(!profiles().length, obj?.profile?.name || "");
+    } catch {
+      alert("ไฟล์นี้ไม่ใช่ไฟล์ข้อมูลของเว็บนี้");
+    }
+  };
+}
+const importFileBtn = `<button data-act="import-file" class="mx-auto mt-4 block text-sm font-semibold text-purple-700 underline dark:text-purple-300">📥 มีข้อมูลจากเครื่องอื่น? นำเข้าจากไฟล์</button>
+  <input data-import-file type="file" accept="application/json,.json" class="hidden">`;
 
 // ---------- UI helpers ----------
 const esc = s => C.esc(s);
@@ -124,7 +239,9 @@ export function showProfiles(ctx) {
           <span class="grid h-16 w-16 place-items-center rounded-2xl text-3xl">＋</span><span class="font-semibold">Add profile</span>
         </button>
       </div>
+      ${importFileBtn}
     </section>`);
+  bindImportFile(C.app);
   C.app.querySelectorAll("[data-pick]").forEach(b => (b.onclick = () => showUnlock(list.find(p => p.id === b.dataset.pick))));
   C.app.querySelector('[data-act="add"]').onclick = () => showCreate(false);
 }
@@ -162,8 +279,8 @@ function showUnlock(p) {
   };
 }
 
-function showCreate(first) {
-  const legacy = first ? legacyData() : null;
+function showCreate(first, prefill = "") {
+  const legacy = first && !pendingImport ? legacyData() : null;
   const taken = new Set(profiles().map(p => p.emoji));
   let emoji = EMOJIS.find(e => !taken.has(e)) || EMOJIS[0];
   screen(`
@@ -175,9 +292,11 @@ function showCreate(first) {
       <input id="pname" maxlength="20" autocomplete="off" class="mt-1 w-full rounded-2xl bg-white px-4 py-3 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-purple-500 dark:bg-zinc-900 dark:ring-zinc-700">
       <div class="mt-4 text-sm text-zinc-500">Avatar</div>
       <div id="emojis" class="mt-2 flex flex-wrap gap-2"></div>
+      ${pendingImport ? `<p class="mt-3 rounded-2xl bg-teal-50 px-4 py-3 text-sm text-teal-800 dark:bg-teal-500/10 dark:text-teal-200">จะนำประวัติการเรียน ${learnedCount(pendingImport)} คำจากไฟล์เข้าโปรไฟล์นี้ (ไฟล์รุ่นเก่าไม่มี PIN จึงต้องตั้งใหม่)</p>` : ""}
       <div class="mt-5">${C.button('data-act="next"', "Next: set PIN →")}</div>
-      ${first ? "" : `<button data-act="back" class="mt-4 text-sm text-zinc-500 underline">← Profiles</button>`}
+      ${first ? (pendingImport ? "" : importFileBtn) : `<button data-act="back" class="mt-4 text-sm text-zinc-500 underline">← Profiles</button>`}
     </section>`);
+  if (first && !pendingImport) bindImportFile(C.app);
   const drawEmojis = () => {
     const box = C.app.querySelector("#emojis");
     box.innerHTML = EMOJIS.map(e => `<button data-e="${e}" class="grid h-12 w-12 place-items-center rounded-xl text-2xl ring-2 ${e === emoji ? "ring-purple-500 bg-purple-50 dark:bg-purple-500/20" : "ring-transparent bg-zinc-100 dark:bg-zinc-800"}">${e}</button>`).join("");
@@ -185,8 +304,9 @@ function showCreate(first) {
   };
   drawEmojis();
   const nameEl = C.app.querySelector("#pname");
+  nameEl.value = prefill;
   nameEl.focus();
-  C.app.querySelector('[data-act="back"]')?.addEventListener("click", () => showProfiles(C));
+  C.app.querySelector('[data-act="back"]')?.addEventListener("click", () => { pendingImport = null; showProfiles(C); });
   C.app.querySelector('[data-act="next"]').onclick = () => {
     const name = nameEl.value.trim();
     if (!name) { nameEl.focus(); nameEl.classList.add("!ring-rose-500"); return; }
@@ -248,11 +368,13 @@ export function showProfileSheet(ctx, p) {
         <div class="min-w-0 flex-1"><div class="truncate text-xl font-bold">${esc(p.name)}</div><div class="text-sm text-zinc-500">${learnedCount(C.store)} words learned</div></div></div>
       <div class="mt-4 grid gap-1">
         ${row("switch", "🔁", "Switch profile", "สลับ/ล็อกโปรไฟล์ (ต้องใส่ PIN ใหม่)")}
-        ${row("backup", "💾", "Back up progress", "บันทึกเป็นไฟล์ .json เก็บไว้ หรือย้ายไปเครื่องอื่น")}
+        ${row("transfer", "📲", "Send to another device", "ส่งโปรไฟล์และประวัติการเรียนไปเครื่องอื่น ผ่านลิงก์ / QR / ไฟล์")}
+        ${row("backup", "💾", "Back up progress", "บันทึกเป็นไฟล์ .json เก็บไว้")}
         ${row("restore", "📂", "Restore from backup", "กู้คืนจากไฟล์สำรอง (แทนที่ข้อมูลปัจจุบัน)")}
         ${row("change-pin", "🔑", "Change PIN", "เปลี่ยน PIN 6 หลัก")}
         ${row("delete", "🗑️", "Delete this profile", "ลบโปรไฟล์และประวัติการเรียนทั้งหมด", "text-rose-600")}
       </div>
+      <div id="transfer" class="hidden"></div>
       <p id="sheet-msg" class="mt-2 hidden rounded-2xl px-4 py-3 text-sm"></p>
       <input id="restore-file" type="file" accept="application/json,.json" class="hidden">
       <button data-close class="mt-3 w-full rounded-2xl bg-zinc-100 py-3 font-semibold text-zinc-700 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-200">Close</button>
@@ -269,17 +391,71 @@ export function showProfileSheet(ctx, p) {
 
   on("switch", () => { setActive(null); location.reload(); });
 
-  on("backup", () => {
+  const download = () => {
     C.save();
-    const data = { app: "english-lessons", version: 1, profile: { name: p.name, emoji: p.emoji }, exportedAt: new Date().toISOString(), data: read(dataKey(p.id)) };
-    const blob = new Blob([JSON.stringify(data)], { type: "application/json" });
+    const blob = new Blob([JSON.stringify(exportObj(p))], { type: "application/json" });
     const a = document.createElement("a");
     a.href = URL.createObjectURL(blob);
-    a.download = `english-progress-${p.name.replace(/[^\w฀-๿-]+/g, "_")}-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = fileName(p);
     document.body.append(a);
     a.click();
     setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000);
-    note("ดาวน์โหลดไฟล์สำรองแล้ว (iPhone: อยู่ในแอป Files > Downloads)");
+  };
+  on("backup", () => { download(); note("ดาวน์โหลดไฟล์สำรองแล้ว (iPhone: อยู่ในแอป Files > Downloads)"); });
+
+  on("transfer", async () => {
+    C.save();
+    const box = el.querySelector("#transfer");
+    const link = await transferLink(p);
+    const canShare = !!navigator.share;
+    const btn = (act, label) => `<button data-t="${act}" class="rounded-2xl bg-zinc-100 px-3 py-3 text-sm font-semibold text-zinc-800 hover:bg-zinc-200 dark:bg-zinc-800 dark:text-zinc-100">${label}</button>`;
+    box.className = "mt-3 rounded-2xl bg-purple-50/70 p-4 ring-1 ring-purple-100 dark:bg-purple-500/10 dark:ring-purple-500/20";
+    box.innerHTML = `
+      <div class="font-semibold">📲 ส่งไปเครื่องอื่น</div>
+      <ol class="mt-2 grid gap-1 text-sm text-zinc-600 dark:text-zinc-300">
+        <li>1. ส่งลิงก์ไปเครื่องใหม่ (เช่น ส่งใน LINE หาตัวเอง หรือ AirDrop) หรือสแกน QR</li>
+        <li>2. เปิดลิงก์บนเครื่องใหม่ แล้วกด “นำเข้าโปรไฟล์นี้”</li>
+        <li>3. ใส่ PIN เดิมของคุณ เรียนต่อได้เลย</li>
+      </ol>
+      <div class="mt-3 grid grid-cols-2 gap-2">
+        ${canShare ? btn("share", "📤 แชร์ลิงก์") : ""}${btn("copy", "📋 คัดลอกลิงก์")}${btn("qr", "▦ แสดง QR")}${btn("file", "💾 ส่งเป็นไฟล์")}
+      </div>
+      <div data-qr class="mt-3 hidden text-center"></div>
+      <p class="mt-3 text-xs text-zinc-500">ลิงก์นี้มีประวัติการเรียนของคุณ ส่งให้เฉพาะเครื่องของตัวเอง · ข้อมูลเป็นของ ณ ตอนนี้ ถ้าเรียนต่อเครื่องเดิมแล้ว ให้ส่งใหม่อีกครั้ง</p>`;
+    box.scrollIntoView({ block: "nearest", behavior: "smooth" });
+    const t = (act, fn) => box.querySelector(`[data-t="${act}"]`)?.addEventListener("click", fn);
+    t("share", async () => { try { await navigator.share({ title: `English progress · ${p.name}`, url: link }); } catch { /* ผู้ใช้ยกเลิก */ } });
+    t("copy", async () => {
+      try { await navigator.clipboard.writeText(link); note("คัดลอกลิงก์แล้ว นำไปวางใน LINE หรือโน้ตแล้วเปิดบนเครื่องใหม่"); }
+      catch { prompt("คัดลอกลิงก์นี้:", link); }
+    });
+    t("qr", async () => {
+      const q = box.querySelector("[data-qr]");
+      q.classList.remove("hidden");
+      if (link.length > QR_MAX) {
+        q.innerHTML = `<p class="rounded-xl bg-amber-50 px-3 py-2 text-sm text-amber-900 dark:bg-amber-500/10 dark:text-amber-200">ข้อมูลมีมากเกินกว่าจะใส่ใน QR (${learnedCount(C.store)} คำ) ใช้ “แชร์ลิงก์” หรือ “ส่งเป็นไฟล์” แทน</p>`;
+        return;
+      }
+      q.innerHTML = `<p class="text-sm text-zinc-500">กำลังสร้าง QR…</p>`;
+      try {
+        if (!window.qrcode) await new Promise((ok, bad) => { const s = document.createElement("script"); s.src = QR_LIB; s.onload = ok; s.onerror = bad; document.head.append(s); });
+        const qr = window.qrcode(0, "L");
+        qr.addData(link);
+        qr.make();
+        q.innerHTML = `<div class="mx-auto w-fit rounded-2xl bg-white p-3">${qr.createSvgTag({ cellSize: 4, margin: 2, scalable: true }).replace("<svg ", '<svg style="width:240px;height:240px" ')}</div>
+          <p class="mt-2 text-sm text-zinc-500">สแกนด้วยกล้องของเครื่องใหม่ แล้วแตะลิงก์ที่ขึ้นมา</p>`;
+      } catch {
+        q.innerHTML = `<p class="text-sm text-rose-600">สร้าง QR ไม่ได้ (ต้องต่ออินเทอร์เน็ต) ใช้แชร์ลิงก์แทน</p>`;
+      }
+    });
+    t("file", async () => {
+      const file = new File([JSON.stringify(exportObj(p))], fileName(p), { type: "application/json" });
+      if (navigator.canShare?.({ files: [file] })) {
+        try { await navigator.share({ files: [file], title: `English progress · ${p.name}` }); return; } catch { /* ยกเลิก */ return; }
+      }
+      download();
+      note("บันทึกไฟล์แล้ว ส่งไฟล์ไปเครื่องใหม่ แล้วกด “นำเข้าจากไฟล์” ที่หน้าเลือกโปรไฟล์");
+    });
   });
 
   const fileEl = el.querySelector("#restore-file");

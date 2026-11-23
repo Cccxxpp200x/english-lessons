@@ -5,7 +5,7 @@ import { openPictures } from "./picture.js?v=18";
 import { normWords } from "./speech.js?v=18";
 import { openPatterns } from "./patterns.js?v=18";
 import { openDialogs } from "./dialogs.js?v=18";
-import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
+import { showProfiles, showProfileSheet, activeProfile, dataKey, hasImportLink, showImportLink } from "./profiles.js?v=18";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
 let profile = null;
@@ -1367,6 +1367,7 @@ async function boot() {
     getJSON("data/extra-words.json")
       .then(x => x.words.forEach(w => (byWord[w.word.toLowerCase()] ??= w)))
       .catch(() => {});
+    if (hasImportLink()) return showImportLink(profileCtx); // เปิดลิงก์ย้ายข้อมูลจากเครื่องอื่น
     const p = activeProfile(); // ปลดล็อกไว้แล้วในแท็บนี้
     if (p) enterProfile(p);
     else showProfiles(profileCtx);
