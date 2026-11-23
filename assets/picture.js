@@ -2,7 +2,7 @@
 // Level 1 เลือกคำตอบ/เรียงประโยค · Level 2 เติมคำ · Level 3 พูด/เขียนอิสระ + ตรวจ + ฟังคำตอบตัวอย่าง
 // ใช้ helper จาก app.js ผ่าน ctx เพื่อไม่ให้ import วนกัน
 
-import { listen, stopListening, micErrorText, SR } from "./speech.js?v=17";
+import { listen, stopListening, micErrorText, SR } from "./speech.js?v=18";
 
 const BAG_KEY = "english-lessons:picbag";
 const AI_KEY = "english-lessons:anthropic-key";

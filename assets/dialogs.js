@@ -1,7 +1,7 @@
 // บทสนทนาจำลอง (Conversations): ฟังบทสนทนาเต็ม แล้วเล่นบทบาทเป็นผู้พูด B ด้วยไมค์
 // แอปพูดบท A ให้ฟัง ผู้เรียนพูดบท B (เห็นคำแปลไทย + คำใบ้) ระบบแสดงคำที่พูดแบบสดแล้วตรวจให้
 
-import { micWidget, stopListening } from "./speech.js?v=17";
+import { micWidget, stopListening } from "./speech.js?v=18";
 
 let C = null;
 let data = null;

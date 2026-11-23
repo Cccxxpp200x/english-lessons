@@ -2,7 +2,7 @@
 // เรียน 1 รูปประโยค = 4 ขั้น: สังเกต → สลับคำ → เปลี่ยนรูป → เห็นไทยแล้วพูด แล้วให้คะแนนเพื่อเข้ารอบทบทวน (SRS)
 // ใช้ helper จาก app.js ผ่าน ctx เหมือน picture.js
 
-import { micWidget, speechMatches, stopListening, SR } from "./speech.js?v=17";
+import { micWidget, speechMatches, stopListening, SR } from "./speech.js?v=18";
 
 const UI_KEY = "english-lessons:pat-ui";
 

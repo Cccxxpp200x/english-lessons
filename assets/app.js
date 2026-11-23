@@ -1,9 +1,10 @@
 // หน้าจอและลำดับการเรียน: Warm-up → Core Review → New Intake → Sentences → Wrap-up (+ รอบฝึกซ้ำคำของวันนี้)
 // หลักการ: ฟังก่อนเห็นตัวสะกด และเห็นคำแปลไทยหลังจากพยายามตอบแล้วเท่านั้น
-import * as srs from "./srs.js?v=17";
-import { openPictures } from "./picture.js?v=17";
-import { openPatterns } from "./patterns.js?v=17";
-import { openDialogs } from "./dialogs.js?v=17";
+import * as srs from "./srs.js?v=18";
+import { openPictures } from "./picture.js?v=18";
+import { normWords } from "./speech.js?v=18";
+import { openPatterns } from "./patterns.js?v=18";
+import { openDialogs } from "./dialogs.js?v=18";
 import { showProfiles, showProfileSheet, activeProfile, dataKey } from "./profiles.js?v=11";
 
 let KEY = null; // ตั้งตามโปรไฟล์ที่เข้าใช้ (english-lessons:v2:<id>)
@@ -32,7 +33,7 @@ const STEPS = {
   intro: ["ฟัง", "เลือก", "รู้จักคำ", "เติมคำ"],
   recall: ["นึก", "เฉลย", "เติมคำ"],
   warm: ["นึก", "เฉลย"],
-  sentence: ["เรียงประโยค", "พูดตาม"],
+  sentence: ["สร้างประโยค", "พูดตาม"],
 };
 
 // ---------- storage ----------
@@ -790,6 +791,113 @@ function buildSentenceTasks(n) {
   return out;
 }
 
+// เรียงถูก/พิมพ์ถูกแล้ว → ฟังและพูดตาม (shadowing) เพื่อฝึกพูดทั้งประโยค
+function sentenceDone(t, w, msg = "ถูกต้อง! ฟังแล้วพูดตามออกเสียง") {
+  shell({
+    stepsHtml: steps(STEPS.sentence, 1),
+    body: chip(true, msg) + card(`
+      <div class="flex items-start gap-4">
+        <p class="flex-1 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${hl(t.en, w.answer)}</p>
+        ${sayBtn(t.en, "md")}
+      </div>
+      <p class="mt-3 border-t border-zinc-100 pt-3 text-zinc-500 dark:border-zinc-800">${esc(t.th)}</p>
+      <div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-zinc-500">${slowBtn(t.en)}<span>พูดตามให้ทันเสียง 1–2 รอบ</span></div>`),
+    actions: button('data-act="next"', `พูดตามแล้ว ไปต่อ ${icon("arrow", "ml-2 h-5 w-5")}`, "primary", "Enter Space"),
+  });
+  speak(t.en);
+  on("next", () => {
+    const d = daily();
+    if (!session.practice) d.sentences = (d.sentences || 0) + 1;
+    session.sentences++;
+    session.completed++;
+    session.currentDone = true;
+    save();
+    next();
+  });
+}
+
+// คำใบ้แบบโครงคำ: ตัวอักษรแรก + ขีดตามจำนวนตัวอักษร เช่น I u______ d____ …
+const skeleton = word => word.replace(/[A-Za-z]+/g, (m, i) => m[0] + "_".repeat(m.length - 1));
+
+// เทียบคำแบบ LCS: คำในเฉลยที่ผู้เรียนพิมพ์ถูกตามลำดับเป็นสีเขียว ที่ขาดหรือผิดเป็นสีแดง
+function diffWords(typed, answer) {
+  const a = normWords(typed), raw = answer.split(/\s+/), b = raw.map(w => normWords(w).join(" "));
+  const L = Array.from({ length: a.length + 1 }, () => Array(b.length + 1).fill(0));
+  for (let i = a.length - 1; i >= 0; i--) for (let j = b.length - 1; j >= 0; j--) {
+    L[i][j] = b[j].split(" ").includes(a[i]) && a[i] === b[j].split(" ")[0] ? 1 + L[i + 1][j + 1] : Math.max(L[i + 1][j], L[i][j + 1]);
+  }
+  const ok = new Set();
+  for (let i = 0, j = 0; i < a.length && j < b.length;) {
+    if (a[i] === b[j].split(" ")[0]) { ok.add(j); i++; j++; } else if (L[i + 1][j] >= L[i][j + 1]) i++; else j++;
+  }
+  return raw.map((w, j) => `<span class="${ok.has(j) ? "text-emerald-700 dark:text-emerald-300" : "rounded bg-rose-100 px-1 text-rose-700 dark:bg-rose-500/20 dark:text-rose-300"}">${esc(w)}</span>`).join(" ");
+}
+
+// แบบ B: ฟังเสียง → พิมพ์ทั้งประโยค (มีโครงคำใบ้ ขอใบ้ทีละคำได้)
+function showDictation(t, w) {
+  const words = t.en.split(/\s+/);
+  const shown = new Set(); // คำที่ขอให้เปิดเฉลยแล้ว
+  let tries = 0;
+  const hintHtml = () => words.map((x, i) => shown.has(i)
+    ? `<span class="font-semibold text-sky-700 dark:text-sky-300">${esc(x)}</span>`
+    : `<span class="tracking-[0.12em]">${esc(skeleton(x))}</span>`).join(" ");
+
+  shell({
+    stepsHtml: steps(STEPS.sentence, 0),
+    body: card(`
+      <div class="text-center">
+        ${sayBtn(t.en, "lg")}
+        <p class="mt-4 text-lg font-semibold">ฟังแล้วพิมพ์ทั้งประโยค</p>
+        <div class="mt-2 flex flex-wrap justify-center gap-2">${slowBtn(t.en)}
+          <button data-act="hint" class="inline-flex items-center gap-1.5 rounded-full bg-amber-50 px-3 py-1.5 text-sm font-medium text-amber-700 ring-1 ring-amber-200 dark:bg-amber-500/10 dark:text-amber-300 dark:ring-amber-500/30">${icon("bulb", "h-4 w-4")} ดูคำแปล</button>
+        </div>
+        <p id="hint" class="mt-2 hidden text-zinc-500">${esc(t.th)}</p>
+      </div>
+      <div id="dict-hint" class="mt-4 rounded-2xl bg-zinc-50 px-4 py-3 font-mono text-[17px] leading-relaxed dark:bg-zinc-800/60">
+        <div class="mb-1 font-sans text-[11px] font-semibold uppercase tracking-wider text-zinc-400">คำใบ้ · ตัวแรกของแต่ละคำ</div>
+        <div id="skel">${hintHtml()}</div>
+      </div>
+      <form id="dict" class="mt-4 grid gap-3">
+        <textarea id="dict-in" rows="2" autocomplete="off" autocapitalize="sentences" autocorrect="off" spellcheck="false" enterkeyhint="done"
+          placeholder="พิมพ์ประโยคที่ได้ยิน" class="w-full resize-none rounded-2xl bg-white px-4 py-3 text-lg ring-1 ring-zinc-300 focus:outline-none focus:ring-2 focus:ring-sky-500 dark:bg-zinc-900 dark:ring-zinc-700"></textarea>
+        <div class="grid grid-cols-[auto_1fr] gap-3">
+          <button type="button" data-act="more" class="rounded-2xl px-4 text-sm font-medium text-zinc-500 ring-1 ring-zinc-200 hover:text-sky-600 dark:ring-zinc-700">ใบ้อีกคำ</button>
+          ${button('type="submit"', "ตรวจประโยค", "primary")}
+        </div>
+      </form>
+      <div id="dict-res" class="mt-3"></div>`),
+  });
+  speak(t.en);
+  on("hint", e => { app.querySelector("#hint").classList.remove("hidden"); e.currentTarget.remove(); });
+  const input = app.querySelector("#dict-in");
+  keepInView(input, app.querySelector("#dict-hint"));
+  on("more", () => {
+    const i = words.findIndex((_, k) => !shown.has(k));
+    if (i < 0) return;
+    shown.add(i);
+    app.querySelector("#skel").innerHTML = hintHtml();
+  });
+  input.addEventListener("keydown", e => { if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); app.querySelector("#dict").requestSubmit(); } });
+  app.querySelector("#dict").onsubmit = e => {
+    e.preventDefault();
+    const typed = input.value.trim();
+    if (!typed) return input.focus();
+    if (normWords(typed).join(" ") === normWords(t.en).join(" ")) {
+      input.blur();
+      return sentenceDone(t, w, tries ? "ถูกต้องแล้ว! ฟังแล้วพูดตามออกเสียง" : "ถูกต้องตั้งแต่ครั้งแรก! ฟังแล้วพูดตาม");
+    }
+    tries++;
+    const res = app.querySelector("#dict-res");
+    res.innerHTML = `<div class="rounded-2xl bg-rose-50 px-4 py-3 text-rose-900 dark:bg-rose-500/10 dark:text-rose-100">
+      <div class="text-sm font-semibold">ยังไม่ถูก${tries >= 2 ? " · นี่คือประโยคที่ถูก (คำสีแดงคือคำที่พิมพ์ผิดหรือขาด)" : " · คำสีแดงคือคำที่ยังผิดหรือขาดไป ลองแก้แล้วตรวจอีกครั้ง"}</div>
+      <p class="mt-1 text-lg leading-relaxed">${tries >= 2 ? diffWords(typed, t.en) : diffWords(typed, t.en).replace(/(<span class="[^"]*rose[^"]*">)([^<]+)<\/span>/g, (m, open, x) => `${open}${"_".repeat(Math.max(2, x.length))}</span>`)}</p>
+      ${tries >= 2 ? `<button type="button" data-act="give-up" class="mt-2 text-sm font-semibold underline">ไปต่อ (ฟังแล้วพูดตาม)</button>` : ""}
+    </div>`;
+    speak(t.en);
+    app.querySelector('[data-act="give-up"]')?.addEventListener("click", () => sentenceDone(t, w, "ไม่เป็นไร ฟังแล้วพูดตามออกเสียง"));
+  };
+}
+
 // สลับบัตรคำ โดยไม่ให้ออกมาเรียงถูกอยู่แล้ว
 function shuffleTiles(tiles) {
   let order = tiles.map((_, i) => i);
@@ -802,11 +910,12 @@ function shuffleTiles(tiles) {
 
 const tileCls = "rounded-xl px-3.5 py-2 text-lg font-medium shadow-sm ring-1 transition active:scale-95";
 
-// แบบ A: เห็นคำแปลไทย → เรียงคำเป็นประโยคอังกฤษ / แบบ B: ฟังเสียง → เรียงคำตามที่ได้ยิน
+// แบบ A: เห็นคำแปลไทย → เรียงคำเป็นประโยคอังกฤษ / แบบ B: ฟังเสียง → พิมพ์ทั้งประโยคตามคำใบ้
 function showSentence(t) {
   session.sflip = !session.sflip;
   const mode = session.sflip ? "build" : "listen";
   const w = byId[t.wid];
+  if (mode === "listen") return showDictation(t, w);
   const { toks, tiles, end } = srs.tokenizeSentence(t.en);
   const order = shuffleTiles(tiles); // ลำดับบัตรคำในกองด้านล่าง (เก็บเป็นตำแหน่งใน tiles)
   let picked = []; // ตำแหน่งใน order ที่ผู้เรียนแตะแล้ว ตามลำดับ
@@ -867,28 +976,7 @@ function showSentence(t) {
       speak(t.en);
       return;
     }
-    // เรียงถูกแล้ว → ฟังและพูดตาม (shadowing) เพื่อฝึกพูดทั้งประโยค
-    shell({
-      stepsHtml: steps(STEPS.sentence, 1),
-      body: chip(true, "ถูกต้อง! ฟังแล้วพูดตามออกเสียง") + card(`
-        <div class="flex items-start gap-4">
-          <p class="flex-1 text-2xl leading-relaxed md:text-3xl md:leading-relaxed">${hl(t.en, w.answer)}</p>
-          ${sayBtn(t.en, "md")}
-        </div>
-        <p class="mt-3 border-t border-zinc-100 pt-3 text-zinc-500 dark:border-zinc-800">${esc(t.th)}</p>
-        <div class="mt-4 flex flex-wrap items-center gap-2 text-sm text-zinc-500">${slowBtn(t.en)}<span>พูดตามให้ทันเสียง 1–2 รอบ</span></div>`),
-      actions: button('data-act="next"', `พูดตามแล้ว ไปต่อ ${icon("arrow", "ml-2 h-5 w-5")}`, "primary", "Enter Space"),
-    });
-    speak(t.en);
-    on("next", () => {
-      const d = daily();
-      if (!session.practice) d.sentences = (d.sentences || 0) + 1;
-      session.sentences++;
-      session.completed++;
-      session.currentDone = true;
-      save();
-      next();
-    });
+    sentenceDone(t, w);
   });
 }
 

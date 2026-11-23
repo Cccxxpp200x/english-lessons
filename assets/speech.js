@@ -43,32 +43,61 @@ export function markWords(heard, target, esc) {
   }).join(" ");
 }
 
-let active = null;
+let active = null;      // รอบการฟังที่กำลังทำงาน
+let shared = null;      // ใช้ตัวรับเสียงตัวเดียวซ้ำ (iPhone มักพังเมื่อสร้างตัวใหม่ทุกครั้ง)
+let waiting = null;     // รอบใหม่ที่รอให้รอบเก่าจบก่อนค่อยเริ่ม
+
 export function stopListening(discard = false) {
+  waiting = null;
   if (!active) return;
-  const a = active;
-  if (discard) a.discard = true;
-  try { a.rec.stop(); } catch { /* ข้าม */ }
+  if (discard) active.discard = true;
+  try { active.rec.stop(); } catch { /* ข้าม */ }
 }
 
-// ฟังหนึ่งครั้ง: onText(ข้อความ, isFinal) ระหว่างพูด แล้ว onDone(ข้อความทั้งหมด, ตัวเลือกอื่น) ตอนจบ
-export function listen({ lang = "en-US", onText, onDone, onError, silenceMs = 1600, maxMs = 15000 }) {
-  if (!SR) { onError?.("unsupported"); return; }
-  stopListening(true);
-  window.speechSynthesis?.cancel();
-  const rec = new SR();
+// ฟังหนึ่งครั้ง: onReady() เมื่อไมค์เปิดจริง, onText(ข้อความ) ระหว่างพูด, onDone(ข้อความทั้งหมด, ตัวเลือกอื่น) ตอนจบ
+// สาเหตุที่ "พูดได้แค่ประโยคแรก" บน iPhone: หลังแอปอ่านเฉลยออกเสียง ระบบเสียงยังไม่ว่าง
+// และการเริ่มฟังขณะที่รอบเก่ายังไม่จบสนิท ทำให้รอบใหม่เงียบไปเฉยๆ จึง (1) รอรอบเก่าจบก่อน
+// (2) ถ้ายังมีเสียงอ่านค้าง ให้หยุดแล้วรอสักครู่ (3) ถ้าไมค์ไม่เปิด ลองใหม่อัตโนมัติ 1 ครั้งด้วยตัวรับเสียงตัวใหม่
+export function listen(opts) {
+  if (!SR) { opts.onError?.("unsupported"); return; }
+  waiting = null;
+  if (active) {
+    // รอบเก่ายังไม่จบ: สั่งหยุดแบบทิ้งผล แล้วค่อยเริ่มรอบใหม่ตอนรอบเก่าจบ
+    active.discard = true;
+    waiting = () => listen(opts);
+    try { active.rec.abort(); } catch { /* ข้าม */ }
+    setTimeout(() => { if (waiting) { const w = waiting; waiting = null; active = null; w(); } }, 600);
+    return;
+  }
+  const synth = window.speechSynthesis;
+  const busy = synth && (synth.speaking || synth.pending);
+  synth?.cancel();
+  if (busy) { setTimeout(() => begin(opts, false), 300); return; }
+  begin(opts, false);
+}
+
+function begin({ lang = "en-US", onReady, onText, onDone, onError, silenceMs = 1600, maxMs = 15000 }, retried) {
+  if (!shared || retried) shared = new SR();
+  const rec = shared;
   rec.lang = lang;
   rec.interimResults = true;
   rec.continuous = !IS_IOS; // continuous บน iOS ทำให้ข้อความซ้ำ จึงใช้แบบประโยคเดียว
   rec.maxAlternatives = 3;
-  const state = { rec, text: "", alts: [], discard: false, heardAny: false };
+  const state = { rec, text: "", alts: [], discard: false, opened: false };
   active = state;
   let silence = null;
   const cap = setTimeout(() => { try { rec.stop(); } catch { /* ข้าม */ } }, maxMs);
-  const armSilence = () => {
+  const armSilence = ms => {
     clearTimeout(silence);
-    silence = setTimeout(() => { try { rec.stop(); } catch { /* ข้าม */ } }, silenceMs);
+    silence = setTimeout(() => { try { rec.stop(); } catch { /* ข้าม */ } }, ms);
   };
+  const retry = () => {
+    clearTimeout(silence);
+    clearTimeout(cap);
+    if (active === state) active = null;
+    setTimeout(() => begin({ lang, onReady, onText, onDone, onError, silenceMs, maxMs }, true), 350);
+  };
+  rec.onaudiostart = () => { state.opened = true; onReady?.(); armSilence(6000); }; // ไม่พูดเลย 6 วินาที = จบ
   rec.onresult = e => {
     let text = "";
     const alts = [];
@@ -76,22 +105,30 @@ export function listen({ lang = "en-US", onText, onDone, onError, silenceMs = 16
       text += (text ? " " : "") + e.results[i][0].transcript.trim();
       if (e.results[i].isFinal) for (let k = 1; k < e.results[i].length; k++) alts.push(e.results[i][k].transcript.trim());
     }
+    state.opened = true;
     state.text = text;
     state.alts = alts;
-    state.heardAny = true;
-    onText?.(text, e.results[e.results.length - 1].isFinal);
-    armSilence();
+    onText?.(text);
+    armSilence(silenceMs);
   };
   rec.onerror = e => { state.error = e.error; };
   rec.onend = () => {
     clearTimeout(silence);
     clearTimeout(cap);
     if (active === state) active = null;
+    if (waiting) { const w = waiting; waiting = null; return w(); }
     if (state.discard) return;
-    if (state.text) onDone?.(state.text, state.alts);
-    else onError?.(state.error || "no-speech");
+    if (state.text) return onDone?.(state.text, state.alts);
+    const fatal = state.error === "not-allowed" || state.error === "service-not-allowed";
+    if (!state.opened && !retried && !fatal) return retry(); // ไมค์ไม่ได้เปิดจริง ลองใหม่อัตโนมัติ
+    onError?.(state.error || "no-speech");
   };
-  try { rec.start(); } catch (err) { active = null; clearTimeout(cap); onError?.("start"); }
+  try { rec.start(); } catch {
+    if (!retried) return retry();
+    active = null;
+    clearTimeout(cap);
+    onError?.("start");
+  }
 }
 
 export const micErrorText = err => ({
@@ -131,10 +168,15 @@ export function micWidget(root, { target, lang, esc, onResult }) {
     btn.classList.add("!bg-zinc-900", "dark:!bg-white", "dark:!text-zinc-900");
     dot.classList.add("animate-ping");
     live.className = live.className.replace("text-zinc-400", "text-zinc-900 dark:text-zinc-100");
-    live.innerHTML = `<span class="text-zinc-400">กำลังฟัง… พูดได้เลย</span>`;
-    status.textContent = "พูดให้ครบทั้งประโยค แล้วหยุดพูดสักครู่";
+    live.innerHTML = `<span class="text-zinc-400">กำลังเปิดไมค์…</span>`;
+    status.textContent = "รอสักครู่ แล้วพูดให้ครบทั้งประโยค";
     listen({
       lang,
+      onReady: () => {
+        if (!live.textContent.startsWith("กำลังเปิด")) return;
+        live.innerHTML = `<span class="text-rose-500">● กำลังฟัง… พูดได้เลย</span>`;
+        status.textContent = "พูดให้ครบทั้งประโยค แล้วหยุดพูดสักครู่ ระบบจะตรวจให้เอง";
+      },
       onText: text => { live.innerHTML = esc(text) + ` <span class="inline-block h-4 w-0.5 animate-pulse bg-rose-500 align-middle"></span>`; },
       onDone: (text, alts) => {
         idle("🎙️ พูดอีกครั้ง");
